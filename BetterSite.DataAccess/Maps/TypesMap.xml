@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_Types,BetterSite.Domain" id="Tab_Types_Result">
+      <result column="TypeId" property="TypeId" />
+      <result column="TypeCode" property="TypeCode" />
+      <result column="TypeName" property="TypeName" />
+      <result column="TypeClickQuantity" property="TypeClickQuantity" />
+      <result column="TypeOrderNumber" property="TypeOrderNumber" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="Tab_Types_Insert" parameterClass="BetterSite.Domain.M_Types">
+      INSERT INTO  Tab_Types  (TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber)
+      VALUES (#TypeId#,#TypeCode#,#TypeName#,#TypeClickQuantity#,#TypeOrderNumber#)
+    </insert>
+    <update id="Tab_Types_Update" parameterClass="BetterSite.Domain.M_Types">
+      UPDATE  Tab_Types  SET TypeCode= #TypeCode#,TypeName= #TypeName#,TypeClickQuantity= #TypeClickQuantity#,TypeOrderNumber= #TypeOrderNumber#
+      WHERE TypeId= #TypeId#
+    </update>
+    <delete id="Tab_Types_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_Types  WHERE TypeId= #TypeId#
+    </delete>
+    <select id="Tab_Types_Select" listClass="ArrayList" resultMap="Tab_Types_Result" parameterClass="Hashtable">
+      SELECT TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber FROM  Tab_Types
+      WHERE TypeId= #TypeId#
+    </select>
+    <select id="Tab_Types_SelectAll" listClass="ArrayList" resultMap="Tab_Types_Result" >
+      SELECT TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber
+      FROM  Tab_Types
+    </select>
+  </statements>
+</sqlMap>

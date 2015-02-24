@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_Tags,BetterSite.Domain" id="Tab_Tags_Result">
+      <result column="TagId" property="TagId" />
+      <result column="TagCode" property="TagCode" />
+      <result column="TagName" property="TagName" />
+      <result column="TagClickQuantity" property="TagClickQuantity" />
+      <result column="TagOrderNumber" property="TagOrderNumber" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="Tab_Tags_Insert" parameterClass="BetterSite.Domain.M_Tags">
+      INSERT INTO  Tab_Tags  (TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber)
+      VALUES (#TagId#,#TagCode#,#TagName#,#TagClickQuantity#,#TagOrderNumber#)
+    </insert>
+    <update id="Tab_Tags_Update" parameterClass="BetterSite.Domain.M_Tags">
+      UPDATE  Tab_Tags  SET TagCode= #TagCode#,TagName= #TagName#,TagClickQuantity= #TagClickQuantity#,TagOrderNumber= #TagOrderNumber#
+      WHERE TagId= #TagId#
+    </update>
+    <delete id="Tab_Tags_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_Tags  WHERE TagId= #TagId#
+    </delete>
+    <select id="Tab_Tags_Select" listClass="ArrayList" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
+      SELECT TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
+      WHERE TagId= #TagId#
+    </select>
+    <select id="Tab_Tags_SelectAll" listClass="ArrayList" resultMap="Tab_Tags_Result" >
+      SELECT TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber
+      FROM  Tab_Tags
+    </select>
+  </statements>
+</sqlMap>

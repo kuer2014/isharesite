@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_Sites,BetterSite.Domain" id="Tab_Sites_Result">
+      <result column="SiteId" property="SiteId" />
+      <result column="SiteCode" property="SiteCode" />
+      <result column="SiteName" property="SiteName" />
+      <result column="SiteUrl" property="SiteUrl" />
+      <result column="TypeId" property="TypeId" />
+      <result column="SiteAddDate" property="SiteAddDate" />
+      <result column="SiteIsTop" property="SiteIsTop" />
+      <result column="SiteIsHome" property="SiteIsHome" />
+      <result column="SiteClickQuantity" property="SiteClickQuantity" />
+      <result column="SiteFavoriteQuantity" property="SiteFavoriteQuantity" />
+      <result column="SiteApproveQuantity" property="SiteApproveQuantity" />
+      <result column="SiteOrderNumber" property="SiteOrderNumber" />
+      <result column="SiteIsActive" property="SiteIsActive" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="Tab_Sites_Insert" parameterClass="BetterSite.Domain.M_Sites">
+      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive)
+      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteAddDate#,#SiteIsTop#,#SiteIsHome#,#SiteClickQuantity#,#SiteFavoriteQuantity#,#SiteApproveQuantity#,#SiteOrderNumber#,#SiteIsActive#)
+    </insert>
+    <update id="Tab_Sites_Update" parameterClass="BetterSite.Domain.M_Sites">
+      UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,SiteAddDate= #SiteAddDate#,SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteClickQuantity= #SiteClickQuantity#,SiteFavoriteQuantity= #SiteFavoriteQuantity#,SiteApproveQuantity= #SiteApproveQuantity#,SiteOrderNumber= #SiteOrderNumber#,SiteIsActive= #SiteIsActive#
+      WHERE SiteId= #SiteId#
+    </update>
+    <delete id="Tab_Sites_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
+    </delete>
+    <select id="Tab_Sites_Select" listClass="ArrayList" resultMap="Tab_Sites_Result" parameterClass="Hashtable">
+      SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive FROM  Tab_Sites
+      WHERE SiteId= #SiteId#
+    </select>
+    <select id="Tab_Sites_SelectAll" listClass="ArrayList" resultMap="Tab_Sites_Result" >
+      SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive
+      FROM  Tab_Sites
+    </select>
+  </statements>
+</sqlMap>

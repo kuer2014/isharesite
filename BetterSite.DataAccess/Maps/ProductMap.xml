@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="EntityModel" xmlns="http://ibatis.apache.org/mapping"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+	<alias>
+		<!--类的别名-->
+		<typeAlias alias="Product" type="Web.Product,Web"/>
+	</alias>
+
+	<resultMaps>
+		<!--Product类与db表的映射-->
+		<resultMap id="SelectAllResult" class="Product">
+			<result property="ProductId" column="ProductId"/>
+			<result property="ProductName" column="ProductName"/>
+			<result property="ProductCompany" column="ProductCompany" />
+			<result property="SignDate" column="SignDate"  />
+			<result property="UpdateDate" column="UpdateDate" />
+		</resultMap>
+	</resultMaps>
+
+	<statements>
+
+		<!--查询所有记录-->
+		<select id="SelectAllProduct" resultMap="SelectAllResult">
+			<![CDATA[SELECT ProductId,ProductName,ProductCompany,SignDate,UpdateDate FROM Product]]>
+		</select>
+
+		<!--查询单条记录-->
+		<select id="SelectByProductId" parameterClass="int" resultMap="SelectAllResult" extends="SelectAllProduct">
+			<![CDATA[ where ProductId = #value#  ]]>
+		</select>
+
+		<!--插入新记录-->
+    <insert id="InsertProduct" parameterClass="Product">
+      <!--oracle sequence的示例用法-->
+      <!--<selectKey property="ProductId" type="pre" resultClass="int">
+				select SQ_Product.nextval as ProductId from dual
+			</selectKey>-->
+      <![CDATA[INSERT into Product(ProductCompany,ProductName,SignDate,UpdateDate)
+			VALUES(#ProductCompany#, #ProductName# , #SignDate# , #UpdateDate#)]]>
+      <!--返回刚插入记录ID-->
+      <selectKey type="post" resultClass="int" property="ProductId">
+        　　　　SELECT CAST(@@IDENTITY as int) as ProductId
+        　　　　
+      </selectKey>
+    </insert>
+
+		<!--更新单条记录-->
+		<update id="UpdateProduct" parameterClass="Product">
+			<![CDATA[Update Product SET ProductName=#ProductName#,
+			ProductCompany=#ProductCompany#,			
+			SignDate=#SignDate#,
+			UpdateDate=#UpdateDate#
+			Where ProductId=#ProductId#]]>
+		</update>
+
+		<!--根据主键删除单条记录-->
+		<delete id="DeleteProductById" parameterClass="int">
+			<![CDATA[Delete From Product Where ProductId=#value#]]>
+		</delete>
+
+
+	</statements>
+
+</sqlMap>
+

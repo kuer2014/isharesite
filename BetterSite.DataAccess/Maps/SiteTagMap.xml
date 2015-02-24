@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_SiteTag,BetterSite.Domain" id="Tab_SiteTag_Result">
+      <result column="SiteTagId" property="SiteTagId" />
+      <result column="SiteId" property="SiteId" />
+      <result column="TagId" property="TagId" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="Tab_SiteTag_Insert" parameterClass="BetterSite.Domain.M_SiteTag">
+      INSERT INTO  Tab_SiteTag  (SiteTagId,SiteId,TagId)
+      VALUES (#SiteTagId#,#SiteId#,#TagId#)
+    </insert>
+    <update id="Tab_SiteTag_Update" parameterClass="BetterSite.Domain.M_SiteTag">
+      UPDATE  Tab_SiteTag  SET SiteId= #SiteId#,TagId= #TagId#
+      WHERE SiteTagId= #SiteTagId#
+    </update>
+    <delete id="Tab_SiteTag_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_SiteTag  WHERE SiteTagId= #SiteTagId#
+    </delete>
+    <select id="Tab_SiteTag_Select" listClass="ArrayList" resultMap="Tab_SiteTag_Result" parameterClass="Hashtable">
+      SELECT SiteTagId,SiteId,TagId FROM  Tab_SiteTag
+      WHERE SiteTagId= #SiteTagId#
+    </select>
+    <select id="Tab_SiteTag_SelectAll" listClass="ArrayList" resultMap="Tab_SiteTag_Result" >
+      SELECT SiteTagId,SiteId,TagId
+      FROM  Tab_SiteTag
+    </select>
+  </statements>
+</sqlMap>
+
