@@ -17,22 +17,51 @@
       <result column="SiteOrderNumber" property="SiteOrderNumber" />
       <result column="SiteIsActive" property="SiteIsActive" />
     </resultMap>
+    <resultMap class="BetterSite.Domain.M_Sites,BetterSite.Domain" extends="Tab_Sites_Result" id="Tab_Sites_JionType_Result">
+      <result column="TypeName" property="TypeName" />
+    </resultMap>
   </resultMaps>
   <statements>
     <insert id="Tab_Sites_Insert" parameterClass="BetterSite.Domain.M_Sites">
-      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive)
-      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteAddDate#,#SiteIsTop#,#SiteIsHome#,#SiteClickQuantity#,#SiteFavoriteQuantity#,#SiteApproveQuantity#,#SiteOrderNumber#,#SiteIsActive#)
-    </insert>
+      INSERT INTO  Tab_Sites  (SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive)
+      VALUES (#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteClickQuantity#,#SiteFavoriteQuantity#,#SiteApproveQuantity#,#SiteOrderNumber#,#SiteIsActive#)
+      <!--返回刚插入记录ID-->
+      <selectKey type="post" resultClass="string" property="SiteId">
+        　　　　SELECT CAST(@@IDENTITY as int) as SiteId        　　　　
+      </selectKey>
+   </insert>
     <update id="Tab_Sites_Update" parameterClass="BetterSite.Domain.M_Sites">
-      UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,SiteAddDate= #SiteAddDate#,SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteClickQuantity= #SiteClickQuantity#,SiteFavoriteQuantity= #SiteFavoriteQuantity#,SiteApproveQuantity= #SiteApproveQuantity#,SiteOrderNumber= #SiteOrderNumber#,SiteIsActive= #SiteIsActive#
+      UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteClickQuantity= #SiteClickQuantity#,SiteFavoriteQuantity= #SiteFavoriteQuantity#,SiteApproveQuantity= #SiteApproveQuantity#,SiteOrderNumber= #SiteOrderNumber#,SiteIsActive= #SiteIsActive#
       WHERE SiteId= #SiteId#
     </update>
-    <delete id="Tab_Sites_Delete" parameterClass="Hashtable">
+    <delete id="Tab_Sites_Delete" parameterClass="string">
+      DELETE FROM  Tab_Sites  WHERE SiteId= #siteId#
+    </delete>
+    <delete id="Tab_Sites_Delete2" parameterClass="Hashtable">
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
     </delete>
-    <select id="Tab_Sites_Select" listClass="ArrayList" resultMap="Tab_Sites_Result" parameterClass="Hashtable">
-      SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive FROM  Tab_Sites
-      WHERE SiteId= #SiteId#
+    <select id="Tab_Sites_Select" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,S.TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive
+      FROM  Tab_Sites S
+      INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
+      <dynamic prepend="WHERE">
+      <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+    </dynamic>
+    </select>
+    <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
+      WITH T AS(
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,S.TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive
+      FROM  Tab_Sites S
+      INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+      </dynamic>
+      )
+      SELECT TOP $PageSize$ * FROM T WHERE SiteId NOT IN
+      (
+      SELECT TOP ($PageSize$*($PageIndex$-1)) SiteId FROM T ORDER BY SiteId
+      )
+      ORDER BY SiteId
     </select>
     <select id="Tab_Sites_SelectAll" listClass="ArrayList" resultMap="Tab_Sites_Result" >
       SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive

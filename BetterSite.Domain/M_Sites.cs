@@ -15,15 +15,17 @@ namespace BetterSite.Domain
         /// 修改日期:
         /// 修改内容:
         /// 版    本: 1.0.0
-        public class M_Sites
+    public class M_Sites : BaseModel
         {
-            private Guid m_SiteId;
+          // private Guid m_SiteId;
+            private string m_SiteId;
 
             private string m_Sitecode = String.Empty;
             private string m_Sitename = String.Empty;
             private string m_Siteurl = String.Empty;
             private Guid m_Typeid = Guid.Empty;
-            private DateTime m_Siteadddate;
+           // private DateTime m_Siteadddate;
+            private string m_Siteadddate;
             private bool m_Siteistop;
             private bool m_Siteishome;
             private int m_Siteclickquantity;
@@ -36,7 +38,7 @@ namespace BetterSite.Domain
             public M_Sites() { }
 
             // Retrieve M_Sites with Id for updating
-            public M_Sites(Guid SiteId)
+            public M_Sites(string SiteId)
             {
                 this.m_SiteId = SiteId;
             }
@@ -46,7 +48,7 @@ namespace BetterSite.Domain
             /// <summary>
             /// 
             /// </summary>
-            public Guid SiteId
+            public string SiteId
             {
                 get { return m_SiteId; }
                 set { m_SiteId = value; }
@@ -92,7 +94,8 @@ namespace BetterSite.Domain
             /// <summary>
             /// 
             /// </summary>
-            public DateTime SiteAddDate
+            //public DateTime SiteAddDate
+                  public string SiteAddDate
             {
                 get { return m_Siteadddate; }
                 set { m_Siteadddate = value; }
@@ -160,7 +163,16 @@ namespace BetterSite.Domain
                 get { return m_Siteisactive; }
                 set { m_Siteisactive = value; }
             }
+            /// <summary>
+            /// 关联类型名称
+            /// </summary>
+            public string TypeName
+            {
+                get;
+                set;
+            }
             #endregion
         }
         #endregion
+
 }

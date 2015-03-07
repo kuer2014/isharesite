@@ -15,9 +15,9 @@ namespace BetterSite.Domain
     /// 修改日期:
     /// 修改内容:
     /// 版    本: 1.0.0
-    public class M_Types
+    public class M_Types:BaseModel
     {
-        private Guid m_TypeId;
+        private string m_TypeId;
 
         private string m_Typecode = String.Empty;
         private string m_Typename = String.Empty;
@@ -28,7 +28,7 @@ namespace BetterSite.Domain
         public M_Types() { }
 
         // Retrieve M_Types with Id for updating
-        public M_Types(Guid TypeId)
+        public M_Types(string TypeId)
         {
             this.m_TypeId = TypeId;
         }
@@ -38,7 +38,7 @@ namespace BetterSite.Domain
         /// <summary>
         /// 
         /// </summary>
-        public Guid TypeId
+        public string TypeId
         {
             get { return m_TypeId; }
             set { m_TypeId = value; }

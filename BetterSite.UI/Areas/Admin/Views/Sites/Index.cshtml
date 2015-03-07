@@ -1,0 +1,107 @@
+﻿
+@section Scripts
+{
+    <script type="text/javascript">
+    var url;
+    function newUser() {
+        $('#dlg').dialog('open').dialog('setTitle', 'New User');
+        $('#fm').form('clear');
+        url = 'save_user.php';
+    }
+    function editUser() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $('#dlg').dialog('open').dialog('setTitle', 'Edit User');
+            $('#fm').form('load', row);
+            url = 'update_user.php?id=' + row.id;
+        }
+    }
+    function saveUser() {
+        $('#fm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                var result = eval('(' + result + ')');
+                if (result.errorMsg) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                }
+            }
+        });
+    }
+    function destroyUser() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+                if (r) {
+                    $.post('destroy_user.php', { id: row.id }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    }
+    </script>
+
+}
+
+<table id="dg" title="站点管理" class="easyui-datagrid" style="width:auto;"
+       url="/Admin/Sites/GetAllSites"
+       toolbar="#toolbar" pagination="true" pagesize="20"
+       rownumbers="true" fitcolumns="true" singleselect="true">
+    <thead>
+        <tr>
+            <th field="SiteCode" width="50" height="30">SiteCode</th>
+            <th field="SiteName" width="50">SiteName</th>
+            <th field="SiteUrl" width="50">SiteUrl</th>
+        </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newUser()">New User</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;"
+     closed="true" modal="true" buttons="#dlg-buttons">
+    <div class="ftitle">User Information</div>
+    <form id="fm" method="post" novalidate>
+        <div class="fitem">
+            <label>SiteCode:</label>
+            <input name="SiteCode" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>SiteName:</label>
+            <input name="SiteName" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>SiteUrl:</label>
+            <input name="SiteUrl" class="easyui-textbox">
+        </div>
+        <div class="fitem">
+            <label>Email:</label>
+            <input name="email" class="easyui-textbox" validtype="email">
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveUser()" style="width:90px">Save</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+</div>
+
+

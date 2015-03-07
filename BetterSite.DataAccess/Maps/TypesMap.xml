@@ -12,19 +12,35 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Types_Insert" parameterClass="BetterSite.Domain.M_Types">
-      INSERT INTO  Tab_Types  (TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber)
-      VALUES (#TypeId#,#TypeCode#,#TypeName#,#TypeClickQuantity#,#TypeOrderNumber#)
+      INSERT INTO  Tab_Types  (TypeCode,TypeName,TypeOrderNumber)
+      VALUES (#TypeCode#,#TypeName#,#TypeOrderNumber#)
     </insert>
     <update id="Tab_Types_Update" parameterClass="BetterSite.Domain.M_Types">
-      UPDATE  Tab_Types  SET TypeCode= #TypeCode#,TypeName= #TypeName#,TypeClickQuantity= #TypeClickQuantity#,TypeOrderNumber= #TypeOrderNumber#
+      UPDATE  Tab_Types  SET TypeCode= #TypeCode#,TypeName= #TypeName#,TypeOrderNumber= #TypeOrderNumber#
       WHERE TypeId= #TypeId#
     </update>
     <delete id="Tab_Types_Delete" parameterClass="Hashtable">
       DELETE FROM  Tab_Types  WHERE TypeId= #TypeId#
     </delete>
     <select id="Tab_Types_Select" listClass="ArrayList" resultMap="Tab_Types_Result" parameterClass="Hashtable">
-      SELECT TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber FROM  Tab_Types
-      WHERE TypeId= #TypeId#
+      SELECT CONVERT(VARCHAR(40), TypeId) TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber FROM  Tab_Types
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TypeId">TypeId= #TypeId#</isNotEmpty>
+      </dynamic>
+    </select>
+    <select id="Tab_Types_SelectPageList" listClass="ArrayList" resultMap="Tab_Types_Result" parameterClass="Hashtable">
+      WITH T AS(
+      SELECT CONVERT(VARCHAR(40), TypeId) TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber
+      FROM  Tab_Types 
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TypeId">TypeId= #TypeId#</isNotEmpty>
+      </dynamic>
+      )
+      SELECT TOP $PageSize$ * FROM T WHERE TypeId NOT IN
+      (
+      SELECT TOP ($PageSize$*($PageIndex$-1)) TypeId FROM T ORDER BY TypeId
+      )
+      ORDER BY TypeId
     </select>
     <select id="Tab_Types_SelectAll" listClass="ArrayList" resultMap="Tab_Types_Result" >
       SELECT TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber

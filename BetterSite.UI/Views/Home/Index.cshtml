@@ -1,45 +1,280 @@
-﻿<div id="body">
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>Welcome to ASP.NET Web API!</h1>
-                <h2>Modify the code in this template to jump-start your ASP.NET Web API development.</h2>
-            </hgroup>
-            <p>
-                ASP.NET Web API allows you to expose your applications, data and services to the
-                web directly over HTTP.
-            </p>
-            <p>
-                To learn more about ASP.NET Web API visit the
-                <a href="http://go.microsoft.com/fwlink/?LinkID=238195" title="ASP.NET Web API Website">ASP.NET Web API Website</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET Web API.
-                If you have any questions about ASP.NET Web API, visit
-                <a href="http://go.microsoft.com/fwlink/?LinkID=238196" title="ASP.NET Web API Forum">our forums</a>.
-            </p>
-        </div>
-    </section>
-    <section class="content-wrapper main-content clear-fix">
-        <h3>We suggest the following steps:</h3>
-        <ol class="round">
-            <li class="one">
-                <h5>Getting Started</h5>
-                ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-                a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-                is an ideal platform for building RESTful applications on the .NET Framework.
-                <a href="http://go.microsoft.com/fwlink/?LinkId=245160">Learn more…</a>
-            </li>
+﻿@{
+    ViewBag.Title = "Sites";
+}
+@section scripts {
+    <style type="text/css">
+        table {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            color: #666666;
+            min-width: 200px;
+        }
+        tr {
+            border: 1px solid #000;
+            line-height: 25px;
+        }
+        th {
+            background-color: #B1C3CC;
+            color: #000;
+            font-size: 13px;
+            text-align: left;
+        }
+        th, td {
+            padding-left: 5px;
+        }
+        #status {
+            color: red;
+        }
+    </style>
+    <script src="@Url.Content("~/Scripts/knockout-2.2.0.debug.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        debugger;
+        function ViewModel() {
+            var self = this;
+            // A nested view model that represents a single product.
+            function SiteViewModel(site) {
+                var self = this;
+                self.SiteId = site.SiteId;
+                self.SiteCode = site.SiteCode;
+                self.SiteName = site.SiteName;
+                self.SiteUrl = site.SiteUrl;
 
-            <li class="two">
-                <h5>Add NuGet packages and jump-start your coding</h5>
-                NuGet makes it easy to install and update free libraries and tools.
-                <a href="http://go.microsoft.com/fwlink/?LinkId=245161">Learn more…</a>
-            </li>
-            <li class="three">
-                <h5>Find Web Hosting</h5>
-                You can easily find a web hosting company that offers the right mix of features
-                and price for your applications.
-                <a href="http://go.microsoft.com/fwlink/?LinkId=245164">Learn more…</a>
-            </li>
-        </ol>
+                self.TypeName = site.TypeName;
+                self.SiteAddDate = site.SiteAddDate;
+                self.SiteIsTop = site.SiteIsTop;
+
+                self.SiteIsHome = site.SiteIsHome;
+                self.SiteClickQuantity = site.SiteClickQuantity;
+                self.SiteFavoriteQuantity = site.SiteFavoriteQuantity;
+
+                self.SiteApproveQuantity = site.SiteApproveQuantity;
+                self.SiteOrderNumber = site.SiteOrderNumber;
+                self.SiteIsActive = site.SiteIsActive;
+              
+            }
+            self.sites = ko.observableArray();   // Contains the list of products
+            self.site = ko.observable();
+            self.status = ko.observable();
+            // Get a list of all products
+            self.getAll = function () {
+               // debugger;
+                self.sites.removeAll();
+                //$.getJSON("/Home/QueryForList/", {}, function (sites) {
+                   
+                //    $.each(sites, function (index, site) {
+                //        self.sites.push(new SiteViewModel(site));
+                //    })
+                //});
+                // Initialize the view-model
+                $.ajax({
+                    url: '@Url.Action("GetAllSites", "Home")',
+                    cache: false,
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    data: {},
+                    success: function (data) {
+                        self.sites(data); //Put the response in ObservableArray
+                    }
+                });
+            }
+            // Find a product by product ID
+            self.getById = function () {
+                self.status("");
+                var id = $('#siteId').val();
+                if (!id.length) {
+                    self.status("ID is required");
+                    return;
+                }
+                // Send AJX request to get the product by ID
+                $.getJSON(
+                    'Home/products/' + id,
+                    function (data) {
+                        self.site(new SiteViewModel(data));
+                    })
+                    // Handler for error response:
+                    .fail(
+                        function (xhr, textStatus, err) {
+                            self.site(null);
+                            self.status(err);
+                        });
+            }
+            // Update product details
+            self.update = function () {
+                self.status("");
+                var id = $('#siteId').val();
+                var site = {
+                    Name: $('#name').val(),
+                    Price: $('#price').val(),
+                    Category: $('#category').val()
+                };
+                $.ajax({
+                    url: 'api/products/' + id,
+                    cache: false,
+                    type: 'PUT',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(site),
+                    success: self.getAll
+                })
+                .fail(
+                function (xhr, textStatus, err) {
+                    self.status(err);
+                });
+            }
+            self.create = function () {
+                self.status("");
+                var site = {
+                    Name: $('#name2').val(),
+                    Price: $('#price2').val(),
+                    Category: $('#category2').val()
+                };
+                $.ajax({
+                    url: 'api/products',
+                    cache: false,
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(site),
+                    statusCode: {
+                        201 /*Created*/: function (data) {
+                            self.sites.push(data);
+                        }
+                    }
+                })
+                .fail(
+                function (xhr, textStatus, err) {
+                    self.status(err);
+                });
+            }
+            // Initialize the view-model
+            $.getJSON("/Home/GetAllSites", function (sites) {
+                $.each(sites, function (index, site) {
+                    self.sites.push(new SiteViewModel(site));
+                })
+            });
+        }
+        function clearStatus() {
+            $('#status').html('');
+        }
+        //function add() {
+        //    clearStatus();
+        //    var site = ko.toJS(viewModel);
+        //    var json = JSON.stringify(site);
+        //    $.ajax({
+        //        url: API_URL,
+        //        cache: false,
+        //        type: 'POST',
+        //        contentType: 'application/json; charset=utf-8',
+        //        data: json,
+        //        statusCode: {
+        //            201 /*Created*/: function (data) {
+        //                self.sites.push(data);
+        //            }
+        //        }
+        //    });
+        //}
+        var viewModel = new ViewModel();
+        ko.applyBindings(viewModel);
+        // Initialize jQuery tab widget
+       // $("#tabs").tabs();
+    </script>
+}
+<div id="body">
+    <section class="content-wrapper main-content">
+        <h3>Sites</h3>
+        <table id="sites">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>URL</th>
+                    
+                      <th>类型</th>               
+                    <th>点击数</th>
+                    <th>收藏数</th>
+
+                    <th>赞同数</th>
+                    <th>添加日期</th>
+                    <th>排序号</th>
+
+                    <th>置顶</th>
+                    <th>首页显示</th>                    
+                    <th>是否活动</th>
+                    <th>编辑</th>
+                    <th>删除</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: sites">
+                <tr>
+                    @*<td data-bind="text: SiteId"></td>*@
+                    <td data-bind="text: SiteCode"></td>
+                    <td data-bind="text: SiteName"></td>
+                    <td data-bind="text: SiteUrl"></td>
+
+                    <td data-bind="text: TypeName"></td>                  
+                    <td data-bind="text: SiteClickQuantity"></td>
+                    <td data-bind="text: SiteFavoriteQuantity"></td>
+
+                    <td data-bind="text: SiteApproveQuantity"></td>
+                    <td data-bind="text: SiteAddDate"></td>
+                    <td data-bind="text: SiteOrderNumber"></td>
+
+                    <td data-bind="text: SiteIsTop"></td>
+                    <td data-bind="text: SiteIsHome"></td>
+                    <td data-bind="text: SiteIsActive"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section id="detail" class="content-wrapper">
+        <div id="tabs">
+            <!-- div for jQuery UI tabs -->
+            <ul>
+                <li><a href="#viewTab">View Site</a></li>
+                <li><a href="#addNewTab">Add New Site</a></li>
+            </ul>
+            <div id="viewTab">
+                <label for="siteId">ID</label>
+                <input type="text" title="ID" name='Id' id="siteId" size="5" />
+                <input type="button" value="Get" data-bind="click: getById" />
+                <div data-bind="if: site()">
+                    <div>
+                        <label for="name">SiteCode</label>
+                        <input data-bind="value: site().SiteCode" type="text" title="Name" id="name" />
+                    </div>
+                    <div>
+                        <label for="category">SiteName</label>
+                        <input data-bind="value: site().SiteName" type="text" title="Category" id="category" />
+                    </div>
+                    <div>
+                        <label for="price">SiteUrl</label>
+                        <input data-bind="value: site().SiteUrl" type="text" title="Price" id="price" />
+                    </div>
+                    <div>
+                        <input type="button" value="Update" data-bind="click: update" />
+                    </div>
+                </div>
+            </div>
+            <div id="addNewTab">
+                <div>
+                    <label for="name">Name</label>
+                    <input type="text" title="Name" id="name2" />
+                </div>
+                <div>
+                    <label for="category">Category</label>
+                    <input type="text" title="Category" id="category2" />
+                </div>
+                <div>
+                    <label for="price">Price</label>
+                    <input type="text" title="Price" id="price2" />
+                </div>
+                <div>
+                    <input type="button" value="Add New" data-bind="click: create" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <p id="status" data-bind="text: status" />
+        </div>
     </section>
 </div>

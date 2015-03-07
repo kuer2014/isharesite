@@ -8,7 +8,6 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <body>
     <header>
         <div class="content-wrapper">
@@ -29,6 +28,7 @@
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")
+     @*@Scripts.Render("~/bundles/jqueryui")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

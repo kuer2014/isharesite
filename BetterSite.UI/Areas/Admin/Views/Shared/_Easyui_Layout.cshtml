@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/jquery-easyui-1.4.2/themes/metro/easyui.css" rel="stylesheet" />
+    <link href="~/Content/jquery-easyui-1.4.2/themes/icon.css" rel="stylesheet" />
+    <style type="text/css">
+        #fm {
+            margin: 0;
+            padding: 10px 30px;
+        }
+
+        .ftitle {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 5px 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .fitem {
+            margin-bottom: 5px;
+        }
+
+            .fitem label {
+                display: inline-block;
+                width: 80px;
+            }
+
+            .fitem input {
+                width: 160px;
+            }
+            /*左侧菜单*/
+            #nav{
+                width:193px;
+                padding:0px;
+                margin:0px;
+            }
+        #nav a {   
+            
+           display:block;
+            letter-spacing:10px;       
+            line-height: 36px;
+            height: 36px;
+            color:#000;
+                text-decoration:none;
+        }
+        #nav li{  
+            background-color:#eee;
+              text-align:center;
+             list-style:none;
+        }
+                #nav li:hover {
+                  background-color:#aaa;
+                }
+                #nav .active {
+                     background-color:#888;
+                }
+    </style>
+      
+</head>
+<body>
+    <div style="margin:20px 0;"></div>
+        <div class="easyui-layout" style="width:1000px;margin:0 auto;height:800px">
+            <div data-options="region:'north'" style="height:100px">
+                <div style="margin:20px;"><h1>Better Site 管理平台</h1></div>
+            </div>
+            <div data-options="region:'south',split:true" style="height:50px;"></div>
+            <div data-options="region:'west',split:true" title="" style="width:200px;position:relative;">
+                <ul id="nav">
+                    <li>@Html.ActionLink("站点管理", "Index", "Sites", new { area = "Admin" }, new { @class = "" })</li>
+                    <li>@Html.ActionLink("类别管理", "Index", "Types", new { area = "Admin" }, new { @class = "" })</li>
+                    <li>@Html.ActionLink("标签管理", "Index", "Home", new { area = "Admin" }, new { @class = "" })</li>
+                </ul>
+
+            </div>
+            <div data-options="region:'center',title:'',iconCls:'icon-ok'">
+                @RenderBody()
+            </div>
+        </div>
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/jquery-easyui-1.4.2/jquery.min.js"></script>
+    <script src="~/Content/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        //current menu
+        var urlFilename = location.href.match(/\/([^\/]+)$/);
+        if (urlFilename) {
+            $("#nav li:has(a[href$='" + urlFilename[1] + "'])").addClass("active");
+        }
+    </script>
+</body>
+</html>

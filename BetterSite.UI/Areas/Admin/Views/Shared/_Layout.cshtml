@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+        @*@Styles.Render("~/Content/css")*@
+        @Styles.Render("~/Content/bootstrap/css")
+   
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/knockout")*@
+</head>
+<body>
+    @*<header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    <a href="~/Admin/Sites">Better Site Management Platform</a></p>
+            </div>
+            <div class="float-right">
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("预览站点", "Index", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("管理", "Index", "Help", new { area = "" }, null)</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>*@
+    @RenderBody()
+
+
+     @*@Scripts.Render("~/bundles/jqueryui")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

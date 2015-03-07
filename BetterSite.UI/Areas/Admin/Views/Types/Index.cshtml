@@ -1,0 +1,104 @@
+﻿
+@section Scripts
+{
+    <script type="text/javascript">
+    var url;
+    function Add() {
+        $('#dlg').dialog('open').dialog('setTitle', '添加');
+        $('#fm').form('clear');
+        url = '/Admin/Types/Create';
+    }
+    function editUser() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $('#dlg').dialog('open').dialog('setTitle', 'Edit User');
+            $('#fm').form('load', row);
+            url = 'update_user.php?id=' + row.id;
+        }
+    }
+    function Save() {
+        $('#fm').form('submit', {
+            url: url,
+            onSubmit: function () {
+                return $(this).form('validate');
+            },
+            success: function (result) {
+                var result = eval('(' + result + ')');
+                if (result.errorMsg) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.errorMsg
+                    });
+                } else {
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                }
+            }
+        });
+    }
+    function destroyUser() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+                if (r) {
+                    $.post('destroy_user.php', { id: row.id }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    }
+    </script>
+
+}
+
+<table id="dg" title="站点类别管理" class="easyui-datagrid" style="width:auto;"
+       url="/Admin/Types/GetAllSites"
+       toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitcolumns="true" singleselect="true">
+    <thead>
+        <tr>
+            <th field="TypeCode" width="50" height="30">TypeCode</th>
+            <th field="TypeName" width="50">TypeName</th>
+            <th field="TypeClickQuantity" width="50">TypeClickQuantity</th>
+            <th field="TypeOrderNumber" width="50">TypeOrderNumber</th>
+        </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Add()">添加</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="Edit()">修改</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;"
+     closed="true" modal="true" buttons="#dlg-buttons">
+   
+    <form id="fm" method="post" novalidate>
+        <div class="fitem">
+            <label>类别编号:</label>
+            <input name="TypeCode" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>类别名称:</label>
+            <input name="TypeName" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>排序号:</label>
+            <input name="TypeOrderNumber" class="easyui-textbox">
+        </div>
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+</div>
+
+

@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@section Scripts
+{
+
+<script src="@Url.Content("~/Content/knockoutPagging/paginationViewModel.js")" type="text/javascript"></script>
+<script type="text/javascript">
+ $(function () {
+        var vm = new viewModel();
+        ko.applyBindings(vm);
+        vm.goToFirst();
+    });
+    var viewModel = function () {
+        var self = this;
+        self.loading = ko.observable(true);
+        self.items = ko.observableArray([]);
+        paginationViewModel.apply(self, [10, function (page, pageHandler) {
+            self.loading(true);
+            $.ajax({
+                url: '/Admin/Sites/GetAllSites',
+                cache: false,
+                data: {
+                    pageIndex: page+1,
+                    pageSize: self.pageSize
+                },
+                success: function (data) {
+                    if (typeof data === "string") {
+                        data = $.parseJSON(data);
+                    }
+                    pageHandler.call(self, data);
+                    self.items(data.list);
+                    self.loading(false);
+                }
+            });
+        }]);
+
+        self.SiteId = ko.observable("");
+        self.SiteCode = ko.observable("");
+        self.SiteName = ko.observable("");
+        self.SiteUrl = ko.observable("");
+
+        var Site = {
+            SiteId: self.SiteId,
+            SiteCode: self.SiteCode,
+            SiteName: self.SiteName,
+            SiteUrl: self.SiteUrl
+        };
+        self.Site = ko.observable();
+        self.Sites = ko.observableArray();
+        self.getAll = function () {
+
+            self.Sites.removeAll();
+            $.getJSON("/Admin/Sites/GetAllSites", function (Sites) {
+                $.each(Sites, function (index, Site) {
+                    self.Sites.push(new viewModel(Site));
+                })
+            });
+        }
+        self.create = function (Site) {
+            // self.status("");
+            //var site = {
+            //    //SiteCode: $('#SiteCode').val(),
+            //    //SiteName: $('#SiteName').val(),
+            //    //SiteUrl: $('#SiteUrl').val(),
+            //    TypeId: 'F1FAFDAD-DFCC-462D-9DB4-8C90349D8187'
+            //};
+           // debugger;
+            $.ajax({
+                url: '/Admin/Sites/Create',
+                cache: false,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(Site),
+                success: function (data) {
+                    // alert('added');
+                    self.items.push(data);
+                    $('#SiteCode').val("");
+                    $('#SiteName').val("");
+                    $('#SiteUrl').val("");
+                    //jQuery("#a_first").click();
+                    //self.Sites.removeAll();
+                    //self.Sites.push(data); //Put the response in ObservableArray
+                    self.Site(null);           
+
+                },
+                error: function (xhr, textStatus, err) {
+                    self.status(err);
+                }
+            })
+        }
+
+        self.edit = function (Site) {
+            //debugger;
+            self.Site(Site);
+        }
+        self.update = function () {
+            // self.status("");
+            //var site = {
+            //    SiteCode: $('#SiteCode').val(),
+            //    SiteName: $('#SiteName').val(),
+            //    SiteUrl: $('#SiteUrl').val(),
+            //    TypeId: 'F1FAFDAD-DFCC-462D-9DB4-8C90349D8187'
+            //};
+            $.ajax({
+                url: '/Admin/Sites/Edit',
+                cache: false,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(self.Site()),
+                success: function (data) {
+                            // alert('added');
+                            //self.items.push(data);
+                            $('#SiteCode').val("");
+                            $('#SiteName').val("");
+                            $('#SiteUrl').val("");
+                  //  self.Sites.removeAll();
+                   // self.Sites(data); //Put the response in ObservableArray
+                    // self.Site(null);
+                            self.items.removeAll();
+                            self.goToFirst();
+
+                },
+                error: function (xhr, textStatus, err) {
+                    self.status(err);
+                }
+            })
+        }
+    }
+</script>
+    }
+<table class="table table-responsive table-bordered">
+    <tr>
+        <th>点击数</th>
+        <th>收藏数</th>
+        <th>赞同数</th>
+        <th>编号</th>
+        <th>名称</th>
+        <th>URL</th>
+        <th>类型</th>
+        @*<th>排序号</th>*@
+        <th>置顶</th>
+        <th>首页</th>        @*<th>是否活动</th>*@
+        <th>添加日期</th>
+        <th>编辑</th>
+        <th>删除</th>
+    </tr>
+    <!--ko foreach:items-->
+    <tr>
+        <td data-bind="text: SiteClickQuantity"></td>
+        <td data-bind="text: SiteFavoriteQuantity"></td>
+        <td data-bind="text: SiteApproveQuantity"></td>
+        <td data-bind="text: SiteCode"></td>
+        <td data-bind="text: SiteName"></td>
+        <td data-bind="text: SiteUrl"></td>
+        <td data-bind="text: TypeName"></td>
+        @*<td data-bind="text: SiteOrderNumber"></td>*@
+        <td><input type="checkbox" data-bind="checked: SiteIsTop" /></td>
+        <td><input type="checkbox" data-bind="checked: SiteIsHome" /></td>
+        @*<td><input type="checkbox" data-bind="checked: SiteIsActive" /></td>*@
+        <td data-bind="text: SiteAddDate"></td>
+        <td><button data-bind="click: $root.edit">Edit</button></td>
+        <td></td>
+    </tr>
+    <!--/ko-->
+    <!--编辑-->
+    <tr data-bind="if: Site()">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><input type="text" data-bind="value: Site().SiteCode" title="SiteCode" id="SiteCode" /></td>
+        <td><input type="text" data-bind="value: Site().SiteName" title="SiteName" id="SiteName" /></td>
+        <td><input type="text" data-bind="value: Site().SiteUrl" title="SiteUrl" id="SiteUrl" /></td>
+        <td><input type="text" title="TypeName" id="TypeName" /></td>
+        @*<td><input type="text" title="SiteOrderNumber" id="SiteOrderNumber" /></td>*@
+        <td><input type="checkbox" title="SiteIsTop" id="SiteIsTop" /></td>
+        <td><input type="checkbox" title="SiteIsHome" id="SiteIsHome" /></td>
+        @*<td></td>*@
+        <td></td>
+        <td><input type="button" value="保存" data-bind="click: update" /></td>
+        <td>@*<input type="button" value="取消" data-bind="click: cancel" />*@</td>
+    </tr>
+    <!--增加-->
+    <tr data-bind="ifnot: Site()">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><input type="text" data-bind="value: $root.SiteCode" title="SiteCode" id="SiteCode" /></td>
+        <td><input type="text" data-bind="value: $root.SiteName" title="SiteName" id="SiteName" /></td>
+        <td><input type="text" data-bind="value: $root.SiteUrl" title="SiteUrl" id="SiteUrl" /></td>
+        <td><input type="text" title="TypeName" id="TypeName" /></td>
+        @*<td><input type="text" title="SiteOrderNumber" id="SiteOrderNumber" /></td>*@
+        <td><input type="checkbox" title="SiteIsTop" id="SiteIsTop" /></td>
+        <td><input type="checkbox" title="SiteIsHome" id="SiteIsHome" /></td>
+        @*<td></td>*@
+        <td></td>
+        <td><input type="button" value="保存" data-bind="click: create" /></td>
+        <td>@*<input type="button" value="取消" data-bind="click: cancel" />*@</td>
+    </tr>
+</table>
+    <div>
+        <span data-bind="template:'tplPagging'"></span>
+    </div>
+
+<script type="text/html" id="tplPagging">
+    <ul class="pagination" data-bind="visible: pages().length > 0">
+        <li><a id="a_first" data-bind="click: goToFirst">首页</a></li>
+        <li><a data-bind="click: goToPrev"><<</a></li>
+        <!--ko if:showStartPagerDot-->
+        <li><a>...</a></li>
+        <!--/ko-->
+        <!--ko foreach:pages-->
+        <li data-bind="css: { 'active': $data == $parent.currentPage() }">
+            <a data-bind="text: $data, click: $parent.goToPage.bind($data, $data)"></a>
+        </li>
+        <!--/ko-->
+        <!--ko if:showEndPagerDot-->
+        <li><a>...</a></li>
+        <!--/ko-->
+        <li><a data-bind="click: goToNext">>></a></li>
+        <li><a data-bind="click: goToLast">末页</a></li>
+    </ul>
+</script>
