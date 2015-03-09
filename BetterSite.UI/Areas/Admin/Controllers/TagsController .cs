@@ -1,5 +1,4 @@
 ﻿using BetterSite.BusinessObject;
-using BetterSite.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,22 +7,22 @@ using System.Web.Mvc;
 
 namespace BetterSite.UI.Areas.Admin.Controllers
 {
-    public class SitesController : Controller
+    public class TagsController : Controller
     {
-        private readonly SitesBO sitesBO = new SitesBO();
+        private readonly TagsBO tagsBO = new TagsBO();
         //
-        // GET: /Admin/Sites/
+        // GET: /Admin/Types/
 
         public ActionResult Index()
         {
             return View();
         }
-        public JsonResult GetAllEntitys(BetterSite.Domain.M_Sites where, int page, int rows)
+        public JsonResult GetAllEntitys(BetterSite.Domain.M_Tags where, int page, int rows)
         {
             where.PageIndex = page;
             where.PageSize = rows;
-            var count = sitesBO.QueryForList(where).Count;
-            var list = sitesBO.QueryForPageList(where);
+            var count = tagsBO.QueryForList(where).Count;
+            var list = tagsBO.QueryForPageList(where);
             var data = new
             {
                 total = count,
@@ -32,8 +31,15 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
 
         }
+        public JsonResult GetAllData()
+        {
+
+            var list = tagsBO.QueryForList(null);
+            return Json(list, JsonRequestBehavior.AllowGet);
+
+        }
         //
-        // GET: /Admin/Sites/Details/5
+        // GET: /Admin/Types/Details/5
 
         public ActionResult Details(int id)
         {
@@ -41,26 +47,22 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         }
 
         //
-        // POST: /Admin/Sites/Create
-        /// <summary>
-        /// 添加一个实体
-        /// </summary>
-        /// <param name="collection"></param>
-        /// <returns></returns>
+        // POST: /Admin/Types/Create
+
         [HttpPost]
-        public JsonResult Create(M_Sites entity,string [] TagId)
+        public JsonResult Create(BetterSite.Domain.M_Tags entity)
         {
             JsonResult json = new JsonResult();
             try
             {
                 // TODO: Add insert logic here
-                sitesBO.Insert(entity);
+                tagsBO.Insert(entity);
                 json.Data = new
                 {
                     success = true,
                     msg = "添加成功"
-                };
-
+                };         
+               
             }
             catch (Exception ex)
             {
@@ -68,21 +70,21 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 {
                     success = false,
                     msg = ex.Message
-                };
+                };         
             }
             return json;
         }
         //
-        // POST: /Admin/Sites/Edit/5
+        // POST: /Admin/Types/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(M_Sites entity)
+        public JsonResult Edit(BetterSite.Domain.M_Tags entity)
         {
             JsonResult json = new JsonResult();
             try
             {
                 // TODO: Add insert logic here
-                sitesBO.Update(entity);
+                tagsBO.Update(entity);
                 json.Data = new
                 {
                     success = true,
@@ -100,17 +102,18 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             }
             return json;
         }
+
         //
-        // POST: /Admin/Sites/Delete/5
+        // POST: /Admin/Types/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(M_Sites entity)
+        public ActionResult Delete(BetterSite.Domain.M_Tags entity)
         {
             JsonResult json = new JsonResult();
             try
             {
                 // TODO: Add insert logic here
-                sitesBO.Delete(entity.SiteId);
+                tagsBO.Delete(entity.TagId);
                 json.Data = new
                 {
                     success = true,
@@ -127,23 +130,6 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 };
             }
             return json;
-        }
-        public JsonResult _knockoutGetAllSites(M_Sites where)
-        {
-
-            // Newtonsoft.Json.Converters.IsoDateTimeConverter timeConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter();
-            //  timeConverter.DateTimeFormat = "yyyy'-'MM'-'dd";
-            // string json = JsonConvert.SerializeObject(sitesBO.QueryForList(null), timeConverter);
-            // return json;
-            var count = sitesBO.QueryForList(where).Count;
-            var list = sitesBO.QueryForPageList(where);
-            var data = new
-            {
-                count = count,
-                list = list
-            };
-            return Json(data, JsonRequestBehavior.AllowGet);
-
         }
     }
 }

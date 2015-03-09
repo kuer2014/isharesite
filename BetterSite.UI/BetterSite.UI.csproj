@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SitesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TagsController .cs" />
     <Compile Include="Areas\Admin\Controllers\TypesController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\HelpPage\App_Start\HelpPageConfig.cs" />
@@ -180,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="项目进度.js" />
     <Content Include="Content\bootstrap_min.css" />
     <Content Include="Content\jquery-easyui-1.4.2\changelog.txt" />
     <Content Include="Content\jquery-easyui-1.4.2\easyloader.js" />
@@ -619,8 +621,11 @@
     <Content Include="Areas\Admin\Views\Shared\_Easyui_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Sites\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Types\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tags\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\jquery.form-3.51.0.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -670,6 +675,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

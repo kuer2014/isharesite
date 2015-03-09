@@ -50,7 +50,10 @@ namespace BetterSite.Domain
         /// </summary>
         public string TypeCode
         {
-            get { return m_Typecode; }
+            get
+            {
+                return string.IsNullOrWhiteSpace(m_Typecode) ? null : m_Typecode;
+            }
             set { m_Typecode = value; }
         }
 

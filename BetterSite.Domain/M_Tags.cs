@@ -15,9 +15,9 @@ namespace BetterSite.Domain
     /// 修改日期:
     /// 修改内容:
     /// 版    本: 1.0.0
-    public class M_Tags
+    public class M_Tags:BaseModel
     {
-        private Guid m_TagId;
+        private string m_TagId;
 
         private string m_Tagcode = String.Empty;
         private string m_Tagname = String.Empty;
@@ -28,7 +28,7 @@ namespace BetterSite.Domain
         public M_Tags() { }
 
         // Retrieve M_Tags with Id for updating
-        public M_Tags(Guid TagId)
+        public M_Tags(string TagId)
         {
             this.m_TagId = TagId;
         }
@@ -38,7 +38,7 @@ namespace BetterSite.Domain
         /// <summary>
         /// 
         /// </summary>
-        public Guid TagId
+        public string TagId
         {
             get { return m_TagId; }
             set { m_TagId = value; }

@@ -6,26 +6,45 @@
     function Add() {
         $('#dlg').dialog('open').dialog('setTitle', '添加');
         $('#fm').form('clear');
-        url = '/Admin/Types/Create';
+        url = '/Admin/Tags/Create';
     }
     function Edit() {
         var row = $('#dg').datagrid('getSelected');
+        //debugger;
         if (row) {
             $('#dlg').dialog('open').dialog('setTitle', '修改');
             $('#fm').form('load', row);
-            url = '/Admin/Types/Edit/';
+            url = '/Admin/Tags/Edit/';
         }
     }
     function Save() {
+        //#region easyui 的form提交方法  IE有兼容问题
+        //$('#fm').form('submit', {
+        //    url: url,
+        //    onSubmit: function () {
+        //        return $(this).form('validate');
+        //    },
+        //    success: function (result) {
+        //        debugger;
+        //        var result = eval('(' + result + ')');
+        //        if (!result.result) {
+        //            $.messager.show({
+        //                title: 'Error',
+        //                msg: result.msg
+        //            });
+        //        } else {
+        //            $('#dlg').dialog('close');        // close the dialog
+        //            $('#dg').datagrid('reload');    // reload the user data
+        //        }
+        //    }
+        //});
+        //#endregion
         if (!$('#fm').form('validate')) { return; }
         var formData = $('#fm').formSerialize(); //jquery.form 插件
         $.ajax({
-            url: url,
-            type: 'post',
-            data: formData,
-            success: function (result) {
+            url: url, type: 'post', data: formData, success: function (result) {
                 //debugger;
-                //  var result = eval('(' + result + ')');
+              //  var result = eval('(' + result + ')');
                 if (!result.success) {
                     $.messager.show({
                         title: 'Error',
@@ -43,7 +62,7 @@
         if (row) {
             $.messager.confirm('Confirm', '删除?', function (r) {
                 if (r) {
-                    $.post('/Admin/Types/Delete/', { TypeId: row.TypeId }, function (result) {
+                    $.post('/Admin/Tags/Delete/', { TagId: row.TagId }, function (result) {
                         if (result.success) {
                             $('#dg').datagrid('reload');    // reload the user data
                         } else {
@@ -61,16 +80,16 @@
 
 }
 
-<table id="dg" title="站点类别管理" class="easyui-datagrid" style="width:auto;"
-       url="/Admin/Types/GetAllEntitys"
+<table id="dg" title="站点标签管理" class="easyui-datagrid" style="width:auto;"
+       url="/Admin/Tags/GetAllEntitys"
        toolbar="#toolbar" pagination="true"
        rownumbers="true" fitcolumns="true" singleselect="true">
     <thead>
         <tr>
-            <th field="TypeCode" width="50" height="30">类别编号</th>
-            <th field="TypeName" width="50">类别名称</th>
-            <th field="TypeClickQuantity" width="50">点击数</th>
-            <th field="TypeOrderNumber" width="50">排序号</th>
+            <th field="TagCode" width="50" height="30">标签编号</th>
+            <th field="TagName" width="50">标签名称</th>
+            <th field="TagClickQuantity" width="50">点击数</th>
+            <th field="TagOrderNumber" width="50">排序号</th>
         </tr>
     </thead>
 </table>
@@ -84,18 +103,18 @@
      closed="true" modal="true" buttons="#dlg-buttons">
    
     <form id="fm" method="post" novalidate>
-        <input type="hidden" name="TypeId" />
+        <input type="hidden" name="TagId" />
         <div class="fitem">
-            <label>类别编号:</label>
-            <input name="TypeCode" class="easyui-textbox" required="true">
+            <label>标签编号:</label>
+            <input name="TagCode" class="easyui-textbox" required="true">
         </div>
         <div class="fitem">
-            <label>类别名称:</label>
-            <input name="TypeName" class="easyui-textbox" required="true">
+            <label>标签名称:</label>
+            <input name="TagName" class="easyui-textbox" required="true">
         </div>
         <div class="fitem">
             <label>排序号:</label>
-            <input name="TypeOrderNumber" class="easyui-textbox">
+            <input name="TagOrderNumber" class="easyui-textbox">
         </div>
     </form>
 </div>

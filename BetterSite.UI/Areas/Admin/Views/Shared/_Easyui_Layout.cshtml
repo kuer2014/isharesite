@@ -4,9 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
+    <title>后台管理</title>
     <link href="~/Content/jquery-easyui-1.4.2/themes/metro/easyui.css" rel="stylesheet" />
     <link href="~/Content/jquery-easyui-1.4.2/themes/icon.css" rel="stylesheet" />
     <style type="text/css">
+        /*#region easyui 表单样式*/
         #fm {
             margin: 0;
             padding: 10px 30px;
@@ -32,14 +34,14 @@
             .fitem input {
                 width: 160px;
             }
-            /*左侧菜单*/
+              /*#endregion*/
+            /*#region 左侧导航菜单*/
             #nav{
                 width:193px;
                 padding:0px;
                 margin:0px;
             }
-        #nav a {   
-            
+        #nav a {               
            display:block;
             letter-spacing:10px;       
             line-height: 36px;
@@ -58,6 +60,8 @@
                 #nav .active {
                      background-color:#888;
                 }
+                /*#endregion*/                 
+
     </style>
       
 </head>
@@ -72,7 +76,7 @@
                 <ul id="nav">
                     <li>@Html.ActionLink("站点管理", "Index", "Sites", new { area = "Admin" }, new { @class = "" })</li>
                     <li>@Html.ActionLink("类别管理", "Index", "Types", new { area = "Admin" }, new { @class = "" })</li>
-                    <li>@Html.ActionLink("标签管理", "Index", "Home", new { area = "Admin" }, new { @class = "" })</li>
+                    <li>@Html.ActionLink("标签管理", "Index", "Tags", new { area = "Admin" }, new { @class = "" })</li>
                 </ul>
 
             </div>
@@ -83,6 +87,8 @@
     @RenderSection("scripts", required: false)
     <script src="~/Content/jquery-easyui-1.4.2/jquery.min.js"></script>
     <script src="~/Content/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery.form-3.51.0.js"></script>
+    <script src="~/Scripts/Common.js"></script>
     <script type="text/javascript">
         //current menu
         var urlFilename = location.href.match(/\/([^\/]+)$/);

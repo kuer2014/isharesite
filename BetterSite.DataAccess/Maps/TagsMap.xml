@@ -12,19 +12,35 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Tags_Insert" parameterClass="BetterSite.Domain.M_Tags">
-      INSERT INTO  Tab_Tags  (TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber)
-      VALUES (#TagId#,#TagCode#,#TagName#,#TagClickQuantity#,#TagOrderNumber#)
+      INSERT INTO  Tab_Tags  (TagId,TagCode,TagName,TagOrderNumber)
+      VALUES (#TagId#,#TagCode#,#TagName#,#TagOrderNumber#)
     </insert>
     <update id="Tab_Tags_Update" parameterClass="BetterSite.Domain.M_Tags">
-      UPDATE  Tab_Tags  SET TagCode= #TagCode#,TagName= #TagName#,TagClickQuantity= #TagClickQuantity#,TagOrderNumber= #TagOrderNumber#
+      UPDATE  Tab_Tags  SET TagCode= #TagCode#,TagName= #TagName#,TagOrderNumber= #TagOrderNumber#
       WHERE TagId= #TagId#
     </update>
     <delete id="Tab_Tags_Delete" parameterClass="Hashtable">
       DELETE FROM  Tab_Tags  WHERE TagId= #TagId#
     </delete>
     <select id="Tab_Tags_Select" listClass="ArrayList" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
-      SELECT TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
-      WHERE TagId= #TagId#
+      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
+      </dynamic>
+    </select>
+    <select id="Tab_Tags_SelectPageList" listClass="ArrayList" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
+      WITH T AS(
+      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber
+      FROM  Tab_Tags
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
+      </dynamic>
+      )
+      SELECT TOP $PageSize$ * FROM T WHERE TagId NOT IN
+      (
+      SELECT TOP ($PageSize$*($PageIndex$-1)) TagId FROM T ORDER BY TagId
+      )
+      ORDER BY TagId
     </select>
     <select id="Tab_Tags_SelectAll" listClass="ArrayList" resultMap="Tab_Tags_Result" >
       SELECT TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber

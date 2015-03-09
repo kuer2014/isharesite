@@ -17,7 +17,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         {
             return View();
         }
-        public JsonResult GetAllSites(BetterSite.Domain.M_Types where, int page, int rows)
+        public JsonResult GetAllEntitys(BetterSite.Domain.M_Types where, int page, int rows)
         {
             where.PageIndex = page;
             where.PageSize = rows;
@@ -31,18 +31,17 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
 
         }
+        public JsonResult GetAllData()
+        {
+
+            var list = typesBO.QueryForList(null);
+            return Json(list, JsonRequestBehavior.AllowGet);
+
+        }
         //
         // GET: /Admin/Types/Details/5
 
         public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        //
-        // GET: /Admin/Types/Create
-
-        public ActionResult Create()
         {
             return View();
         }
@@ -60,7 +59,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 typesBO.Insert(entity);
                 json.Data = new
                 {
-                    result = true,
+                    success = true,
                     msg = "添加成功"
                 };         
                
@@ -69,19 +68,11 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             {
                 json.Data = new
                 {
-                    result = false,
+                    success = false,
                     msg = ex.Message
                 };         
             }
             return json;
-        }
-
-        //
-        // GET: /Admin/Types/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
         }
 
         //
@@ -97,16 +88,15 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 typesBO.Update(entity);
                 json.Data = new
                 {
-                    result = true,
+                    success = true,
                     msg = "修改成功"
                 };
-
             }
             catch (Exception ex)
             {
                 json.Data = new
                 {
-                    result = false,
+                    success = false,
                     msg = ex.Message
                 };
             }
@@ -114,29 +104,32 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         }
 
         //
-        // GET: /Admin/Types/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
         // POST: /Admin/Types/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(BetterSite.Domain.M_Types entity)
         {
+            JsonResult json = new JsonResult();
             try
             {
-                // TODO: Add delete logic here
+                // TODO: Add insert logic here
+                typesBO.Delete(entity.TypeId);
+                json.Data = new
+                {
+                    success = true,
+                    msg = "删除成功"
+                };
 
-                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                json.Data = new
+                {
+                    success = false,
+                    msg = ex.Message
+                };
             }
+            return json;
         }
     }
 }

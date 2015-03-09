@@ -1,47 +1,84 @@
 ﻿
 @section Scripts
 {
+    <style type="text/css">
+             #tag_div{
+                padding:2px;
+                margin:0px;
+            }
+            #tag_div ul {
+margin: 0px;
+padding: 0px;
+}
+           #tag_div ul li{  
+               float:left;
+              text-align:center;
+             list-style:none;
+        }
+    </style>
     <script type="text/javascript">
     var url;
-    function newUser() {
-        $('#dlg').dialog('open').dialog('setTitle', 'New User');
+    function Add() {
+        $('#dlg').dialog('open').dialog('setTitle', '添加');
         $('#fm').form('clear');
-        url = 'save_user.php';
+        url = '/Admin/Sites/Create';
+        this.BuildChk();
     }
-    function editUser() {
+    function Edit() {
         var row = $('#dg').datagrid('getSelected');
         if (row) {
-            $('#dlg').dialog('open').dialog('setTitle', 'Edit User');
+            $('#dlg').dialog('open').dialog('setTitle', '修改');
             $('#fm').form('load', row);
-            url = 'update_user.php?id=' + row.id;
+            //debugger;
+            //设置类别的值
+            var opts = $('#cc').combobox('options');
+            var optdata = $('#cc').combobox('getData');
+            var rowid=row[opts.valueField].toLocaleLowerCase();//
+            var temp = [];
+            temp = $.grep(optdata, function (val, index) {
+                if (val[opts.valueField].toLocaleLowerCase() == rowid)
+                    return true;
+                // 如果[invert]参数不给或为false, $.grep只收集回调函数返回true的数组元素
+                // 反之[invert]参数为true, $.grep收集回调函数返回false的数组元素
+            }, false);
+
+            $('#cc').combobox('select', temp[0][opts.valueField]);
+
+            url = '/Admin/Sites/Edit/';
         }
     }
-    function saveUser() {
-        $('#fm').form('submit', {
+    function Save() {
+        if (!$('#fm').form('validate')) { return; }
+        var formData = $('#fm').formSerialize(); //jquery.form 插件
+      //  var tagFormData = $('#tag_form').formSerialize();
+       // formData=  formData.concat('&').concat(tagFormData);
+        //var tagsData = $("#tag_div input[checked=checked]");
+        debugger;
+        $.ajax({
             url: url,
-            onSubmit: function () {
-                return $(this).form('validate');
-            },
+            type: 'post',
+            data: formData,
             success: function (result) {
-                var result = eval('(' + result + ')');
-                if (result.errorMsg) {
+                //debugger;
+                //  var result = eval('(' + result + ')');
+                if (!result.success) {
                     $.messager.show({
                         title: 'Error',
-                        msg: result.errorMsg
+                        msg: result.msg
                     });
                 } else {
                     $('#dlg').dialog('close');        // close the dialog
                     $('#dg').datagrid('reload');    // reload the user data
                 }
-            }
+            }, dataType: 'json'
         });
     }
-    function destroyUser() {
+    function Del() {
         var row = $('#dg').datagrid('getSelected');
         if (row) {
-            $.messager.confirm('Confirm', 'Are you sure you want to destroy this user?', function (r) {
+            $.messager.confirm('Confirm', '删除?', function (r) {
                 if (r) {
-                    $.post('destroy_user.php', { id: row.id }, function (result) {
+                    $.post('/Admin/Types/Delete/', { SiteId: row.SiteId }, function (result) {
                         if (result.success) {
                             $('#dg').datagrid('reload');    // reload the user data
                         } else {
@@ -55,53 +92,174 @@
             });
         }
     }
+    function BuildChk() {
+        var tagsdata = this.GetTagsData();
+       // var executerDiv = $("#tag_div")[0];
+        var executerDiv= document.getElementById("tag_div");
+        executerDiv.innerHTML = "";
+        var ul = document.createElement("ul");
+        //var tableDatas = [];
+        //var temp = [];
+        //temp[0] = "tag_chk";
+        //temp[1] = "TagId";
+        //tableDatas.push(temp);
+      //  debugger;
+        for (var i = 0; i < tagsdata.length; i++) {
+            var tag = tagsdata[i];
+            var li = createElement_li(tag.TagId, tag.TagName);
+          //  // 加入复选框
+          //  var checkBox = document.createElement("input");
+          //  checkBox.setAttribute("type", "checkbox");
+          ////  checkBox.setAttribute("id", arr[0]);
+          //  checkBox.setAttribute("name", "TagId");
+          //checkBox.setAttribute("value", tag.TagId);
+
+          //  var li = document.createElement("li");
+          //  li.appendChild(checkBox);
+          //  li.appendChild(document.createTextNode(tag.TagName));
+
+            ul.appendChild(li);
+        }
+
+        executerDiv.appendChild(ul);
+
+    }
+        /*后台查询到所有标签*/
+    function GetTagsData() {
+        var json=[];
+        debugger;
+        $.ajax({
+            url: "/Admin/Tags/GetAllData",
+            type: 'get',
+            async: false,
+            success: function (result) {
+                if (result.length) { json = result; }
+            }
+        });
+        return json;
+    }
+        /*卡片中添加标签功能*/
+    function InputTag() {
+        var tagName = $("#tag_txt").val();
+        $("#tag_txt").val("");
+        var exisTag=$("#tag_div li:contains('" + tagName + "')");
+        if (exisTag.length) {
+            exisTag.css('color', 'red');
+            return;
+        }
+        var tagId = Global.createGuid();
+        //向服务器提交保存
+        debugger;
+        $.post('/Admin/Tags/Create', {TagId:tagId,TagCode:"fromSite",TagName:tagName}, function (result) {
+            if (!result.success) {
+                $.messager.show({
+                    title: 'Error',
+                    msg: result.msg
+                });
+            } else {
+                var ul = document.getElementById("tag_div").children[0];               
+                //开始创建
+                var li = this.createElement_li(tagId, tagName);
+                ul.appendChild(li);
+            }
+        });   
+       
+    }
+        /*创建一个包含checkBox的li元素
+           参数：id为chenkBox的value值
+              name为chenkBox的name属性值
+          返回：DOM类型li元素
+        */
+    function createElement_li(id, name) {
+        // 加入复选框
+        var checkBox = document.createElement("input");
+        checkBox.setAttribute("type", "checkbox");
+        //  checkBox.setAttribute("id", arr[0]);
+        checkBox.setAttribute("name", "TagId");
+        checkBox.setAttribute("value", id);
+
+        var li = document.createElement("li");
+        li.appendChild(checkBox);
+        li.appendChild(document.createTextNode(name));
+        return li;
+    }
     </script>
 
 }
 
 <table id="dg" title="站点管理" class="easyui-datagrid" style="width:auto;"
-       url="/Admin/Sites/GetAllSites"
+       url="/Admin/Sites/GetAllEntitys"
        toolbar="#toolbar" pagination="true" pagesize="20"
-       rownumbers="true" fitcolumns="true" singleselect="true">
+       rownumbers="true" fitcolumns="true" singleselect="true"
+       autorowheight="false">
     <thead>
         <tr>
-            <th field="SiteCode" width="50" height="30">SiteCode</th>
-            <th field="SiteName" width="50">SiteName</th>
-            <th field="SiteUrl" width="50">SiteUrl</th>
+            <th field="SiteCode" width="50">站点编号</th>
+            <th field="SiteName" width="50">站点名称</th>
+            <th field="SiteUrl" width="50">站点Url</th>
+            <th field="TypeName" width="50">站点类别</th>
+            <th field="SiteAddDate" width="50">添加日期</th>
+
+            <th field="SiteIsTop" width="50">置顶</th>
+            <th field="SiteIsHome" width="50">首页显示</th>
+            <th field="SiteClickQuantity" width="50">点击数</th>
+            <th field="SiteFavoriteQuantity" width="50">收藏数</th>
+            <th field="SiteApproveQuantity" width="50">推荐数</th>
+
+            <th field="SiteOrderNumber" width="50">排序号</th>
+            <th field="SiteIsActive" width="50">有效</th>
         </tr>
     </thead>
 </table>
 <div id="toolbar">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="newUser()">New User</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="editUser()">Edit User</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="destroyUser()">Remove User</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Add()">添加</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="Edit()">修改</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;"
+<div id="dlg" class="easyui-dialog" style="width:400px;height:300px;"
      closed="true" modal="true" buttons="#dlg-buttons">
-    <div class="ftitle">User Information</div>
+
     <form id="fm" method="post" novalidate>
+        <input type="hidden" name="SiteId" />
         <div class="fitem">
-            <label>SiteCode:</label>
+            <label>站点编号:</label>
             <input name="SiteCode" class="easyui-textbox" required="true">
         </div>
         <div class="fitem">
-            <label>SiteName:</label>
-            <input name="SiteName" class="easyui-textbox" required="true">
+            <label>站点名称:</label>
+            <input name="SiteName" class="easyui-textbox" data-options="required:true">
         </div>
         <div class="fitem">
-            <label>SiteUrl:</label>
+            <label>站点Url:</label>
             <input name="SiteUrl" class="easyui-textbox">
         </div>
         <div class="fitem">
-            <label>Email:</label>
-            <input name="email" class="easyui-textbox" validtype="email">
+            <label>站点类别:</label>
+            <input id="cc" class="easyui-combobox" name="TypeId" 
+                   data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData'" />
         </div>
+        <div class="">
+            <fieldset>
+                <legend>
+                    <label>站点标签:</label>
+                </legend>
+                <div class="" id="tag_div">
+                </div>
+                <div style="float:right;padding:10px;">
+                    <input id="tag_txt" type="text" name="TagName" placeholder="Input Tag" style="width:70px;height:12px;" />
+                    <a href="javascript:void(0)" onclick="InputTag()">添加</a>
+                </div>
+            </fieldset>
+        </div>
+</form>
+    <form id="tag_form">
+       
     </form>
 </div>
 <div id="dlg-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="saveUser()" style="width:90px">Save</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
 </div>
 
 
