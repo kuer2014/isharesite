@@ -11,6 +11,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
     public class SitesController : Controller
     {
         private readonly SitesBO sitesBO = new SitesBO();
+        private readonly SiteTagBO siteTagBO = new SiteTagBO();
         //
         // GET: /Admin/Sites/
 
@@ -55,6 +56,11 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             {
                 // TODO: Add insert logic here
                 sitesBO.Insert(entity);
+                //插入标签信息
+                for (int i = 0; i < TagId.Length; i++)
+                {
+                    siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = TagId[i] });
+                }               
                 json.Data = new
                 {
                     success = true,
@@ -76,13 +82,19 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         // POST: /Admin/Sites/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(M_Sites entity)
+        public ActionResult Edit(M_Sites entity, string[] TagId)
         {
             JsonResult json = new JsonResult();
             try
             {
                 // TODO: Add insert logic here
                 sitesBO.Update(entity);
+                //修改标签信息（先根据siteId删除，再插入）
+                siteTagBO.DeleteBySiteId(entity.SiteId);
+                for (int i = 0; i < TagId.Length; i++)
+                {
+                    siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = TagId[i] });
+                }               
                 json.Data = new
                 {
                     success = true,

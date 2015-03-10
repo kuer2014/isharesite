@@ -10,8 +10,8 @@
   </resultMaps>
   <statements>
     <insert id="Tab_SiteTag_Insert" parameterClass="BetterSite.Domain.M_SiteTag">
-      INSERT INTO  Tab_SiteTag  (SiteTagId,SiteId,TagId)
-      VALUES (#SiteTagId#,#SiteId#,#TagId#)
+      INSERT INTO  Tab_SiteTag  (SiteId,TagId)
+      VALUES (#SiteId#,#TagId#)
     </insert>
     <update id="Tab_SiteTag_Update" parameterClass="BetterSite.Domain.M_SiteTag">
       UPDATE  Tab_SiteTag  SET SiteId= #SiteId#,TagId= #TagId#
@@ -20,9 +20,16 @@
     <delete id="Tab_SiteTag_Delete" parameterClass="Hashtable">
       DELETE FROM  Tab_SiteTag  WHERE SiteTagId= #SiteTagId#
     </delete>
+     <delete id="Tab_SiteTag_DeleteBySiteId" parameterClass="Hashtable">
+      DELETE FROM  Tab_SiteTag  WHERE SiteId= #SiteId#
+    </delete>
     <select id="Tab_SiteTag_Select" listClass="ArrayList" resultMap="Tab_SiteTag_Result" parameterClass="Hashtable">
-      SELECT SiteTagId,SiteId,TagId FROM  Tab_SiteTag
-      WHERE SiteTagId= #SiteTagId#
+      SELECT CONVERT(VARCHAR(40), SiteTagId) SiteTagId,CONVERT(VARCHAR(40), SiteId) SiteId,CONVERT(VARCHAR(40), TagId) TagId FROM  Tab_SiteTag
+        <dynamic prepend="WHERE">
+             <isNotEmpty prepend="and" property="SiteTagId">SiteTagId= #SiteTagId#</isNotEmpty>
+      <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+         <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
+    </dynamic>
     </select>
     <select id="Tab_SiteTag_SelectAll" listClass="ArrayList" resultMap="Tab_SiteTag_Result" >
       SELECT SiteTagId,SiteId,TagId

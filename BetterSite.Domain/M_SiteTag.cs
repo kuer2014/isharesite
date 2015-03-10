@@ -17,16 +17,16 @@ namespace BetterSite.Domain
     /// 版    本: 1.0.0
     public class M_SiteTag
     {
-        private Guid m_SiteTagId;
+        private string m_SiteTagId;
 
-        private Guid m_Siteid = Guid.Empty;
-        private Guid m_Tagid = Guid.Empty;
+        private string m_Siteid = string.Empty;
+        private string m_Tagid = string.Empty;
 
         // Instantiate empty M_SiteTag for inserting
         public M_SiteTag() { }
 
         // Retrieve M_SiteTag with Id for updating
-        public M_SiteTag(Guid SiteTagId)
+        public M_SiteTag(string SiteTagId)
         {
             this.m_SiteTagId = SiteTagId;
         }
@@ -36,7 +36,7 @@ namespace BetterSite.Domain
         /// <summary>
         /// 
         /// </summary>
-        public Guid SiteTagId
+        public string SiteTagId
         {
             get { return m_SiteTagId; }
             set { m_SiteTagId = value; }
@@ -46,7 +46,7 @@ namespace BetterSite.Domain
         /// <summary>
         /// 
         /// </summary>
-        public Guid SiteId
+        public string SiteId
         {
             get { return m_Siteid; }
             set { m_Siteid = value; }
@@ -55,7 +55,7 @@ namespace BetterSite.Domain
         /// <summary>
         /// 
         /// </summary>
-        public Guid TagId
+        public string TagId
         {
             get { return m_Tagid; }
             set { m_Tagid = value; }

@@ -23,12 +23,12 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Sites_Insert" parameterClass="BetterSite.Domain.M_Sites">
-      INSERT INTO  Tab_Sites  (SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber)
-                      VALUES (#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#)
+      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber)
+      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#)
       <!--返回刚插入记录ID-->
-      <selectKey type="post" resultClass="string" property="SiteId">
+      <!--<selectKey type="post" resultClass="string" property="SiteId">
         　　　　SELECT CAST(@@IDENTITY as int) as SiteId        　　　　
-      </selectKey>
+      </selectKey>-->
    </insert>
     <update id="Tab_Sites_Update" parameterClass="BetterSite.Domain.M_Sites">
       UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,

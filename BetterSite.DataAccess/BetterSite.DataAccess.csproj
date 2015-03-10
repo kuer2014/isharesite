@@ -58,6 +58,7 @@
     <Compile Include="BaseDA.cs" />
     <Compile Include="MapperHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiteTagDA.cs" />
     <Compile Include="TagsDA.cs" />
     <Compile Include="TypesDA.cs" />
     <Compile Include="SitesDA.cs" />
@@ -68,7 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Maps\ProductMap.xml" />
-    <Content Include="Maps\SiteTagMap.xml" />
+    <Content Include="Maps\SiteTagMap.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Maps\TagsMap.xml" />
     <Content Include="Maps\TypesMap.xml" />
     <Content Include="Maps\SitesMap.xml">

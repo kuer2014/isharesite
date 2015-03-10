@@ -1,27 +1,30 @@
 ﻿
 @section Scripts
 {
-    <style type="text/css">
-             #tag_div{
-                padding:2px;
-                margin:0px;
-            }
-            #tag_div ul {
-margin: 0px;
-padding: 0px;
-}
-           #tag_div ul li{  
-               float:left;
-              text-align:center;
-             list-style:none;
+<style type="text/css">
+    #tag_div {
+        padding: 2px;
+        margin: 0px;
+    }
+
+        #tag_div ul {
+            margin: 0px;
+            padding: 0px;
         }
-    </style>
+
+            #tag_div ul li {
+                float: left;
+                text-align: center;
+                list-style: none;
+            }
+</style>
     <script type="text/javascript">
     var url;
     function Add() {
         $('#dlg').dialog('open').dialog('setTitle', '添加');
         $('#fm').form('clear');
         url = '/Admin/Sites/Create';
+        $("#SiteId").val(Global.createGuid());
         this.BuildChk();
     }
     function Edit() {
@@ -30,7 +33,7 @@ padding: 0px;
             $('#dlg').dialog('open').dialog('setTitle', '修改');
             $('#fm').form('load', row);
             //debugger;
-            //设置类别的值
+            //设置类别的值 start
             var opts = $('#cc').combobox('options');
             var optdata = $('#cc').combobox('getData');
             var rowid=row[opts.valueField].toLocaleLowerCase();//
@@ -41,9 +44,25 @@ padding: 0px;
                 // 如果[invert]参数不给或为false, $.grep只收集回调函数返回true的数组元素
                 // 反之[invert]参数为true, $.grep收集回调函数返回false的数组元素
             }, false);
-
             $('#cc').combobox('select', temp[0][opts.valueField]);
-
+            //设置类别的值 end
+            this.BuildChk();
+            //设置标签的值 start
+            debugger;
+            var sitetagList = GetSiteTagData({ "SiteId": row.SiteId });
+            if (sitetagList.length) {
+                var tags_chk = $("#tag_div li input");
+                if (tags_chk&&tags_chk.length) {
+                    for (var i = 0; i < sitetagList.length; i++) {
+                        tags_chk.each(function (inx, chk) {
+                            if (chk.value == sitetagList[i].TagId) {
+                                chk.checked = true;
+                            }
+                        });
+                    }
+                }
+            }
+            //设置标签的值 end
             url = '/Admin/Sites/Edit/';
         }
     }
@@ -53,7 +72,7 @@ padding: 0px;
       //  var tagFormData = $('#tag_form').formSerialize();
        // formData=  formData.concat('&').concat(tagFormData);
         //var tagsData = $("#tag_div input[checked=checked]");
-        debugger;
+       // debugger;
         $.ajax({
             url: url,
             type: 'post',
@@ -150,20 +169,26 @@ padding: 0px;
         var tagId = Global.createGuid();
         //向服务器提交保存
         debugger;
-        $.post('/Admin/Tags/Create', {TagId:tagId,TagCode:"fromSite",TagName:tagName}, function (result) {
-            if (!result.success) {
-                $.messager.show({
-                    title: 'Error',
-                    msg: result.msg
-                });
-            } else {
-                var ul = document.getElementById("tag_div").children[0];               
-                //开始创建
-                var li = this.createElement_li(tagId, tagName);
-                ul.appendChild(li);
-            }
-        });   
-       
+        $.ajax({
+            url: '/Admin/Tags/Create',
+            type: 'post',
+            async: false,
+            data: { TagId: tagId, TagCode: "fromSite", TagName: tagName },
+            success: function (result) {
+                if (!result.success) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.msg
+                    });
+                } else {
+                    var ul = document.getElementById("tag_div").children[0];
+                    //开始创建
+                    var li = createElement_li(tagId, tagName);
+                    ul.appendChild(li);
+                }
+            }, dataType: 'json'
+        });
+
     }
         /*创建一个包含checkBox的li元素
            参数：id为chenkBox的value值
@@ -182,6 +207,23 @@ padding: 0px;
         li.appendChild(checkBox);
         li.appendChild(document.createTextNode(name));
         return li;
+    }
+        /*后台查询到所有站点标签关系
+        返回数据列表
+        */
+    function GetSiteTagData(param) {
+        var json = [];
+        debugger;
+        $.ajax({
+            url: "/Admin/SiteTag/GetAllData",
+            type: 'get',
+            async: false,
+            data:param,
+            success: function (result) {
+                if (result.length) { json = result; }
+            }
+        });
+        return json;
     }
     </script>
 
@@ -221,7 +263,7 @@ padding: 0px;
      closed="true" modal="true" buttons="#dlg-buttons">
 
     <form id="fm" method="post" novalidate>
-        <input type="hidden" name="SiteId" />
+        <input type="hidden" id="SiteId" name="SiteId" />
         <div class="fitem">
             <label>站点编号:</label>
             <input name="SiteCode" class="easyui-textbox" required="true">
@@ -239,7 +281,7 @@ padding: 0px;
             <input id="cc" class="easyui-combobox" name="TypeId" 
                    data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData'" />
         </div>
-        <div class="">
+        <div>
             <fieldset>
                 <legend>
                     <label>站点标签:</label>
@@ -253,9 +295,6 @@ padding: 0px;
             </fieldset>
         </div>
 </form>
-    <form id="tag_form">
-       
-    </form>
 </div>
 <div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>

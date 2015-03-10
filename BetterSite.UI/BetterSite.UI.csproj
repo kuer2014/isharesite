@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SitesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SiteTagController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagsController .cs" />
     <Compile Include="Areas\Admin\Controllers\TypesController.cs" />
     <Compile Include="Areas\HelpPage\ApiDescriptionExtensions.cs" />

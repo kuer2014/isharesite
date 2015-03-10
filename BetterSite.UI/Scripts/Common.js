@@ -905,23 +905,23 @@ var Url = {
             webappPath = "http://" + window.location.hostname + "/" + this.getVirtualPath();
         return webappPath;
     },
-    /**
-    *   级别：Public
-    *   类型：Function
-    *   功能：得到虚拟目录
-    *   参数：无
-    *   返回：虚拟目录
-    */
-    getVirtualPath: function () {
-        if (virtualPath == undefined) {
-            var p = window.location.pathname;
-            if (p.substring(0, 1) != "/")
-                p = "/" + p;
-            var str = p.replace(/^[/]\w*[/]/, "");			//将虚拟目录从字符串中清除
-            virtualPath = p.substring(0, p.length - str.length);	//返回虚拟目录
-        }
-        return virtualPath;
-    },
+    ///**
+    //*   级别：Public
+    //*   类型：Function
+    //*   功能：得到虚拟目录
+    //*   参数：无
+    //*   返回：虚拟目录
+    //*/
+    //getVirtualPath: function () {
+    //    if (virtualPath == undefined) {
+    //        var p = window.location.pathname;
+    //        if (p.substring(0, 1) != "/")
+    //            p = "/" + p;
+    //        var str = p.replace(/^[/]\w*[/]/, "");			//将虚拟目录从字符串中清除
+    //        virtualPath = p.substring(0, p.length - str.length);	//返回虚拟目录
+    //    }
+    //    return virtualPath;
+    //},
 
     /**
     *   级别：Private
@@ -1276,88 +1276,88 @@ function attachMouseUp(type, func, condition) {
 //    }
 //});
 
-Object.extend(Function.prototype, {
-    //第一个参数是方法，以后的是变量，把方法和变量绑定方法的参数中，this不变
-    wrapargs: function () {
-        var __method = this, args = $A(arguments), object = args.shift();
-        return function () {
-            return object.apply(this, [__method.bind(this)].concat(args).concat($A(arguments)));
-        }
-    },
-    //把多个参数绑定到方法参数中，this不变
-    args: function () {
-        var __method = this, args = $A(arguments);
-        return function () {
-            return __method.apply(this, args.concat($A(arguments)));
-        }
-    }
-});
+//Object.extend(Function.prototype, {
+//    //第一个参数是方法，以后的是变量，把方法和变量绑定方法的参数中，this不变
+//    wrapargs: function () {
+//        var __method = this, args = $A(arguments), object = args.shift();
+//        return function () {
+//            return object.apply(this, [__method.bind(this)].concat(args).concat($A(arguments)));
+//        }
+//    },
+//    //把多个参数绑定到方法参数中，this不变
+//    args: function () {
+//        var __method = this, args = $A(arguments);
+//        return function () {
+//            return __method.apply(this, args.concat($A(arguments)));
+//        }
+//    }
+//});
 
-/**
-*   级别：Public
-*   类型：Function
-*   功能：字符串格式
-*   返回：stringBuilder对象
-*/
-Object.extend(String, {
-    //字符串格式化函数，element.innerHTML = String.format(’<a href=”%1″ onclick=”alert(\’%2\’);”>%3</a>’, url, msg, text);
-    format: function (str) {
-        var args = arguments, re = new RegExp("%([1-" + args.length + "])", "g");
-        return String(str).replace(
-            re,
-            function ($1, $2) {
-                return args[$2];
-            }
-        );
-    }
-});
+///**
+//*   级别：Public
+//*   类型：Function
+//*   功能：字符串格式
+//*   返回：stringBuilder对象
+//*/
+//Object.extend(String, {
+//    //字符串格式化函数，element.innerHTML = String.format(’<a href=”%1″ onclick=”alert(\’%2\’);”>%3</a>’, url, msg, text);
+//    format: function (str) {
+//        var args = arguments, re = new RegExp("%([1-" + args.length + "])", "g");
+//        return String(str).replace(
+//            re,
+//            function ($1, $2) {
+//                return args[$2];
+//            }
+//        );
+//    }
+//});
 
-String.prototype.leftPad = function (n, s) {
-    s = s || " ";
-    if (this.length < n) {
-        var ts = new Array(n - 1);
-        ts[n - 1] = this;
-        for (var i = 0; i < n - this.length; i++) {
-            ts[i] = s;
-        }
-        return ts.join("");
-    } else {
-        return this;
-    }
-}
+//String.prototype.leftPad = function (n, s) {
+//    s = s || " ";
+//    if (this.length < n) {
+//        var ts = new Array(n - 1);
+//        ts[n - 1] = this;
+//        for (var i = 0; i < n - this.length; i++) {
+//            ts[i] = s;
+//        }
+//        return ts.join("");
+//    } else {
+//        return this;
+//    }
+//}
 
 
-///<summary>
-/// 对prototype的extend方法的扩展
-///</summary>
-///<param name="destination" type="object">
-///1:目标对象
-///</param>
-///<param name="source" type="object">
-///1:扩展自对象
-///</param>
-///<returns type="object" />
-///用法：和Class.create的用法类似，只是$super改为$base的形式，可以调用扩展之前的方法。
-Object._extend = function (destination, source) {
-    if (!destination.baseClass) {
-        destination.baseClass = {};
-    }
-    for (var property in source) {
-        var uid = Global.createGuid();
-        var value = source[property]
-        if (destination && Object.isFunction(destination[property]) &&
-             Object.isFunction(value) && value.argumentNames().first() == "$super") {
-            destination[uid] = destination.baseClass[property] = destination[property];
-            destination.baseClass[property] = destination.baseClass[property].bind(destination);
-            var method = value;
-            value = (function (m) {
-                return function () { return destination[m].apply(this, arguments) };
-            })(uid).wrap(method);
-        }
-        destination[property] = value;
-    }
-    return destination;
-};
+/////<summary>
+///// 对prototype的extend方法的扩展
+/////</summary>
+/////<param name="destination" type="object">
+/////1:目标对象
+/////</param>
+/////<param name="source" type="object">
+/////1:扩展自对象
+/////</param>
+/////<returns type="object" />
+/////用法：和Class.create的用法类似，只是$super改为$base的形式，可以调用扩展之前的方法。
+//Object._extend = function (destination, source) {
+//    if (!destination.baseClass) {
+//        destination.baseClass = {};
+//    }
+//    for (var property in source) {
+//        var uid = Global.createGuid();
+//        var value = source[property]
+//        if (destination && Object.isFunction(destination[property]) &&
+//             Object.isFunction(value) && value.argumentNames().first() == "$super") {
+//            destination[uid] = destination.baseClass[property] = destination[property];
+//            destination.baseClass[property] = destination.baseClass[property].bind(destination);
+//            var method = value;
+//            value = (function (m) {
+//                return function () { return destination[m].apply(this, arguments) };
+//            })(uid).wrap(method);
+//        }
+//        destination[property] = value;
+//    }
+//    return destination;
+//};
 
 //原始的window.alert 方法 
 window.oriAlert = window.alert;
