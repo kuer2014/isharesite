@@ -19,6 +19,17 @@
             }
 </style>
     <script type="text/javascript">
+        function Search() {
+            var dg = $('#dg').datagrid();
+            dg.datagrid('enableFilter'
+            //    ,[{
+            //        field: 'SiteCode',
+            //    type: 'numberbox',
+            //    options: { precision: 1 },
+            //    op: ['equal', 'notequal', 'less', 'greater']
+            //}]
+            );
+        }
     var url;
     function Add() {
         $('#dlg').dialog('open').dialog('setTitle', '添加');
@@ -48,7 +59,7 @@
             //设置类别的值 end
             this.BuildChk();
             //设置标签的值 start
-            debugger;
+           // debugger;
             var sitetagList = GetSiteTagData({ "SiteId": row.SiteId });
             if (sitetagList.length) {
                 var tags_chk = $("#tag_div li input");
@@ -93,11 +104,31 @@
         });
     }
     function Del() {
-        var row = $('#dg').datagrid('getSelected');
-        if (row) {
+      //  var row = $('#dg').datagrid('getSelected');
+        var rows = $('#dg').datagrid('getChecked');
+        if (!rows.length) {
+            $.messager.show({    // show error message
+                title: 'Error',
+                msg: "请勾选记录！"
+            });
+            return;
+        }
+        //debugger;
+       // return;
+        // if (row) {
+     // var  SitesId =
+      //  rows.each(function (i, row) {
+
+      //  })
+        var sitesId="'";
+        $(rows).each(function (i, row) {
+            sitesId += row.SiteId + "','";
+        });
+        sitesId=sitesId.substring(0, sitesId.length - 2)
+        debugger;
             $.messager.confirm('Confirm', '删除?', function (r) {
                 if (r) {
-                    $.post('/Admin/Types/Delete/', { SiteId: row.SiteId }, function (result) {
+                    $.post('/Admin/Sites/Delete/', { 'sitesId': sitesId }, function (result) {
                         if (result.success) {
                             $('#dg').datagrid('reload');    // reload the user data
                         } else {
@@ -109,7 +140,7 @@
                     }, 'json');
                 }
             });
-        }
+       // }
     }
     function BuildChk() {
         var tagsdata = this.GetTagsData();
@@ -146,7 +177,7 @@
         /*后台查询到所有标签*/
     function GetTagsData() {
         var json=[];
-        debugger;
+       // debugger;
         $.ajax({
             url: "/Admin/Tags/GetAllData",
             type: 'get',
@@ -168,7 +199,7 @@
         }
         var tagId = Global.createGuid();
         //向服务器提交保存
-        debugger;
+       // debugger;
         $.ajax({
             url: '/Admin/Tags/Create',
             type: 'post',
@@ -213,7 +244,7 @@
         */
     function GetSiteTagData(param) {
         var json = [];
-        debugger;
+        //debugger;
         $.ajax({
             url: "/Admin/SiteTag/GetAllData",
             type: 'get',
@@ -232,10 +263,12 @@
 <table id="dg" title="站点管理" class="easyui-datagrid" style="width:auto;"
        url="/Admin/Sites/GetAllEntitys"
        toolbar="#toolbar" pagination="true" pagesize="20"
-       rownumbers="true" fitcolumns="true" singleselect="true"
+       rownumbers="true" fitcolumns="true" 
+       singleselect="true" checkonselect="false" selectoncheck="false" multiselect="false"
        autorowheight="false">
     <thead>
         <tr>
+            <th field="" width="" checkbox="true"></th>
             <th field="SiteCode" width="50">站点编号</th>
             <th field="SiteName" width="50">站点名称</th>
             <th field="SiteUrl" width="50">站点Url</th>
@@ -257,6 +290,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Add()">添加</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="Edit()">修改</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Search()">查询</a>
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:300px;"

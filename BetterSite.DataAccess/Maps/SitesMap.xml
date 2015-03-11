@@ -36,7 +36,7 @@
       WHERE SiteId= #SiteId#
     </update>
     <delete id="Tab_Sites_Delete" parameterClass="string">
-      DELETE FROM  Tab_Sites  WHERE SiteId= #siteId#
+      DELETE FROM  Tab_Sites  WHERE SiteId in($sitesId$)
     </delete>
     <delete id="Tab_Sites_Delete2" parameterClass="Hashtable">
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#

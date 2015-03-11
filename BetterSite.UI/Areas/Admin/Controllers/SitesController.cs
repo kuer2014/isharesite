@@ -116,13 +116,15 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         // POST: /Admin/Sites/Delete/5
 
         [HttpPost]
-        public ActionResult Delete(M_Sites entity)
+        public ActionResult Delete(string sitesId)
         {
             JsonResult json = new JsonResult();
             try
             {
                 // TODO: Add insert logic here
-                sitesBO.Delete(entity.SiteId);
+                sitesBO.Delete(sitesId);
+                //删除站点标签关系
+                siteTagBO.DeleteBySiteId(sitesId);
                 json.Data = new
                 {
                     success = true,
