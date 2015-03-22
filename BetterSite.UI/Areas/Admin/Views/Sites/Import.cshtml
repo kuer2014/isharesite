@@ -1,0 +1,105 @@
+﻿@section Scripts
+{
+<style type="text/css">
+    table {
+        width:100%;
+        border-right: 1px solid #808080;
+        border-bottom: 1px solid #808080;
+        table-layout:fixed;word-wrap:break-word;word-break:break-all;overflow: hidden;  /*word-break;break-all;*/
+    }
+
+        table td {
+            border-left: 1px solid #808080;
+            border-top: 1px solid #808080;
+        } 
+</style>
+
+    <script type="text/javascript">
+        var sitesObj = [];
+       function run_matching(){
+       	var src=window.document.getElementById('src_text').value;
+       	var reg = new RegExp("<A.*</A>", "g");
+        var result=src.match(reg);
+         debugger;
+          sitesObj = [];
+         for (var i = 0; i < result.length; i++) {
+             var srcText = result[i];
+             //	debugger;
+             var hrefstr = attribute_matching(srcText, 'HREF="http.[^"]*"', 'http.[^"]*');
+             var addDate = attribute_matching(srcText, 'ADD_DATE="\\d{10}"', '\\d{10}');
+             var siteName = attribute_matching(srcText, '>.[^<>]+<', '[^>][\\s\\S][^<]*');
+             var siteObj = {};
+             siteObj.siteId = Global.createGuid();
+             siteObj.siteUrl = hrefstr;
+             siteObj.siteCollectionDate = new Date(addDate + '000' - 0);
+             siteObj.siteName = siteName;
+             sitesObj.push(siteObj);
+
+             // var hrefstr=	result[i].match('HREF="http.[^"]*"');
+             //      if  (hrefstr.length) {
+             //     	hrefstr[0]=hrefstr[0].match('http.[^"]*')
+             //     }
+             // //	var reg2 = new RegExp('(?<=HREF=")http.[^"]*', 'g');//报数量词错误
+             //  // var hrefstr=result[i].match(reg2);
+             //  siteObj.siteUrl=	hrefstr[0].length?hrefstr[0][0]:'';
+             //   sitesObj.push(siteObj);
+         };
+       //var li_html ='';           
+       //for (var i = 0; i < 10; i++) {
+           //    li_html += '<li>' + sitesObj[i].siteName + sitesObj[i].siteUrl + sitesObj[i].siteCollectionDate + '</li>';
+       //}
+       //jQuery("#ul_view").html(li_html);
+       var tab_html = '';
+       for (var i = 0; i < sitesObj.length; i++) {
+           tab_html += '<tr><td>' + sitesObj[i].siteName + '</td><td style="overflow: hidden;">' + sitesObj[i].siteUrl + '</td><td>' + sitesObj[i].siteCollectionDate.toLocaleString() + '</td></tr>';
+       }
+       jQuery("#tab_view").html(tab_html);
+     debugger;
+       }
+       function attribute_matching(txt,reg1,reg2){
+       	  var hrefstr=	txt.match(reg1);
+            if  (hrefstr.length) {
+            	hrefstr[0]=hrefstr[0].match(reg2)
+            }
+
+      var url=	hrefstr[0].length?hrefstr[0][0]:'';
+      return url;
+       }
+       function run_import() {
+           var url = '/Admin/Sites/Import/';
+           debugger;
+           $.ajax({
+               url: url,
+               type: 'post',
+               data: { "sitesJson": JSON.stringify(sitesObj) },  //提交到后台
+               success: function (result) {
+                   //debugger;
+                   //  var result = eval('(' + result + ')');
+                   if (!result.success) {
+                       $.messager.show({
+                           title: 'Error',
+                           msg: result.msg
+                       });
+                   } else {
+                       $.messager.show({
+                           title: 'Success',
+                           msg: result.msg
+                       });
+                       //$('#dlg').dialog('close');        // close the dialog
+                       //$('#dg').datagrid('reload');    // reload the user data
+                   }
+               }, dataType: 'json'
+           });
+       }
+</script>
+}
+<div>
+    <textarea type="textarea" id="src_text" style="width: 100%; height: 300px"></textarea>
+    <input type="button" value="开始处理" onclick="run_matching()" />
+    <input type="button" value="导入结果" onclick="run_import()" />
+    <div id="div_import">
+        <span>处理结果：</span>
+        @*<ul id="ul_view"></ul>*@
+        <table id="tab_view"></table>
+    </div>
+</div>

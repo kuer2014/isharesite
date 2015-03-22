@@ -36,6 +36,7 @@
         $('#fm').form('clear');
         url = '/Admin/Sites/Create';
         $("#SiteId").val(Global.createGuid());
+        $("#SiteCollectionDate").val(new Date().toISOString());
         this.BuildChk();
     }
     function Edit() {
@@ -78,12 +79,20 @@
         }
     }
     function Save() {
+        
         if (!$('#fm').form('validate')) { return; }
+        if (!$("#tag_div :checked").length) {
+            $.messager.show({
+                title: 'Error',
+                msg: "至少添加一个标签"
+            });
+            return;
+        }
         var formData = $('#fm').formSerialize(); //jquery.form 插件
       //  var tagFormData = $('#tag_form').formSerialize();
        // formData=  formData.concat('&').concat(tagFormData);
         //var tagsData = $("#tag_div input[checked=checked]");
-       // debugger;
+       debugger;
         $.ajax({
             url: url,
             type: 'post',
@@ -269,20 +278,20 @@
     <thead>
         <tr>
             <th field="" width="" checkbox="true"></th>
-            <th field="SiteCode" width="50">站点编号</th>
-            <th field="SiteName" width="50">站点名称</th>
-            <th field="SiteUrl" width="50">站点Url</th>
-            <th field="TypeName" width="50">站点类别</th>
-            <th field="SiteAddDate" width="50">添加日期</th>
+            <th field="SiteCode" width="0">站点编号</th>
+            <th field="SiteName">站点名称</th>
+            <th field="SiteUrl">站点Url</th>
+            <th field="TypeName" width="0">站点类别</th>
+            <th field="SiteAddDate" width="80">添加日期</th>
 
-            <th field="SiteIsTop" width="50">置顶</th>
-            <th field="SiteIsHome" width="50">首页显示</th>
-            <th field="SiteClickQuantity" width="50">点击数</th>
-            <th field="SiteFavoriteQuantity" width="50">收藏数</th>
-            <th field="SiteApproveQuantity" width="50">推荐数</th>
+            <th field="SiteIsTop" width="0">置顶</th>
+            <th field="SiteIsHome" width="0">首页显示</th>
+            <th field="SiteClickQuantity" width="0">点击数</th>
+            <th field="SiteFavoriteQuantity" width="0">收藏数</th>
+            <th field="SiteApproveQuantity" width="0">推荐数</th>
 
-            <th field="SiteOrderNumber" width="50">排序号</th>
-            <th field="SiteIsActive" width="50">有效</th>
+            <th field="SiteOrderNumber" width="0">排序号</th>
+            <th field="SiteIsActive" width="0">有效</th>
         </tr>
     </thead>
 </table>
@@ -298,6 +307,7 @@
 
     <form id="fm" method="post" novalidate>
         <input type="hidden" id="SiteId" name="SiteId" />
+        <input type="hidden" id="SiteCollectionDate" name="SiteCollectionDate" />
         <div class="fitem">
             <label>站点编号:</label>
             <input name="SiteCode" class="easyui-textbox" required="true">
@@ -308,12 +318,12 @@
         </div>
         <div class="fitem">
             <label>站点Url:</label>
-            <input name="SiteUrl" class="easyui-textbox">
+            <input name="SiteUrl" class="easyui-textbox" data-options="required:true">
         </div>
         <div class="fitem">
             <label>站点类别:</label>
-            <input id="cc" class="easyui-combobox" name="TypeId" 
-                   data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData'" />
+            <input id="cc" class="easyui-combobox" name="TypeId"
+                   data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData',required:true" />
         </div>
         <div>
             <fieldset>

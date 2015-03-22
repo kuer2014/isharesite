@@ -21,7 +21,7 @@
       DELETE FROM  Tab_SiteTag  WHERE SiteTagId= #SiteTagId#
     </delete>
      <delete id="Tab_SiteTag_DeleteBySiteId" parameterClass="Hashtable">
-       DELETE FROM  Tab_SiteTag  WHERE SiteId  in($sitesId$)
+       DELETE FROM  Tab_SiteTag  WHERE SiteId  in('$sitesId$')
      </delete>
     <select id="Tab_SiteTag_Select" listClass="ArrayList" resultMap="Tab_SiteTag_Result" parameterClass="Hashtable">
       SELECT CONVERT(VARCHAR(40), SiteTagId) SiteTagId,CONVERT(VARCHAR(40), SiteId) SiteId,CONVERT(VARCHAR(40), TagId) TagId FROM  Tab_SiteTag

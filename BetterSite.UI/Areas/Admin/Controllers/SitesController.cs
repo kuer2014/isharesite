@@ -12,6 +12,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
     {
         private readonly SitesBO sitesBO = new SitesBO();
         private readonly SiteTagBO siteTagBO = new SiteTagBO();
+        private readonly TypesBO typesBO = new TypesBO();
         //
         // GET: /Admin/Sites/
 
@@ -131,6 +132,48 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                     msg = "删除成功"
                 };
 
+            }
+            catch (Exception ex)
+            {
+                json.Data = new
+                {
+                    success = false,
+                    msg = ex.Message
+                };
+            }
+            return json;
+        }
+        public ActionResult Import()
+        {
+            return View();
+        }
+         [HttpPost]
+        public JsonResult Import(string sitesJson)
+        {
+            JsonResult json = new JsonResult();
+            int importCount = 0;
+            int successCount = 0;
+            try
+            {
+                var sites = Newtonsoft.Json.JsonConvert.DeserializeObject<List<M_Sites>>(sitesJson);
+                importCount = sites.Count;
+                IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = "DR" });
+                // types = (typesBO.QueryForList(new BetterSite.Domain.M_Types() { TypeCode = "DR" })) as System.Collections.ArrayList;
+                var typeId = types[0].TypeId;
+                foreach (var item in sites)
+                {
+                    item.TypeId = typeId;
+                    if ((int)sitesBO.QueryForObject(item) == 0)
+                    {
+                        sitesBO.Insert(item);
+                        successCount++;
+                    }
+                }
+                json.Data = new
+                   {
+                       success = true,
+                       msg = "共" + importCount + "条记录，导入成功" + successCount + "条记录"
+                   };
             }
             catch (Exception ex)
             {

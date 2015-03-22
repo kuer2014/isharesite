@@ -89,15 +89,15 @@ namespace BetterSite.DataAccess
             return null;
         }
 
-        //public static IList<T> QueryForList<T>(string statementName, object parameterObject = null)
-        //{
-        //  // ISqlMapper iSqlMapper = Mapper.Instance();
-        //    if (iSqlMapper != null)
-        //    {
-        //        return iSqlMapper.QueryForList<T>(statementName, parameterObject);
-        //    }
-        //    return null;
-        //}
+        public static IList<T> QueryForEntityList<T>(string statementName, object parameterObject = null)
+        {
+            // ISqlMapper iSqlMapper = Mapper.Instance();
+            if (iSqlMapper != null)
+            {
+                return iSqlMapper.QueryForList<T>(statementName, parameterObject);
+            }
+            return null;
+        }
         public static IList QueryForList(string statementName, object parameterObject = null)
         {
           //  ISqlMapper iSqlMapper = Mapper.Instance();
@@ -106,6 +106,15 @@ namespace BetterSite.DataAccess
                 return iSqlMapper.QueryForList(statementName, parameterObject);
             }
             return null;
+        }
+        public static object QueryForObject(string statementName, object parameterObject)
+        {
+            if (iSqlMapper != null)
+            {
+                return iSqlMapper.QueryForObject(statementName, parameterObject);
+            }
+            return null;
+          
         }
     }
 }

@@ -28,6 +28,13 @@
         <isNotEmpty prepend="and" property="TypeId">TypeId= #TypeId#</isNotEmpty>
       </dynamic>
     </select>
+    <select id="Tab_Types_SelectList" resultMap="Tab_Types_Result" parameterClass="Hashtable">
+      SELECT CONVERT(VARCHAR(40), TypeId) TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber FROM  Tab_Types
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TypeId">TypeId= #TypeId#</isNotEmpty>
+        <isNotEmpty prepend="and" property="TypeCode">TypeCode= #TypeCode#</isNotEmpty>
+      </dynamic>
+    </select>
     <select id="Tab_Types_SelectPageList" listClass="ArrayList" resultMap="Tab_Types_Result" parameterClass="Hashtable">
       WITH T AS(
       SELECT CONVERT(VARCHAR(40), TypeId) TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber

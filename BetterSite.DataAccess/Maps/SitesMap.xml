@@ -16,6 +16,7 @@
       <result column="SiteApproveQuantity" property="SiteApproveQuantity" />
       <result column="SiteOrderNumber" property="SiteOrderNumber" />
       <result column="SiteIsActive" property="SiteIsActive" />
+      <result column="SiteCollectionDate" property="SiteCollectionDate" />
     </resultMap>
     <resultMap class="BetterSite.Domain.M_Sites,BetterSite.Domain" extends="Tab_Sites_Result" id="Tab_Sites_JionType_Result">
       <result column="TypeName" property="TypeName" />
@@ -23,13 +24,25 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Sites_Insert" parameterClass="BetterSite.Domain.M_Sites">
-      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber)
-      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#)
+      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber,SiteCollectionDate)
+      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#,#SiteCollectionDate#)
       <!--返回刚插入记录ID-->
       <!--<selectKey type="post" resultClass="string" property="SiteId">
         　　　　SELECT CAST(@@IDENTITY as int) as SiteId        　　　　
       </selectKey>-->
    </insert>
+    <insert id="Tab_Sites_CheckInsert" parameterClass="BetterSite.Domain.M_Sites">
+      IF NOT EXISTS(SELECT 1  FROM  Tab_Sites WHERE SiteUrl=#SiteUrl#)
+      BEGIN
+      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber,SiteCollectionDate)
+      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#,#SiteCollectionDate#)
+      END
+      <!--ELSE
+      BEGIN
+      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber,SiteCollectionDate)
+      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#,#SiteCollectionDate#)
+      END-->
+    </insert>
     <update id="Tab_Sites_Update" parameterClass="BetterSite.Domain.M_Sites">
       UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,
       SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteOrderNumber= #SiteOrderNumber#,SiteIsActive= #SiteIsActive#
@@ -42,7 +55,7 @@
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
     </delete>
     <select id="Tab_Sites_Select" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
-      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,S.TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
@@ -51,7 +64,7 @@
     </select>
     <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
       WITH T AS(
-      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,S.TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
@@ -64,8 +77,12 @@
       )
       ORDER BY SiteId
     </select>
+    <select id="Tab_Sites_SelectCount" resultClass="System.Int32" parameterClass="Hashtable">
+      SELECT COUNT(*) FROM  Tab_Sites
+      WHERE SiteUrl= #SiteUrl#
+    </select>
     <select id="Tab_Sites_SelectAll" listClass="ArrayList" resultMap="Tab_Sites_Result" >
-      SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive
+      SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
       FROM  Tab_Sites
     </select>
   </statements>

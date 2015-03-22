@@ -23,7 +23,8 @@ namespace BetterSite.Domain
             private string m_Sitecode = String.Empty;
             private string m_Sitename = String.Empty;
             private string m_Siteurl = String.Empty;
-            private Guid m_Typeid = Guid.Empty;
+            //private Guid m_Typeid = Guid.Empty;
+            private string m_TypeId = String.Empty;
            // private DateTime m_Siteadddate;
             private string m_Siteadddate;
             private bool m_Siteistop;
@@ -85,10 +86,10 @@ namespace BetterSite.Domain
             /// <summary>
             /// 
             /// </summary>
-            public Guid TypeId
+            public string TypeId
             {
-                get { return m_Typeid; }
-                set { m_Typeid = value; }
+                get { return m_TypeId; }
+                set { m_TypeId = value; }
             }
 
             /// <summary>
@@ -167,6 +168,14 @@ namespace BetterSite.Domain
             /// 关联类型名称
             /// </summary>
             public string TypeName
+            {
+                get;
+                set;
+            }
+            /// <summary>
+            /// 收藏日期（来自导入时，书签文件中的ADD DATE）
+            /// </summary>
+            public DateTime SiteCollectionDate
             {
                 get;
                 set;

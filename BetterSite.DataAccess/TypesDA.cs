@@ -31,10 +31,10 @@ namespace BetterSite.DataAccess
           return BaseDA.Get<M_Types>("", siteId);
       }
       ///查询列表
-      //public IList<M_Sites> QueryForList(M_Sites where)
-      //{
-      //    return BaseDA.QueryForList<M_Sites>("Tab_Sites_Select", where);
-      //}
+      public IList<M_Types> QueryForEntityList(M_Types where)
+      {
+          return BaseDA.QueryForEntityList<M_Types>("Tab_Types_SelectList", where);
+      }
       public IList QueryForList(M_Types where)
       {
           return BaseDA.QueryForList("Tab_Types_Select", where);

@@ -50,10 +50,10 @@ namespace BetterSite.BusinessObject
           return da.Get(siteId);
       }
       ///查询列表
-      //public IList<M_Sites> QueryForList(M_Sites where)
-      //{
-      //    return da.QueryForList(where);
-      //}
+      public IList<M_Types> QueryForEntityList(M_Types where)
+      {
+          return da.QueryForEntityList(where);
+      }
       public IList QueryForList(M_Types where)
       {
           return da.QueryForList(where);
