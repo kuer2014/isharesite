@@ -17,10 +17,10 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         {
             return View();
         }
-        public JsonResult GetAllEntitys(BetterSite.Domain.M_Types where, int page, int rows)
+        public JsonResult GetAllEntitys(BetterSite.Domain.M_Types where)//, int page, int rows)
         {
-            where.PageIndex = page;
-            where.PageSize = rows;
+          //  where.PageIndex = page;
+           // where.PageSize = rows;
             var count = typesBO.QueryForList(where).Count;
             var list = typesBO.QueryForPageList(where);
             var data = new

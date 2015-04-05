@@ -60,6 +60,7 @@
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
       <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+         <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
     </dynamic>
     </select>
     <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
@@ -69,13 +70,19 @@
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+       <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
       </dynamic>
+      <!--<dynamic>
+        <isNotEmpty prepend=" " property="order">
+          order by $sort$ $order$
+        </isNotEmpty>
+      </dynamic>-->
       )
-      SELECT TOP $PageSize$ * FROM T WHERE SiteId NOT IN
+      SELECT TOP $Rows$ * FROM T WHERE SiteId NOT IN
       (
-      SELECT TOP ($PageSize$*($PageIndex$-1)) SiteId FROM T ORDER BY SiteId
+      SELECT TOP ($Rows$*($Page$-1)) SiteId FROM T ORDER BY $sort$ $order$
       )
-      ORDER BY SiteId
+      ORDER BY $sort$ $order$
     </select>
     <select id="Tab_Sites_SelectCount" resultClass="System.Int32" parameterClass="Hashtable">
       SELECT COUNT(*) FROM  Tab_Sites

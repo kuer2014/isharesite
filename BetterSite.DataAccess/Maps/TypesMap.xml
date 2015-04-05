@@ -43,9 +43,9 @@
         <isNotEmpty prepend="and" property="TypeId">TypeId= #TypeId#</isNotEmpty>
       </dynamic>
       )
-      SELECT TOP $PageSize$ * FROM T WHERE TypeId NOT IN
+      SELECT TOP $Rows$ * FROM T WHERE TypeId NOT IN
       (
-      SELECT TOP ($PageSize$*($PageIndex$-1)) TypeId FROM T ORDER BY TypeId
+      SELECT TOP ($Rows$*($Page$-1)) TypeId FROM T ORDER BY TypeId
       )
       ORDER BY TypeId
     </select>

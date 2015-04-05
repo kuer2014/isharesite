@@ -36,9 +36,9 @@
         <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
       </dynamic>
       )
-      SELECT TOP $PageSize$ * FROM T WHERE TagId NOT IN
+      SELECT TOP $Rows$ * FROM T WHERE TagId NOT IN
       (
-      SELECT TOP ($PageSize$*($PageIndex$-1)) TagId FROM T ORDER BY TagId
+      SELECT TOP ($Rows$*($Page$-1)) TagId FROM T ORDER BY TagId
       )
       ORDER BY TagId
     </select>

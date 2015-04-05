@@ -20,10 +20,14 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         {
             return View();
         }
-        public JsonResult GetAllEntitys(BetterSite.Domain.M_Sites where, int page, int rows)
+        public JsonResult GetAllEntitys(BetterSite.Domain.M_Sites where)//, int page, int rows, string sort, string order)
         {
-            where.PageIndex = page;
-            where.PageSize = rows;
+          //  where.PageIndex = page;
+          //  where.PageSize = rows;
+       //   where.Sort=  string.IsNullOrWhiteSpace(where.Sort) ? "SiteAddDate" : where.Sort;
+          where.Sort = where.Sort?? "SiteAddDate";
+          where.Order = where.Order ?? "Asc";
+
             var count = sitesBO.QueryForList(where).Count;
             var list = sitesBO.QueryForPageList(where);
             var data = new
@@ -159,6 +163,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 importCount = sites.Count;
                 IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = "DR" });
                 // types = (typesBO.QueryForList(new BetterSite.Domain.M_Types() { TypeCode = "DR" })) as System.Collections.ArrayList;
+				// IList<M_Types> types = typesBO.QueryForList(new BetterSite.Domain.M_Types() { TypeCode = "DR" }).Cast<M_Types>().ToList();
                 var typeId = types[0].TypeId;
                 foreach (var item in sites)
                 {
