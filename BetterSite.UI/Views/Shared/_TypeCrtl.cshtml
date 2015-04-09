@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+@model  IList<BetterSite.Domain.M_Types>
+<!DOCTYPE html>
+
+<html>
+<head>
+      <title>_TagCrtl</title>
+</head>
+<body>
+    <div>
+        @foreach (var item in Model)
+        {
+            <div>@Html.ActionLink(item.TypeName, "Index", "Sites", new { @TypeCode = item.TypeCode }, null)</div>
+        }
+    </div>
+</body>
+</html>

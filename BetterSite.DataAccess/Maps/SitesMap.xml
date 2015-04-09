@@ -20,6 +20,7 @@
     </resultMap>
     <resultMap class="BetterSite.Domain.M_Sites,BetterSite.Domain" extends="Tab_Sites_Result" id="Tab_Sites_JionType_Result">
       <result column="TypeName" property="TypeName" />
+      <result column="TypeCode" property="TypeCode" />
     </resultMap>
   </resultMaps>
   <statements>
@@ -55,21 +56,25 @@
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
     </delete>
     <select id="Tab_Sites_Select" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
-      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,T.TypeName,T.TypeCode, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
       <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+          <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
+         <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
          <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
     </dynamic>
     </select>
     <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
       WITH T AS(
-      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,TypeName, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,T.TypeName, T.TypeCode,CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+          <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
+         <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
        <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
       </dynamic>
       <!--<dynamic>

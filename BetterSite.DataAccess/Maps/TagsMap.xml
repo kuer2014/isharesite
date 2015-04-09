@@ -28,6 +28,19 @@
         <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
       </dynamic>
     </select>
+    <select id="Tab_Tags_SelectByTypeId" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
+      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TypeId">
+          TagId IN(
+          SELECT TagId
+          FROM Tab_SiteTag T_ST
+          INNER JOIN  (SELECT DISTINCT SiteId FROM Tab_Sites WHERE TypeId=#TypeId#) T_S 
+          ON  T_ST.SiteId=T_S.SiteId
+              )
+        </isNotEmpty>
+      </dynamic>
+    </select>
     <select id="Tab_Tags_SelectPageList" listClass="ArrayList" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
       WITH T AS(
       SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber

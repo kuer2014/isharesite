@@ -11,8 +11,28 @@ namespace BetterSite.UI.Controllers
     public class HomeController : Controller
     {
         private readonly SitesBO sitesBO=new SitesBO();
-        public ActionResult Index()
+      //  private readonly SiteTagBO siteTagBO = new SiteTagBO();
+        private readonly TypesBO typesBO = new TypesBO();
+       private readonly TagsBO tagsBO = new TagsBO();
+       public ActionResult Index(BetterSite.Domain.M_Sites where)
         {
+         //   IList<M_Types> types = typesBO.QueryForEntityList(null);
+         //   ViewBag.Types = types;
+          var tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
+           ViewBag.Tags = tags;
+            //ViewBag.TypeText = "分类信息";
+
+            where.Sort = where.Sort ?? "SiteAddDate";
+            where.Order = where.Order ?? "Asc";
+            var count = sitesBO.QueryForList(where).Count;
+          //  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
+            var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
+            return View(list);
+        }
+       #region demo_knockout
+       public ActionResult _knockoutIndex()
+        {
+            ViewBag.TypeText = "分类信息";
             return View();
         }
         //public IList<M_Sites> QueryForList()
@@ -20,7 +40,7 @@ namespace BetterSite.UI.Controllers
         //    M_Sites where = null;
         //    return sitesBO.QueryForList(where);
         //}
-        public JsonResult GetAllSites()
+        public JsonResult _knockoutGetAllSites()
         {
         
            // Newtonsoft.Json.Converters.IsoDateTimeConverter timeConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter();
@@ -29,5 +49,6 @@ namespace BetterSite.UI.Controllers
            // string json = JsonConvert.SerializeObject(sitesBO.QueryForList(null), timeConverter);
            // return json;
         }
+        #endregion demo_knockout
     }
 }

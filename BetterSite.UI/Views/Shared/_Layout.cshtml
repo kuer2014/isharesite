@@ -5,28 +5,90 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+    <style type="text/css">
+        .header {
+            height: 200px;
+            background-color: #FFF;
+        }
+
+        .bodyer {
+            width: 1000px;
+            height: 600px;
+            background-color: #555;
+            margin: 0 auto;
+        }
+
+        .footer {
+            width: 1000px;
+            height: 200px;
+            background-color: #222;
+            margin: 0 auto;
+        }
+
+        .left {
+            width: 100px;
+            height: 600px;
+            background-color: #f2f2f2;
+            float: left;
+        }
+
+        .midd {
+            width:700px;
+            height: 600px;
+            background-color: #ddd;
+            float: left;
+        }
+
+        .right {
+            width: 200px;
+            height: 600px;
+            background-color: #f2f2f2;
+            float: right;
+        }
+        .right-top{
+              /*min-height: 1px;*/
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">
-                    <a href="~/">ASP.NET Web API</a></p>
-            </div>
-            <div class="float-right">
-                <nav>
-                    <ul id="menu">
-                        <li>@Html.ActionLink("主页", "Index", "Home", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                    </ul>
-                </nav>
-            </div>
+    <div class='header'> </div>
+    <div class='bodyer'>
+        <div class='left'>
+            
+            @{
+                Html.RenderAction("_TypeCrtl", "Types");
+                    }
+                        @*
+            @ViewBag.TypeText
+                            @foreach (var item in ViewBag.Types as IList<BetterSite.Domain.M_Types>)
+        {
+            <div>@item.TypeName</div>
+        }*@
         </div>
-    </header>
-    @RenderBody()
+        <div class='midd'>   
+            @*<div class="right-top">
+                @{
+                    Html.RenderAction("_TagCrtl", "Tags");
+                }
+           </div>*@
+                        @RenderBody()
+            </div>
+        <div class='right'>
+            @*@{
+                Html.RenderAction("_TypeCrtl", "Types", new { @TypeCode = "" });
+            }*@
+            @*@foreach (var item in ViewBag.Tags as IList<BetterSite.Domain.M_Tags>)
+            {
+                <span>@item.TagName</span>
+            }*@
+        </div>
+    </div>
+    <div class='footer'>
 
+    </div>
     @Scripts.Render("~/bundles/jquery")
      @*@Scripts.Render("~/bundles/jqueryui")*@
     @RenderSection("scripts", required: false)

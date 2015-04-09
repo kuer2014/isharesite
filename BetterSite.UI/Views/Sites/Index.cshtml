@@ -10,6 +10,11 @@
     <input id="ck1" type="checkbox" /> 
     <label for="ck1">点击我即可选择/取消勾选状态</label>
 </div>*@
+<div class="right-top">
+    @{
+        Html.RenderAction("_TagCrtl", "Tags");
+    }
+</div>
 
 <div>
     @foreach (var item in Model )

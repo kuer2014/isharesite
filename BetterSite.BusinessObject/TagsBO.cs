@@ -50,9 +50,9 @@ namespace BetterSite.BusinessObject
           return da.Get(siteId);
       }
       ///查询列表
-      //public IList<M_Sites> QueryForList(M_Sites where)
+      //public IList<M_Tags> QueryForEntityList(M_Tags where)
       //{
-      //    return da.QueryForList(where);
+      //    return da.QueryForEntityList(where);
       //}
       public IList QueryForList(M_Tags where)
       {
@@ -61,6 +61,10 @@ namespace BetterSite.BusinessObject
       public IList QueryForPageList(M_Tags where)
       {
           return da.QueryForPageList(where);
+      }
+      public IList<M_Tags> QueryForEntityListByTypeId(string typeId)
+      {
+          return da.QueryForEntityListByTypeId(typeId);
       }
     }
 }

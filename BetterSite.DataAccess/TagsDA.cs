@@ -43,5 +43,11 @@ namespace BetterSite.DataAccess
       {
           return BaseDA.QueryForList("Tab_Tags_SelectPageList", where);
       }
+      public IList<M_Tags> QueryForEntityListByTypeId(string typeId)
+      {
+          Hashtable where = new Hashtable();
+          where.Add("TypeId", typeId);
+          return BaseDA.QueryForEntityList<M_Tags>("Tab_Tags_SelectByTypeId", where);
+      }
     }
 }

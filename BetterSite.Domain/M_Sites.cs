@@ -173,6 +173,14 @@ namespace BetterSite.Domain
                 set;
             }
             /// <summary>
+            /// 关联类型名称
+            /// </summary>
+            public string TypeCode
+            {
+                get;
+                set;
+            }
+            /// <summary>
             /// 收藏日期（来自导入时，书签文件中的ADD DATE）
             /// </summary>
             public DateTime SiteCollectionDate
