@@ -20,20 +20,24 @@ namespace BetterSite.UI.Controllers
             IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList(); 
             return View(tags);
         }
-        public ActionResult _TagCrtl(string TypeCode,string[] TagId)
+        /// <summary>
+        /// 【标签控件】根据TypeCode查找标签
+        /// </summary>
+        /// <param name="TypeCode">类型编号</param>
+        /// <param name="TagId">状态（页面已勾选数据）</param>
+        /// <returns>标签数据</returns>
+        public ActionResult _TagCrtl(string TypeCode, string[] TagId)
         {
-            //ViewBag.Typecode = TypeCode;
-#region 根据TypeCode查找标签
             var typeId = string.Empty;
-            if (!string.IsNullOrWhiteSpace(TypeCode)) {
-            IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = TypeCode });
-             typeId = types[0].TypeId;
+            if (!string.IsNullOrWhiteSpace(TypeCode))
+            {
+                IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = TypeCode });
+                typeId = types[0].TypeId;
             }
-            IList<M_Tags> tags= tagsBO.QueryForEntityListByTypeId(typeId);
-#endregion
+            IList<M_Tags> tags = tagsBO.QueryForEntityListByTypeId(typeId);
             //IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
-            if(TagId!=null&& TagId.Count()>0) ViewBag.CheckdTags = TagId.ToList();
-            return PartialView("_TagCrtl",tags);
+            if (TagId != null && TagId.Count() > 0) ViewBag.CheckdTags = TagId.ToList();
+            return PartialView("_TagCrtl", tags);
         }     
     }
 }

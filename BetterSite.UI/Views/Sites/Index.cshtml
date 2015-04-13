@@ -2,24 +2,40 @@
     ViewBag.Title = "Index";
 }
 @model IList<BetterSite.Domain.M_Sites>
-@*<div class="right-top">
-    @foreach (var item in ViewBag.Tags as IList<BetterSite.Domain.M_Tags>)
-    {
-        <span>@item.TagName</span>
-    }
-    <input id="ck1" type="checkbox" /> 
-    <label for="ck1">点击我即可选择/取消勾选状态</label>
-</div>*@
-<div class="right-top">
+@*<div class="midd-top">
+        @foreach (var item in ViewBag.Tags as IList<BetterSite.Domain.M_Tags>)
+        {
+            <span>@item.TagName</span>
+        }
+        <input id="ck1" type="checkbox" />
+        <label for="ck1">点击我即可选择/取消勾选状态</label>
+    </div>*@
+<div class="midd-top">
     @{
         Html.RenderAction("_TagCrtl", "Tags");
     }
 </div>
-
 <div>
     @foreach (var item in Model )
     {
         <div>@item.SiteName</div>
     }
-
 </div>
+@section scripts {
+    <script>
+        jQuery(function () {
+            // debugger;
+            //为标签绑定事件
+            jQuery('form [name=TagId]').each(function(i, elem){
+                elem.onchange = function () {
+                    jQuery('form').submit();
+                };
+            });
+            //active Type
+            var urlFilename = location.href.match(/\/([^\/]+)$/);
+            if (urlFilename) {
+                $(".ul_nav li:has(a[href$='" + urlFilename[1] + "'])").addClass("active");
+            }
+        });
+    </script>
+}

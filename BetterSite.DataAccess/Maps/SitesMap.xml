@@ -60,7 +60,8 @@
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
-      <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+      <!--<isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
          <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
@@ -72,7 +73,8 @@
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
-        <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+            <!--<isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
        <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>

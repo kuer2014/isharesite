@@ -3,7 +3,6 @@
 }
 @model  IList<BetterSite.Domain.M_Tags>
 <!DOCTYPE html>
-
 <html>
 <head>
       <title>_TagCrtl</title>
@@ -16,9 +15,6 @@
             {
                 foreach (var item in Model)
                 {
-                    @*<div>@Html.ActionLink(item.TagName, "Index", "Home", new { @TagName = item.TagName }, null)</div>*@
-                    @*@Html.DisplayFor(m => item.TagName)*@
-                    @*@Html.CheckBox(item.TagId)*@
                     if (ViewBag.CheckdTags.Contains(item.TagId))
                     {
                         <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" checked="checked" />
@@ -36,10 +32,10 @@
                 foreach (var item in Model)
                 {
                     <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox"  />
-                    <label for="@item.TagId">@item.TagName</label>
+       <label for="@item.TagId">@item.TagName</label>
                 }
             }
-            <input type="submit" value="提交" />
+            @*<input type="submit" value="提交" />*@
         }
     </div>
 </body>
