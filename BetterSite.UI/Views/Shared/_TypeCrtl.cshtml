@@ -3,33 +3,36 @@
 }
 @model  IList<BetterSite.Domain.M_Types>
 <!DOCTYPE html>
-
 <html>
 <head>
       <title>_TypeCrtl</title>
     <style type="text/css">
-          /*.div_nav{
-            width: 100px;
-            height: 600px;
-            color:#fff;
-            background-color: #297fb8;
-            float: left;
-        }*/
-     
-        /*li.active > a, li.active > a:hover, li.active > a:focus {
-        color: #fff;
-        background-color: #428bca;
-    }*/
     </style>
 </head>
 <body>
-    <div>
-        <ul class="ul_nav">
-            @foreach (var item in Model)
-            {
-                <li>@Html.ActionLink(item.TypeName, "Index", "Sites", new { @TypeCode = item.TypeCode }, null)</li>
-            }
-        </ul>
-    </div>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">BetterSite</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    @foreach (var item in Model)
+                    {
+                        <li>@Html.ActionLink(item.TypeName, "Index", "Sites", new { @TypeCode = item.TypeCode }, null)</li>
+                    }
+                    @*<li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>*@
+                </ul>
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar --> 
 </body>
 </html>

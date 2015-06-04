@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Better Site Index";
 }
 @model IList<BetterSite.Domain.M_Sites>
 @*<div class="midd-top">
@@ -10,16 +10,34 @@
         <input id="ck1" type="checkbox" />
         <label for="ck1">点击我即可选择/取消勾选状态</label>
     </div>*@
-<div class="midd-top">
+@*<div class="midd-top">
     @{
         Html.RenderAction("_TagCrtl", "Tags");
     }
-</div>
-<div>
+</div>*@
+@*<div>
     @foreach (var item in Model )
     {
         <div>@item.SiteName</div>
     }
+</div>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @{
+                Html.RenderAction("_TagCrtl", "Tags");
+            }
+        </div>
+        <div class="col-md-6">
+            <div>
+                @foreach (var item in Model)
+                {
+                    <div>@item.SiteName</div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
 @section scripts {
     <script>
@@ -34,7 +52,7 @@
             //active Type
             var urlFilename = location.href.match(/\/([^\/]+)$/);
             if (urlFilename) {
-                $(".ul_nav li:has(a[href$='" + urlFilename[1] + "'])").addClass("active");
+                $(".navbar li:has(a[href$='" + urlFilename[1] + "'])").addClass("active");
             }
         });
     </script>

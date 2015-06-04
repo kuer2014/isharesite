@@ -7,121 +7,58 @@
     <title>@ViewBag.Title</title>
     @*@Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")*@
-    @*<link href="~/Content/bootstrap_min.css" rel="stylesheet" />*@
+    <link href="~/Content/bootstrap_min.css" rel="stylesheet" />
     <style type="text/css">
-        body{
-            /*background-color:#3498db*/
-        }
-        .header {
-            height: 200px;
-            background-color: #FFF;
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
         }
 
-        .bodyer {
-            width: 1000px;
-            height: 600px;
-            /*background-color: #555;*/
+        #container {
+            min-height: 100%;
+            height: auto !important;
+            height: 100%; /*IE6不识别min-height*/
+            position: relative;
+        }
+
+        #page {
             margin: 0 auto;
+            padding-bottom: 60px; /*等于footer的高度*/
         }
 
-        .footer {
-            width: 1000px;
-            height: 200px;
-            background-color: #3c7fdc ;
-            margin: 0 auto;
+        #footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60px; /*脚部的高度*/
+            background: #f1f1f1;
+            clear: both;
         }
 
-            /*#region 左侧导航菜单*/
-       .left .ul_nav {
-            width: 100px;
-            height: 600px;
-            color:#fff;
-            background-color: #297fb8;
-            float: left;
-            padding: 0px;
-            margin: 0px;
+        body {
+            padding-top: 70px;
         }
-
-           .left .ul_nav a {
-                display: block;
-                /*letter-spacing:10px;*/ /*字符间距*/
-                line-height: 36px;
-                height: 36px;
-                color: #fff;
-                text-decoration: none;
-            }
-
-           .left .ul_nav li {
-                /*background-color:#297fb8;*/
-                text-align: center;
-                list-style: none;
-            }
-
-               .left .ul_nav li:hover {
-                    background-color: #fff;
-                    color: #297fb8;
-                }
-                 .left .ul_nav li:hover a{
-                       background-color:#3498db ;
-                    /*color: #428bca;*/ 
-                }
-           .left .ul_nav .active {
-                background-color: #fff;
-                 color: #297fb8;
-            }
-             .left .ul_nav .active a{              
-                 color: #297fb8;
-            }
-                /*#endregion*/    
-        .midd {
-            width:700px;
-            height: 600px;
-            /*background-color: #ddd;*/
-            float: left;
-        }
-                .midd-top{
-             min-height: 20px; 
-            background-color:#27ae60;
-            color:#fff;
-            padding: 8px 16px 8px 16px;
-        }
-        .right {
-            width: 200px;
-            height: 600px;
-            background-color: #9b59b6;
-            float: right;
-        }
-
     </style>
+
 </head>
 <body>
-    <div class='header'> </div>
-    <div class='bodyer'>
-        <div class='left'>
-            
-            @{
-                Html.RenderAction("_TypeCrtl", "Types");
-                    }
+    @{
+        Html.RenderAction("_TypeCrtl", "Types");
+    }
+    <div id="container">
+        <div id="page">
+            @RenderBody()
         </div>
-        <div class='midd'>   
-            @*<div class="midd-top">
-         @{
-             Html.RenderAction("_TagCrtl", "Tags");
-         }
-    </div>*@
-                        @RenderBody()
-            </div>
-        <div class='right'>
+        <!-- 页脚  -->
+        <div id="footer" class="text-center">
+            <footer>关于本站</footer>
         </div>
     </div>
-    <div class='footer'>
-
-    </div>
-
-  
     @Scripts.Render("~/bundles/jquery")
-    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
-     @*@Scripts.Render("~/bundles/jqueryui")*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*@Scripts.Render("~/bundles/jqueryui")*@
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
