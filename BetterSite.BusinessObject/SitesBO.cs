@@ -75,5 +75,9 @@ namespace BetterSite.BusinessObject
       {
           return da.QueryForObject(where);
       }
+      public IList QueryForJoinTagList(M_Sites where)
+      {
+          return da.QueryForJoinTagList(where);
+      }
     }
 }

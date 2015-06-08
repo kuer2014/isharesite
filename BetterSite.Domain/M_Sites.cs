@@ -34,7 +34,7 @@ namespace BetterSite.Domain
             private int m_Siteapprovequantity;
             private int m_Siteordernumber;
             private bool m_Siteisactive;
-
+            private string m_TagName = String.Empty;
             // Instantiate empty M_Sites for inserting
             public M_Sites() { }
 
@@ -180,6 +180,7 @@ namespace BetterSite.Domain
                 get;
                 set;
             }
+          
             /// <summary>
             /// 收藏日期（来自导入时，书签文件中的ADD DATE）
             /// </summary>
@@ -188,8 +189,55 @@ namespace BetterSite.Domain
                 get;
                 set;
             }
+            /// <summary>
+            /// 收藏日期（来自导入时，书签文件中的ADD DATE）
+            /// </summary>
+            public string SiteProfile
+            {
+                get;
+                set;
+            }
+            /// <summary>
+            /// 关联标签名称
+            /// </summary>
+            public string TagName
+            {
+                get { return m_TagName; }
+                set { m_TagName = value; }
+            }
+            //public M_SitesForGroup Site
+            //{
+            //    get { return new M_SitesForGroup { SiteName = m_Sitename }; }
+            //    set { this.Site.SiteName = m_Sitename; }
+            //}
             #endregion
         }
         #endregion
+    #region M_SitesForGroup
+    //public class M_SitesForGroup// : M_Sites
+    //{
+    //    //public M_Sites Sites 
+    //    //{
+    //    //    get { return new M_Sites { SiteName=base.SiteName}; }
+    //    //    set{this.Sites.SiteName=base.SiteName ;}
+    //    //}
+    //        private string m_Sitename = String.Empty;
+    //        private string m_Siteurl = String.Empty;
+    //              /// <summary>
+    //        /// 
+    //        /// </summary>
+    //        public string SiteName
+    //        {
+    //            get { return m_Sitename; }
+    //            set { m_Sitename = value; }
+    //        }
+    //        public string SiteUrl
+    //        {
+    //            get { return m_Siteurl; }
+    //            set { m_Siteurl = value; }
+    //        }
+
+    //}
+#endregion
 
 }

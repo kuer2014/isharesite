@@ -56,5 +56,9 @@ namespace BetterSite.DataAccess
       {
           return BaseDA.QueryForObject("Tab_Sites_SelectCount", where);
       }
+      public IList QueryForJoinTagList(M_Sites where)
+      {
+          return BaseDA.QueryForList("Tab_Sites_JoinTag_Select", where);
+      }
     }
 }

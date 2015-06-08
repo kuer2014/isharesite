@@ -288,16 +288,16 @@
             <th field="SiteName" sortable="true">站点名称</th>
             <th field="SiteUrl">站点URL</th>
             <th field="TypeName" width="0">站点类别</th>
-            <th field="SiteAddDate" width="80">添加日期</th>
+            <th field="SiteAddDate" width="70">添加日期</th>
 
-            <th field="SiteIsTop" width="0">置顶</th>
-            <th field="SiteIsHome" width="0">首页显示</th>
-            <th field="SiteClickQuantity" width="0">点击数</th>
-            <th field="SiteFavoriteQuantity" width="0">收藏数</th>
-            <th field="SiteApproveQuantity" width="0">推荐数</th>
+            <th field="SiteClickQuantity" width="20">点击数</th>
+            <th field="SiteFavoriteQuantity" width="20">收藏数</th>
+            <th field="SiteApproveQuantity" width="20">推荐数</th>
+            <th field="SiteOrderNumber" width="20">排序号</th>
 
-            <th field="SiteOrderNumber" width="0">排序号</th>
-            <th field="SiteIsActive" width="0">有效</th>
+            <th field="SiteIsTop" width="20">置顶</th>
+            <th field="SiteIsHome" width="20">首页</th>
+            <th field="SiteIsActive" width="20">有效</th>
         </tr>
     </thead>
 </table>
@@ -313,7 +313,7 @@
     </div>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:300px;"
+<div id="dlg" class="easyui-dialog" style="width:450px;height:400px;"
      closed="true" modal="true" buttons="#dlg-buttons">
 
     <form id="fm" method="post" novalidate>
@@ -349,7 +349,13 @@
                 </div>
             </fieldset>
         </div>
-</form>
+        <div>
+                    <label>站点简介:</label>
+            <div>
+                <textarea rows=4 cols="50" name="SiteProfile"></textarea>
+            </div>
+        </div>
+    </form>
 </div>
 <div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>
