@@ -5,10 +5,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-      <title>_TagCrtl</title>
+    <title>_TagCrtl</title>
+    <style type="text/css">
+        .Tags-Block {
+            background-color: #f1f1f1;
+            padding: 10px 10px 0 10px;
+        }
+
+        .Tag-Single {
+            display: inline-block;
+        }
+    </style>
+
 </head>
 <body>
-    <div>
+    <div class="Tags-Block">
         @using (Html.BeginForm())
         {
             if (ViewBag.CheckdTags != null)
@@ -17,13 +28,17 @@
                 {
                     if (ViewBag.CheckdTags.Contains(item.TagId))
                     {
-                        <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" checked="checked" />
-                        <label for="@item.TagId">@item.TagName</label>
+                        <div class="Tag-Single">
+                            <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" checked="checked" />
+                            <label for="@item.TagId">@item.TagName</label>
+                        </div>
                     }
                     else
                     {
-                        <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" />
-                        <label for="@item.TagId">@item.TagName</label>
+                        <div class="Tag-Single">
+                            <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" />
+                            <label for="@item.TagId">@item.TagName</label>
+                        </div>
                     }
                 }
             }
@@ -31,8 +46,10 @@
             {
                 foreach (var item in Model)
                 {
-                    <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox"  />
-       <label for="@item.TagId">@item.TagName</label>
+                    <div class="Tag-Single">
+                        <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" />
+                        <label for="@item.TagId">@item.TagName</label>
+                    </div>
                 }
             }
             @*<input type="submit" value="提交" />*@
