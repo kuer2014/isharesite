@@ -1,5 +1,6 @@
 ﻿using BetterSite.BusinessObject;
 using BetterSite.Domain;
+using BetterSite.UI.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Web.Mvc;
 
 namespace BetterSite.UI.Areas.Admin.Controllers
 {
+    //[CustomAuth(false)]
+      [AuthorizeFilter]
     public class SitesController : Controller
     {
         private readonly SitesBO sitesBO = new SitesBO();
@@ -20,6 +23,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         {
             return View();
         }
+         // [AuthorizeFilter]
         public JsonResult GetAllEntitys(BetterSite.Domain.M_Sites where)//, int page, int rows, string sort, string order)
         {
           //  where.PageIndex = page;

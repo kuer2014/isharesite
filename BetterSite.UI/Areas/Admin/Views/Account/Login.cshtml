@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <h2>Use a local account to log in.</h2>
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <legend>Log in Form</legend>
+                <ol>
+                    <li>
+                        <label>用户名：</label>
+                        <input type="text" name="userName" />
+                    </li>
+                    <li>
+                        <label>密码：</label>
+                        <input type="password" name="password" />
+                    </li>
+                    <li>
+                        <input type="checkbox" name="rememberMe" />
+                        <label>记住密码</label>
+                    </li>
+                </ol>
+                <input type="submit" value="Log in" />
+            </fieldset>
+
+        }
+    </div>
+</body>
+</html>

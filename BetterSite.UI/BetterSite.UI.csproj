@@ -151,6 +151,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SitesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SiteTagController.cs" />
@@ -178,6 +179,8 @@
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Filter\AuthorizeFilterAttribute.cs" />
+    <Compile Include="Filter\CustomAuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -628,6 +631,7 @@
     <Content Include="Areas\Admin\Views\Types\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tags\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Sites\Import.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Common.js" />
@@ -683,6 +687,7 @@
     <Content Include="Views\Shared\_TypeCrtl.cshtml" />
     <Content Include="Views\Shared\_TagCrtl.cshtml" />
     <Content Include="Views\Sites\Index.cshtml" />
+    <Content Include="Views\Sites\ListGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

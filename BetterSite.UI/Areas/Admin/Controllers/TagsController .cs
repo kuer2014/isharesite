@@ -1,4 +1,5 @@
 ﻿using BetterSite.BusinessObject;
+using BetterSite.UI.Filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace BetterSite.UI.Areas.Admin.Controllers
 {
+     [AuthorizeFilter]
     public class TagsController : Controller
     {
         private readonly TagsBO tagsBO = new TagsBO();
