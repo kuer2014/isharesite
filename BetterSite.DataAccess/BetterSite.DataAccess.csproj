@@ -64,19 +64,19 @@
     <Compile Include="SitesDA.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Providers.config" />
-    <None Include="SqlMap.config" />
+    <EmbeddedResource Include="Providers.config" />
+    <EmbeddedResource Include="SqlMap.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Maps\ProductMap.xml" />
-    <Content Include="Maps\SiteTagMap.xml">
+    <EmbeddedResource Include="Maps\ProductMap.xml" />
+    <EmbeddedResource Include="Maps\SiteTagMap.xml">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Maps\TagsMap.xml" />
-    <Content Include="Maps\TypesMap.xml" />
-    <Content Include="Maps\SitesMap.xml">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Maps\TagsMap.xml" />
+    <EmbeddedResource Include="Maps\TypesMap.xml" />
+    <EmbeddedResource Include="Maps\SitesMap.xml">
       <SubType>Designer</SubType>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BetterSite.Common\BetterSite.Common.csproj">
