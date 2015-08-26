@@ -21,7 +21,7 @@ namespace BetterSite.UI.Controllers
         }
         public ActionResult _TypeCrtl()
         {
-            IList<M_Types> types = typesBO.QueryForEntityList(null).OrderBy(t=>t.TypeOrderNumber).ToList();
+            IList<M_Types> types = typesBO.QueryForEntityList(null);
             return PartialView("_TypeCrtl",types);
         }     
     }
