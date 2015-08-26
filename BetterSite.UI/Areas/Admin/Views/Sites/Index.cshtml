@@ -153,6 +153,9 @@
             });
        // }
     }
+    function Import() {
+        $('#winImport').window('refresh', '/Admin/Sites/Import');
+    }
     function BuildChk() {
         var tagsdata = this.GetTagsData();
        // var executerDiv = $("#tag_div")[0];
@@ -306,6 +309,8 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Add()">添加</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="Edit()">修改</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
+        @*<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Import()">导入</a>*@
+        <a href="/Admin/Sites/Import" class="easyui-linkbutton" iconcls="icon-add" plain="true">导入</a>
     </div>
     <div style="padding-left:5px;">
          <input type="text" id="searchText" name="searchText" onkeyup="Func_Keyup(event)" placeholder="请输入站点名称/URL" />
@@ -357,6 +362,8 @@
         </div>
     </form>
 </div>
+@*<div id="winImport" class="easyui-window" style="width:800px;height:600px;"
+     closed="true"></div>*@
 <div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>
     <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>

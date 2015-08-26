@@ -45,9 +45,9 @@
       )
       SELECT TOP $Rows$ * FROM T WHERE TypeId NOT IN
       (
-      SELECT TOP ($Rows$*($Page$-1)) TypeId FROM T ORDER BY TypeId
+      SELECT TOP ($Rows$*($Page$-1)) TypeId FROM T ORDER BY TypeOrderNumber
       )
-      ORDER BY TypeId
+      ORDER BY TypeOrderNumber
     </select>
     <select id="Tab_Types_SelectAll" listClass="ArrayList" resultMap="Tab_Types_Result" >
       SELECT TypeId,TypeCode,TypeName,TypeClickQuantity,TypeOrderNumber
