@@ -81,7 +81,7 @@
             }
         }
         function Save() {
-            if (!$('#fm').form('validate')) { return; }
+            if (!$('#fm').form('validate')) { return; } //easyui验证
             if (!$("#tag_div :checked").length) {
                 $.messager.show({
                     title: 'Error',
@@ -144,7 +144,7 @@
                         } else {
                             $.messager.show({    // show error message
                                 title: 'Error',
-                                msg: result.errorMsg
+                                msg: result.msg
                             });
                         }
                     }, 'json');
@@ -321,7 +321,7 @@
         <input type="hidden" id="SiteCollectionDate" name="SiteCollectionDate" />
         <div class="fitem">
             <label>站点编号:</label>
-            <input name="SiteCode" class="easyui-textbox" required="true">
+            <input name="SiteCode" class="easyui-textbox">
         </div>
         <div class="fitem">
             <label>站点名称:</label>

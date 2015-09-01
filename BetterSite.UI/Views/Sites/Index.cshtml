@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Better Site Index";
+    //ViewBag.Title = ViewBag.Title+"-优站分享-为开发者提供一些便利";
 }
 @model IEnumerable<BetterSite.Domain.M_Sites>
 
@@ -14,7 +14,23 @@
         <div>@item.SiteName</div>
     }
 </div>*@
-
+<style>
+    p{
+        margin:0px;
+        color:#555;
+        display:block;
+        font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+line-height: 24px;
+text-indent: 30px;
+    }
+    small{
+        word-wrap: break-word;
+    }
+    .list-group-item-heading{
+        margin:5px 0 3px 0;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
@@ -27,10 +43,11 @@
                 @foreach (var item in Model)
                 {
                     <li class="list-group-item">
-                        <h4 class="list-group-item-heading"><a href="@item.SiteUrl" target="_blank">@item.SiteName</a> 
-                            <small>@item.SiteUrl</small>
+                        <h4 class="list-group-item-heading">
+                            <a href="@item.SiteUrl" target="_blank">@item.SiteName</a> 
+                            <br/><small>@item.SiteUrl</small>
                         </h4>
-                        <p class="list-group-item-text">
+                        <p>
                             @item.SiteProfile
                         </p>
                     </li>

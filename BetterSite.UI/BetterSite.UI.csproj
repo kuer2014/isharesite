@@ -650,6 +650,13 @@
     <Content Include="Views\Shared\_TagCrtl.cshtml" />
     <Content Include="Views\Sites\Index.cshtml" />
     <Content Include="Views\Sites\ListGroup.cshtml" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

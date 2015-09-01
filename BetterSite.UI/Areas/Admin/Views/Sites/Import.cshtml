@@ -12,6 +12,10 @@
             border-left: 1px solid #808080;
             border-top: 1px solid #808080;
         } 
+        input[type=button]{
+            width:100px;
+            height:30px;
+        }
 </style>
 
     <script type="text/javascript">
@@ -20,7 +24,7 @@
        	var src=window.document.getElementById('src_text').value;
        	var reg = new RegExp("<A.*</A>", "g");
         var result=src.match(reg);
-         debugger;
+        // debugger;
           sitesObj = [];
          for (var i = 0; i < result.length; i++) {
              var srcText = result[i];
@@ -48,13 +52,14 @@
        //for (var i = 0; i < 10; i++) {
            //    li_html += '<li>' + sitesObj[i].siteName + sitesObj[i].siteUrl + sitesObj[i].siteCollectionDate + '</li>';
        //}
-       //jQuery("#ul_view").html(li_html);
+           //jQuery("#ul_view").html(li_html);
+         jQuery("#siteCount").text("共成功处理" + sitesObj.length + "个网站");
        var tab_html = '';
        for (var i = 0; i < sitesObj.length; i++) {
-           tab_html += '<tr><td>' + sitesObj[i].siteName + '</td><td style="overflow: hidden;">' + sitesObj[i].siteUrl + '</td><td>' + sitesObj[i].siteCollectionDate.toLocaleString() + '</td></tr>';
+           tab_html += '<tr><td style="width: 30px;">' + i + '</td><td>' + sitesObj[i].siteName + '</td><td style="overflow: hidden;">' + sitesObj[i].siteUrl + '</td><td style="width: 160px;">' + sitesObj[i].siteCollectionDate.toLocaleString() + '</td></tr>';
        }
        jQuery("#tab_view").html(tab_html);
-     debugger;
+    // debugger;
        }
        function attribute_matching(txt,reg1,reg2){
        	  var hrefstr=	txt.match(reg1);
@@ -67,11 +72,12 @@
        }
        function run_import() {
            var url = '/Admin/Sites/Import/';
+          // var url = '/';
            debugger;
            $.ajax({
                url: url,
                type: 'post',
-               data: { "sitesJson": JSON.stringify(sitesObj) },  //提交到后台
+               data: { sitesJson: JSON.stringify(sitesObj) },  //提交到后台  $(sitesObj).serialize()|
                success: function (result) {
                    //debugger;
                    //  var result = eval('(' + result + ')');
@@ -81,6 +87,7 @@
                            msg: result.msg
                        });
                    } else {
+                       clear_textarea();
                        $.messager.show({
                            title: 'Success',
                            msg: result.msg
@@ -88,17 +95,30 @@
                        //$('#dlg').dialog('close');        // close the dialog
                        //$('#dg').datagrid('reload');    // reload the user data
                    }
-               }, dataType: 'json'
+               },
+               dataType: 'json',
+               error: function (data) {
+                   debugger;
+                   $.messager.show({
+                       title: 'Error',
+                       msg: data.responseText
+                   });
+}
            });
        }
+       function clear_textarea() {
+           $('#src_text').val('');
+}
 </script>
 }
 <div>
     <textarea type="textarea" id="src_text" rows="20" style="width:99%"></textarea>
     <input type="button" value="开始处理" onclick="run_matching()" />
     <input type="button" value="导入结果" onclick="run_import()" />
+    <input type="button" value="清空" onclick="clear_textarea()" />
     <div id="div_import">
         <span>处理结果：</span>
+        <div id="siteCount"></div>
         @*<ul id="ul_view"></ul>*@
         <table id="tab_view"></table>
     </div>

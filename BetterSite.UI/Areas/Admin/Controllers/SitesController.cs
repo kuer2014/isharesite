@@ -99,7 +99,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 // TODO: Add insert logic here
                 sitesBO.Update(entity);
                 //修改标签信息（先根据siteId删除，再插入）
-                siteTagBO.DeleteBySiteId(entity.SiteId);
+                siteTagBO.DeleteBySiteId(string.Format("'{0}'",entity.SiteId));
                 for (int i = 0; i < TagId.Length; i++)
                 {
                     siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = TagId[i] });
@@ -156,6 +156,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             return View();
         }
          [HttpPost]
+         [ValidateInput(false)]
         public JsonResult Import(string sitesJson)
         {
             JsonResult json = new JsonResult();
@@ -165,10 +166,20 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             {
                 var sites = Newtonsoft.Json.JsonConvert.DeserializeObject<List<M_Sites>>(sitesJson);
                 importCount = sites.Count;
+                //处理类型
+                var typeId = string.Empty;
                 IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = "DR" });
                 // types = (typesBO.QueryForList(new BetterSite.Domain.M_Types() { TypeCode = "DR" })) as System.Collections.ArrayList;
 				// IList<M_Types> types = typesBO.QueryForList(new BetterSite.Domain.M_Types() { TypeCode = "DR" }).Cast<M_Types>().ToList();
-                var typeId = types[0].TypeId;
+                if (types.Count > 0)
+                {
+                    typeId = types[0].TypeId;
+                }
+                else {
+                    typesBO.Insert(new BetterSite.Domain.M_Types() { TypeCode = "DR", TypeName = "导入" });
+                    typeId = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = "DR" })[0].TypeId;
+                }
+               
                 foreach (var item in sites)
                 {
                     item.TypeId = typeId;
