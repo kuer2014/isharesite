@@ -24,6 +24,7 @@ namespace BetterSite.UI.Controllers
         {
             where.Sort = where.Sort ?? "SiteAddDate";
             where.Order = where.Order ?? "Asc";
+            where.SiteIsActive = true;
             #region 根据标签查找对应的站点Id
             var m_SiteTag = new M_SiteTag();
             if (TagId != null && TagId.Count() > 0)

@@ -52,11 +52,13 @@
     </insert>
     <update id="Tab_Sites_Update" parameterClass="BetterSite.Domain.M_Sites">
       UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,
-      SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteOrderNumber= #SiteOrderNumber#,SiteIsActive= #SiteIsActive#,SiteProfile=#SiteProfile#
+      SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteOrderNumber= #SiteOrderNumber#,SiteProfile=#SiteProfile#
       WHERE SiteId= #SiteId#
     </update>
     <delete id="Tab_Sites_Delete" parameterClass="string">
-      DELETE FROM  Tab_Sites  WHERE SiteId in($sitesId$)
+      <!--DELETE FROM  Tab_Sites  WHERE SiteId in($sitesId$)-->
+       UPDATE  Tab_Sites  SET SiteIsActive = 0
+      WHERE SiteId in($sitesId$)
     </delete>
     <delete id="Tab_Sites_Delete2" parameterClass="Hashtable">
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
@@ -66,6 +68,7 @@
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
+          <isNotEmpty prepend="and" property="SiteIsActive">SiteIsActive = #SiteIsActive#</isNotEmpty>
       <!--<isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>-->
         <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
@@ -79,6 +82,7 @@
       FROM  Tab_Sites S
       INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
       <dynamic prepend="WHERE">
+         <isNotEmpty prepend="and" property="SiteIsActive">SiteIsActive = #SiteIsActive#</isNotEmpty>
             <!--<isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>-->
         <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>

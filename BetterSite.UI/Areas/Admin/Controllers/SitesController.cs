@@ -32,6 +32,8 @@ namespace BetterSite.UI.Areas.Admin.Controllers
           where.Sort = where.Sort?? "SiteAddDate";
           where.Order = where.Order ?? "Asc";
 
+          where.SiteIsActive = true;
+
             var count = sitesBO.QueryForList(where).Count;
             var list = sitesBO.QueryForPageList(where);
             var data = new
