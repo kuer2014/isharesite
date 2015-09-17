@@ -39,6 +39,9 @@
             $('#fm').form('clear');
             url = '/Admin/Sites/Create';
             $("#SiteId").val(Global.createGuid());
+           // $("#SiteCode").val(new Date().getTime());
+            $("#SiteCode").textbox('setValue', 'SITE' + new Date().getTime());
+            $("#SiteCode").textbox('readonly');
             $("#SiteCollectionDate").val(new Date().toISOString());
             this.BuildChk();
         }
@@ -47,6 +50,12 @@
             if (row) {
                 $('#dlg').dialog('open').dialog('setTitle', '修改');
                 $('#fm').form('load', row);
+                ///处理站点编号
+                $("#SiteCode").textbox('readonly');
+                if (!$("#SiteCode").textbox('getValue')) {
+                    $("#SiteCode").textbox('setValue', 'SITE' + new Date().getTime());
+                  
+               }
                 //debugger;
                 //设置类别的值 start
                 var opts = $('#cc').combobox('options');
@@ -61,6 +70,7 @@
                 }, false);
                 $('#cc').combobox('select', temp[0][opts.valueField]);
                 //设置类别的值 end
+                //创建标签
                 this.BuildChk();
                 //设置标签的值 start
                 // debugger;
@@ -94,7 +104,7 @@
             //  var tagFormData = $('#tag_form').formSerialize();
             // formData=  formData.concat('&').concat(tagFormData);
             //var tagsData = $("#tag_div input[checked=checked]");
-            debugger;
+           // debugger;
             $.ajax({
                 url: url,
                 type: 'post',
@@ -136,7 +146,7 @@
                 sitesId += row.SiteId + "','";
             });
             sitesId = sitesId.substring(0, sitesId.length - 2)
-            debugger;
+            //debugger;
             $.messager.confirm('Confirm', '删除?', function (r) {
                 if (r) {
                     $.post('/Admin/Sites/Delete/', { 'sitesId': sitesId }, function (result) {
@@ -157,7 +167,9 @@
             $('#winImport').window('refresh', '/Admin/Sites/Import');
         }
         function BuildChk() {
-            var tagsdata = this.GetTagsData();
+           // debugger;
+            var typeId = $('#cc').combobox('getValue');
+            var tagsdata = this.GetTagsData(typeId);
             // var executerDiv = $("#tag_div")[0];
             var executerDiv = document.getElementById("tag_div");
             executerDiv.innerHTML = "";
@@ -188,12 +200,14 @@
             executerDiv.appendChild(ul);
 
         }
-        /*后台查询到所有标签*/
-        function GetTagsData() {
+        /*根据类型编号查询到标签
+          参数为TypeId
+        */
+        function GetTagsData(param) {
             var json = [];
             // debugger;
             $.ajax({
-                url: "/Admin/Tags/GetAllData",
+                url: "/Admin/Tags/GetDataByType?typeId=" + param,
                 type: 'get',
                 async: false,
                 success: function (result) {
@@ -276,7 +290,7 @@
             return json;
         }
         function Func_Keyup(e) {
-            debugger;
+            //debugger;
             if (e.keyCode == 13) {
                 Search();
             }
@@ -330,7 +344,7 @@
         <input type="hidden" id="SiteCollectionDate" name="SiteCollectionDate" />
         <div class="fitem">
             <label>站点编号:</label>
-            <input name="SiteCode" class="easyui-textbox" data-options="required:true" style="width:320px;">
+            <input id="SiteCode"  name="SiteCode" class="easyui-textbox" data-options="required:true" style="width:320px;">
         </div>
         <div class="fitem">
             <label>站点名称:</label>
@@ -343,7 +357,7 @@
         <div class="fitem">
             <label>站点类别:</label>
             <input id="cc" class="easyui-combobox" name="TypeId"
-                   data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData',required:true" style="width:320px;" />
+                   data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData',required:true,onChange: function(rec){  BuildChk(); }" style="width:320px;" />
         </div>
         <div>
             <fieldset>

@@ -1,4 +1,5 @@
 ﻿using BetterSite.BusinessObject;
+using BetterSite.Domain;
 using BetterSite.UI.Filter;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
     public class TagsController : Controller
     {
         private readonly TagsBO tagsBO = new TagsBO();
+        private readonly TypesBO typesBO = new TypesBO();
         //
         // GET: /Admin/Types/
 
@@ -38,6 +40,17 @@ namespace BetterSite.UI.Areas.Admin.Controllers
 
             var list = tagsBO.QueryForList(null);
             return Json(list, JsonRequestBehavior.AllowGet);
+
+        }
+        public JsonResult GetDataByType(string typeId)
+        {
+            IList<M_Tags> tags = new List<M_Tags>();
+            if (!string.IsNullOrWhiteSpace(typeId))
+            {
+                tags = tagsBO.QueryForEntityListByTypeId(typeId);
+            }
+            
+            return Json(tags, JsonRequestBehavior.AllowGet);
 
         }
         //
