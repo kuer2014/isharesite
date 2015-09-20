@@ -73,7 +73,7 @@
         <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
-         <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
+         <isNotEmpty prepend="and" property="searchText">(UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
     </dynamic>
     </select>
     <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
@@ -87,7 +87,7 @@
         <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
-       <isNotEmpty prepend="and" property="searchText">UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
+       <isNotEmpty prepend="and" property="searchText">(UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
       </dynamic>
       <!--<dynamic>
         <isNotEmpty prepend=" " property="order">
@@ -136,7 +136,7 @@
         <isNotEmpty prepend="and" property="SiteId">S.SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
-         <isNotEmpty prepend="and" property="searchText">UPPER(S.SiteName) LIKE UPPER('%$searchText$%') OR UPPER(S.SiteUrl) LIKE UPPER('%$searchText$%')</isNotEmpty>
+         <isNotEmpty prepend="and" property="searchText">(UPPER(S.SiteName) LIKE UPPER('%$searchText$%') OR UPPER(S.SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
     </dynamic>
     </select>
     <select id="Tab_Sites_SelectAll" listClass="ArrayList" resultMap="Tab_Sites_Result" >

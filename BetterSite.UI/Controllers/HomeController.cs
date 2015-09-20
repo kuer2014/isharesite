@@ -24,9 +24,28 @@ namespace BetterSite.UI.Controllers
 
             where.Sort = where.Sort ?? "SiteAddDate";
             where.Order = where.Order ?? "Asc";
-            var count = sitesBO.QueryForList(where).Count;
-          //  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
-            var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
+            where.SiteIsActive = true;
+            where.Page = 1;
+            where.Rows = 10;
+          //  var count = sitesBO.QueryForList(where).Count;
+            var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+           //技术列表
+            where.TypeCode = "JS";
+            var listJS = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.JS = listJS;
+           //资源列表
+            where.TypeCode = "ZY";
+            var listZY = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.ZY = listZY;
+            //资讯列表
+            where.TypeCode = "ZX";
+            var listZX = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.ZX = listZX;
+            //生活列表
+            where.TypeCode = "SH";
+            var listSH = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.SH = listSH;
+            //var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
             return View(list);
         }
        #region demo_knockout

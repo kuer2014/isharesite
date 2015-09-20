@@ -645,12 +645,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\bak_Layout.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
     <Content Include="Views\Shared\_TypeCrtl.cshtml" />
     <Content Include="Views\Shared\_TagCrtl.cshtml" />
     <Content Include="Views\Sites\Index.cshtml" />
     <Content Include="Views\Sites\ListGroup.cshtml" />
     <Content Include="Web.config" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

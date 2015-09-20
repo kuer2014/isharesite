@@ -69,7 +69,11 @@
     <div style="margin:20px 0;"></div>
         <div class="easyui-layout" style="width:auto;margin:0 auto;height:810px">
             <div data-options="region:'north'" style="height:100px">
-                <div style="float:right;padding-right:30px;padding-top:10px;">@Html.ActionLink("退出", "LogOff", "Account")</div>
+                <div style="float:right;padding-right:30px;padding-top:10px;">
+                    @*@Html.ActionLink("优站分享", "Index", "Home", new { area = "" })*@
+                    <a href="/Home/Index" target="_blank" title="预览前台页面">优站分享</a>
+                @Html.ActionLink("退出", "LogOff", "Account")
+                </div>
                 <div style="margin-left:30px;">
                     <h1>优站分享 管理平台</h1>
                     <b>--IShareSite.com</b>

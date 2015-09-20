@@ -4,39 +4,41 @@
 @model IEnumerable<BetterSite.Domain.M_Sites>
 
 @*<div class="midd-top">
-    @{
-        Html.RenderAction("_TagCrtl", "Tags");
-    }
-</div>*@
+        @{
+            Html.RenderAction("_TagCrtl", "Tags");
+        }
+    </div>*@
 @*<div>
-    @foreach (var item in Model )
-    {
-        <div>@item.SiteName</div>
-    }
-</div>*@
+        @foreach (var item in Model )
+        {
+            <div>@item.SiteName</div>
+        }
+    </div>*@
 <style>
-    p{
-        margin:0px;
-        color:#555;
-        display:block;
+    p {
+        margin: 0px;
+        color: #555;
+        display: block;
         font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 14px;
-line-height: 24px;
-text-indent: 30px;
+        line-height: 24px;
+        text-indent: 30px;
     }
-    small{
+
+    small {
         word-wrap: break-word;
     }
-    .list-group-item-heading{
-        margin:5px 0 3px 0;
+
+    .list-group-item-heading {
+        margin: 5px 0 3px 0;
     }
 </style>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-                @{
-                    Html.RenderAction("_TagCrtl", "Tags");
-                }
+            @{
+                Html.RenderAction("_TagCrtl", "Tags");
+            }
         </div>
         <div class="col-md-8">
             <ul class="list-group">
@@ -44,8 +46,8 @@ text-indent: 30px;
                 {
                     <li class="list-group-item">
                         <h4 class="list-group-item-heading">
-                            <a href="@item.SiteUrl" target="_blank">@item.SiteName</a> 
-                            <br/><small>@item.SiteUrl</small>
+                            <a href="@item.SiteUrl" target="_blank">@item.SiteName</a>
+                            <br /><small>@item.SiteUrl</small>
                         </h4>
                         <p>
                             @item.SiteProfile
@@ -53,45 +55,45 @@ text-indent: 30px;
                     </li>
                 }
             </ul>
-                @*@foreach (var item in Model)
-                            {
-                        <div class="list-group">
-                            <div class="list-group-item">
-                                <h4 class="list-group-item-heading">@item.SiteName</h4>
-                                <p class="list-group-item-text">@item.SiteUrl</p>
-                            </div>
+            @*@foreach (var item in Model)
+                                {
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <h4 class="list-group-item-heading">@item.SiteName</h4>
+                                    <p class="list-group-item-text">@item.SiteUrl</p>
+                                </div>
 
-                        </div>
-            }*@
-                @*<table class="table  table-hover">
-                <tr>
-                    <th>首页－视频</th>
-                </tr>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            <h4>@item.SiteName</h4>
-                            <div>
-                                <a href="#">访问站点</a>
-                                <a href="#">站点介绍</a>
                             </div>
-                        </td>
+                }*@
+            @*<table class="table  table-hover">
+                    <tr>
+                        <th>首页－视频</th>
                     </tr>
-                    }
-            </table>*@
-</div>
-        <div class="col-md-2">
-            常用站点推荐
-            </div>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <h4>@item.SiteName</h4>
+                                <div>
+                                    <a href="#">访问站点</a>
+                                    <a href="#">站点介绍</a>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                </table>*@
         </div>
+        <div class="col-md-2">
+            相关站点
+        </div>
+    </div>
 </div>
 @section scripts {
     <script>
         jQuery(function () {
             // debugger;
             //为标签绑定事件
-            jQuery('form [name=TagId]').each(function(i, elem){
+            jQuery('form [name=TagId]').each(function (i, elem) {
                 elem.onchange = function () {
                     jQuery('form').submit();
                 };
