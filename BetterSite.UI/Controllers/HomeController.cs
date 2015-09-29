@@ -27,7 +27,11 @@ namespace BetterSite.UI.Controllers
             where.SiteIsActive = true;
             where.Page = 1;
             where.Rows = 10;
+          
           //  var count = sitesBO.QueryForList(where).Count;
+           //最新收录
+            var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            ViewBag.New = listNew;
             var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
            //技术列表
             where.TypeCode = "JS";
