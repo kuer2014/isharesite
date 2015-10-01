@@ -42,10 +42,10 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-unstyled">
-                                            @foreach (var item in ViewBag.New)
+                                            @foreach (var item in ViewBag.IsTop)
                                             {
                                                 <li>
-                                                    <a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl">@item.SiteName </a>
+                                                   <small>★</small><a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl"> @item.SiteName </a>
                                                 </li>
                        
                                             }
@@ -194,11 +194,13 @@
                             @foreach (var item in ViewBag.New)
                             {
                                 <tr>
-                                    <td>                                        
+                                    <td>    
+                                        <h5 class="site-add-date">@item.SiteAddDate</h5>                                    
                                         <h4>
+                                            
                                             <a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                                             <br /><small>@item.SiteUrl</small>
-                                            <br /> <small class="site-add-date">@item.SiteAddDate</small>
+                                          
                                         </h4>
                                         <p>
                                             @item.SiteProfile
@@ -224,10 +226,10 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-unstyled ">
-                        @foreach (var item in Model)
+                        @foreach (var item in ViewBag.IsHome)
                         {
                             <li>
-                                <a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
+                                <small>★</small><a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                             </li>
                         }
                     </ul>
@@ -254,7 +256,7 @@
             });
             jQuery(".site-add-date").each(function (n, ele) {
                 if (ele.innerText.length > 0) {
-                    ele.innerText = ele.innerText.substr(5, 6);
+                    ele.innerText = ele.innerText.substr(0, 11);
                 }
             });
         })

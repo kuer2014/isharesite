@@ -29,10 +29,11 @@ namespace BetterSite.UI.Controllers
             where.Rows = 10;
           
           //  var count = sitesBO.QueryForList(where).Count;
+         
            //最新收录
             var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             ViewBag.New = listNew;
-            var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+           
            //技术列表
             where.TypeCode = "JS";
             var listJS = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
@@ -49,7 +50,19 @@ namespace BetterSite.UI.Controllers
             where.TypeCode = "SH";
             var listSH = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.SH = listSH;
+           //默认列表
             //var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
+            var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+
+            //站长推荐
+            where.SiteIsTop = true;
+            var listIsTop = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            ViewBag.IsTop = listIsTop;
+            //常用站点
+            where.SiteIsTop = false;
+            where.SiteIsHome = true;
+            var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            ViewBag.IsHome = listIsHome;
             return View(list);
         }
        #region demo_knockout
