@@ -7,6 +7,9 @@
       <result column="SiteId" property="SiteId" />
       <result column="TagId" property="TagId" />
     </resultMap>
+    <resultMap class="BetterSite.Domain.M_SiteTag,BetterSite.Domain" id="Tab_SiteTag_ResultSiteId">
+      <result column="SiteId" property="SiteId" />
+    </resultMap>
   </resultMaps>
   <statements>
     <insert id="Tab_SiteTag_Insert" parameterClass="BetterSite.Domain.M_SiteTag">
@@ -32,6 +35,15 @@
           <isNotEmpty prepend="and" property="TagId">TagId IN('$TagId$')</isNotEmpty>
     </dynamic>
     </select>
+    <select id="Tab_SiteTag_SelectSiteIdByTagId" listClass="ArrayList"  resultMap="Tab_SiteTag_ResultSiteId"  parameterClass="Hashtable">
+      SELECT  CONVERT(VARCHAR(40), SiteId) SiteId
+      FROM dbo.Tab_SiteTag
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="TagId">TagId IN('$TagId$')</isNotEmpty>
+      </dynamic>
+      GROUP BY SiteId
+      HAVING COUNT(SiteId) <![CDATA[>=]]> #TagCount#
+  </select>
     <select id="Tab_SiteTag_SelectAll" listClass="ArrayList" resultMap="Tab_SiteTag_Result" >
       SELECT SiteTagId,SiteId,TagId
       FROM  Tab_SiteTag

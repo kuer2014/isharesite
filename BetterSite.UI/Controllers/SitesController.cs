@@ -1,6 +1,7 @@
 ﻿using BetterSite.BusinessObject;
 using BetterSite.Domain;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,9 +30,26 @@ namespace BetterSite.UI.Controllers
             var m_SiteTag = new M_SiteTag();
             if (TagId != null && TagId.Count() > 0)
             {
-                m_SiteTag.TagId = string.Join("','", TagId);
-                IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
+                string tagsId=string.Join("','", TagId);
+                m_SiteTag.TagId = tagsId;
+                /// 标签关系[或]
+                //IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
+                //where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
+                ///标签关系[或]end
+                
+                ///标签关系[且]start
+                Hashtable htTagsId = new Hashtable();
+                htTagsId.Add("TagId", tagsId);
+                htTagsId.Add("TagCount", TagId.Count());
+                IList<M_SiteTag> tags = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
+               
+                if (tags.Count == 0) {
+                    where.SiteId = Guid.NewGuid().ToString();
+                }
+                else { 
                 where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
+                }
+                ///标签关系[且]end
             }
             #endregion
             ////var count = sitesBO.QueryForList(where).Count;

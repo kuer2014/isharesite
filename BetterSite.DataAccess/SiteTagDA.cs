@@ -48,6 +48,10 @@ namespace BetterSite.DataAccess
       {
           return BaseDA.QueryForList("Tab_SiteTag_Select", where);
       }
+      public IList QueryForListByTags(Hashtable where)
+      {
+          return BaseDA.QueryForList("Tab_SiteTag_SelectSiteIdByTagId", where);
+      }
       public IList QueryForPageList(M_SiteTag where)
       {
           return BaseDA.QueryForList("Tab_SiteTag_SelectPageList", where);

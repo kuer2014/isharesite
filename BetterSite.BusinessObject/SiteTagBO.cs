@@ -67,6 +67,10 @@ namespace BetterSite.BusinessObject
       {
           return da.QueryForList(where);
       }
+      public IList QueryForListByTags(Hashtable where)
+      {
+          return da.QueryForListByTags(where);
+      }
       public IList QueryForPageList(M_SiteTag where)
       {
           return da.QueryForPageList(where);
