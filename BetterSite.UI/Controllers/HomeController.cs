@@ -23,7 +23,7 @@ namespace BetterSite.UI.Controllers
             //ViewBag.TypeText = "分类信息";
 
             where.Sort = where.Sort ?? "SiteAddDate";
-            where.Order = where.Order ?? "Asc";
+            where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
             where.Page = 1;
             where.Rows = 10;
@@ -54,11 +54,11 @@ namespace BetterSite.UI.Controllers
             //var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
             var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
 
-            //站长推荐
+            //站长推荐:显示置顶的网站
             where.SiteIsTop = true;
             var listIsTop = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             ViewBag.IsTop = listIsTop;
-            //常用站点
+            //常用站点：显示推到首页的网站
             where.SiteIsTop = false;
             where.SiteIsHome = true;
             var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
