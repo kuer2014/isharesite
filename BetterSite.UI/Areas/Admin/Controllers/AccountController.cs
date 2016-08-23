@@ -64,7 +64,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
 
 HttpCookie cookie = new HttpCookie("userName"); 
 cookie.Value = userName;
-cookie.Expires = DateTime.Now.AddHours(3); 
+cookie.Expires = DateTime.Now.AddHours(1); 
 System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
 ///System.Web.HttpContext.Current.Response.AppendCookie(cookie);     
                 return RedirectToLocal(returnUrl);
