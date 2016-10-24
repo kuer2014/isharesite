@@ -42,7 +42,9 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(string userName, string password, string returnUrl, bool isPersistent = true)
         {
-            if (userName=="admin"&&password=="abc")
+            string _userName = System.Configuration.ConfigurationManager.AppSettings["userName"].ToLower();
+            string _password = System.Configuration.ConfigurationManager.AppSettings["password"];
+            if (userName== _userName && password== _password)
             {
                 //FormsAuthentication.SetAuthCookie(userName, true, FormsAuthentication.FormsCookiePath);
                 //string userData = "ApplicationSpecific data for this user.";

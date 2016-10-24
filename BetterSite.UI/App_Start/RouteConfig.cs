@@ -12,7 +12,12 @@ namespace BetterSite.UI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+              name: "Site",
+              url: "Sites/{TypeCode}",
+              defaults: new { controller = "Sites", action = "Index", TypeCode = UrlParameter.Optional },
+               namespaces: new string[] { "BetterSite.UI.Controllers" }
+          );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

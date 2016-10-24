@@ -60,6 +60,14 @@
        UPDATE  Tab_Sites  SET SiteIsActive = 0
       WHERE SiteId in($sitesId$)
     </delete>
+    <update id="Tab_Sites_ToTop" parameterClass="Hashtable">
+      UPDATE  Tab_Sites  SET SiteIsTop = #SiteIsTop#
+      WHERE SiteId in($sitesId$)
+    </update>
+    <update id="Tab_Sites_ToHome" parameterClass="Hashtable">
+      UPDATE  Tab_Sites  SET SiteIsHome =#SiteIsHome#
+      WHERE SiteId in($sitesId$)
+    </update>
     <delete id="Tab_Sites_Delete2" parameterClass="Hashtable">
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
     </delete>

@@ -187,3 +187,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/BetterSite.UI/Web.config
+/BetterSite.UI/Web.Release.config
+/BetterSite.UI/Web.Debug.config
+/BetterSite.UI/mybatis.log.2
+/BetterSite.UI/mybatis.log.1

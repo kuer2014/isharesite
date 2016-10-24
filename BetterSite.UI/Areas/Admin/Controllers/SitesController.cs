@@ -123,6 +123,62 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             }
             return json;
         }
+        // POST: /Admin/Sites/Delete/5
+
+        [HttpPost]
+        public ActionResult ToTop(string sitesId,int isTop)
+        {
+            JsonResult json = new JsonResult();
+            try
+            {
+                // TODO: Add insert logic here
+                sitesBO.ToTop(sitesId,isTop);
+              
+                json.Data = new
+                {
+                    success = true,
+                    msg = "操作成功"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                json.Data = new
+                {
+                    success = false,
+                    msg = ex.Message
+                };
+            }
+            return json;
+        }
+        // POST: /Admin/Sites/Delete/5
+
+        [HttpPost]
+        public ActionResult ToHome(string sitesId,int isHome)
+        {
+            JsonResult json = new JsonResult();
+            try
+            {
+                // TODO: Add insert logic here
+                sitesBO.ToHome(sitesId,isHome);
+              
+                json.Data = new
+                {
+                    success = true,
+                    msg = "操作成功"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                json.Data = new
+                {
+                    success = false,
+                    msg = ex.Message
+                };
+            }
+            return json;
+        }
         //
         // POST: /Admin/Sites/Delete/5
 

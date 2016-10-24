@@ -48,8 +48,24 @@ namespace BetterSite.BusinessObject
       {
           return da.Update(model);
       }
-      ///删除
-      public int Delete(string siteId)
+        ///置顶
+        public int ToTop(string sitesId, int isTop)
+        {
+            Hashtable param = new Hashtable();
+            param.Add("sitesId", sitesId);
+            param.Add("SiteIsTop", isTop);
+            return da.ToTop(param);
+        }
+        ///至首页
+        public int ToHome(string sitesId, int isHome)
+        {
+            Hashtable param = new Hashtable();
+            param.Add("sitesId", sitesId);
+            param.Add("SiteIsHome", isHome);
+            return da.ToHome(param);
+        }
+        ///删除
+        public int Delete(string siteId)
       {
           return da.Delete(siteId);
       }

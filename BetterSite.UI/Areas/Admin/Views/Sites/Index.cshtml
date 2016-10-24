@@ -124,6 +124,77 @@
                 }, dataType: 'json'
             });
         }
+        function ToTop(isTop) {
+            //  var row = $('#dg').datagrid('getSelected');
+            var rows = $('#dg').datagrid('getChecked');
+            if (!rows.length) {
+                $.messager.show({    // show error message
+                    title: 'Error',
+                    msg: "请勾选记录！"
+                });
+                return;
+            }
+            var sitesId = "'";
+            $(rows).each(function (i, row) {
+                sitesId += row.SiteId + "','";
+            });
+            sitesId = sitesId.substring(0, sitesId.length - 2)
+            //debugger;
+            $.messager.confirm('Confirm', '置顶?', function (r) {
+                if (r) {
+                    $.post('/Admin/Sites/ToTop/', { 'sitesId': sitesId, 'isTop': isTop }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.msg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+            // }
+        }
+        function ToHome(isHome) {
+            //  var row = $('#dg').datagrid('getSelected');
+            var rows = $('#dg').datagrid('getChecked');
+            if (!rows.length) {
+                $.messager.show({    // show error message
+                    title: 'Error',
+                    msg: "请勾选记录！"
+                });
+                return;
+            }
+            //debugger;
+            // return;
+            // if (row) {
+            // var  SitesId =
+            //  rows.each(function (i, row) {
+
+            //  })
+            var sitesId = "'";
+            $(rows).each(function (i, row) {
+                sitesId += row.SiteId + "','";
+            });
+            sitesId = sitesId.substring(0, sitesId.length - 2)
+            //debugger;
+            $.messager.confirm('Confirm', '至首页?', function (r) {
+                if (r) {
+                    $.post('/Admin/Sites/ToHome/', { 'sitesId': sitesId, 'isHome': isHome }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.msg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+            // }
+        }
         function Del() {
             //  var row = $('#dg').datagrid('getSelected');
             var rows = $('#dg').datagrid('getChecked');
@@ -331,6 +402,10 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
         @*<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Import()">导入</a>*@
         <a href="/Admin/Sites/Import" class="easyui-linkbutton" iconcls="icon-add" plain="true">导入</a>
+        |<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToTop(1)">置顶(首页-站长推荐)</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToTop(0)">取消置顶</a>
+        ｜<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToHome(1)">推荐(首页-常用站点)</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToHome(0)">取消推荐</a>
     </div>
     <div style="padding-left:5px;">
         <input type="text" id="searchText" name="searchText" onkeyup="Func_Keyup(event)" placeholder="请输入站点名称/URL" />

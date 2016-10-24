@@ -29,8 +29,18 @@ namespace BetterSite.DataAccess
       {
           return BaseDA.Update<M_Sites>("Tab_Sites_Update", model);
       }
-      ///删除
-      public int Delete(string siteId)
+        ///置顶
+        public int ToTop(Hashtable param)
+        {
+            return BaseDA.Update<Hashtable>("Tab_Sites_ToTop", param);
+        }
+        ///至首页
+        public int ToHome(Hashtable param)
+        {
+            return BaseDA.Update<Hashtable>("Tab_Sites_ToHome", param);
+        }
+        ///删除
+        public int Delete(string siteId)
       {
           return BaseDA.Delete("Tab_Sites_Delete", siteId);
       }
