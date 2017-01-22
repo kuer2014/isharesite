@@ -22,8 +22,8 @@ namespace BetterSite.UI.Controllers
            ViewBag.Tags = tags;
             //ViewBag.TypeText = "分类信息";
 
-            where.Sort = where.Sort ?? "SiteAddDate";
-            where.Order = where.Order ?? "Desc";
+            where.Sort = where.Sort ?? "SiteOrderNumber";
+            where.Order = where.Order ?? "ASC";
             where.SiteIsActive = true;
             where.Page = 1;
             where.Rows = 10;
