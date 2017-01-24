@@ -16,3 +16,7 @@
 //首页 站长推荐:显示置顶的网站  SiteIsTop = true
 //首页 常用站点：显示推到首页的网站 SiteIsHome = true;
 //所有站点排序为 SiteAddDate 降序
+
+//2017-01-24
+//首页的各分类数据支持自定义排序
+//SiteOrderNumber 排序号字段
