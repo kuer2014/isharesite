@@ -64,11 +64,13 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 //// Redirect back to original URL.
                 ////Response.Redirect(FormsAuthentication.GetRedirectUrl(userName, isPersistent));
 
-HttpCookie cookie = new HttpCookie("userName"); 
-cookie.Value = userName;
-cookie.Expires = DateTime.Now.AddHours(1); 
-System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
-///System.Web.HttpContext.Current.Response.AppendCookie(cookie);     
+                //HttpCookie cookie = new HttpCookie("userName"); 
+                //cookie.Value = userName;
+                //cookie.Expires = DateTime.Now.AddHours(1); 
+                //System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+                //                ///System.Web.HttpContext.Current.Response.AppendCookie(cookie);     
+                Session.Timeout = 10;//10分钟不操作页面即失效
+                Session["userName"] = userName;
                 return RedirectToLocal(returnUrl);
             }
 

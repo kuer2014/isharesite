@@ -54,7 +54,7 @@ namespace BetterSite.UI.Controllers
             #endregion
             ////var count = sitesBO.QueryForList(where).Count;
             ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
-            var list = sitesBO.QueryForList(where).Cast<M_Sites>();
+            var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>();
             //var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().ToList();  
             var types=typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
             if (types.Count > 0)

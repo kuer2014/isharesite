@@ -20,7 +20,7 @@
 </head>
 <body>
     <div class="Tags-Block">
-        @using (Html.BeginForm())
+        @using (Html.BeginRouteForm("Site",FormMethod.Get))
         {
             if (ViewBag.CheckdTags != null)
             {

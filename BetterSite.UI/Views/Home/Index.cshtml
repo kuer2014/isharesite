@@ -43,10 +43,10 @@
                     <ul class="list-unstyled">
                                             @foreach (var item in ViewBag.IsTop)
                                             {
-                                                <li>
-                                                   <small>★</small><a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl"> @item.SiteName </a>
+                                                <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                                                    <small>★</small><a href="@item.SiteUrl" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName </a>
                                                 </li>
-                       
+
                                             }
                                         </ul>
 
@@ -77,7 +77,7 @@
                         @*<caption><h3>资源</h3></caption>*@
                         <thead>
                             <tr>
-                                <th><h4>技术</h4></th>
+                                <th><h4>学技术</h4></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,7 +98,7 @@
                         @*<caption><h3>资源</h3></caption>*@
                         <thead>
                             <tr>
-                                <th><h4>资源</h4></th>
+                                <th><h4>找资源</h4></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -121,7 +121,7 @@
                         @*<caption><h3>资源</h3></caption>*@
                         <thead>
                             <tr>
-                                <th><h4>资讯</h4></th>
+                                <th><h4>善发现</h4></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,7 +142,7 @@
                         @*<caption><h3>资源</h3></caption>*@
                         <thead>
                             <tr>
-                                <th><h4>生活</h4></th>
+                                <th><h4>爱生活</h4></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -227,8 +227,8 @@
                     <ul class="list-unstyled ">
                         @foreach (var item in ViewBag.IsHome)
                         {
-                            <li>
-                                <small>★</small><a href="@item.SiteUrl" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
+                            <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                                <small>★</small><a href="@item.SiteUrl" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
                             </li>
                         }
                     </ul>

@@ -21,8 +21,11 @@
         function Search() {
             $('#dg').datagrid('reload', {
                 searchText: $('#searchText').val(),
-                TypeId: $('#cc_search').combobox('getValue')
-            });
+                TypeId: $('#cc_search').combobox('getValue'),
+                SiteIsActive: $('#SiteIsActive')[0].checked
+               
+        });
+            
             //var dg = $('#dg').datagrid();
             //dg.datagrid('enableFilter'
             ////    ,[{
@@ -42,6 +45,7 @@
            // $("#SiteCode").val(new Date().getTime());
             $("#SiteCode").textbox('setValue', 'SITE' + new Date().getTime());
             $("#SiteCode").textbox('readonly');
+            $("#SiteOrderNumber").textbox('setValue', '100');
             $("#SiteCollectionDate").val(new Date().toISOString());
             this.BuildChk();
         }
@@ -412,6 +416,7 @@
         <label>站点类别:</label>
         <input id="cc_search" class="easyui-combobox" name="TypeId"
                data-options="valueField:'TypeId',textField:'TypeName',url:'/Admin/Types/GetAllData',required:false" style="width:100px;" />
+        <input type="checkbox" id="SiteIsActive" name="SiteIsActive" checked="checked" /><label for="SiteIsActive">有效</label>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-search" plain="true" onclick="Search()">查询</a>
     </div>
 </div>
@@ -439,7 +444,7 @@
         </div>
         <div class="fitem">
             <label>站点排序号:</label>
-            <input name="SiteOrderNumber" class="easyui-textbox" style="width:320px;">
+            <input id="SiteOrderNumber" name="SiteOrderNumber" class="easyui-textbox" style="width:320px;">
         </div>
         <div>
             <fieldset>

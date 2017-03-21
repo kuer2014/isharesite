@@ -50,10 +50,10 @@ namespace BetterSite.UI.Controllers
             where.TypeCode = "SH";
             var listSH = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.SH = listSH;
-           //默认列表
+            //默认列表
             //var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
-            var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
-
+            //var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            where.TypeCode = string.Empty;
             //站长推荐:显示置顶的网站
             where.SiteIsTop = true;
             var listIsTop = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
@@ -63,7 +63,8 @@ namespace BetterSite.UI.Controllers
             where.SiteIsHome = true;
             var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             ViewBag.IsHome = listIsHome;
-            return View(list);
+           // return View(list);
+            return View();
         }
        #region demo_knockout
        public ActionResult _knockoutIndex()
@@ -76,15 +77,15 @@ namespace BetterSite.UI.Controllers
         //    M_Sites where = null;
         //    return sitesBO.QueryForList(where);
         //}
-        public JsonResult _knockoutGetAllSites()
-        {
+        //public JsonResult _knockoutGetAllSites()
+        //{
         
-           // Newtonsoft.Json.Converters.IsoDateTimeConverter timeConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter();
-          //  timeConverter.DateTimeFormat = "yyyy'-'MM'-'dd";
-            return Json(sitesBO.QueryForList(null), JsonRequestBehavior.AllowGet);
-           // string json = JsonConvert.SerializeObject(sitesBO.QueryForList(null), timeConverter);
-           // return json;
-        }
+        //   // Newtonsoft.Json.Converters.IsoDateTimeConverter timeConverter = new Newtonsoft.Json.Converters.IsoDateTimeConverter();
+        //  //  timeConverter.DateTimeFormat = "yyyy'-'MM'-'dd";
+        //    return Json(sitesBO.QueryForList(null), JsonRequestBehavior.AllowGet);
+        //   // string json = JsonConvert.SerializeObject(sitesBO.QueryForList(null), timeConverter);
+        //   // return json;
+        //}
         #endregion demo_knockout
     }
 }

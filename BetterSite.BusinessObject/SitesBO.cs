@@ -83,6 +83,15 @@ namespace BetterSite.BusinessObject
       {
           return da.QueryForList(where);
       }
+        /// <summary>
+        ///  网站 站点列表 关联了标签
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        public IList QueryForStuffTagsList(M_Sites where)
+      {
+          return da.QueryForStuffTagsList(where);
+      }
       public IList QueryForPageList(M_Sites where)
       {
           return da.QueryForPageList(where);

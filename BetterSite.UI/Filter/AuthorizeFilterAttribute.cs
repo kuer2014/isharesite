@@ -30,19 +30,22 @@ namespace BetterSite.UI.Filter
             //fcinfo.controllerName;获取 controllerName 名称
 
             bool isstate =  false; //登录状态 
-            var userName = System.Web.HttpContext.Current.Request.Cookies["userName"];
+                                   //  var userName = System.Web.HttpContext.Current.Request.Cookies["userName"];
+            string userName = filterContext.HttpContext.Session["userName"]+"";
             if (userName != null)
             {
-                isstate = userName.Value == "admin";
+                isstate = userName == "admin";
             }          
             if (isstate)//如果满足
             {
+
                 //当通过验证后，什么也不写表示返回默认访问页面，也可以跳到其它页面，如下：
 
                 //逻辑代码
                 // filterContext.Result = new HttpUnauthorizedResult();//直接URL输入的页面地址跳转到登陆页  
                 // filterContext.Result = new RedirectResult("http://www.baidu.com");//也可以跳到别的站点
-                //filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { Controller = "product", action = "Default" }));
+                //  filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new { Controller = "Sites", action = "Index" }));
+               // filterContext.HttpContext.Response.Redirect("/Admin/Sites/Index");
             }
             else
             {

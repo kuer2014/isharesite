@@ -27,16 +27,18 @@ namespace BetterSite.Domain
             private string m_TypeId = String.Empty;
            // private DateTime m_Siteadddate;
             private string m_Siteadddate;
-            private bool m_Siteistop;
-            private bool m_Siteishome;
+            private bool? m_Siteistop;
+            private bool? m_Siteishome;
             private int m_Siteclickquantity;
             private int m_Sitefavoritequantity;
             private int m_Siteapprovequantity;
             private int m_Siteordernumber;
-            private bool m_Siteisactive;
+            private bool? m_Siteisactive;
             private string m_TagName = String.Empty;
-            // Instantiate empty M_Sites for inserting
-            public M_Sites() { }
+        private string m_SiteTagsName = String.Empty;
+        private string m_SiteTagsId = String.Empty;
+        // Instantiate empty M_Sites for inserting
+        public M_Sites() { }
 
             // Retrieve M_Sites with Id for updating
             public M_Sites(string SiteId)
@@ -105,7 +107,7 @@ namespace BetterSite.Domain
             /// <summary>
             /// 
             /// </summary>
-            public bool SiteIsTop
+            public bool? SiteIsTop
             {
                 get { return m_Siteistop; }
                 set { m_Siteistop = value; }
@@ -114,7 +116,7 @@ namespace BetterSite.Domain
             /// <summary>
             /// 
             /// </summary>
-            public bool SiteIsHome
+            public bool? SiteIsHome
             {
                 get { return m_Siteishome; }
                 set { m_Siteishome = value; }
@@ -159,7 +161,7 @@ namespace BetterSite.Domain
             /// <summary>
             /// 
             /// </summary>
-            public bool SiteIsActive
+            public bool? SiteIsActive
             {
                 get { return m_Siteisactive; }
                 set { m_Siteisactive = value; }
@@ -205,13 +207,39 @@ namespace BetterSite.Domain
                 get { return m_TagName; }
                 set { m_TagName = value; }
             }
-            //public M_SitesForGroup Site
-            //{
-            //    get { return new M_SitesForGroup { SiteName = m_Sitename }; }
-            //    set { this.Site.SiteName = m_Sitename; }
-            //}
-            #endregion
+
+        public string SiteTagsName
+        {
+            get
+            {
+                return m_SiteTagsName;
+            }
+
+            set
+            {
+                m_SiteTagsName = value;
+            }
         }
+
+        public string SiteTagsId
+        {
+            get
+            {
+                return m_SiteTagsId;
+            }
+
+            set
+            {
+                m_SiteTagsId = value;
+            }
+        }
+        //public M_SitesForGroup Site
+        //{
+        //    get { return new M_SitesForGroup { SiteName = m_Sitename }; }
+        //    set { this.Site.SiteName = m_Sitename; }
+        //}
+        #endregion
+    }
         #endregion
     #region M_SitesForGroup
     //public class M_SitesForGroup// : M_Sites
