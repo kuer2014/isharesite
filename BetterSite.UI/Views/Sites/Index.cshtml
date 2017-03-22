@@ -56,7 +56,7 @@
                         </p>
                         <div class="div-SiteTags" style="margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
                         <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
-                        <input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />
+                        @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
                     </li>
                 }
             </ul>
@@ -117,10 +117,10 @@
             var siteItemArr = jQuery('.li-site-item');
             jQuery.each(siteItemArr, function (i_site, n_site) {
                 var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
+                //var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
                 if (siteTagsName) {
                     var siteTagsNameArr = siteTagsName.split(',');
-                    var siteTagsIdArr = siteTagsId.split(',');
+                   // var siteTagsIdArr = siteTagsId.split(',');
                     var htmlArr = [];
                     for (var i = 0; i < siteTagsNameArr.length; i++) {
                         //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
@@ -144,9 +144,9 @@
             //    jQuery('#div_SiteTags').append(htmlArr.join());
             //}
             //active Type
-            var urlFilename = location.href.match(/\/([^\/]+)$/);
-            if (urlFilename) {
-                $(".navbar li:has(a[href$='" + urlFilename[1] + "'])").addClass("active");
+            //var urlFilename = location.href.match(/\/([^\/]+)$/);
+            if (urlFilenameArr[0]) {
+                $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
             }
         });
     </script>
