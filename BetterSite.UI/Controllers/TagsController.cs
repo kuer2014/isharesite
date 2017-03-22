@@ -26,15 +26,20 @@ namespace BetterSite.UI.Controllers
         /// <param name="TypeCode">类型编号</param>
         /// <param name="TagId">状态（页面已勾选数据）</param>
         /// <returns>标签数据</returns>
-        public ActionResult _TagCrtl(string TypeCode, string[] Tag)
+            public ActionResult _TagCrtl(string TypeCode, string[] Tag)
         {
             var typeId = string.Empty;
+            IList<M_Tags> tags = new List<M_Tags>();
             if (!string.IsNullOrWhiteSpace(TypeCode))
             {
                 IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = TypeCode });
-                typeId = types[0].TypeId;
+                if (types != null && types.Count() > 0) {
+                    typeId = types[0].TypeId;
+                    tags = tagsBO.QueryForEntityListByTypeId(typeId);
+                }
+              
             }
-            IList<M_Tags> tags = tagsBO.QueryForEntityListByTypeId(typeId);
+           
             //IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
             if (Tag != null && Tag.Count() > 0) ViewBag.CheckdTags = Tag.ToList();
             return PartialView("_TagCrtl", tags);

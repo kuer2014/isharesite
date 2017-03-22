@@ -104,7 +104,7 @@
                 };
             });
             //为每个站点的标签添加事件
-            debugger;
+            //debugger;
             // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];
             var urlPath = location.href.match(/\/([^\/]+)$/)[1];
             var urlFilenameArr = urlPath.split('?');
@@ -129,21 +129,8 @@
                     jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
                 }
             })
-
-            //debugger;
-            //var siteTagsName = jQuery('#hid_SiteTagsName').val();
-            //var siteTagsId = jQuery('#hid_SiteTagsId').val();
-            //if (siteTagsName) {
-            //    var siteTagsNameArr = siteTagsName.split(',');
-            //    var siteTagsIdArr = siteTagsId.split(',');
-            //    var htmlArr = [];
-            //    var urlFilename = location.href.match(/\/([^\/]+)$/);
-            //    for (var i = 0; i < siteTagsNameArr.length; i++) {
-            //        htmlArr.push('<a class="btn btn-default btn-xs" href="/Sites/Index/' + urlFilename[1] + '?TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>')
-            //    }
-            //    jQuery('#div_SiteTags').append(htmlArr.join());
-            //}
-            //active Type
+           
+            ///活动菜单
             //var urlFilename = location.href.match(/\/([^\/]+)$/);
             if (urlFilenameArr[0]) {
                 $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
