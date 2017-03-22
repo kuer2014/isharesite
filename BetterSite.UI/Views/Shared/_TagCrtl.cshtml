@@ -26,17 +26,17 @@
             {
                 foreach (var item in Model)
                 {
-                    if (ViewBag.CheckdTags.Contains(item.TagId))
+                    if (ViewBag.CheckdTags.Contains(item.TagName))
                     {
                         <div class="Tag-Single">
-                            <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" checked="checked" />
+                            <input id="@item.TagId" name="Tag" value="@item.TagName" type="checkbox" checked="checked" />
                             <label for="@item.TagId">@item.TagName</label>
                         </div>
                     }
                     else
                     {
                         <div class="Tag-Single">
-                            <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" />
+                            <input id="@item.TagId" name="Tag" value="@item.TagName" type="checkbox" />
                             <label for="@item.TagId">@item.TagName</label>
                         </div>
                     }
@@ -47,7 +47,7 @@
                 foreach (var item in Model)
                 {
                     <div class="Tag-Single">
-                        <input id="@item.TagId" name="TagId" value="@item.TagId" type="checkbox" />
+                        <input id="@item.TagId" name="Tag" value="@item.TagName" type="checkbox" />
                         <label for="@item.TagId">@item.TagName</label>
                     </div>
                 }

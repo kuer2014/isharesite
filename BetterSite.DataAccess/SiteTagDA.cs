@@ -50,7 +50,7 @@ namespace BetterSite.DataAccess
       }
       public IList QueryForListByTags(Hashtable where)
       {
-          return BaseDA.QueryForList("Tab_SiteTag_SelectSiteIdByTagId", where);
+          return BaseDA.QueryForList("Tab_SiteTag_SelectSiteIdByTag", where);
       }
       public IList QueryForPageList(M_SiteTag where)
       {

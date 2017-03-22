@@ -21,36 +21,64 @@ namespace BetterSite.UI.Controllers
         /// <param name="where">包含了TypeCode</param>
         /// <param name="TagId">页面已勾选的标签</param>
         /// <returns>站点数据</returns>
-        public ActionResult Index(BetterSite.Domain.M_Sites where, string[] TagId)
+        public ActionResult Index(BetterSite.Domain.M_Sites where, string[] Tag)
         {
             where.Sort = where.Sort ?? "SiteAddDate";
             where.Order = where.Order ?? "Asc";
             where.SiteIsActive = true;
-            #region 根据标签查找对应的站点Id
-            var m_SiteTag = new M_SiteTag();
-            if (TagId != null && TagId.Count() > 0)
+            #region 根据标签Name查找对应的站点Id
+           // var m_SiteTag = new M_SiteTag();
+            if (Tag != null && Tag.Count() > 0)
             {
-                string tagsId=string.Join("','", TagId);
-                m_SiteTag.TagId = tagsId;
+                string tagsName = string.Join("','", Tag);
+               // m_SiteTag.TagId = tagsId;
                 /// 标签关系[或]
                 //IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
                 //where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
                 ///标签关系[或]end
-                
+
                 ///标签关系[且]start
                 Hashtable htTagsId = new Hashtable();
-                htTagsId.Add("TagId", tagsId);
-                htTagsId.Add("TagCount", TagId.Count());
+                htTagsId.Add("TagsName", tagsName);
+                htTagsId.Add("TagCount", Tag.Count());
                 IList<M_SiteTag> tags = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
-               
-                if (tags.Count == 0) {
+
+                if (tags.Count == 0)
+                {
                     where.SiteId = Guid.NewGuid().ToString();
                 }
-                else { 
-                where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
+                else
+                {
+                    where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
                 }
                 ///标签关系[且]end
             }
+            #endregion
+            #region 根据标签Id查找对应的站点Id
+            //var m_SiteTag = new M_SiteTag();
+            //if (TagId != null && TagId.Count() > 0)
+            //{
+            //    string tagsId=string.Join("','", TagId);
+            //    m_SiteTag.TagId = tagsId;
+            //    /// 标签关系[或]
+            //    //IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
+            //    //where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
+            //    ///标签关系[或]end
+                
+            //    ///标签关系[且]start
+            //    Hashtable htTagsId = new Hashtable();
+            //    htTagsId.Add("TagsId", tagsId);
+            //    htTagsId.Add("TagCount", TagId.Count());
+            //    IList<M_SiteTag> tags = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
+               
+            //    if (tags.Count == 0) {
+            //        where.SiteId = Guid.NewGuid().ToString();
+            //    }
+            //    else { 
+            //    where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
+            //    }
+            //    ///标签关系[且]end
+            //}
             #endregion
             ////var count = sitesBO.QueryForList(where).Count;
             ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();

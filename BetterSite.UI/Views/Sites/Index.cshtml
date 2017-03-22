@@ -98,7 +98,7 @@
         jQuery(function () {
             // debugger;
             //为标签绑定事件
-            jQuery('form [name=TagId]').each(function (i, elem) {
+            jQuery('form [name=Tag]').each(function (i, elem) {
                 elem.onchange = function () {
                     jQuery('form').submit();
                 };
@@ -123,7 +123,8 @@
                     var siteTagsIdArr = siteTagsId.split(',');
                     var htmlArr = [];
                     for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>')
+                        //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                        htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
                     }
                     jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
                 }
