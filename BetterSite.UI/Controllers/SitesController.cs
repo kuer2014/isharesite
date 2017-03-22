@@ -84,9 +84,21 @@ namespace BetterSite.UI.Controllers
             ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
             var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>();
             //var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().ToList();  
-            var types=typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
-            if (types.Count > 0)
-            { ViewBag.Title = types[0].TypeName + "-优站分享-为开发者提供一些便利"; }
+            //标题
+            string title = "优站分享-为开发者提供一些便利";
+            if (string.IsNullOrWhiteSpace(where.TypeCode))
+            {
+                title = "全部-"+ title;
+            }
+            else
+            {
+                var types = typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
+                if (types.Count > 0)
+                {
+                    title = types[0].TypeName+"-"+ title;
+                }               
+            }
+            ViewBag.Title = title;
             return View(list);
         }
         /// <summary>

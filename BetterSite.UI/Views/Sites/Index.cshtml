@@ -96,6 +96,13 @@
 @section scripts {
     <script>
         jQuery(function () {
+            Array.prototype.contains = function (item) {
+                // return RegExp("^" + item + "$").test(this);
+                for (i = 0; i < this.length; i++) {
+                    if (this[i] == item) { return true; }
+                }
+                return false;
+            };
             // debugger;
             //为标签绑定事件
             jQuery('form [name=Tag]').each(function (i, elem) {
@@ -109,32 +116,66 @@
             var urlPath = location.href.match(/\/([^\/]+)$/)[1];
             var urlFilenameArr = urlPath.split('?');
             var urlFilename = '';
+            //debugger;
             if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
-                urlFilename = '/Sites/' + urlPath + '&'
+                urlFilename = '' + urlPath;
+                if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
+                    urlFilename += '&';
+                }
             } else {
-                urlFilename = '/Sites/' + urlFilenameArr[0] + '?';
+                urlFilename = '' + urlFilenameArr[0];
+                if (urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
+                    urlFilename += '?';
+                }
             }
+            //debugger;
+            var paramValueArr = urlFilenameArr[1]?urlFilenameArr[1].split('&'):[];
             var siteItemArr = jQuery('.li-site-item');
             jQuery.each(siteItemArr, function (i_site, n_site) {
                 var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
                 //var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
                 if (siteTagsName) {
                     var siteTagsNameArr = siteTagsName.split(',');
-                   // var siteTagsIdArr = siteTagsId.split(',');
+                    // var siteTagsIdArr = siteTagsId.split(',');
                     var htmlArr = [];
                     for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                        htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                        if (paramValueArr.contains('Tag=' + encodeURI(siteTagsNameArr[i]))) {
+                            // htmlArr.push('<a class="btn btn-default btn-xs disabled" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                            htmlArr.push('<a class="btn btn-default btn-xs active" href="' + urlFilename.replace('Tag=' + encodeURI(siteTagsNameArr[i]) + '&', '') + '">' + siteTagsNameArr[i] + '</a>');
+                        } else {
+                            //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                            htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                        }
                     }
                     jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
                 }
-            })
+            });
            
             ///活动菜单
             //var urlFilename = location.href.match(/\/([^\/]+)$/);
             if (urlFilenameArr[0]) {
                 $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
             }
+            //搜索功能
+            jQuery('#SearchForm').keyup(function (e) {
+                if (e.keyCode == 13) {
+                    var txt=jQuery(this).val();
+                    //Search();
+                    if (txt) {
+                        jQuery('.li-site-item').css('display', 'none');
+                        jQuery('.li-site-item:contains(' + txt + ')').css('display', 'block');
+                    } else {
+                        jQuery('.li-site-item').css('display', 'block');
+                    }
+                    //高亮显示
+                    //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
+                    var site_a= jQuery('.li-site-item a');//.text().replace(txt, '<b>' + txt + '</b>');
+                   jQuery.each(site_a, function (i, n) {
+                       //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
+                       jQuery(n).html(jQuery(n).text().replace(txt, '<b>' + txt + '</b>'));
+                   });
+                }
+            });
         });
     </script>
 }

@@ -33,11 +33,15 @@ namespace BetterSite.UI.Controllers
             if (!string.IsNullOrWhiteSpace(TypeCode))
             {
                 IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = TypeCode });
-                if (types != null && types.Count() > 0) {
+                if (types != null && types.Count() > 0)
+                {
                     typeId = types[0].TypeId;
                     tags = tagsBO.QueryForEntityListByTypeId(typeId);
                 }
-              
+
+            }
+            else {
+                tags = tagsBO.QueryForEntityListByTypeId("");
             }
            
             //IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();

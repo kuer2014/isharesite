@@ -524,6 +524,8 @@
     <Content Include="Content\knockoutPagging\paginationViewModel.js" />
     <Content Include="Images\Logo30px.png" />
     <Content Include="Images\Logo20px.png" />
+    <Content Include="Images\Logo30px2.png" />
+    <Content Include="Images\Logo40px.png" />
     <Content Include="Library\Castle.DynamicProxy.dll" />
     <Content Include="Library\IBatisNet.Common.dll" />
     <Content Include="Library\IBatisNet.Common.Logging.Log4Net.dll" />
