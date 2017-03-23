@@ -85,7 +85,7 @@ namespace BetterSite.UI.Controllers
             var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>();
             //var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().ToList();  
             //标题
-            string title = "优站分享-为开发者提供一些便利";
+            string title = "优站分享|致力于分享实用的优秀网站";
             if (string.IsNullOrWhiteSpace(where.TypeCode))
             {
                 title = "全部-"+ title;
@@ -99,6 +99,8 @@ namespace BetterSite.UI.Controllers
                 }               
             }
             ViewBag.Title = title;
+           // ViewData["TypeCode"] = where.TypeCode;
+            TempData["TypeCode"] = where.TypeCode;//跨控制器
             return View(list);
         }
         /// <summary>

@@ -38,8 +38,8 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Sites_Insert" parameterClass="BetterSite.Domain.M_Sites">
-      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteIsTop,SiteIsHome,SiteOrderNumber,SiteCollectionDate,SiteProfile)
-      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteIsTop#,#SiteIsHome#,#SiteOrderNumber#,#SiteCollectionDate#,#SiteProfile#)
+      INSERT INTO  Tab_Sites  (SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteOrderNumber,SiteCollectionDate,SiteProfile)
+      VALUES (#SiteId#,#SiteCode#,#SiteName#,#SiteUrl#,#TypeId#,#SiteOrderNumber#,#SiteCollectionDate#,#SiteProfile#)
       <!--返回刚插入记录ID-->
       <!--<selectKey type="post" resultClass="string" property="SiteId">
         　　　　SELECT CAST(@@IDENTITY as int) as SiteId        　　　　
@@ -59,7 +59,7 @@
     </insert>
     <update id="Tab_Sites_Update" parameterClass="BetterSite.Domain.M_Sites">
       UPDATE  Tab_Sites  SET SiteCode= #SiteCode#,SiteName= #SiteName#,SiteUrl= #SiteUrl#,TypeId= #TypeId#,
-      SiteIsTop= #SiteIsTop#,SiteIsHome= #SiteIsHome#,SiteOrderNumber= #SiteOrderNumber#,SiteProfile=#SiteProfile#
+     SiteOrderNumber= #SiteOrderNumber#,SiteProfile=#SiteProfile#
       WHERE SiteId= #SiteId#
     </update>
     <delete id="Tab_Sites_Delete" parameterClass="string">

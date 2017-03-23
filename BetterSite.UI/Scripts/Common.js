@@ -1552,3 +1552,23 @@ var Enum = {
 jQuery(document).bind("contextmenu", function (e) {
     return true;
 });
+/******
+*   维护记录
+*   时间：2017-03-23
+*   维护人：wangshuai
+*   维护内容：增加方法
+*/
+/**
+*   级别：Public
+*   类型：Function
+*   功能：数组的contains方法
+*   返回：bool
+*   示例：arr1.contains(e)
+*/
+Array.prototype.contains = function (item) {
+    // return RegExp("^" + item + "$").test(this);
+    for (i = 0; i < this.length; i++) {
+        if (this[i] == item) { return true; }
+    }
+    return false;
+};

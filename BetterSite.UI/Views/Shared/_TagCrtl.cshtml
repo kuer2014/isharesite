@@ -11,16 +11,29 @@
             background-color: #f1f1f1;
             padding: 10px 10px 0 10px;
         }
-
+        .Tags-Block form{
+        margin-bottom:5px;
+        margin-top:5px;
+        }
         .Tag-Single {
             display: inline-block;
+        }
+         .Tag-Single label{
+            font-weight:normal;
+        }
+        code {        
+        display:none;
         }
     </style>
 
 </head>
 <body>
     <div class="Tags-Block">
-        @using (Html.BeginRouteForm("Site",FormMethod.Get))
+        <div class="">
+            <input type="text" class="form-control input-sm" id="SearchTag" placeholder="搜索标签...">
+            <code>无匹配!</code> 
+        </div>
+       @using (Html.BeginRouteForm("Site",FormMethod.Get))      
         {
             if (ViewBag.CheckdTags != null)
             {

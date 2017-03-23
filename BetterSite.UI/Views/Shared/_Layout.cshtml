@@ -5,9 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <meta name="keywords" content="网站分享,网站推荐,实用的网站大全,优秀网站导航,优秀网站大全,互联网技术导航" />
+    <meta name="description" content="优站分享,致力于分享实用的优秀网站,论坛,博客,官网,关注网站涵盖了互联网技术,软件开发,编程,框架,架构,开源,前端,设计,移动端,数据库,大数据,人工智能,机器学习等,是IT人工作,学习的最佳导航网站" />
     @*@Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")*@
-    <link href="~/Content/bootstrap_min.css" rel="stylesheet" />
+    @*<link href="~/Content/bootstrap_min.css" rel="stylesheet" />*@
+    @Styles.Render("~/Content/bootstrap/css")
     <style type="text/css">
         html, body {
             margin: 0;
@@ -59,8 +62,9 @@
             <footer>关于本站<br/>(未完成,进行中~)</footer>
         </div>
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/common")
     @*@Scripts.Render("~/bundles/jqueryui")*@
     @RenderSection("scripts", required: false)
 </body>

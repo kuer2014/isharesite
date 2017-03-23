@@ -35,9 +35,9 @@
                        
                     </li>
                 </ul>
-                <div class="navbar-form navbar-right">
-                    <input type="text" class="form-control" id="SearchForm" placeholder="Search...">
-                </div>
+                <form class="navbar-form navbar-right" action="/Sites/@TempData["TypeCode"]">
+                    <input type="text" name="SearchText" class="form-control" id="SearchForm" placeholder="搜索站点名称/URL...">
+                </form>
             </div><!-- /.nav-collapse -->
         </div><!-- /.container -->
     </nav><!-- /.navbar --> 
