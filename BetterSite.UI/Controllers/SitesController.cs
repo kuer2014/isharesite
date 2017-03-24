@@ -24,7 +24,7 @@ namespace BetterSite.UI.Controllers
         public ActionResult Index(BetterSite.Domain.M_Sites where, string[] Tag)
         {
             where.Sort = where.Sort ?? "SiteAddDate";
-            where.Order = where.Order ?? "Asc";
+            where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
             #region 根据标签Name查找对应的站点Id
            // var m_SiteTag = new M_SiteTag();
@@ -82,7 +82,7 @@ namespace BetterSite.UI.Controllers
             #endregion
             ////var count = sitesBO.QueryForList(where).Count;
             ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
-            var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>();
+            var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             //var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().ToList();  
             //标题
             string title = "优站分享|致力于分享实用的优秀网站";

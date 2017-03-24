@@ -22,8 +22,8 @@ namespace BetterSite.UI.Controllers
            ViewBag.Tags = tags;
             //ViewBag.TypeText = "分类信息";
 
-            where.Sort = where.Sort ?? "SiteOrderNumber";
-            where.Order = where.Order ?? "ASC";
+            where.Sort = where.Sort ?? "SiteAddDate";
+            where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
             where.Page = 1;
             where.Rows = 10;
@@ -33,8 +33,9 @@ namespace BetterSite.UI.Controllers
            //最新收录
             var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             ViewBag.New = listNew;
-           
-           //技术列表
+            where.Sort =  "SiteOrderNumber";
+            where.Order = "ASC";
+            //技术列表
             where.TypeCode = "JS";
             var listJS = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.JS = listJS;
