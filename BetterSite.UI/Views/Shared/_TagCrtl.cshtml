@@ -11,16 +11,17 @@
             background-color: #f1f1f1;
             padding: 10px 10px 0 10px;
         }
-        .Tags-Block form{
+        /*.Tags-Block form{
         margin-bottom:5px;
         margin-top:5px;
-        }
+        }*/
         .Tag-Single {
             display: inline-block;
+            margin:1px;
         }
-         .Tag-Single label{
+         /*.Tag-Single label{
             font-weight:normal;
-        }
+        }*/
         code {        
         display:none;
         }
@@ -33,7 +34,7 @@
             <input type="text" class="form-control input-sm" id="SearchTag" placeholder="搜索标签...">
             <code>无匹配!</code> 
         </div>
-       @using (Html.BeginRouteForm("Site",FormMethod.Get))      
+       @*@using (Html.BeginRouteForm("Site",FormMethod.Get))      
         {
             if (ViewBag.CheckdTags != null)
             {
@@ -65,8 +66,42 @@
                     </div>
                 }
             }
+            @*<input type="submit" value="提交" />*
+        }*@
+        @{
+            if (ViewBag.CheckdTags != null)
+            {
+                foreach (var item in Model)
+                {
+                    if (ViewBag.CheckdTags.Contains(item.TagName))
+                    {
+                        <div class="Tag-Single">
+                            <a class="btn btn-default btn-xs active" href="?Tag=@item.TagName">@item.TagName</a>                           
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="Tag-Single">
+                            <a class="btn btn-default btn-xs" href="?Tag=@item.TagName">@item.TagName</a>      
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <div class="Tag-Single">
+                        <a class="btn btn-default btn-xs" href="?Tag=@item.TagName">@item.TagName</a> 
+                    </div>
+                }
+            }
             @*<input type="submit" value="提交" />*@
         }
+
     </div>
+    @section scripts {
+ 
+        }
 </body>
 </html>
