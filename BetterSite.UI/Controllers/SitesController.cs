@@ -103,6 +103,11 @@ namespace BetterSite.UI.Controllers
             TempData["TypeCode"] = where.TypeCode;//跨控制器
             return View(list);
         }
+        public ActionResult Detail(string SiteCode) {
+            var where = new M_Sites() { SiteCode = SiteCode,SiteIsActive =true };
+            var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();          
+            return View(model);
+        }
         /// <summary>
         /// [测试group by]站点数据，条件为TypeCode 和TagId
         /// </summary>

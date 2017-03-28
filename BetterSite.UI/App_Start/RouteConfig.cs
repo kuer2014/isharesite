@@ -13,6 +13,16 @@ namespace BetterSite.UI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
+          name: "SiteDetail",
+          url: "Sites/{SiteCode}",
+          defaults: new { controller = "Sites", action = "Detail", SiteCode = UrlParameter.Optional },
+           namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 SiteCode = @"SITE\d{13}"
+             }
+      );
+            routes.MapRoute(
               name: "Site",
               url: "Sites/{TypeCode}",
               defaults: new { controller = "Sites", action = "Index", TypeCode = UrlParameter.Optional },

@@ -1,7 +1,7 @@
 ﻿@{
     //ViewBag.Title = ViewBag.Title+"-优站分享-为开发者提供一些便利";
 }
-@model IEnumerable<BetterSite.Domain.M_Sites>
+@model BetterSite.Domain.M_Sites
 
 @*<div class="midd-top">
         @{
@@ -41,52 +41,22 @@
             }
         </div>
         <div class="col-md-8">
-            <ul class="list-group">
-                @foreach (var item in Model)
-                {
+            <ul class="list-group">              
                     <li class="list-group-item li-site-item">
                         <h4 class="list-group-item-heading">
-                            <a href="@item.SiteUrl" target="_blank">@item.SiteName</a>
-                            <br /><small>@item.SiteUrl</small>
+                            <a href="@Model.SiteUrl" target="_blank">@Model.SiteName</a>
+                            <br /><small>@Model.SiteUrl</small>
                         </h4>
                       
                         <p>
-                            @item.SiteProfile
+                            @Model.SiteProfile
                            
                         </p>
                         <div class="div-SiteTags" style="margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
-                        <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
+                        <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
                         @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
-                    </li>
-                }
-            </ul>
-            @*@foreach (var item in Model)
-                                {
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <h4 class="list-group-item-heading">@item.SiteName</h4>
-                                    <p class="list-group-item-text">@item.SiteUrl</p>
-                                </div>
-
-                            </div>
-                }*@
-            @*<table class="table  table-hover">
-                    <tr>
-                        <th>首页－视频</th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <h4>@item.SiteName</h4>
-                                <div>
-                                    <a href="#">访问站点</a>
-                                    <a href="#">站点介绍</a>
-                                </div>
-                            </td>
-                        </tr>
-                        }
-                </table>*@
+                    </li>                
+            </ul>         
         </div>
         <div class="col-md-2">
             相关站点
@@ -127,11 +97,11 @@
         jQuery(function () {     
             // debugger;
             //为标签绑定事件
-            //jQuery('form [name=Tag]').each(function (i, elem) {
-            //    elem.onchange = function () {
-            //        jQuery('form').submit();
-            //    };
-            //});
+            jQuery('form [name=Tag]').each(function (i, elem) {
+                elem.onchange = function () {
+                    jQuery('form').submit();
+                };
+            });
             //为每个标签添加事件
            // debugger;
             // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];

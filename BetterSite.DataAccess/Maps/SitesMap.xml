@@ -108,6 +108,7 @@
       <!--<isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>-->
         <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
           <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
+        <isNotEmpty prepend="and" property="SiteCode">S.SiteCode= #SiteCode#</isNotEmpty>
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
          <isNotEmpty prepend="and" property="searchText">(UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
     </dynamic>
