@@ -72,6 +72,15 @@
         @Scripts.Render("~/bundles/common")
     @*@Scripts.Render("~/bundles/jqueryui")*@
     @RenderSection("scripts", required: false)
+    <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5f86045996483139413748abc268c7f6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+    </script>
 </body>
 
 </html>
