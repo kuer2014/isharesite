@@ -26,7 +26,11 @@ namespace BetterSite.UI
               name: "Site",
               url: "Sites/{TypeCode}",
               defaults: new { controller = "Sites", action = "Index", TypeCode = UrlParameter.Optional },
-               namespaces: new string[] { "BetterSite.UI.Controllers" }
+               namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 TypeCode = @"[a-z]{2}"
+             }
           );
             routes.MapRoute(
                 name: "Default",

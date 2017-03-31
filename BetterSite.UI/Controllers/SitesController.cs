@@ -95,7 +95,10 @@ namespace BetterSite.UI.Controllers
                 var types = typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
                 if (types.Count > 0)
                 {
-                    title = types[0].TypeName+"-"+ title;
+                    title = types[0].TypeName + "-" + title;
+                }
+                else {
+                    return Redirect("/Sites");
                 }               
             }
             ViewBag.Title = title;
@@ -105,8 +108,16 @@ namespace BetterSite.UI.Controllers
         }
         public ActionResult Detail(string SiteCode) {
             var where = new M_Sites() { SiteCode = SiteCode,SiteIsActive =true };
-            var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();          
-            return View(model);
+            var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();
+            if (model != null)
+            {
+                ViewBag.Title = model.SiteName;
+                return View(model);
+            }
+            else {               
+               return RedirectToAction("Index");
+            }
+         
         }
         /// <summary>
         /// [测试group by]站点数据，条件为TypeCode 和TagId
