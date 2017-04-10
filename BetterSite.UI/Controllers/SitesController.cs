@@ -106,6 +106,7 @@ namespace BetterSite.UI.Controllers
             TempData["TypeCode"] = where.TypeCode;//跨控制器
             return View(list);
         }
+        // GET /Sites/SITE1489992926300
         public ActionResult Detail(string SiteCode) {
             var where = new M_Sites() { SiteCode = SiteCode,SiteIsActive =true };
             var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();
