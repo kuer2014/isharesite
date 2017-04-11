@@ -93,17 +93,17 @@
             });
         })
 </script>-->
-    <script>
-        jQuery(function () {     
+   @*<script>
+        jQuery(function () {
             // debugger;
             //为标签绑定事件
-            jQuery('form [name=Tag]').each(function (i, elem) {
-                elem.onchange = function () {
-                    jQuery('form').submit();
-                };
-            });
+            //jQuery('form [name=Tag]').each(function (i, elem) {
+            //    elem.onchange = function () {
+            //        jQuery('form').submit();
+            //    };
+            //});
             //为每个标签添加事件
-           // debugger;
+            // debugger;
             // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];
             var localhrefmat = location.href.match(/\/([^\/]+)$/);
             if (localhrefmat) {
@@ -118,7 +118,7 @@
                     }
                 } else {
                     urlFilename = '' + urlFilenameArr[0];
-                    if (urlFilename==''||urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
+                    if (urlFilename == '' || urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
                         urlFilename += '?';
                     }
                 }
@@ -160,56 +160,57 @@
                     $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
                 }
             }
-      
+
             //搜索辅助功能
             //jQuery('#SearchForm').keyup(function (e) {
             //    if (e.keyCode == 13) {
-            var txt = decodeURI(Url.getParam('SearchText'));          
+            var txt = decodeURI(Url.getParam('SearchText'));
             if (txt != 'undefined') { jQuery('#SearchForm').val(txt).focus(); }
-                    ////Search();
-                    //if (txt) {
-                    //    jQuery('.li-site-item').css('display', 'none');
-                    //    jQuery('.li-site-item:contains(' + txt + ')').css('display', 'block');
-                    //} else {
-                    //    jQuery('.li-site-item').css('display', 'block');
-                    //}
-                    //高亮显示
-                    //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
+            ////Search();
+            //if (txt) {
+            //    jQuery('.li-site-item').css('display', 'none');
+            //    jQuery('.li-site-item:contains(' + txt + ')').css('display', 'block');
+            //} else {
+            //    jQuery('.li-site-item').css('display', 'block');
+            //}
+            //高亮显示
+            //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
             var site_a = jQuery('.li-site-item h4').children();//.text().replace(txt, '<b>' + txt + '</b>');
-                   jQuery.each(site_a, function (i, n) {
-                       //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
-                       jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
-                       //jQuery(n).next().html(jQuery(n).next().text().replace(txt, '<mark>' + txt + '</mark>'));
-                   });
+            jQuery.each(site_a, function (i, n) {
+                //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
+                jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
+                //jQuery(n).next().html(jQuery(n).next().text().replace(txt, '<mark>' + txt + '</mark>'));
+            });
             //    }
             //});
             //搜索标签功能
-                   jQuery('#SearchTag').keyup(function (e) {
-                       if (e.keyCode == 13) {
-                           var _this = jQuery(this);
-                           $(".Tag-Single a").css('font-weight', 'normal');
-                           var tagName = _this.val();
-                           if (tagName) {
-                               _this.next().css('display', 'none');
-                               ///var exisTag = $(".Tag-Single label:contains('" + tagName + "')");
-                               //if (exisTag.length) {
-                               //    exisTag.css('font-weight', 'bold');
-                               //    return;
-                               //} else {
-                               //    jQuery(this).next().css('display', 'initial');
-                               //}
-                              /// debugger;
-                               var isn = false;
-                               $(".Tag-Single a").each(function (i, e) {
-                                   if (jQuery(e).text().toLowerCase().indexOf(tagName.toLowerCase()) > -1) {
-                                       jQuery(e).css('font-weight', 'bold');
-                                       isn = true;
-                                   }
-                               });
-                               if (!isn) _this.next().css('display', 'initial');
-                           }
-                       }
-                   });
+            jQuery('#SearchTag').keyup(function (e) {
+                if (e.keyCode == 13) {
+                    var _this = jQuery(this);
+                    $(".Tag-Single a").css('font-weight', 'normal');
+                    var tagName = _this.val();
+                    if (tagName) {
+                        _this.next().css('display', 'none');
+                        ///var exisTag = $(".Tag-Single label:contains('" + tagName + "')");
+                        //if (exisTag.length) {
+                        //    exisTag.css('font-weight', 'bold');
+                        //    return;
+                        //} else {
+                        //    jQuery(this).next().css('display', 'initial');
+                        //}
+                        /// debugger;
+                        var isn = false;
+                        $(".Tag-Single a").each(function (i, e) {
+                            if (jQuery(e).text().toLowerCase().indexOf(tagName.toLowerCase()) > -1) {
+                                jQuery(e).css('font-weight', 'bold');
+                                isn = true;
+                            }
+                        });
+                        if (!isn) _this.next().css('display', 'initial');
+                    }
+                }
+            });
         });
-    </script>
+</script>*@
+
 }

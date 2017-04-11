@@ -238,6 +238,43 @@
             });
             // }
         }
+        function CaptureImage() {
+            //  var row = $('#dg').datagrid('getSelected');
+            var rows = $('#dg').datagrid('getChecked');
+            if (!rows.length && !$('#AllCap')[0].checked) {
+                $.messager.show({    // show error message
+                    title: 'Error',
+                    msg: "请勾选记录！"
+                });
+                return;
+            }
+            //debugger;
+            var sitesId = "'";
+            if ($('#AllCap')[0].checked) {
+                sitesId = 'all';
+            } else {
+                $(rows).each(function (i, row) {
+                    sitesId += row.SiteId + "','";
+                });
+                sitesId = sitesId.substring(0, sitesId.length - 2)
+            }
+            //debugger;
+            $.messager.confirm('Confirm', '生成?', function (r) {
+                if (r) {
+                    $.post('/Admin/Sites/CaptureImage/', { 'sitesId': sitesId }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.msg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+            // }
+        }
         function Import() {
             $('#winImport').window('refresh', '/Admin/Sites/Import');
         }
@@ -410,6 +447,8 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToTop(0)">取消置顶</a>
         ｜<a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToHome(1)">推荐(首页-常用站点)</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="ToHome(0)">取消推荐</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="CaptureImage()">生成截图</a>
+        <input type="checkbox" id="AllCap" name="AllCap" checked="checked" /><label for="AllCap">全部</label>
     </div>
     <div style="padding-left:5px;">
         <input type="text" id="searchText" name="searchText" onkeyup="Func_Keyup(event)" placeholder="请输入站点名称/URL" />

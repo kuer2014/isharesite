@@ -1,6 +1,7 @@
 ﻿using BetterSite.BusinessObject;
 using BetterSite.Domain;
 using BetterSite.UI.Filter;
+using BetterSite.UI.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -280,6 +281,37 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             };
             return Json(data, JsonRequestBehavior.AllowGet);
 
+        }
+        public JsonResult CaptureImage(string sitesId) {
+            JsonResult json = new JsonResult();
+            try
+            {
+                // TODO: Add insert logic here
+                M_Sites where = new M_Sites();
+                if (sitesId == "all") sitesId = string.Empty;
+                where.SiteId = sitesId;
+                var list = sitesBO.QueryForList(where).Cast<M_Sites>();
+                OLayer ow = new OLayer();
+                foreach (var site in list)
+                {
+                    ow.CaptureImage(site.SiteUrl, Request.MapPath("\\cap\\")+site.SiteCode+".jpg");
+                }              
+                json.Data = new
+                {
+                    success = true,
+                    msg = "处理成功"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                json.Data = new
+                {
+                    success = false,
+                    msg = ex.Message
+                };
+            }
+            return json;
         }
     }
 }
