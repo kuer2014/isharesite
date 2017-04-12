@@ -46,7 +46,8 @@
                 {
                     <li class="list-group-item li-site-item">
                         <h4 class="list-group-item-heading">
-                            <a href="@item.SiteUrl" target="_blank">@item.SiteName</a>
+                            @*<a href="@item.SiteUrl" target="_blank">@item.SiteName</a>*@
+                            <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
                             <br /><small>@item.SiteUrl</small>
                         </h4>
                       

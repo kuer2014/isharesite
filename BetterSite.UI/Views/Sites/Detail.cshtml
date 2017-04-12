@@ -1,5 +1,5 @@
 ﻿@{
-    //ViewBag.Title = ViewBag.Title+"-优站分享-为开发者提供一些便利";
+//ViewBag.Title = ViewBag.Title+"-优站分享-为开发者提供一些便利";
 }
 @model BetterSite.Domain.M_Sites
 
@@ -32,6 +32,19 @@
     .list-group-item-heading {
         margin: 5px 0 3px 0;
     }
+    .pic_shadow{border:1px solid #dadada;}
+    /*.pic_shadow {
+    -moz-box-shadow: 3px 3px 4px #000;
+    -webkit-box-shadow: 3px 3px 4px #000;
+    box-shadow: 3px 3px 4px #000;
+    /* For IE 8 * /
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+    /* For IE 5.5 - 7 * /
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+   }
+    .pic_position {
+    margin-left:20px;
+    }*/
 </style>
 <div class="container">
     <div class="row">
@@ -42,20 +55,25 @@
         </div>
         <div class="col-md-8">
             <ul class="list-group">              
-                    <li class="list-group-item li-site-item">
-                        <h4 class="list-group-item-heading">
-                            <a href="@Model.SiteUrl" target="_blank">@Model.SiteName</a>
-                            <br /><small>@Model.SiteUrl</small>
-                        </h4>
-                      <h5>类别:@Model.TypeName</h5>
-                        <p>
-                            @Model.SiteProfile
-                           
-                        </p>
-                        <div class="div-SiteTags" style="margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
-                        <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
-                        @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
-                    </li>                
+                <li class="list-group-item li-site-item">
+                    <h4 class="list-group-item-heading">
+                        <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName">@Model.SiteName</a>
+                        <br /><small>@Model.SiteUrl</small>
+                    </h4>
+                    <h5><label>类别:</label><a href="/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></h5>
+                    <div class="div-SiteTags" style="margin:6px auto 6px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
+                    <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
+                    @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
+                    <p>
+                        @Model.SiteProfile
+                    </p>
+                    <div class="pic_position">
+                        <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName" >
+                            <img  class="pic_shadow" src="\Images\SiteScreen\@{@Model.SiteCode}.jpg" alt="@Model.SiteName" title="@Model.SiteName"/>
+                        </a>
+                    </div>
+                  
+                </li>                
             </ul>         
         </div>
         <div class="col-md-2">
