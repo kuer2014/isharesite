@@ -17,11 +17,12 @@ namespace BetterSite.CMD
             //Console.ReadKey();
             Console.WriteLine("请输入类型－两位大写字母;全部请输入ALL");
             string type= Console.ReadLine();
-            if (type == "ALL") type = "";
+           
             while (string.IsNullOrWhiteSpace(type)) {
                 Console.WriteLine("请输入类型－两位大写字母;全部请输入ALL");
                  type = Console.ReadLine();
             } ;
+            if (type.ToUpper() == "ALL") type = "";
             SitesBO sitesBO = new SitesBO();
             M_Sites where = new M_Sites();
             where.SiteIsActive = true;

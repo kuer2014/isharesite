@@ -56,14 +56,6 @@ namespace BetterSite.UI.Utility
             this.ImageHeight = ImageHeight;
             this.ImageWidth = ImageWidth;
         }
-
-        //public Bitmap GetBitmap()
-        //{
-        //    WebPageBitmap Shot = new WebPageBitmap(this.WebSite, this.ScreenWidth, this.ScreenHeight);
-        //    Shot.GetIt();
-        //    Bitmap Pic = Shot.DrawBitmap(this.ImageHeight, this.ImageWidth);
-        //    return Pic;
-        //}
         public Bitmap GetBitmap()
         {
             WebPageBitmap Shot = new WebPageBitmap(this.WebSite, this.ScreenWidth, this.ScreenHeight);
@@ -90,8 +82,21 @@ namespace BetterSite.UI.Utility
             MyBrowser.WebBrowserShortcutsEnabled = false;
             MyBrowser.ObjectForScripting = false;
             MyBrowser.Size = new Size(this.Width, this.Height);
-            MyBrowser.ScriptErrorsSuppressed = false; //该值指示 WebBrowser 是否显示对话框，如脚本错误消息。
-            
+            MyBrowser.ScriptErrorsSuppressed = true; //该值指示 WebBrowser 是否禁止显示对话框，如脚本错误消息。
+           
+  //MyBrowser.IsWebBrowserContextMenuEnabled = false;// 禁用右键菜单
+  //          MyBrowser.WebBrowserShortcutsEnabled =false;  //禁用快捷键
+  //          MyBrowser.AllowWebBrowserDrop = false;  //获取或设置一个值，该值指示 WebBrowser 控件是否导航到拖放到它上面的文档。
+  //                //禁用超链接
+  //                //超链接分为两种，一种是 当前窗口直接转向， 一种是 在新窗口中打开
+  //               //当然窗口直接转向：
+  //              //将 WebBrowser 的 AllowNavigation 设为 false
+  //                  //在新窗口中打开：
+  //                   //禁用新窗口打开，需要处理 WebBrowser 的 NewWindow 事件
+  //                     //private void webBrowser1_NewWindow(object sender, CancelEventArgs e)
+  //                      //        {
+  //                      //            e.Cancel = true;
+  //                    //        }
         }
 
         public void GetIt()
@@ -101,7 +106,7 @@ namespace BetterSite.UI.Utility
             //{
             //    Application.DoEvents();
             //}
-            for (int i = 0; i < 500000; i++)
+            for (int i = 0; i < 1000000; i++)
             {
                 if (MyBrowser.ReadyState != WebBrowserReadyState.Complete)
                 {
