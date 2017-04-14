@@ -112,7 +112,9 @@ namespace BetterSite.UI.Controllers
             var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();
             if (model != null)
             {
-                ViewBag.Title = model.SiteName;
+                ViewBag.Title = model.SiteName + " 优站分享|致力于分享实用的优秀网站";
+                ViewBag.Keywords = model.SiteName;
+                ViewBag.Description = model.SiteName+","+model.SiteProfile;
                 return View(model);
             }
             else {               
