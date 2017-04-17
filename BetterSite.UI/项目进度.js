@@ -20,3 +20,40 @@
 //2017-01-24
 //首页的各分类数据支持自定义排序
 //SiteOrderNumber 排序号字段
+{///*
+    //<div class="row">
+    //       <div class="col-md-12">
+    //           <table class="table table-condensed ">
+    //               <thead>
+    //                   <tr>
+    //                       <th><h4>最新收录</h4></th>
+    //                   </tr>
+    //               </thead>
+    //               <tbody>
+    //                   @foreach (var item in ViewBag.New)
+    //{
+    //                       <tr>
+    //                           <td>
+    //                               <h5 class="site-add-date">@item.SiteAddDate</h5>
+    //                               <h4>
+
+    //                                   <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+    //                                   <br /><small>@item.SiteUrl</small>
+
+    //                               </h4>
+    //                               <p>
+    //                                   @item.SiteProfile
+    //                               </p>
+
+    //                           </td>
+
+    //                       </tr>
+
+    //}
+    //               </tbody>
+    //               <tfoot><tr><td><small style="float:right"><a href="/Sites">更多</a></small></td></tr></tfoot>
+    //           </table>
+    //       </div>
+    //   </div>
+    ///*
+} 首页的备份
