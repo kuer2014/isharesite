@@ -69,179 +69,153 @@
                 </div>
             </div>
         </div>
+
         @*中间 分类站点*@
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-condensed ">
-                        @*<caption><h3>资源</h3></caption>*@
-                        <thead>
-                            <tr>
-                                <th><h4>学技术</h4></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.JS)
-                            {
-                                <tr>
-                                    <td>
-                                        <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot><tr><td><small style="float:right"><a href="/Sites/JS">更多</a></small></td></tr></tfoot>
-                    </table>
+                <div class="col-md-12">
+                    <h4>最新收录</h4>
+                    <ul class="list-group">
+                      @foreach (var item in ViewBag.New)
+                      {
+                            <li class="list-group-item li-site-item">
+                                
+                                <h4 class="list-group-item-heading">
+                                    @*<a href="@item.SiteUrl" target="_blank">@item.SiteName</a>*@
+                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                    <br /><small>@item.SiteUrl</small>
+                                   <br /><small class="site-add-date">@item.SiteAddDate</small>
+                                </h4>
+                                <h5>类别: <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>
+                                <p>
+                                    @item.SiteProfile
+
+                                </p>
+                               <div class="div-SiteTags" style="display:inline; margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
+                                <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
+                                @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
+                            </li>
+                        }
+                    </ul>
+                    <small style="float:right"><a href="/Sites">更多</a></small>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <table class="table table-condensed ">
-                        @*<caption><h3>资源</h3></caption>*@
-                        <thead>
-                            <tr>
-                                <th><h4>找资源</h4></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.ZY)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-condensed ">
+                                @*<caption><h3>资源</h3></caption>*@
+                                <thead>
+                                    <tr>
+                                        <th><h4>学技术</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.JS)
                             {
-                                <tr>
-                                    <td>
-                                        <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                </td>
+                            </tr>
                             }
-                        </tbody>
-                        <tfoot><tr><td><small style="float:right"><a href="/Sites/ZY">更多</a></small></td></tr></tfoot>
-                    </table>
+                                </tbody>
+                                <tfoot><tr><td><small style="float:right"><a href="/Sites/JS">更多</a></small></td></tr></tfoot>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-condensed ">
+                                @*<caption><h3>资源</h3></caption>*@
+                                <thead>
+                                    <tr>
+                                        <th><h4>找资源</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.ZY)
+                            {
+                            <tr>
+                                <td>
+                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                </td>
+                            </tr>
+                            }
+                                </tbody>
+                                <tfoot><tr><td><small style="float:right"><a href="/Sites/ZY">更多</a></small></td></tr></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-condensed ">
+                                @*<caption><h3>资源</h3></caption>*@
+                                <thead>
+                                    <tr>
+                                        <th><h4>善发现</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.ZX)
+                            {
+                            <tr>
+                                <td>
+                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                </td>
+                            </tr>
+                            }
+                                </tbody>
+                                <tfoot><tr><td><small style="float:right"><a href="/Sites/ZX">更多</a></small></td></tr></tfoot>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-condensed ">
+                                @*<caption><h3>资源</h3></caption>*@
+                                <thead>
+                                    <tr>
+                                        <th><h4>爱生活</h4></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.SH)
+                            {
+                            <tr>
+                                <td>
+                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                </td>
+                            </tr>
+                            }
+                                </tbody>
+                                <tfoot><tr><td><small style="float:right"><a href="/Sites/SH">更多</a></small></td></tr></tfoot>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <table class="table table-condensed ">
-                        @*<caption><h3>资源</h3></caption>*@
-                        <thead>
-                            <tr>
-                                <th><h4>善发现</h4></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.ZX)
-                            {
-                                <tr>
-                                    <td>
-                                        <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot><tr><td><small style="float:right"><a href="/Sites/ZX">更多</a></small></td></tr></tfoot>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <table class="table table-condensed ">
-                        @*<caption><h3>资源</h3></caption>*@
-                        <thead>
-                            <tr>
-                                <th><h4>爱生活</h4></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.SH)
-                            {
-                                <tr>
-                                    <td>
-                                        <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot><tr><td><small style="float:right"><a href="/Sites/SH">更多</a></small></td></tr></tfoot>
-                    </table>
+                @*右侧 常用站点*@
+                <div class="col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">常用站点</h4>
+
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled ">
+                                @foreach (var item in ViewBag.IsHome)
+                        {
+                        <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                            <small>★</small><a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                        </li>
+                        }
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    @*<div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">最新收录 </h4>
-                        </div>
-                        <div class="panel-body">
-                            <ul class="list-group  new-site">
-                                @foreach (var item in Model)
-                                {
-                                    <li class="list-group-item">
-                                        <h4 class="list-group-item-heading">
-                                            <a href="@item.SiteUrl" target="_blank">@item.SiteName</a>
-                                            <br /><small>@item.SiteUrl</small>
-                                            <br /> <small class="site-add-date">@item.SiteAddDate</small>
-                                        </h4>
-                                        <p>
-                                            @item.SiteProfile
-                                        </p>
-                                    </li>
-                                }
-                            </ul>
-                            </div>
-                        </div>*@
-                            <table class="table table-condensed ">
-                        <thead>
-                            <tr>
-                                <th><h4>新收录</h4></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.New)
-                            {
-                                <tr>
-                                    <td>    
-                                        <h5 class="site-add-date">@item.SiteAddDate</h5>                                    
-                                        <h4>
-                                            
-                                            <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
-                                            <br /><small>@item.SiteUrl</small>
-                                          
-                                        </h4>
-                                        <p>
-                                            @item.SiteProfile
-                                        </p>
 
-                                    </td>
-                                   
-                                </tr>
-                              
-                            }
-                        </tbody>
-                        <tfoot><tr><td><small style="float:right"><a href="/Sites">更多</a></small></td></tr></tfoot>
-                    </table>
-                        </div>
-                    </div>
-                </div>
-        @*右侧 常用站点*@
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">常用站点</h4>
-
-                </div>
-                <div class="panel-body">
-                    <ul class="list-unstyled ">
-                        @foreach (var item in ViewBag.IsHome)
-                        {
-                            <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                                <small>★</small><a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
-                            </li>
-                        }
-                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-           
-            </div>
-        </div>
-</div>
 @section Scripts
 {
     <script>
@@ -253,11 +227,21 @@
                     ele.innerText = ele.innerText.substring(0, 12) + '..';
                 }
             });
-            jQuery(".site-add-date").each(function (n, ele) {
-                if (ele.innerText.length > 0) {
-                    ele.innerText = ele.innerText.substr(0, 11);
+     
+            //为每个站点的标签添加事件
+            var urlFilename = location.href;
+            var siteItemArr = jQuery('.li-site-item');
+            jQuery.each(siteItemArr, function (i_site, n_site) {
+                var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
+                if (siteTagsName) {
+                    var siteTagsNameArr = siteTagsName.split(',');
+                    var htmlArr = [];
+                    for (var i = 0; i < siteTagsNameArr.length; i++) {
+                            htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'Sites/?Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');                        
+                    }
+                    jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
                 }
-            });
+            })
         })
     </script>
 }

@@ -90,14 +90,20 @@
                 if (/SITE\d{13}/i.test(urlPath)) urlPath = '';//去掉SITE1489992926300
                 var urlFilenameArr = urlPath.split('?');
                 var urlFilename = '';
-               // debugger;
+                debugger;
                 if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
-                    urlFilename = '/Sites/' + urlPath;
+                    if (urlPath != 'Sites')
+                        urlFilename = '/Sites/' + urlPath;
+                    else
+                        urlFilename = '/Sites/';
                     if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
                         urlFilename += '&';
                     }
                 } else {
-                    urlFilename = '/Sites/' + urlFilenameArr[0];
+                    if (urlFilenameArr[0] != 'Sites')
+                        urlFilename = '/Sites/' + urlFilenameArr[0];
+                    else
+                        urlFilename = '/Sites/';
                     if (urlFilename==''||urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
                         urlFilename += '?';
                     }
@@ -188,6 +194,12 @@
                                });
                                if (!isn) _this.next().css('display', 'initial');
                            }
+                       }
+                   });
+            //站点添加时间显示样式
+                   jQuery(".site-add-date").each(function (n, ele) {
+                       if (ele.innerText.length > 0) {
+                           ele.innerText = ele.innerText.substr(0, 11);
                        }
                    });
         });

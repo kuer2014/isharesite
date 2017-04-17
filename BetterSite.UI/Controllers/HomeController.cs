@@ -31,7 +31,8 @@ namespace BetterSite.UI.Controllers
           //  var count = sitesBO.QueryForList(where).Count;
          
            //最新收录
-            var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+           // var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            var listNew = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).Take(10).ToList();
             ViewBag.New = listNew;
             where.Sort =  "SiteOrderNumber";
             where.Order = "ASC";
