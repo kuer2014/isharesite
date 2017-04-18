@@ -22,11 +22,12 @@ namespace BetterSite.UnitTest
             M_Sites where = new M_Sites();
             where.SiteIsActive = true;
             where.TypeCode = "ZX";
+            //where.SearchText = "鸠摩电子书搜索引擎";
             var list = sitesBO.QueryForList(where).Cast<M_Sites>();
             OLayer ow = new OLayer();
             foreach (var site in list)
             {
-                ow.CaptureImage(site.SiteUrl, "D:\\cap\\" + site.SiteCode + ".jpg");
+                //ow.CaptureImage(site.SiteUrl, "D:\\cap\\" + site.SiteCode + ".jpg");
             }
         }
         /// <summary>

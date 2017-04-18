@@ -59,6 +59,10 @@
       <Project>{145AF33B-7EF2-4018-A3BF-EFE36D607979}</Project>
       <Name>BetterSite.BusinessObject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BetterSite.DataAccess\BetterSite.DataAccess.csproj">
+      <Project>{9094389e-a7e4-4a46-b318-63d1be9482a4}</Project>
+      <Name>BetterSite.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BetterSite.Domain\BetterSite.Domain.csproj">
       <Project>{BE87CAB1-44EA-4F51-854C-752898919CFA}</Project>
       <Name>BetterSite.Domain</Name>
