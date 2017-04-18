@@ -152,7 +152,11 @@ namespace BetterSite.UI.Utility
     }
     public class OLayer
     {
-        public string CaptureImage(string url,string fileName)
+        public string CaptureImage(string url, string fileName)
+        {
+          return  CaptureImage(url,fileName,1024,768);
+        }
+        public string CaptureImage(string url,string fileName,int imageWidth,int imageHeight)
         {
             string result = string.Empty;
             System.Drawing.Bitmap x = null;
@@ -163,8 +167,8 @@ namespace BetterSite.UI.Utility
 
                 //GetImage thumb = new GetImage(url, 1024, 3200, 1024, 3200);
                 //生成页面图片的长宽高
-                GetImage thumb = new GetImage(url, 1024, 768, 1024, 768);
-
+               // GetImage thumb = new GetImage(url, imageWidth, imageHeight, imageWidth, imageHeight);
+                GetImage thumb = new GetImage(url, 1024, 768, 600, 450);
                 x = thumb.GetBitmap();
                // string FileName = DateTime.Now.ToString("yyyyMMddhhmmss");
                 x.Save(fileName);
