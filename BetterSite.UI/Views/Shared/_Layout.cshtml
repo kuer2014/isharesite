@@ -46,6 +46,16 @@
       .navbar-inverse .navbar-nav > li > a {
         color: #c2c2c2;
     }
+        /*站点说明*/
+        p {
+        margin: 0px;
+        color: #555;
+        display: block;
+        font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 24px;
+        text-indent: 28px;
+    }
     </style>
 
 </head>
@@ -90,7 +100,7 @@
                 if (/SITE\d{13}/i.test(urlPath)) urlPath = '';//去掉SITE1489992926300
                 var urlFilenameArr = urlPath.split('?');
                 var urlFilename = '';
-                debugger;
+               // debugger;
                 if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
                     if (urlPath != 'Sites')
                         urlFilename = '/Sites/' + urlPath;
