@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSite.UnitTest", "Bett
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSite.CMD", "BetterSite.CMD\BetterSite.CMD.csproj", "{4C1E034E-54A9-4A70-B088-DF2F94FAB076}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetterSite.SiteTool", "BetterSite.SiteTool\BetterSite.SiteTool.csproj", "{DB76D4F2-DBE6-46D2-B688-C95F6D509C03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{4C1E034E-54A9-4A70-B088-DF2F94FAB076}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C1E034E-54A9-4A70-B088-DF2F94FAB076}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C1E034E-54A9-4A70-B088-DF2F94FAB076}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB76D4F2-DBE6-46D2-B688-C95F6D509C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB76D4F2-DBE6-46D2-B688-C95F6D509C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB76D4F2-DBE6-46D2-B688-C95F6D509C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB76D4F2-DBE6-46D2-B688-C95F6D509C03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace BetterSite.UI.Controllers
 {
-    public class SiteController : ApiController
+    public class Site2Controller : ApiController
     {
         // GET api/Site
         public IEnumerable<string> Get()

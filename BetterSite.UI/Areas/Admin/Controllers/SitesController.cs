@@ -19,7 +19,6 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         private readonly TypesBO typesBO = new TypesBO();
         //
         // GET: /Admin/Sites/
-
         public ActionResult Index()
         {
             return View();
@@ -313,6 +312,6 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             }
             return json;
         }
-
+  
     }
 }

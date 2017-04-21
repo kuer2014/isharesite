@@ -37,6 +37,7 @@ namespace BetterSite.Domain
             private string m_TagName = String.Empty;
         private string m_SiteTagsName = String.Empty;
         private string m_SiteTagsId = String.Empty;
+ private string m_SiteImgBase64 = String.Empty;
         // Instantiate empty M_Sites for inserting
         public M_Sites() { }
 
@@ -231,6 +232,19 @@ namespace BetterSite.Domain
             set
             {
                 m_SiteTagsId = value;
+            }
+        }
+
+        public string SiteImgBase64
+        {
+            get
+            {
+                return m_SiteImgBase64;
+            }
+
+            set
+            {
+                m_SiteImgBase64 = value;
             }
         }
         //public M_SitesForGroup Site
