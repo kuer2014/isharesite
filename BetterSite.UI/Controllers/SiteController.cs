@@ -7,31 +7,32 @@ using System.Web.Http;
 
 namespace BetterSite.UI.Controllers
 {
-    public class ValuesController : ApiController
+    public class SiteController : ApiController
     {
-        // GET api/values
+        // GET api/Site
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/Site/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        // POST api/Site
+        public string Post(BetterSite.Domain.M_Sites site)
         {
+            return site.SiteCode +"|"+ site.SiteName;
         }
 
-        // PUT api/values/5
+        // PUT api/Site/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/Site/5
         public void Delete(int id)
         {
         }

@@ -41,6 +41,10 @@ namespace BetterSite.UnitTest
             string msg = "";
                msg = RequestHelper.PostData(url,param);
         }
+        [TestMethod]
+        public void GetGUID() {
+            string[] guids = { Guid.NewGuid().ToString().ToUpper(), Guid.NewGuid().ToString().ToUpper(), Guid.NewGuid().ToString().ToUpper(), Guid.NewGuid().ToString().ToUpper() };
+        }
       
     }
 }

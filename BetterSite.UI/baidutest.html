@@ -12,7 +12,9 @@
         <!--<input type="submit" value="submi提交"/>-->
         <input type="button" onclick="submit1();" value="推送" />
     </form>
-
+    <iframe name="frameOut" id ="frameOut" src="http://www.2cto.com/kf/201509/442025.html" height="768" width="1024"></iframe>
+    <input type="button" value="操作" onclick="getcontent();" />
+    <input type="button" value="添加站点" onclick="addsite();" />
     <script src="Scripts/jquery-1.8.2.min.js"></script>
     <script>
      // 百度主动推送  不能这样，有跨域问题
@@ -28,7 +30,22 @@
         //        }
         //    });
         //}
-
+        function addsite() {
+            debugger;
+            $.ajax({
+                type: "post",
+                url: "api/Site",
+                contentType: 'application/json',
+                data: JSON.stringify({ SiteCode: 'SiteCode123', SiteName:'apitest'}),
+                success: function (data, status) {
+                    debugger;
+                }
+            });
+        }
+        function getcontent() {
+            debugger;
+            console.log(window.frames["frameOut"].document.getElementByName('description')[0].content)
+        }
     </script>
 </body>
 </html>
