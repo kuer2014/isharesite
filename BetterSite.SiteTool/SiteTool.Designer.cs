@@ -53,6 +53,9 @@
             this.SystemMsg = new System.Windows.Forms.TextBox();
             this.CopyMsg = new System.Windows.Forms.Button();
             this.ClearMsg = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.SiteKeywords = new System.Windows.Forms.TextBox();
+            this.BackWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.SiteImg)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -146,7 +149,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 315);
+            this.label4.Location = new System.Drawing.Point(8, 312);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 12);
             this.label4.TabIndex = 0;
@@ -154,7 +157,7 @@
             // 
             // SiteProfile
             // 
-            this.SiteProfile.Location = new System.Drawing.Point(88, 291);
+            this.SiteProfile.Location = new System.Drawing.Point(88, 286);
             this.SiteProfile.Multiline = true;
             this.SiteProfile.Name = "SiteProfile";
             this.SiteProfile.Size = new System.Drawing.Size(302, 59);
@@ -163,7 +166,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 378);
+            this.label5.Location = new System.Drawing.Point(22, 430);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 0;
@@ -172,7 +175,7 @@
             // TypeId
             // 
             this.TypeId.FormattingEnabled = true;
-            this.TypeId.Location = new System.Drawing.Point(88, 372);
+            this.TypeId.Location = new System.Drawing.Point(88, 424);
             this.TypeId.Name = "TypeId";
             this.TypeId.Size = new System.Drawing.Size(121, 20);
             this.TypeId.TabIndex = 6;
@@ -187,16 +190,16 @@
             // 
             // SiteOrderNumber
             // 
-            this.SiteOrderNumber.Location = new System.Drawing.Point(88, 418);
+            this.SiteOrderNumber.Location = new System.Drawing.Point(325, 423);
             this.SiteOrderNumber.Name = "SiteOrderNumber";
-            this.SiteOrderNumber.Size = new System.Drawing.Size(121, 21);
+            this.SiteOrderNumber.Size = new System.Drawing.Size(65, 21);
             this.SiteOrderNumber.TabIndex = 1;
             this.SiteOrderNumber.Text = "100";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 420);
+            this.label7.Location = new System.Drawing.Point(242, 425);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 0;
@@ -254,12 +257,12 @@
             // 
             // SystemMsg
             // 
-            this.SystemMsg.Location = new System.Drawing.Point(29, 456);
+            this.SystemMsg.Location = new System.Drawing.Point(29, 470);
             this.SystemMsg.Multiline = true;
             this.SystemMsg.Name = "SystemMsg";
-            this.SystemMsg.Size = new System.Drawing.Size(361, 59);
+            this.SystemMsg.Size = new System.Drawing.Size(361, 45);
             this.SystemMsg.TabIndex = 1;
-            this.SystemMsg.Text = "SystemMsg";
+            this.SystemMsg.Text = "msg...";
             // 
             // CopyMsg
             // 
@@ -281,6 +284,29 @@
             this.ClearMsg.UseVisualStyleBackColor = true;
             this.ClearMsg.Click += new System.EventHandler(this.ClearMsg_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 378);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 12);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "SiteKeywords";
+            // 
+            // SiteKeywords
+            // 
+            this.SiteKeywords.Location = new System.Drawing.Point(88, 362);
+            this.SiteKeywords.Multiline = true;
+            this.SiteKeywords.Name = "SiteKeywords";
+            this.SiteKeywords.Size = new System.Drawing.Size(302, 45);
+            this.SiteKeywords.TabIndex = 1;
+            // 
+            // BackWorker
+            // 
+            this.BackWorker.WorkerReportsProgress = true;
+            this.BackWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackWorker_DoWork);
+            this.BackWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackWorker_RunWorkerCompleted);
+            // 
             // SiteTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -299,6 +325,8 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.SiteKeywords);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.SiteUrl);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SiteName);
@@ -348,6 +376,9 @@
         private System.Windows.Forms.TextBox SystemMsg;
         private System.Windows.Forms.Button CopyMsg;
         private System.Windows.Forms.Button ClearMsg;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox SiteKeywords;
+        private System.ComponentModel.BackgroundWorker BackWorker;
     }
 }
 

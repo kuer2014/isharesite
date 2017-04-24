@@ -58,10 +58,10 @@ namespace BetterSite.UI.Controllers
                      && entity.SiteOrderNumber > 0
                      &&!string.IsNullOrWhiteSpace(entity.SiteImgBase64))
                 {
-                    ImageHelper.Base64ToFile(entity.SiteImgBase64, Server.MapPath("~/Images/SiteScreen"), entity.SiteCode);
+                    ImageHelper.Base64ToFile(entity.SiteImgBase64.Replace('-', '+').Replace('_', '/'), Server.MapPath("~/Images/SiteScreen"), entity.SiteCode);
                     entity.SiteId = Guid.NewGuid().ToString();
                     entity.SiteCollectionDate = DateTime.Now;
-                       // var result = sitesBO.Insert(entity);  //(SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteOrderNumber,SiteCollectionDate,SiteProfile)
+                    var result = sitesBO.Insert(entity);  //(SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteOrderNumber,SiteCollectionDate,SiteProfile)
                   //if (result != null && (int)result > 0)
                    // {
                         ////插入标签信息

@@ -42,33 +42,53 @@ namespace BetterSite.SiteTool
 
         private void PullData_Click(object sender, EventArgs e)
         {
+            BackWorker.RunWorkerAsync(2000/*参数是可选的*/);          
+        }
+        /// <summary>
+        /// 拉取数据
+        /// </summary>
+        private void _PullData()
+        {
             string url = SourceUrl.Text;
-            string cmd = @"F:&cd F:\NavSite\phantom\0421\&phantomjs getsitedata.js "+ url;
-            string result =string.Empty;
+            string appExePath = System.Windows.Forms.Application.StartupPath;//(.exe文件所在的目录)// System.Windows.Forms.Application.ExecutablePath;//(.exe文件所在的目录+.exe文件名)
+            string appExeDrive = appExePath.Substring(0, 2);
+            string cmd = $"{appExeDrive }&cd {appExePath}\\Phantomjs\\&phantomjs getsitedata.js " + url;
+            // string cmd = @"F:&cd F:\NavSite\phantom\0421\&phantomjs getsitedata.js "+ url;
+            string sitedataPath = $"{appExePath}\\Phantomjs\\tempdata\\sitedata.txt";
+            //@"F:\NavSite\phantom\0421\data\sitedata.txt"
+            string result = string.Empty;
             PhantomjsHelper.RunCmd(cmd, out result);
-            if (!string.IsNullOrEmpty(result)) {
-                string[] siteSourceData = File.ReadAllLines(@"F:\NavSite\phantom\0421\data\sitedata.txt");
-                if (siteSourceData != null) {
+            if (!string.IsNullOrEmpty(result))
+            {
+                string[] siteSourceData = File.ReadAllLines(sitedataPath);
+                if (siteSourceData != null)
+                {
                     int cnt = siteSourceData.Count();
-                    if (cnt> 0)
-                    SiteCode.Text = siteSourceData[0];
+                    if (cnt > 0)
+                        SiteCode.Text = siteSourceData[0];
                     if (cnt > 1)
                         SiteName.Text = siteSourceData[1];
                     if (cnt > 2)
                         SiteUrl.Text = siteSourceData[2];
                     if (cnt > 3)
                         SiteProfile.Text = siteSourceData[3];
-                    if (cnt > 4) {
-                        SiteImgBase64.Text = siteSourceData[4];
-                       // Image img = Image.FromFile(@"F:\NavSite\phantom\0421\data\siteimg.jpg");
-                        // Image img = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());
-                        
-                        SiteImg.Image =ImageHelper.ToImage(siteSourceData[4]);
+                    if (cnt > 4)
+                        SiteKeywords.Text = siteSourceData[4];
+                    if (cnt > 5)
+                    {
+                        SiteImgBase64.Text = siteSourceData[5];
+                        // Image img = Image.FromFile(@"F:\NavSite\phantom\0421\data\siteimg.jpg");
+                        // Image img = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());                        
+                        SiteImg.Image = ImageHelper.ToImage(siteSourceData[5]);
                     }
                 }
             }
         }
-
+        /// <summary>
+        /// 推送数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PushData_Click(object sender, EventArgs e)
         {
             M_Sites m = new M_Sites();
@@ -78,22 +98,24 @@ namespace BetterSite.SiteTool
             m.SiteProfile = SiteProfile.Text;
             m.TypeId = TypeId.SelectedValue.ToString();
             m.SiteOrderNumber = int.Parse(SiteOrderNumber.Text);
-            m.SiteImgBase64 = SiteImgBase64.Text;
-            string result = RequestHelper.PostHttp("http://localhost:8080/SiteHandler.ashx", "token=2CBa31gg4s7dB&imgbase64="+m.SiteImgBase64+"&entityJson=" + JsonConvert.SerializeObject(m));
-           //string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
+            m.SiteImgBase64 = SiteImgBase64.Text.Replace('+', '-').Replace('/', '_');
+           // string postImgBase64 = m.SiteImgBase64.Replace('+', '-').Replace('/', '_');
+           // string result = RequestHelper.PostHttp("http://localhost:8080/SiteHandler.ashx", "token=2CBa31gg4s7dB&imgbase64="+ postImgBase64 + "&entityJson=" + JsonConvert.SerializeObject(m));
+           string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
             // string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/?token=abc", "entityJson=" + JsonConvert.SerializeObject(m));
 
-            SystemMsg.Text = JsonConvert.SerializeObject(m);// result;
+            SystemMsg.Text =  result;//JsonConvert.SerializeObject(m);//
         }
+        /// <summary>
+        /// 复制
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CopyMsg_Click(object sender, EventArgs e)
         {
             
             if (SystemMsg.Text != "")
                 Clipboard.SetDataObject(SystemMsg.Text);
-        }
-        private void ClearMsg_Click(object sender, EventArgs e)
-        {
-            SystemMsg.Text = string.Empty;
         }
         ////粘贴： 
         //private void button2_Click(object sender, System.EventArgs e)
@@ -104,5 +126,32 @@ namespace BetterSite.SiteTool
         //        textBox2.Text = (String)iData.GetData(DataFormats.Text);
         //    }
         //}
+        private void ClearMsg_Click(object sender, EventArgs e)
+        {
+            SystemMsg.Text = string.Empty;
+        }
+
+        private void BackWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            SystemMsg.Text = "进行中..";
+            //for (int i = 1; i < 11; i++)
+            //{
+            //    System.Threading.Thread.Sleep(2000);
+            //    BackWorker.ReportProgress(i * 10);
+            //    if (BackWorker.CancellationPending)
+            //    {
+            //        e.Cancel = true;
+            //        return;
+            //    }
+            //}
+            _PullData();
+         
+           // BackWorker.ReportProgress("进行中..");
+        }
+
+        private void BackWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SystemMsg.Text = "完成。";
+        }
     }
 }
