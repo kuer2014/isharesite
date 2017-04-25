@@ -35,6 +35,12 @@
       <result column="TypeCode" property="TypeCode" />
        <result column="TagName" property="TagName" />
     </resultMap>
+    <resultMap class="BetterSite.Domain.M_SiteComment,BetterSite.Domain" id="Tab_SiteComment_Result">
+      <result column="CreateTime" property="CreateTime" />
+      <result column="CommentUserNickname" property="CommentUserNickname" />
+      <result column="CommentUserIp" property="CommentUserIp" />
+      <result column="CommentContent" property="CommentContent" />
+    </resultMap>
   </resultMaps>
   <statements>
     <insert id="Tab_Sites_Insert" parameterClass="BetterSite.Domain.M_Sites">
@@ -44,7 +50,8 @@
       <!--<selectKey type="post" resultClass="string" property="SiteId">
         　　　　SELECT CAST(@@IDENTITY as int) as SiteId        　　　　
       </selectKey>-->
-   </insert>
+   </insert>   
+   
     <insert id="Tab_Sites_CheckInsert" parameterClass="BetterSite.Domain.M_Sites">
       IF NOT EXISTS(SELECT 1  FROM  Tab_Sites WHERE SiteUrl=#SiteUrl#)
       BEGIN
@@ -181,6 +188,20 @@
     <select id="Tab_Sites_SelectAll" listClass="ArrayList" resultMap="Tab_Sites_Result" >
       SELECT SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate,SiteProfile
       FROM  Tab_Sites
+    </select>
+    <insert id="Tab_SiteComment_Insert" parameterClass="BetterSite.Domain.M_SiteComment">
+      INSERT INTO  Tab_SiteComment  ([Id], [SiteId], [CreateTime], [CommentUserNickname], [CommentUserIp], [CommentContent], [Status])
+      VALUES (#Id#, #SiteId#, #CreateTime#, #CommentUserNickname#, #CommentUserIp#, #CommentContent#, #Status#)
+    </insert>
+    <select id="Tab_SiteComment_Select" listClass="ArrayList" resultMap="Tab_SiteComment_Result" >
+      SELECT [Id], [SiteId], [CreateTime], [CommentUserNickname], [CommentUserIp], [CommentContent], [Status]
+      FROM  Tab_SiteComment
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+      <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+      <!--<isNotEmpty prepend="and" property="SiteId">S.SiteId IN('$SiteId$')</isNotEmpty>-->
+    </dynamic>
+      ORDER BY CreateTime DESC;
     </select>
   </statements>
 </sqlMap>

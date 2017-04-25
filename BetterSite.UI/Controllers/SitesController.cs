@@ -115,6 +115,8 @@ namespace BetterSite.UI.Controllers
                 ViewBag.Title = model.SiteName + " 优站分享|致力于分享实用的优秀网站";
                 ViewBag.Keywords = model.SiteName;
                 ViewBag.Description = model.SiteName+","+model.SiteProfile;
+                //加载评论
+                ViewBag.CommentList=sitesBO.QuerySiteCommentForList(new M_SiteComment {SiteId= model.SiteId,Status=1 });
                 return View(model);
             }
             else {               
@@ -153,6 +155,50 @@ namespace BetterSite.UI.Controllers
             var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().GroupBy(s => new M_Sites { SiteName = s.SiteName, SiteUrl = s.SiteUrl }, s => new M_Sites { TagName = s.TagName });//.OrderBy(f => f.Key.SiteName); ;
 
             return View(list);
+        }
+       [HttpPost]
+        public JsonResult AddSiteComment(string siteId,string nickname, string commentContent)
+        {
+            JsonResult json = new JsonResult();
+            if (!string.IsNullOrWhiteSpace(siteId) && !string.IsNullOrWhiteSpace(nickname) && !string.IsNullOrWhiteSpace(commentContent))
+            {
+                try
+                {
+                    // TODO: Add insert logic here
+                    M_SiteComment entity = new M_SiteComment();
+                    entity.Id = Guid.NewGuid().ToString().ToUpper();
+                    entity.SiteId = siteId;
+                    entity.CreateTime = DateTime.Now;
+                    entity.CommentUserNickname = nickname;
+                    entity.CommentUserIp = System.Web.HttpContext.Current.Request.UserHostAddress;
+                    entity.CommentContent = commentContent;
+                    entity.Status = 2;//待审核
+                    sitesBO.AddSiteComment(entity);
+
+                    json.Data = new
+                    {
+                        success = true,
+                        msg = "添加成功"
+                    };
+                }
+                catch (Exception ex)
+                {
+                    json.Data = new
+                    {
+                        success = false,
+                        msg = ex.Message
+                    };
+                }
+            }
+            else {
+                json.Data = new
+                {
+                    success = false,
+                    msg = "参数有误"
+                };
+            }
+            //json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return json;
         }
     }
 }

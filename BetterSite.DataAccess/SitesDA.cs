@@ -74,5 +74,13 @@ namespace BetterSite.DataAccess
       {
           return BaseDA.QueryForList("Tab_Sites_JoinTag_Select", where);
       }
+        public object AddSiteComment(M_SiteComment model)
+        {
+            return BaseDA.Insert<M_SiteComment>("Tab_SiteComment_Insert", model);
+        }
+        public IList QuerySiteCommentForList(M_SiteComment where)
+        {
+            return BaseDA.QueryForList("Tab_SiteComment_Select", where);
+        }
     }
 }

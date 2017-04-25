@@ -104,5 +104,12 @@ namespace BetterSite.BusinessObject
       {
           return da.QueryForJoinTagList(where);
       }
+        public object AddSiteComment(M_SiteComment model)
+        {
+            return da.AddSiteComment(model);
+        } public IList QuerySiteCommentForList(M_SiteComment where)
+      {
+          return da.QuerySiteCommentForList(where);
+      }
     }
 }

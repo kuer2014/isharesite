@@ -16,7 +16,7 @@
     </div>*@
 <style>
     p {
-        margin: 0px;
+        margin: 0px 20px 0px 20px;
         color: #555;
         display: block;
         font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -41,10 +41,19 @@
     -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
     /* For IE 5.5 - 7 * /
     filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
-   }
+   }*/
     .pic_position {
-    margin-left:20px;
-    }*/
+    margin:15px auto 15px auto;
+    }
+    input {
+    max-width:200px;
+    }
+    .panel-heading {
+    padding:6px;
+    }
+    .div-SiteTags {
+    margin:6px auto 15px 30px;
+    }
 </style>
 <div class="container">
     <div class="row">
@@ -61,8 +70,7 @@
                         <br /><small>@Model.SiteUrl</small>
                     </h4>
                     <h5>类别: <a href="/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></h5>
-                    <div class="div-SiteTags" style="margin:6px auto 6px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
-                    <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
+                 
                     @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
                     <p>
                         @Model.SiteProfile
@@ -72,7 +80,34 @@
                             <img  class="pic_shadow img-responsive center-block" src="\Images\SiteScreen\@{@Model.SiteCode}.jpg" alt="@Model.SiteName" title="@Model.SiteName"/>
                         </a>
                     </div>
-                  
+                    <div class="div-SiteTags">网站标签: </div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
+                    <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">评论区</div>                     
+                        <div class="panel-body">
+                            <form class="comment-form">
+                                <div class="form-group" style="margin-bottom:0px;">
+                                   <input type="hidden" id="hidSiteId" value="@Model.SiteId" />
+                                    <input type="text" class="form-control" id="Nickname" placeholder="网友">
+                                    <textarea class="form-control" id="CommentContent" rows="4" placeholder="文明上网理性发言，评论审核后显示，谢谢。"></textarea>
+                                    <button type="button" onclick="SubmitComment();" class="btn btn-default">提交评论</button>
+                                </div>
+                            </form>                           
+                        </div>                       
+                        <ul class="list-group">
+                            @foreach (var item in ViewBag.CommentList)
+                            {
+                                <li class="list-group-item">
+                                    <span>@item.CommentUserNickname</span>
+                                    <span>@item.CreateTime</span>
+                                    <p>
+                                        @item.CommentContent
+                                    </p>
+                                </li>                              
+                            }
+                           
+                        </ul>
+                    </div>               
                 </li>                
             </ul>         
         </div>
@@ -111,7 +146,7 @@
             });
         })
 </script>-->
-   @*<script>
+   <!--<script>
         jQuery(function () {
             // debugger;
             //为标签绑定事件
@@ -229,6 +264,35 @@
                 }
             });
         });
-</script>*@
-
+</script> -->
+ <script>
+     function SubmitComment() {
+         var commentContent = $('#CommentContent').val();
+         if (!commentContent) return;
+         var siteId = $('#hidSiteId').val();
+         var nickname = $('#Nickname').val();
+         if (!nickname) nickname = '网友';
+       //  var formData = encodeURI('siteId=' + siteId + '&nickname=' + nickname + '&commentContent=' + commentContent);
+         var formData = 'siteId=' + siteId + '&nickname=' + nickname + '&commentContent=' + commentContent;
+         $.ajax({
+             url: 'AddSiteComment',
+             type: 'post',
+           //  dataType: 'application/x-www-form-urlencoded;charset=UTF-8',
+             async:true,
+             data: formData,
+             success: function (data, status, xhr) {
+                 if (data.success){
+                   //  oriAlert(data.msg + ",将在审核后显示");
+                     $('.comment-form').append('<div class="alert alert-info" role="alert">添加成功,评论将在24小时内审核后显示.</div>');
+                 }
+                 else
+                     $('.comment-form').append('<div class="alert alert-warning" role="alert">' + data.msg + '</div>');
+                    // oriAlert(data.msg);
+             },
+             fail: function () {
+                 console.log("fail");
+             }
+         });
+     }
+    </script>
 }
