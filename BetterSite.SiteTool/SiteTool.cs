@@ -17,21 +17,22 @@ namespace BetterSite.SiteTool
 {
     public partial class SiteTool : Form
     {
-       
+
         public SiteTool()
         {
-            
+
             InitializeComponent();
+
         }
 
         private void SiteTool_Load(object sender, EventArgs e)
         {
             ////这里构造一个List，当然也可以从数据库中获取
             List<M_Types> typeList = new List<M_Types>() {
-                new M_Types { TypeName="善发现",TypeId="50822E1E-C5E2-4B3C-B023-0B857BA40E18"},
-                new M_Types { TypeName="待审核",TypeId="712A8505-D927-49DD-9B4E-1F276EDE6746"},
+                   new M_Types { TypeName="待审核",TypeId="712A8505-D927-49DD-9B4E-1F276EDE6746"},
                  new M_Types { TypeName="找资源",TypeId="7670B2EA-5E3C-4072-B02E-577D893AA7F9"},
                   new M_Types { TypeName="学技术",TypeId="984E08AE-CADE-4522-A674-7EFEDC056B91"},
+                new M_Types { TypeName="善发现",TypeId="50822E1E-C5E2-4B3C-B023-0B857BA40E18"},             
                    new M_Types { TypeName="爱生活",TypeId="914DD8D4-9934-4CDD-8DC3-E07C0CE87BF6"},
             };
             TypeId.DataSource = typeList;//绑定
@@ -42,7 +43,7 @@ namespace BetterSite.SiteTool
 
         private void PullData_Click(object sender, EventArgs e)
         {
-            BackWorker.RunWorkerAsync(2000/*参数是可选的*/);          
+            BackWorker.RunWorkerAsync(2000/*参数是可选的*/);
         }
         /// <summary>
         /// 拉取数据
@@ -99,12 +100,13 @@ namespace BetterSite.SiteTool
             m.TypeId = TypeId.SelectedValue.ToString();
             m.SiteOrderNumber = int.Parse(SiteOrderNumber.Text);
             m.SiteImgBase64 = SiteImgBase64.Text.Replace('+', '-').Replace('/', '_');
-           // string postImgBase64 = m.SiteImgBase64.Replace('+', '-').Replace('/', '_');
-           // string result = RequestHelper.PostHttp("http://localhost:8080/SiteHandler.ashx", "token=2CBa31gg4s7dB&imgbase64="+ postImgBase64 + "&entityJson=" + JsonConvert.SerializeObject(m));
-           string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
-            // string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/?token=abc", "entityJson=" + JsonConvert.SerializeObject(m));
 
-            SystemMsg.Text =  result;//JsonConvert.SerializeObject(m);//
+            // string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
+            string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
+
+            SystemMsg.Text = "推送数据－" + result;//JsonConvert.SerializeObject(m);//
+            if (result.Equals("添加成功"))
+                SourceUrl.Text = "";
         }
         /// <summary>
         /// 复制
@@ -113,7 +115,7 @@ namespace BetterSite.SiteTool
         /// <param name="e"></param>
         private void CopyMsg_Click(object sender, EventArgs e)
         {
-            
+
             if (SystemMsg.Text != "")
                 Clipboard.SetDataObject(SystemMsg.Text);
         }
@@ -133,7 +135,7 @@ namespace BetterSite.SiteTool
 
         private void BackWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            SystemMsg.Text = "进行中..";
+            SystemMsg.Text = "拉取数据－进行中..";
             //for (int i = 1; i < 11; i++)
             //{
             //    System.Threading.Thread.Sleep(2000);
@@ -145,13 +147,13 @@ namespace BetterSite.SiteTool
             //    }
             //}
             _PullData();
-         
-           // BackWorker.ReportProgress("进行中..");
+
+            // BackWorker.ReportProgress("进行中..");
         }
 
         private void BackWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SystemMsg.Text = "完成。";
+            SystemMsg.Text = "拉取数据－完成。";
         }
     }
 }

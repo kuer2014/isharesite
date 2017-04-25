@@ -80,9 +80,9 @@
             // 
             // PullData
             // 
-            this.PullData.Location = new System.Drawing.Point(88, 95);
+            this.PullData.Location = new System.Drawing.Point(114, 95);
             this.PullData.Name = "PullData";
-            this.PullData.Size = new System.Drawing.Size(75, 23);
+            this.PullData.Size = new System.Drawing.Size(95, 35);
             this.PullData.TabIndex = 2;
             this.PullData.Text = "拉取数据";
             this.PullData.UseVisualStyleBackColor = true;
@@ -90,9 +90,9 @@
             // 
             // PushData
             // 
-            this.PushData.Location = new System.Drawing.Point(278, 95);
+            this.PushData.Location = new System.Drawing.Point(268, 95);
             this.PushData.Name = "PushData";
-            this.PushData.Size = new System.Drawing.Size(75, 23);
+            this.PushData.Size = new System.Drawing.Size(95, 35);
             this.PushData.TabIndex = 3;
             this.PushData.Text = "推送数据";
             this.PushData.UseVisualStyleBackColor = true;
@@ -175,6 +175,7 @@
             // TypeId
             // 
             this.TypeId.FormattingEnabled = true;
+            this.TypeId.ItemHeight = 12;
             this.TypeId.Location = new System.Drawing.Point(88, 424);
             this.TypeId.Name = "TypeId";
             this.TypeId.Size = new System.Drawing.Size(121, 20);
@@ -266,7 +267,7 @@
             // 
             // CopyMsg
             // 
-            this.CopyMsg.Location = new System.Drawing.Point(259, 521);
+            this.CopyMsg.Location = new System.Drawing.Point(315, 518);
             this.CopyMsg.Name = "CopyMsg";
             this.CopyMsg.Size = new System.Drawing.Size(75, 23);
             this.CopyMsg.TabIndex = 9;
@@ -276,7 +277,7 @@
             // 
             // ClearMsg
             // 
-            this.ClearMsg.Location = new System.Drawing.Point(107, 521);
+            this.ClearMsg.Location = new System.Drawing.Point(234, 518);
             this.ClearMsg.Name = "ClearMsg";
             this.ClearMsg.Size = new System.Drawing.Size(75, 23);
             this.ClearMsg.TabIndex = 9;
