@@ -45,7 +45,7 @@
                                             @foreach (var item in ViewBag.IsTop)
                                             {
                                                 <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                                                    <small>★</small><a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName </a>
+                                                    <small>★</small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName </a>
                                                 </li>
 
                                             }
@@ -83,7 +83,7 @@
                                 
                                 <h4 class="list-group-item-heading">
                                     @*<a href="@item.SiteUrl" target="_blank">@item.SiteName</a>*@
-                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                                     <br /><small>@item.SiteUrl</small>
                                    <br /><small class="site-add-date">@item.SiteAddDate</small>
                                 </h4>
@@ -115,7 +115,7 @@
                             {
                             <tr>
                                 <td>
-                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                                 </td>
                             </tr>
                             }
@@ -136,7 +136,7 @@
                             {
                             <tr>
                                 <td>
-                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                                 </td>
                             </tr>
                             }
@@ -159,7 +159,7 @@
                             {
                             <tr>
                                 <td>
-                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                                 </td>
                             </tr>
                             }
@@ -180,7 +180,7 @@
                             {
                             <tr>
                                 <td>
-                                    <a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteUrl">@item.SiteName</a>
+                                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                                 </td>
                             </tr>
                             }
@@ -203,7 +203,7 @@
                                 @foreach (var item in ViewBag.IsHome)
                         {
                         <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                            <small>★</small><a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                            <small>★</small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
                         </li>
                         }
                             </ul>
