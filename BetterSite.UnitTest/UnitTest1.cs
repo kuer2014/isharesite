@@ -13,10 +13,22 @@ namespace BetterSite.UnitTest
     public class UnitTest1
     {
         /// <summary>
-        /// 生成网站缩略图
+        /// 生成一个网站的缩略图
         /// </summary>
         [TestMethod]
-        public void BuildImage()
+        public void BuildSingleImage()
+        {
+            string siteUrl = "https://www.processon.com/", siteCode = "SITE1493289419421";
+            OLayer ow = new OLayer();
+       
+               ow.CaptureImage(siteUrl, "D:\\cap\\" + siteCode + ".jpg");
+          
+        }
+        /// <summary>
+        /// 根据类别生成网站缩略图
+        /// </summary>
+        [TestMethod]
+        public void BuildImageByType()
         {
             SitesBO sitesBO = new SitesBO();
             M_Sites where = new M_Sites();
