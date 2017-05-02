@@ -39,9 +39,9 @@ namespace BetterSite.UI.Controllers
 
         //
         // POST: /SiteApi/Create
-        
+
         [HttpPost]
-        public string Add(string entityJson, string token)
+        public string Add(string entityJson, string token, string sitetags)
         {
             if (token != "2CBa31gg4s7dB") {
                 return "非法操作!";
@@ -62,20 +62,24 @@ namespace BetterSite.UI.Controllers
                     entity.SiteId = Guid.NewGuid().ToString();
                     entity.SiteCollectionDate = DateTime.Now;
                     var result = sitesBO.Insert(entity);  //(SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteOrderNumber,SiteCollectionDate,SiteProfile)
-                  //if (result != null && (int)result > 0)
-                   // {
-                        ////插入标签信息
-                        //for (int i = 0; i < TagId.Length; i++)
-                        //{
-                        //    siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = TagId[i] });
-                        //}
+                    if (!string.IsNullOrWhiteSpace(sitetags))
+                    {
+                        //插入标签信息
+                        BusinessObject.SiteTagBO siteTagBO = new SiteTagBO();
+                        var tagsId = sitetags.Split(',');
+                        for (int i = 0; i < tagsId.Length; i++)
+                        {
+                            if(!string.IsNullOrWhiteSpace(tagsId[i]))
+                            siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = tagsId[i] });
+                        }
 
-                        msg = "添加成功";
-                   // }
-                   //// else
-                   // {
-                   //     msg = "添加失败";
-                   // }
+                       
+                    }
+                    msg = "添加成功";
+                    //// else
+                    // {
+                    //     msg = "添加失败";
+                    // }
                 }
                 else
                 {
@@ -90,7 +94,28 @@ namespace BetterSite.UI.Controllers
             }
             return msg;
         }
+        [HttpPost]
+        public string GetTags(string typeId, string token)
+        {
+            if (token != "2CBa31gg4s7dB")
+            {
+                return "非法操作!";
+            }           
+            string msg = string.Empty;
+            try
+            {
+                TagsBO tagsBO = new TagsBO();
+                var taglist = tagsBO.QueryForEntityListByTypeId(typeId);
+                return JsonConvert.SerializeObject(taglist);
+            }
+            catch (Exception ex)
+            {
 
+                msg = ex.Message;
+
+            }
+            return msg;
+        }
 
         //
         // GET: /SiteApi/Edit/5
@@ -143,5 +168,6 @@ namespace BetterSite.UI.Controllers
                 return View();
             }
         }
+
     }
 }

@@ -56,6 +56,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.SiteKeywords = new System.Windows.Forms.TextBox();
             this.BackWorker = new System.ComponentModel.BackgroundWorker();
+            this.CancelPull = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SiteImg)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -80,7 +83,7 @@
             // 
             // PullData
             // 
-            this.PullData.Location = new System.Drawing.Point(114, 95);
+            this.PullData.Location = new System.Drawing.Point(88, 73);
             this.PullData.Name = "PullData";
             this.PullData.Size = new System.Drawing.Size(95, 35);
             this.PullData.TabIndex = 2;
@@ -90,7 +93,7 @@
             // 
             // PushData
             // 
-            this.PushData.Location = new System.Drawing.Point(268, 95);
+            this.PushData.Location = new System.Drawing.Point(295, 73);
             this.PushData.Name = "PushData";
             this.PushData.Size = new System.Drawing.Size(95, 35);
             this.PushData.TabIndex = 3;
@@ -101,7 +104,7 @@
             // label1SiteCode
             // 
             this.label1SiteCode.AutoSize = true;
-            this.label1SiteCode.Location = new System.Drawing.Point(24, 154);
+            this.label1SiteCode.Location = new System.Drawing.Point(24, 125);
             this.label1SiteCode.Name = "label1SiteCode";
             this.label1SiteCode.Size = new System.Drawing.Size(53, 12);
             this.label1SiteCode.TabIndex = 0;
@@ -109,7 +112,7 @@
             // 
             // SiteCode
             // 
-            this.SiteCode.Location = new System.Drawing.Point(88, 147);
+            this.SiteCode.Location = new System.Drawing.Point(88, 118);
             this.SiteCode.Name = "SiteCode";
             this.SiteCode.Size = new System.Drawing.Size(302, 21);
             this.SiteCode.TabIndex = 1;
@@ -117,7 +120,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 198);
+            this.label2.Location = new System.Drawing.Point(29, 151);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -125,7 +128,7 @@
             // 
             // SiteName
             // 
-            this.SiteName.Location = new System.Drawing.Point(88, 194);
+            this.SiteName.Location = new System.Drawing.Point(88, 147);
             this.SiteName.Name = "SiteName";
             this.SiteName.Size = new System.Drawing.Size(302, 21);
             this.SiteName.TabIndex = 1;
@@ -133,7 +136,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 250);
+            this.label3.Location = new System.Drawing.Point(29, 182);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 12);
             this.label3.TabIndex = 0;
@@ -141,7 +144,7 @@
             // 
             // SiteUrl
             // 
-            this.SiteUrl.Location = new System.Drawing.Point(88, 241);
+            this.SiteUrl.Location = new System.Drawing.Point(88, 177);
             this.SiteUrl.Name = "SiteUrl";
             this.SiteUrl.Size = new System.Drawing.Size(302, 21);
             this.SiteUrl.TabIndex = 1;
@@ -149,7 +152,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 312);
+            this.label4.Location = new System.Drawing.Point(8, 233);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 12);
             this.label4.TabIndex = 0;
@@ -157,7 +160,7 @@
             // 
             // SiteProfile
             // 
-            this.SiteProfile.Location = new System.Drawing.Point(88, 286);
+            this.SiteProfile.Location = new System.Drawing.Point(88, 207);
             this.SiteProfile.Multiline = true;
             this.SiteProfile.Name = "SiteProfile";
             this.SiteProfile.Size = new System.Drawing.Size(302, 59);
@@ -166,7 +169,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 430);
+            this.label5.Location = new System.Drawing.Point(22, 332);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
             this.label5.TabIndex = 0;
@@ -176,10 +179,12 @@
             // 
             this.TypeId.FormattingEnabled = true;
             this.TypeId.ItemHeight = 12;
-            this.TypeId.Location = new System.Drawing.Point(88, 424);
+            this.TypeId.Location = new System.Drawing.Point(88, 326);
             this.TypeId.Name = "TypeId";
             this.TypeId.Size = new System.Drawing.Size(121, 20);
             this.TypeId.TabIndex = 6;
+            this.TypeId.SelectedIndexChanged += new System.EventHandler(this.TypeId_SelectedIndexChanged);
+            this.TypeId.SelectedValueChanged += new System.EventHandler(this.TypeId_SelectedValueChanged);
             // 
             // label6
             // 
@@ -191,7 +196,7 @@
             // 
             // SiteOrderNumber
             // 
-            this.SiteOrderNumber.Location = new System.Drawing.Point(325, 423);
+            this.SiteOrderNumber.Location = new System.Drawing.Point(325, 325);
             this.SiteOrderNumber.Name = "SiteOrderNumber";
             this.SiteOrderNumber.Size = new System.Drawing.Size(65, 21);
             this.SiteOrderNumber.TabIndex = 1;
@@ -200,7 +205,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(242, 425);
+            this.label7.Location = new System.Drawing.Point(242, 327);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 12);
             this.label7.TabIndex = 0;
@@ -255,10 +260,11 @@
             this.SiteImgBase64.Size = new System.Drawing.Size(600, 450);
             this.SiteImgBase64.TabIndex = 0;
             this.SiteImgBase64.Text = "";
+            this.SiteImgBase64.TextChanged += new System.EventHandler(this.SiteImgBase64_TextChanged);
             // 
             // SystemMsg
             // 
-            this.SystemMsg.Location = new System.Drawing.Point(29, 470);
+            this.SystemMsg.Location = new System.Drawing.Point(534, 564);
             this.SystemMsg.Multiline = true;
             this.SystemMsg.Name = "SystemMsg";
             this.SystemMsg.Size = new System.Drawing.Size(361, 45);
@@ -267,28 +273,28 @@
             // 
             // CopyMsg
             // 
-            this.CopyMsg.Location = new System.Drawing.Point(315, 518);
+            this.CopyMsg.Location = new System.Drawing.Point(820, 612);
             this.CopyMsg.Name = "CopyMsg";
             this.CopyMsg.Size = new System.Drawing.Size(75, 23);
             this.CopyMsg.TabIndex = 9;
-            this.CopyMsg.Text = "复制";
+            this.CopyMsg.Text = "复制消息";
             this.CopyMsg.UseVisualStyleBackColor = true;
             this.CopyMsg.Click += new System.EventHandler(this.CopyMsg_Click);
             // 
             // ClearMsg
             // 
-            this.ClearMsg.Location = new System.Drawing.Point(234, 518);
+            this.ClearMsg.Location = new System.Drawing.Point(739, 612);
             this.ClearMsg.Name = "ClearMsg";
             this.ClearMsg.Size = new System.Drawing.Size(75, 23);
             this.ClearMsg.TabIndex = 9;
-            this.ClearMsg.Text = "清空";
+            this.ClearMsg.Text = "清空消息";
             this.ClearMsg.UseVisualStyleBackColor = true;
             this.ClearMsg.Click += new System.EventHandler(this.ClearMsg_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(9, 378);
+            this.label8.Location = new System.Drawing.Point(9, 289);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 12);
             this.label8.TabIndex = 0;
@@ -296,7 +302,7 @@
             // 
             // SiteKeywords
             // 
-            this.SiteKeywords.Location = new System.Drawing.Point(88, 362);
+            this.SiteKeywords.Location = new System.Drawing.Point(88, 273);
             this.SiteKeywords.Multiline = true;
             this.SiteKeywords.Name = "SiteKeywords";
             this.SiteKeywords.Size = new System.Drawing.Size(302, 45);
@@ -308,16 +314,48 @@
             this.BackWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackWorker_DoWork);
             this.BackWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackWorker_RunWorkerCompleted);
             // 
+            // CancelPull
+            // 
+            this.CancelPull.Location = new System.Drawing.Point(180, 73);
+            this.CancelPull.Name = "CancelPull";
+            this.CancelPull.Size = new System.Drawing.Size(95, 35);
+            this.CancelPull.TabIndex = 2;
+            this.CancelPull.Text = "取消拉取";
+            this.CancelPull.UseVisualStyleBackColor = true;
+            this.CancelPull.Click += new System.EventHandler(this.PullData_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(26, 359);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(47, 12);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "SiteTag";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(89, 350);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "加载标签";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SiteTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 553);
+            this.ClientSize = new System.Drawing.Size(1036, 665);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.ClearMsg);
             this.Controls.Add(this.CopyMsg);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.TypeId);
             this.Controls.Add(this.PushData);
+            this.Controls.Add(this.CancelPull);
             this.Controls.Add(this.PullData);
             this.Controls.Add(this.SiteOrderNumber);
             this.Controls.Add(this.SystemMsg);
@@ -380,6 +418,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox SiteKeywords;
         private System.ComponentModel.BackgroundWorker BackWorker;
+        private System.Windows.Forms.Button CancelPull;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button1;
     }
 }
 

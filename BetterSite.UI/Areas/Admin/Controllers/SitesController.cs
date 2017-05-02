@@ -30,7 +30,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
           //  where.PageSize = rows;
        //   where.Sort=  string.IsNullOrWhiteSpace(where.Sort) ? "SiteAddDate" : where.Sort;
           where.Sort = where.Sort?? "SiteAddDate";
-          where.Order = where.Order ?? "Asc";
+          where.Order = where.Order ?? "Desc";
 
             if(where.SiteIsActive == false) where.SiteIsActive = null;// where.SiteIsActive == false? null?:true;
             else if (where.SiteIsActive == null) where.SiteIsActive = true;

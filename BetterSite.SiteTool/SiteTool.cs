@@ -22,9 +22,10 @@ namespace BetterSite.SiteTool
         {
 
             InitializeComponent();
+            // 
 
         }
-
+        
         private void SiteTool_Load(object sender, EventArgs e)
         {
             ////这里构造一个List，当然也可以从数据库中获取
@@ -80,7 +81,7 @@ namespace BetterSite.SiteTool
                         SiteImgBase64.Text = siteSourceData[5];
                         // Image img = Image.FromFile(@"F:\NavSite\phantom\0421\data\siteimg.jpg");
                         // Image img = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());                        
-                        SiteImg.Image = ImageHelper.ToImage(siteSourceData[5]);
+                        SiteImg.Image = ImageHelper.ToImage(SiteImgBase64.Text);//siteSourceData[5]
                     }
                 }
             }
@@ -100,13 +101,29 @@ namespace BetterSite.SiteTool
             m.TypeId = TypeId.SelectedValue.ToString();
             m.SiteOrderNumber = int.Parse(SiteOrderNumber.Text);
             m.SiteImgBase64 = SiteImgBase64.Text.Replace('+', '-').Replace('/', '_');
-
+            string sitetags = GetSiteTags();
             // string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
-            string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
+            string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags="+ sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
+            //string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags=" + sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
 
             SystemMsg.Text = "推送数据－" + result;//JsonConvert.SerializeObject(m);//
             if (result.Equals("添加成功"))
                 SourceUrl.Text = "";
+        }
+        private string GetSiteTags() {
+            string tagsStr = string.Empty;
+            foreach (Control item in this.Controls)
+            {                
+                if (item is CheckBox)
+                {
+                    var chk = (CheckBox)item;
+                    if (chk.Checked == true) {
+                        tagsStr +=  chk.Tag+",";
+                    }
+                   
+                }
+            }  
+            return tagsStr;
         }
         /// <summary>
         /// 复制
@@ -135,7 +152,7 @@ namespace BetterSite.SiteTool
 
         private void BackWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            SystemMsg.Text = "拉取数据－进行中..";
+            SystemMsg.Text = "拉取数据－进行中.. \r\n 开始时间:"+DateTime.Now;
             //for (int i = 1; i < 11; i++)
             //{
             //    System.Threading.Thread.Sleep(2000);
@@ -152,8 +169,101 @@ namespace BetterSite.SiteTool
         }
 
         private void BackWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {            
+            SystemMsg.Text = "拉取数据－完成。\r\n 完成时间:" + DateTime.Now;
+            MessageBox.Show("OK");
+        }
+
+        private void SiteImgBase64_TextChanged(object sender, EventArgs e)
         {
-            SystemMsg.Text = "拉取数据－完成。";
+            SiteImg.Image = ImageHelper.ToImage(SiteImgBase64.Text);
+        }
+
+        private void TypeId_SelectedValueChanged(object sender, EventArgs e)
+        {
+           
+        }
+        private Control.ControlCollection RemoveTag(Control.ControlCollection cc) {
+            bool flag = false;
+            foreach (Control item in this.Controls)
+            {
+                // if (item.GetType().ToString() == "System.Windows.Forms.CheckBox")
+                if (item is CheckBox)
+                {
+                    flag = true;
+                    this.Controls.Remove(item);
+                }
+            }
+            if (flag)
+                return RemoveTag(this.Controls);
+            else
+                return null;
+        }
+        /// <summary>
+        /// 构建标签
+        /// </summary>
+        private void BulidTagChk()
+        {
+
+            ////清除之前标签
+            RemoveTag(this.Controls);
+            //foreach (Control item in this.Controls)
+            //{
+            //   // if (item.GetType().ToString() == "System.Windows.Forms.CheckBox")
+            //        if (item is CheckBox)
+            //    {
+            //        this.Controls.Remove(item);
+            //    }
+            //}
+            //for (int i = 0; i < this.pnl.Controls.Count; i++)
+            //{
+
+            //        this.Controls.RemoveByKey(string.Format("chk{0}", i.ToString()));
+
+            //}
+            // var url = "http://www.isharesite.com/siteapi/GetTags?token=2CBa31gg4s7dB";
+            var url = "http://localhost:8080/siteapi/GetTags?token=2CBa31gg4s7dB";
+            string result = RequestHelper.PostHttp(url, "typeId=" + TypeId.SelectedValue.ToString());// "7670B2EA-5E3C-4072-B02E-577D893AA7F9");
+          
+            if (!string.IsNullOrWhiteSpace(result)) { 
+            var taglist = JsonConvert.DeserializeObject<IList<M_Tags>>(result);
+                int x=0, y=380,ii=0;
+                for (int i = 0; i < taglist.Count; i++)
+                {
+                    System.Windows.Forms.CheckBox chkb = new System.Windows.Forms.CheckBox();               
+
+                    x = ii *80;
+                    ++ii;
+                    //if (taglist[i].TagName.Length >=3) x += 10;
+                    //if (taglist[i].TagName.Length >=5) x += 10;
+                    if (ii % 5 == 0) { y += 20; ii = 0; }
+                    chkb.Location = new Point(x,y);
+                    chkb.AutoSize = true;
+                    chkb.Name = string.Format("chk{0}", i.ToString());
+                    //chkb.Size = new System.Drawing.Size(78, 16);
+                  //  chkb.TabIndex = 11;
+                    chkb.Text = taglist[i].TagName;
+                    chkb.UseVisualStyleBackColor = true;
+                    chkb.Tag = taglist[i].TagId;
+                    
+                    this.Controls.Add(chkb);
+                   // chkb.BringToFront();
+                  //  chkb.Visible = true;
+
+                }
+               // this.pnl.BringToFront();
+               // this.pnl.Visible = true;
+            }
+        }
+
+        private void TypeId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            BulidTagChk();
         }
     }
 }

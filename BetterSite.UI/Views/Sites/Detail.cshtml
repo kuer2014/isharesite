@@ -112,7 +112,48 @@
             </ul>         
         </div>
         <div class="col-md-2">
-            相关站点
+            
+            <div class="panel panel-default">
+                @*<div class="panel-heading">
+                    <h4 class="panel-title">站长推荐</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled ">
+                        @foreach (var item in ViewBag.IsTop)
+                        {
+                            <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                                <small>★</small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>*@
+                <div class="panel-heading">
+                    <h4 class="panel-title">同类站点</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled ">
+                        @foreach (var item in ViewBag.ListType)
+                        {
+                            <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                                <small>★</small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                @*<div class="panel-heading">
+                    <h4 class="panel-title">常用站点</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-unstyled ">
+                        @foreach (var item in ViewBag.IsHome)
+                        {
+                            <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                                <small>★</small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>*@
+            </div>
         </div>
     </div>
 </div>

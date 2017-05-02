@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Web;
 
@@ -40,6 +41,34 @@ namespace BetterSite.SiteTool
 
             return responseContent;
         }
+        public static string GetHttp(string url)
+        {
+            using (var client = new HttpClient())
+            {
+                var responseString = client.GetStringAsync(url);
+                return responseString.Result;
+            }   //byte[] btBodys = Encoding.UTF8.GetBytes(param);
+                //HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                //httpWebRequest.ContentType = "application/x-www-form-urlencoded";
+                //// httpWebRequest.ContentType = "text/plain";
+                //httpWebRequest.Method = "GET";
+                //httpWebRequest.Timeout = 50000;
+
+                //httpWebRequest.ContentLength = btBodys.Length;
+                //httpWebRequest.GetRequestStream().Write(btBodys, 0, btBodys.Length);
+
+                //HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                //StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream());
+                //string responseContent = streamReader.ReadToEnd();
+
+                //httpWebResponse.Close();
+                //streamReader.Close();
+                //httpWebRequest.Abort();
+                //httpWebResponse.Close();
+
+                //return responseContent;
+            }
 
 
         /// <summary>

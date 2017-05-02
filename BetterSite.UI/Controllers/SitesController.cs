@@ -117,6 +117,27 @@ namespace BetterSite.UI.Controllers
                 ViewBag.Description = model.SiteName+","+model.SiteProfile;
                 //加载评论
                 ViewBag.CommentList=sitesBO.QuerySiteCommentForList(new M_SiteComment {SiteId= model.SiteId,Status=1 });
+                //同类站点 和常用站点
+                BetterSite.Domain.M_Sites siteWhere = new M_Sites();
+                siteWhere.SiteIsActive = true;
+                siteWhere.Page = 1;
+                siteWhere.Rows = 10;
+                siteWhere.Sort = "SiteOrderNumber";
+                siteWhere.Order = "ASC";
+                //同类站点
+                siteWhere.TypeCode =model.TypeCode;
+                var listType = sitesBO.QueryForPageList(siteWhere).Cast<M_Sites>().ToList();
+                ViewBag.ListType = listType;
+                //siteWhere.TypeCode = "";
+                ////站长推荐:显示置顶的网站
+                //siteWhere.SiteIsTop = true;
+                //var listIsTop = sitesBO.QueryForPageList(siteWhere).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+                //ViewBag.IsTop = listIsTop;
+                ////常用站点：显示推到首页的网站
+                //siteWhere.SiteIsTop = false;
+                //siteWhere.SiteIsHome = true;
+                //var listIsHome = sitesBO.QueryForPageList(siteWhere).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+                //ViewBag.IsHome = listIsHome;
                 return View(model);
             }
             else {               
