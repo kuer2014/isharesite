@@ -54,9 +54,10 @@ namespace BetterSite.SiteTool
             string url = SourceUrl.Text;
             string appExePath = System.Windows.Forms.Application.StartupPath;//(.exe文件所在的目录)// System.Windows.Forms.Application.ExecutablePath;//(.exe文件所在的目录+.exe文件名)
             string appExeDrive = appExePath.Substring(0, 2);
-            string cmd = $"{appExeDrive }&cd {appExePath}\\Phantomjs\\&phantomjs getsitedata.js " + url;
+            string sitecode= "SITE"+ Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
+            string cmd = $"{appExeDrive }&cd {appExePath}\\Phantomjs\\&phantomjs getsitedata.js " + url+" "+sitecode;
             // string cmd = @"F:&cd F:\NavSite\phantom\0421\&phantomjs getsitedata.js "+ url;
-            string sitedataPath = $"{appExePath}\\Phantomjs\\tempdata\\sitedata.txt";
+            string sitedataPath = $"{appExePath}\\Phantomjs\\tempdata\\sitedata_"+sitecode+".txt";
             //@"F:\NavSite\phantom\0421\data\sitedata.txt"
             string result = string.Empty;
             PhantomjsHelper.RunCmd(cmd, out result);

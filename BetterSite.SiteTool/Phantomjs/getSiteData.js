@@ -29,7 +29,7 @@ var sitesContent='';//'SiteId,SiteCode,SiteName,SiteUrl,    TypeId,       SiteOr
 						   });
 					
 					//sitesContent+='\n';
-					var sitecode='SITE' + new Date().getTime();
+				 var sitecode = system.args[2];//'SITE' + new Date().getTime();
 						sitesContent+=sitecode;
 						sitesContent+='\r\n';
 						sitesContent+=page.title;
@@ -52,7 +52,7 @@ var sitesContent='';//'SiteId,SiteCode,SiteName,SiteUrl,    TypeId,       SiteOr
 						sitesContent+=imgbase64;
 						//console.log(sitesContent);
 						//fs.write('data\\'+sitecode+'.txt', sitesContent, 'w');
-						fs.write('tempdata\\sitedata.txt', sitesContent, 'w');
+						fs.write('tempdata\\sitedata_' + sitecode + '.txt', sitesContent, 'w');
 		  
 		             // page.render('data\\siteimg.jpg", {format: 'jpg', quality: '90'});
 	   } else {
