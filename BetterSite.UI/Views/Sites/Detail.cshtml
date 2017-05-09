@@ -76,7 +76,8 @@
                  
                     @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
                     <p>
-                        @Model.SiteProfile
+                        @*@Model.SiteProfile*@
+                        @Html.Raw(Model.SiteProfile)
                     </p>
                     <div class="pic_position">
                         <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName" >

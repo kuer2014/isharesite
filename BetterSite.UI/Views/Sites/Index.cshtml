@@ -45,7 +45,7 @@
                         </h4> 
                         <h5>类别: <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>                     
                         <p>
-                            @item.SiteProfile
+                            @Html.Raw(item.SiteProfile)
                            
                         </p>
                         <div class="div-SiteTags" style="margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
