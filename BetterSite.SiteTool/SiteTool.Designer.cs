@@ -59,6 +59,9 @@
             this.CancelPull = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CmbViewSite = new System.Windows.Forms.ComboBox();
+            this.BtnViewData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SiteImg)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -77,15 +80,16 @@
             // SourceUrl
             // 
             this.SourceUrl.Location = new System.Drawing.Point(88, 44);
+            this.SourceUrl.Multiline = true;
             this.SourceUrl.Name = "SourceUrl";
-            this.SourceUrl.Size = new System.Drawing.Size(302, 21);
+            this.SourceUrl.Size = new System.Drawing.Size(302, 51);
             this.SourceUrl.TabIndex = 1;
             // 
             // PullData
             // 
-            this.PullData.Location = new System.Drawing.Point(88, 73);
+            this.PullData.Location = new System.Drawing.Point(88, 101);
             this.PullData.Name = "PullData";
-            this.PullData.Size = new System.Drawing.Size(95, 35);
+            this.PullData.Size = new System.Drawing.Size(95, 28);
             this.PullData.TabIndex = 2;
             this.PullData.Text = "拉取数据";
             this.PullData.UseVisualStyleBackColor = true;
@@ -93,9 +97,9 @@
             // 
             // PushData
             // 
-            this.PushData.Location = new System.Drawing.Point(295, 73);
+            this.PushData.Location = new System.Drawing.Point(740, 636);
             this.PushData.Name = "PushData";
-            this.PushData.Size = new System.Drawing.Size(95, 35);
+            this.PushData.Size = new System.Drawing.Size(95, 28);
             this.PushData.TabIndex = 3;
             this.PushData.Text = "推送数据";
             this.PushData.UseVisualStyleBackColor = true;
@@ -104,7 +108,7 @@
             // label1SiteCode
             // 
             this.label1SiteCode.AutoSize = true;
-            this.label1SiteCode.Location = new System.Drawing.Point(24, 125);
+            this.label1SiteCode.Location = new System.Drawing.Point(24, 138);
             this.label1SiteCode.Name = "label1SiteCode";
             this.label1SiteCode.Size = new System.Drawing.Size(53, 12);
             this.label1SiteCode.TabIndex = 0;
@@ -112,7 +116,7 @@
             // 
             // SiteCode
             // 
-            this.SiteCode.Location = new System.Drawing.Point(88, 118);
+            this.SiteCode.Location = new System.Drawing.Point(88, 131);
             this.SiteCode.Name = "SiteCode";
             this.SiteCode.Size = new System.Drawing.Size(302, 21);
             this.SiteCode.TabIndex = 1;
@@ -120,7 +124,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 151);
+            this.label2.Location = new System.Drawing.Point(29, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -128,7 +132,7 @@
             // 
             // SiteName
             // 
-            this.SiteName.Location = new System.Drawing.Point(88, 147);
+            this.SiteName.Location = new System.Drawing.Point(88, 157);
             this.SiteName.Name = "SiteName";
             this.SiteName.Size = new System.Drawing.Size(302, 21);
             this.SiteName.TabIndex = 1;
@@ -136,7 +140,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 182);
+            this.label3.Location = new System.Drawing.Point(29, 188);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 12);
             this.label3.TabIndex = 0;
@@ -144,7 +148,8 @@
             // 
             // SiteUrl
             // 
-            this.SiteUrl.Location = new System.Drawing.Point(88, 177);
+            this.SiteUrl.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SiteUrl.Location = new System.Drawing.Point(88, 183);
             this.SiteUrl.Name = "SiteUrl";
             this.SiteUrl.Size = new System.Drawing.Size(302, 21);
             this.SiteUrl.TabIndex = 1;
@@ -152,7 +157,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 233);
+            this.label4.Location = new System.Drawing.Point(8, 235);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 12);
             this.label4.TabIndex = 0;
@@ -160,7 +165,7 @@
             // 
             // SiteProfile
             // 
-            this.SiteProfile.Location = new System.Drawing.Point(88, 207);
+            this.SiteProfile.Location = new System.Drawing.Point(88, 209);
             this.SiteProfile.Multiline = true;
             this.SiteProfile.Name = "SiteProfile";
             this.SiteProfile.Size = new System.Drawing.Size(302, 59);
@@ -177,11 +182,12 @@
             // 
             // TypeId
             // 
+            this.TypeId.Font = new System.Drawing.Font("宋体", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.TypeId.FormattingEnabled = true;
-            this.TypeId.ItemHeight = 12;
+            this.TypeId.ItemHeight = 13;
             this.TypeId.Location = new System.Drawing.Point(88, 326);
             this.TypeId.Name = "TypeId";
-            this.TypeId.Size = new System.Drawing.Size(121, 20);
+            this.TypeId.Size = new System.Drawing.Size(121, 21);
             this.TypeId.TabIndex = 6;
             this.TypeId.SelectedIndexChanged += new System.EventHandler(this.TypeId_SelectedIndexChanged);
             this.TypeId.SelectedValueChanged += new System.EventHandler(this.TypeId_SelectedValueChanged);
@@ -225,7 +231,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(407, 41);
+            this.tabControl1.Location = new System.Drawing.Point(407, 83);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(619, 488);
@@ -264,16 +270,16 @@
             // 
             // SystemMsg
             // 
-            this.SystemMsg.Location = new System.Drawing.Point(534, 564);
+            this.SystemMsg.Location = new System.Drawing.Point(414, 49);
             this.SystemMsg.Multiline = true;
             this.SystemMsg.Name = "SystemMsg";
-            this.SystemMsg.Size = new System.Drawing.Size(361, 45);
+            this.SystemMsg.Size = new System.Drawing.Size(433, 23);
             this.SystemMsg.TabIndex = 1;
             this.SystemMsg.Text = "msg...";
             // 
             // CopyMsg
             // 
-            this.CopyMsg.Location = new System.Drawing.Point(820, 612);
+            this.CopyMsg.Location = new System.Drawing.Point(940, 49);
             this.CopyMsg.Name = "CopyMsg";
             this.CopyMsg.Size = new System.Drawing.Size(75, 23);
             this.CopyMsg.TabIndex = 9;
@@ -283,7 +289,7 @@
             // 
             // ClearMsg
             // 
-            this.ClearMsg.Location = new System.Drawing.Point(739, 612);
+            this.ClearMsg.Location = new System.Drawing.Point(853, 49);
             this.ClearMsg.Name = "ClearMsg";
             this.ClearMsg.Size = new System.Drawing.Size(75, 23);
             this.ClearMsg.TabIndex = 9;
@@ -316,9 +322,9 @@
             // 
             // CancelPull
             // 
-            this.CancelPull.Location = new System.Drawing.Point(180, 73);
+            this.CancelPull.Location = new System.Drawing.Point(295, 101);
             this.CancelPull.Name = "CancelPull";
-            this.CancelPull.Size = new System.Drawing.Size(95, 35);
+            this.CancelPull.Size = new System.Drawing.Size(95, 28);
             this.CancelPull.TabIndex = 2;
             this.CancelPull.Text = "取消拉取";
             this.CancelPull.UseVisualStyleBackColor = true;
@@ -335,19 +341,50 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(89, 350);
+            this.button1.Location = new System.Drawing.Point(89, 351);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 27);
             this.button1.TabIndex = 11;
             this.button1.Text = "加载标签";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(412, 587);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(71, 12);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "已拉取站点:";
+            // 
+            // CmbViewSite
+            // 
+            this.CmbViewSite.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.CmbViewSite.FormattingEnabled = true;
+            this.CmbViewSite.Location = new System.Drawing.Point(492, 580);
+            this.CmbViewSite.Name = "CmbViewSite";
+            this.CmbViewSite.Size = new System.Drawing.Size(367, 24);
+            this.CmbViewSite.TabIndex = 13;
+            // 
+            // BtnViewData
+            // 
+            this.BtnViewData.Location = new System.Drawing.Point(521, 636);
+            this.BtnViewData.Name = "BtnViewData";
+            this.BtnViewData.Size = new System.Drawing.Size(95, 28);
+            this.BtnViewData.TabIndex = 14;
+            this.BtnViewData.Text = "预览数据";
+            this.BtnViewData.UseVisualStyleBackColor = true;
+            this.BtnViewData.Click += new System.EventHandler(this.BtnViewData_Click);
+            // 
             // SiteTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 665);
+            this.ClientSize = new System.Drawing.Size(1036, 708);
+            this.Controls.Add(this.BtnViewData);
+            this.Controls.Add(this.CmbViewSite);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.ClearMsg);
@@ -421,6 +458,9 @@
         private System.Windows.Forms.Button CancelPull;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox CmbViewSite;
+        private System.Windows.Forms.Button BtnViewData;
     }
 }
 

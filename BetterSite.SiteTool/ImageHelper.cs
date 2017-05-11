@@ -34,15 +34,22 @@ namespace BetterSite.SiteTool
         /// <param name="e"></param>
         public static Image ToImage(string base64)
         {
-            if (base64.IndexOf("data:image") ==0)
-                base64 = base64.Split(',')[1];
-            //string base64 = this.richTextBox.Text;
-            byte[] bytes = Convert.FromBase64String(base64);
-            MemoryStream memStream = new MemoryStream(bytes);
-            Bitmap bmp = new Bitmap(memStream);
-            memStream.Close();
-          
-            return bmp;
+
+            try
+            {
+                if (base64.IndexOf("data:image") == 0)
+                    base64 = base64.Split(',')[1];
+                //string base64 = this.richTextBox.Text;
+                byte[] bytes = Convert.FromBase64String(base64);
+                MemoryStream memStream = new MemoryStream(bytes);
+                Bitmap bmp = new Bitmap(memStream);
+                memStream.Close();
+
+                return bmp;
+            }
+            catch {
+                return null;
+            }
            // BinaryFormatter binFormatter = new BinaryFormatter();
            // Image img = (Image)binFormatter.Deserialize(memStream);
            // return  img;

@@ -47,45 +47,54 @@ namespace BetterSite.SiteTool
             BackWorker.RunWorkerAsync(2000/*参数是可选的*/);
         }
         /// <summary>
-        /// 拉取数据
+        /// 通过URL拉取数据保存为本地文本文件
         /// </summary>
-        private void _PullData()
+        private string _PullData(string url)
         {
-            string url = SourceUrl.Text;
+             string sitedataPath = string.Empty;
+            //string url = SourceUrl.Text;
             string appExePath = System.Windows.Forms.Application.StartupPath;//(.exe文件所在的目录)// System.Windows.Forms.Application.ExecutablePath;//(.exe文件所在的目录+.exe文件名)
             string appExeDrive = appExePath.Substring(0, 2);
             string sitecode= "SITE"+ Math.Round((DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds);
             string cmd = $"{appExeDrive }&cd {appExePath}\\Phantomjs\\&phantomjs getsitedata.js " + url+" "+sitecode;
-            // string cmd = @"F:&cd F:\NavSite\phantom\0421\&phantomjs getsitedata.js "+ url;
-            string sitedataPath = $"{appExePath}\\Phantomjs\\tempdata\\sitedata_"+sitecode+".txt";
-            //@"F:\NavSite\phantom\0421\data\sitedata.txt"
+            // string cmd = @"F:&cd F:\NavSite\phantom\0421\&phantomjs getsitedata.js "+ url;  
             string result = string.Empty;
             PhantomjsHelper.RunCmd(cmd, out result);
             if (!string.IsNullOrEmpty(result))
             {
-                string[] siteSourceData = File.ReadAllLines(sitedataPath);
-                if (siteSourceData != null)
+                sitedataPath = $"{appExePath}\\Phantomjs\\tempdata\\sitedata_" + sitecode + ".txt";
+                //@"F:\NavSite\phantom\0421\data\sitedata.txt"
+            }
+            return sitedataPath;
+        }
+        /// <summary>
+        /// 读取本地sitedata文本文件填充表单
+        /// </summary>
+        /// <param name="sitedataPath"></param>
+        private void FillForm(string sitedataPath) {
+            string[] siteSourceData = File.ReadAllLines(sitedataPath);
+            if (siteSourceData != null)
+            {
+                int cnt = siteSourceData.Count();
+                if (cnt > 0)
+                    SiteCode.Text = siteSourceData[0];
+                if (cnt > 1)
+                    SiteName.Text = siteSourceData[1];
+                if (cnt > 2)
+                    SiteUrl.Text = siteSourceData[2];
+                if (cnt > 3)
+                    SiteProfile.Text = siteSourceData[3];
+                if (cnt > 4)
+                    SiteKeywords.Text = siteSourceData[4];
+                if (cnt > 5)
                 {
-                    int cnt = siteSourceData.Count();
-                    if (cnt > 0)
-                        SiteCode.Text = siteSourceData[0];
-                    if (cnt > 1)
-                        SiteName.Text = siteSourceData[1];
-                    if (cnt > 2)
-                        SiteUrl.Text = siteSourceData[2];
-                    if (cnt > 3)
-                        SiteProfile.Text = siteSourceData[3];
-                    if (cnt > 4)
-                        SiteKeywords.Text = siteSourceData[4];
-                    if (cnt > 5)
-                    {
-                        SiteImgBase64.Text = siteSourceData[5];
-                        // Image img = Image.FromFile(@"F:\NavSite\phantom\0421\data\siteimg.jpg");
-                        // Image img = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());                        
-                        SiteImg.Image = ImageHelper.ToImage(SiteImgBase64.Text);//siteSourceData[5]
-                    }
+                    SiteImgBase64.Text = siteSourceData[5];
+                    // Image img = Image.FromFile(@"F:\NavSite\phantom\0421\data\siteimg.jpg");
+                    // Image img = Image.FromStream(System.Net.WebRequest.Create(imgurl).GetResponse().GetResponseStream());                        
+                    SiteImg.Image = ImageHelper.ToImage(SiteImgBase64.Text);//siteSourceData[5]
                 }
             }
+
         }
         /// <summary>
         /// 推送数据
@@ -107,7 +116,7 @@ namespace BetterSite.SiteTool
             string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags="+ sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
             //string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags=" + sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
 
-            SystemMsg.Text = "推送数据－" + result;//JsonConvert.SerializeObject(m);//
+            SystemMsg.Text = result + ":推送数据－成功添加一个网站。\r\n 完成时间:" + DateTime.Now;
             if (result.Equals("添加成功"))
                 SourceUrl.Text = "";
         }
@@ -153,25 +162,41 @@ namespace BetterSite.SiteTool
 
         private void BackWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            SystemMsg.Text = "拉取数据－进行中.. \r\n 开始时间:"+DateTime.Now;
-            //for (int i = 1; i < 11; i++)
-            //{
-            //    System.Threading.Thread.Sleep(2000);
-            //    BackWorker.ReportProgress(i * 10);
-            //    if (BackWorker.CancellationPending)
-            //    {
-            //        e.Cancel = true;
-            //        return;
-            //    }
-            //}
-            _PullData();
-
-            // BackWorker.ReportProgress("进行中..");
+            BuildData();
         }
-
+        private List<dynamic> sitefile = new List<dynamic>();
+        private void BuildData() {
+            string urls = SourceUrl.Text;
+            if (string.IsNullOrWhiteSpace(urls))
+            {
+                SystemMsg.Text = "未输入网站URL。";
+                return;
+            }
+            SystemMsg.Text = "拉取数据－开始.. \r\n 开始时间:" + DateTime.Now;
+            string[] urlarr = urls.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            //Dictionary<string, string> sitefile = new Dictionary<string, string>();
+            // List<dynamic> sitefile = new List<dynamic>();
+            string sitedataPath = string.Empty;
+            for (int i = 0; i < urlarr.Count(); i++)
+            {
+               // System.Threading.Thread.Sleep(100);
+                sitedataPath = _PullData(urlarr[i]);
+                sitefile.Add(new { SiteUrl = urlarr[i], fileName = sitedataPath });
+                SystemMsg.Text = $"拉取数据－最新完成:{i + 1}/{urlarr.Count()} [{ urlarr[i]}].";
+            }
+            //CmbViewSite.DataSource = sitefile;//绑定
+            //CmbViewSite.DisplayMember = "SiteUrl";//显示的文本
+            //CmbViewSite.ValueMember = "fileName";//对应的值
+            //CmbViewSite.DropDownStyle = ComboBoxStyle.DropDownList;
+         
+        }
         private void BackWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {            
-            SystemMsg.Text = "拉取数据－完成。\r\n 完成时间:" + DateTime.Now;
+            SystemMsg.Text = $"拉取数据－完成。共计{sitefile.Count}条。| 完成时间:" + DateTime.Now;
+            CmbViewSite.DataSource = sitefile;//绑定
+            CmbViewSite.DisplayMember = "SiteUrl";//显示的文本
+            CmbViewSite.ValueMember = "fileName";//对应的值
+            CmbViewSite.DropDownStyle = ComboBoxStyle.DropDownList;
             MessageBox.Show("OK");
         }
 
@@ -222,12 +247,12 @@ namespace BetterSite.SiteTool
             //        this.Controls.RemoveByKey(string.Format("chk{0}", i.ToString()));
 
             //}
-            // var url = "http://www.isharesite.com/siteapi/GetTags?token=2CBa31gg4s7dB";
-            var url = "http://localhost:8080/siteapi/GetTags?token=2CBa31gg4s7dB";
+            var url = "http://www.isharesite.com/siteapi/GetTags?token=2CBa31gg4s7dB";
+              // var url = "http://localhost:8080/siteapi/GetTags?token=2CBa31gg4s7dB";
             string result = RequestHelper.PostHttp(url, "typeId=" + TypeId.SelectedValue.ToString());// "7670B2EA-5E3C-4072-B02E-577D893AA7F9");
           
             if (!string.IsNullOrWhiteSpace(result)) { 
-            var taglist = JsonConvert.DeserializeObject<IList<M_Tags>>(result);
+            var taglist = JsonConvert.DeserializeObject<IList<M_Tags>>(result).OrderBy(t=>t.TagName).ToList();
                 int x=0, y=380,ii=0;
                 for (int i = 0; i < taglist.Count; i++)
                 {
@@ -265,6 +290,12 @@ namespace BetterSite.SiteTool
         private void button1_Click(object sender, EventArgs e)
         {
             BulidTagChk();
+        }
+
+        private void BtnViewData_Click(object sender, EventArgs e)
+        {
+            string sitedataPath=CmbViewSite.SelectedValue.ToString();
+            FillForm(sitedataPath);
         }
     }
 }

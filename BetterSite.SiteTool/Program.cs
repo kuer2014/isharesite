@@ -18,6 +18,7 @@ namespace BetterSite.SiteTool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           Control.CheckForIllegalCrossThreadCalls = false;//"线程间操作无效: 从不是创建控件的线程访问它"解决方法  
             Application.Run(new SiteTool());
         }
     }
