@@ -33,6 +33,7 @@
             }
         </div>
         <div class="col-md-8">
+            <p> 本次共找到网站：@Model.Count() 个</p>
             <ul class="list-group">
                 @foreach (var item in Model)
                 {
@@ -40,20 +41,20 @@
                         <h4 class="list-group-item-heading">
                             @*<a href="@item.SiteUrl" target="_blank">@item.SiteName</a>*@
                             <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
-                            <br /><small>@item.SiteUrl</small>  
-                            <br /><small class="site-add-date">@item.SiteAddDate</small>                         
-                        </h4> 
-                        <h5>类别: <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>                     
+                            <br /><small>@item.SiteUrl</small>
+                            <br /><small class="site-add-date">@item.SiteAddDate</small>
+                        </h4>
+                        <h5>类别: <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>
                         <p>
                             @Html.Raw(item.SiteProfile)
-                           
+
                         </p>
                         <div class="div-SiteTags" style="margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
                         <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
                         @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
                     </li>
                 }
-            </ul>
+</ul>
             @*@foreach (var item in Model)
                                 {
                             <div class="list-group">
@@ -83,7 +84,7 @@
                 </table>*@
         </div>
         <div class="col-md-2">
-            相关站点
+            本类热门站点
         </div>
     </div>
 </div>
