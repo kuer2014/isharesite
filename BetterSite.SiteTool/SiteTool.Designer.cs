@@ -328,7 +328,7 @@
             this.CancelPull.TabIndex = 2;
             this.CancelPull.Text = "取消拉取";
             this.CancelPull.UseVisualStyleBackColor = true;
-            this.CancelPull.Click += new System.EventHandler(this.PullData_Click);
+            this.CancelPull.Click += new System.EventHandler(this.CancelPullData_Click);
             // 
             // label9
             // 
@@ -373,7 +373,7 @@
             this.BtnViewData.Name = "BtnViewData";
             this.BtnViewData.Size = new System.Drawing.Size(95, 28);
             this.BtnViewData.TabIndex = 14;
-            this.BtnViewData.Text = "预览数据";
+            this.BtnViewData.Text = "装载数据";
             this.BtnViewData.UseVisualStyleBackColor = true;
             this.BtnViewData.Click += new System.EventHandler(this.BtnViewData_Click);
             // 

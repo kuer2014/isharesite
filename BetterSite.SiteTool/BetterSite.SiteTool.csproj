@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImageHelper.cs" />
+    <Compile Include="Models.cs" />
     <Compile Include="PhantomjsHelper.cs" />
     <Compile Include="RequestHelper.cs" />
     <Compile Include="SiteTool.cs">
