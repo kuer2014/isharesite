@@ -5,12 +5,47 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace BetterSite.SiteTool
 {
     public class RequestHelper
     {
+        /// <summary>
+        /// HttpClient 实现,异步
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static async Task<HttpResponseMessage> PostAsync(string url, string param)
+        {
+            var client = new HttpClient();
+            var values = new List<KeyValuePair<string, string>>();
+            values.Add(new KeyValuePair<string, string>("param", param));
+            // include other fields
+            var content = new FormUrlEncodedContent(values);
+            var response = await client.PostAsync(url, content);
+            return response;
+        }
+        /// <summary>
+        /// HttpClient 实现,同步
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static Task<HttpResponseMessage> PostSync(string url, string param)
+        {
+            var client = new HttpClient();
+            var values = new List<KeyValuePair<string, string>>();
+            values.Add(new KeyValuePair<string, string>("param", param));
+            // include other fields
+            var content = new FormUrlEncodedContent(values);
+          
+             var response =  client.PostAsync(url, content);
+             response.Wait();//等待 Task 完成执行过程
+            return response;
+        }
         /// <summary>
         /// 轻量版
         /// </summary>
