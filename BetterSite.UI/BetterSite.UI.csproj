@@ -180,6 +180,8 @@
     <Content Include="Content\DW\css\style.css" />
     <Content Include="Content\DW\detail.html" />
     <Content Include="Content\DW\index.html" />
+    <Content Include="Content\DW\js\main.min.js" />
+    <Content Include="Content\DW\js\wp-embed.min.js" />
     <Content Include="Content\DW\list.html" />
     <Content Include="Content\jquery-easyui-1.4.2\datagrid-filter.js" />
     <Content Include="Content\bootstrap_min.css" />

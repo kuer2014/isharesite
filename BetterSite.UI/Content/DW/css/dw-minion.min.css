@@ -3658,7 +3658,7 @@ input[type="submit"].btn-small {
   text-align: center;
   line-height: 40px;
   display: block;
-  color: #444444;
+  color: #fff; /*color: #444444;*/
   background: #222222;
   cursor: pointer;
 }
