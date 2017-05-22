@@ -176,13 +176,6 @@
   <ItemGroup>
     <Content Include="baidutest.html" />
     <Content Include="captest.html" />
-    <Content Include="Content\DW\css\dw-minion.min.css" />
-    <Content Include="Content\DW\css\style.css" />
-    <Content Include="Content\DW\detail.html" />
-    <Content Include="Content\DW\index.html" />
-    <Content Include="Content\DW\js\main.min.js" />
-    <Content Include="Content\DW\js\wp-embed.min.js" />
-    <Content Include="Content\DW\list.html" />
     <Content Include="Content\jquery-easyui-1.4.2\datagrid-filter.js" />
     <Content Include="Content\bootstrap_min.css" />
     <Content Include="Content\jquery-easyui-1.4.2\changelog.txt" />
@@ -1007,9 +1000,6 @@
     <Content Include="Areas\Admin\Views\Sites\Import.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="项目进度.js" />
-    <Content Include="Content\DW\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\DW\js\dw-minion.min.js" />
-    <Content Include="Content\DW\js\jquery.js" />
     <None Include="Properties\PublishProfiles\AliHost.pubxml" />
     <None Include="Properties\PublishProfiles\LocalSite.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
