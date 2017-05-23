@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Better Site Index";
+}
+@*@model IEnumerable<System.Linq.IGrouping<System.String, System.String>>*@
+@*@model IEnumerable<System.Linq.IGrouping<BetterSite.Domain.M_SitesForGroup, System.String>>*@
+@model IEnumerable<System.Linq.IGrouping<BetterSite.Domain.M_Sites, BetterSite.Domain.M_Sites>>
+@*<div class="midd-top">
+        @foreach (var item in ViewBag.Tags as IList<BetterSite.Domain.M_Tags>)
+        {
+            <span>@item.TagName</span>
+        }
+        <input id="ck1" type="checkbox" />
+        <label for="ck1">点击我即可选择/取消勾选状态</label>
+    </div>*@
+@*<div class="midd-top">
+    @{
+        Html.RenderAction("_TagCrtl", "Tags");
+    }
+</div>*@
+@*<div>
+    @foreach (var item in Model )
+    {
+        <div>@item.SiteName</div>
+    }
+</div>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            @{
+                Html.RenderAction("_TagCrtl", "Tags");
+            }
+        </div>
+        <div class="col-md-6">
+            <div>
+                @*@foreach (var item in Model)
+                {
+                    <div>@item.SiteName</div>
+                }*@
+                <table>
+                    @foreach (var group in Model)
+                    {
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(modelItem => group.Key.SiteName)
+                                @*@group.Key.TagName*@
+                            </th>
+                            <td>
+                                @*@Html.DisplayFor(modelItem => group.Key)*@
+                                @*@group.Key.TagName*@
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>标签：</td>
+                            <td>
+                                <ul style="list-style: none;">
+                                    @foreach (var item in group)
+                                    {
+                                        <li style="float:left;padding:5px;"><span>@item.TagName</span></li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><hr/></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script>
+        jQuery(function () {
+            // debugger;
+            //为标签绑定事件
+            jQuery('form [name=TagId]').each(function(i, elem){
+                elem.onchange = function () {
+                    jQuery('form').submit();
+                };
+            });
+            //active Type
+            var urlFilename = location.href.match(/\/([^\/]+)$/);
+            if (urlFilename) {
+                $(".navbar li:has(a[href$='" + urlFilename[1] + "'])").addClass("active");
+            }
+        });
+    </script>
+}

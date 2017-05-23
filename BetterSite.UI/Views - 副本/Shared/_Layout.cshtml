@@ -8,35 +8,30 @@
     <meta name="keywords" content="@ViewBag.Keywords 网站分享,网站推荐,实用的网站大全,优秀网站导航,优秀网站大全,互联网技术导航" />
     <meta name="description" content="@ViewBag.Description 优站分享,致力于分享实用的优秀网站,论坛,博客,官网,关注网站涵盖了互联网技术,软件开发,编程,框架,架构,开源,前端,设计,移动端,数据库,大数据,人工智能,机器学习等,是IT人工作,学习的最佳导航网站。" />
     <link href="~/Content/style.css" rel="stylesheet" />
-    <style>
-         /*站点说明*/
-        /*p {
-        margin: 0px;
-        color: #555;
-        display: block;
-        font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        line-height: 24px;
-        text-indent: 28px;
-    }*/
-    </style>
 </head>
 <body>
+    @{
+        Html.RenderAction("_TypeCrtl", "Types");
+    }
+
     <div class="main">
+
         <div class="header">
             <div class="header_resize">
-                @*<a class="navbar-brand" href="/" style="padding-bottom:5px;padding-top:12px;">
-                    <img src="~/Images/Logo30px.png" width="25" /><b><em style="margin-left:15px;color:#eee">IShareSite</em></b>
-                </a>*@
-                <div class="logo"><h1><a href="/">IShareSite</a> <small>优站分享,致力于分享实用的优秀网站</small></h1></div>
+                <div class="logo"><h1><a href="index.html">classiclink</a> <small>put your slogan here</small></h1></div>
                 <div class="menu_nav">
-                    @{
-                        Html.RenderAction("_TypeCrtl", "Types");
-                    }                    
+                    <ul>
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="support.html">Support</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
                 </div>
                 <div class="clr"></div>
             </div>
         </div>
+
         <div class="content">
             <div class="content_resize">
                 <div class="mainbar">
@@ -44,12 +39,9 @@
                 </div>
                 <div class="sidebar">
                     <div class="searchform">
-                        @*<form id="formsearch" name="formsearch" method="post" action="">
+                        <form id="formsearch" name="formsearch" method="post" action="">
                             <span><input name="editbox_search" class="editbox_search" id="editbox_search" maxlength="80" value="Search our ste:" type="text" /></span>
                             <input name="button_search" src="images/search_btn.gif" class="button_search" type="image" />
-                        </form>*@
-                        <form class="navbar-form navbar-right" action="/Sites/@TempData["TypeCode"]">                         
-                            <input type="text" name="SearchText" class="form-control" id="SearchForm" placeholder="搜索站点名称/URL...">
                         </form>
                     </div>
                     <div class="gadget">
@@ -79,7 +71,7 @@
             </div>
         </div>
         <!-- 页脚  -->
-        @*<div id="footer" class="text-center">
+        <div id="footer" class="text-center">
             <footer>
 
                 <div>
@@ -91,56 +83,14 @@
                 <a href="http://www.miibeian.gov.cn" title="网站备案号" target="_blank">京ICP备15047973号</a>
                 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1261815581'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261815581%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
             </footer>
-        </div>*@
-
-     <!--备用-->
-        <div class="fbg">
-            <div class="fbg_resize">
-                <div class="col c1">
-                    <h2><span>Image Gallery</span></h2>
-                    <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
-                </div>
-                <div class="col c2">
-                    <h2><span>Lorem Ipsum</span></h2>
-                    <p>Lorem ipsum dolor<br />Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum odio, ac blandit ante orci ut diam.</p>
-                </div>
-                <div class="col c3">
-                    <h2><span>Contact</span></h2>
-                    <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue.</p>
-                    <p><a href="mailto:support@yoursite.com">support@yoursite.com</a></p>
-                    <p>+1 (123) 444-5677<br />+1 (123) 444-5678</p>
-                    <p>Address: 123 TemplateAccess Rd1</p>
-                </div>
-                <div class="clr"></div>
-            </div>
         </div>
-        <div class="footer">
-            <div class="footer_resize">
-                <p class="lf">&copy; Copyright <a href="#">MyWebSite</a>. Collect From <a href="http://www.cssmoban.com/" title="网页模板">网页模板</a></p>
-                <ul class="fmenu">
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="support.html">Support</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contacts</a></li>
-                </ul>
-                <div class="clr"></div>
-            </div>
-        </div>
-        <!--备用-->
     </div>
                 <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "slide": { "type": "slide", "bdImg": "2", "bdPos": "right", "bdTop": "200.5" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
                 @*<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"200.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>*@
            
    
   
-        @Scripts.Render("~/bundles/jquery")
-        <script src="~/Scripts/Common.js"></script>
+    @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     <script>
                 jQuery(function () {

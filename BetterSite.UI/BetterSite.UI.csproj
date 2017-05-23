@@ -176,6 +176,25 @@
   <ItemGroup>
     <Content Include="baidutest.html" />
     <Content Include="captest.html" />
+    <Content Include="Content\images\fbg_bg.jpg" />
+    <Content Include="Content\images\fbg_rbg.jpg" />
+    <Content Include="Content\images\global_bg.jpg" />
+    <Content Include="Content\images\header_bg.jpg" />
+    <Content Include="Content\images\img1.jpg" />
+    <Content Include="Content\images\main_bg.jpg" />
+    <Content Include="Content\images\menu.jpg" />
+    <Content Include="Content\images\menu_a.jpg" />
+    <Content Include="Content\images\pix1.jpg" />
+    <Content Include="Content\images\pix2.jpg" />
+    <Content Include="Content\images\pix3.jpg" />
+    <Content Include="Content\images\pix4.jpg" />
+    <Content Include="Content\images\pix5.jpg" />
+    <Content Include="Content\images\pix6.jpg" />
+    <Content Include="Content\images\search.gif" />
+    <Content Include="Content\images\search_btn.gif" />
+    <Content Include="Content\images\spacer.gif" />
+    <Content Include="Content\images\submit.gif" />
+    <Content Include="Content\images\userpic.gif" />
     <Content Include="Content\jquery-easyui-1.4.2\datagrid-filter.js" />
     <Content Include="Content\bootstrap_min.css" />
     <Content Include="Content\jquery-easyui-1.4.2\changelog.txt" />
@@ -533,6 +552,8 @@
     <Content Include="Content\knockoutPagging\demoViewModel.js" />
     <Content Include="Content\knockoutPagging\knockout.mapping-latest.js" />
     <Content Include="Content\knockoutPagging\paginationViewModel.js" />
+    <Content Include="Content\style.css" />
+    <Content Include="Images\eye.jpg" />
     <Content Include="Images\Logo30px.png" />
     <Content Include="Images\Logo20px.png" />
     <Content Include="Images\Logo30px2.png" />
@@ -1054,6 +1075,7 @@
     </Content>
     <Content Include="Views\Sites\Detail.cshtml" />
     <Content Include="SiteHandler.ashx" />
+    <Content Include="Views\Shared\_Layout - 复制.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
