@@ -49,25 +49,42 @@
         color: #fd7658;
         position: absolute;
         right: 0;
-    }</style>
+    }
+    .title {
+        width: 340px;
+        display: block;
+        overflow: hidden;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float:left;
+    }
+    .gjlist p.siteprofile {
+           height: 115px;
+
+    }
+</style>
 @foreach (var item in ViewBag.New)
 {
     <div class="gjlist">
         <div class="pic">
-            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> 
+            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> 
                 <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
             </a>
         </div>
         <div class="incon">
             <h2 class="fl">
-                <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
-                <a href="https://smiletherapy.co/" class="visit" target="_blank" rel="nofollow">
-                    <img src="http://www.egouz.com/statics/images/v9/visit.gif" width="14" height="12" alt="icon" title="直达官方网站">
-                </a><span>(38)</span>
+                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                <span>@item.SiteClickQuantity</span>        
+               
             </h2>
-            <p>
+            <p class="siteprofile">
                 @Html.Raw(item.SiteProfile)
-                <span>[<a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> 更多</a>]</span>
+                <span>[<a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a>]</span>
+                <span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>
+                @*<a href="https://smiletherapy.co/" class="visit" target="_blank" rel="nofollow">
+                    <img src="http://www.egouz.com/statics/images/v9/visit.gif" width="14" height="12" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                </a>*@
             </p>
             <p class="l fl div-SiteTags">
                 标签：
@@ -111,7 +128,7 @@
             //        ele.innerText = ele.innerText.substring(0, 12) + '..';
             //    }
             //});
-            debugger;
+            //debugger;
             //为每个站点的标签添加事件
             var urlFilename = location.href;
             var siteItemArr = jQuery('.gjlist');

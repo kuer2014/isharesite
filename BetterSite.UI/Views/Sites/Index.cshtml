@@ -1,240 +1,170 @@
 ﻿@{
-    //ViewBag.Title = ViewBag.Title+"-优站分享-为开发者提供一些便利";
+    ViewBag.Title = "优站分享|致力于分享实用的优秀网站";
 }
-@model IEnumerable<BetterSite.Domain.M_Sites>
-
-@*<div class="midd-top">
-        @{
-            Html.RenderAction("_TagCrtl", "Tags");
-        }
-    </div>*@
-@*<div>
-        @foreach (var item in Model )
-        {
-            <div>@item.SiteName</div>
-        }
-    </div>*@
+@model IList<BetterSite.Domain.M_Sites>
 <style>
-
-
-    small {
-        word-wrap: break-word;
+     .gjlist {
+        border-bottom: 1px dotted #ccc;
+        clear: both;
+        overflow: hidden;
+        width: 100%;
+        padding: 15px 0;
+    }
+    .gjlist .pic {
+        float: left;
+        width: 200px;
+        margin: 10px 0 0 30px;
     }
 
-    .list-group-item-heading {
-        margin: 5px 0 3px 0;
+    .gjlist .incon {
+        float: right;
+        width: 420px;
+    }
+ .gjlist h2 {
+            position: relative;
+            width: 99%;
+            margin-top: 2px;
+            font-size: 16px;
+            margin-bottom: 0px;
+            /*padding-bottom:0px;*/
+        }
+   .gjlist p {
+        /*line-height: 150%;*/
+        margin:0px;
+        padding:0px;
+        color: #666;
+        /*margin-top: 20px;*/
+        font-size: 12px;
+         text-indent: 26px;
+    }
+     .gjlist p.l {
+            color: #999;
+        }
+    .fl {
+        float: left;
+    }  
+    .fr {
+        float: right;
+    }
+    .gjlist h2 span {    
+        background: url('../../Images/eye.jpg')0 4px no-repeat;
+        padding-left: 23px;
+        color: #fd7658;
+        position: absolute;
+        right: 0;
+    }
+    .title {
+        width: 340px;
+        display: block;
+        overflow: hidden;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float:left;
+        text-decoration:none;
+        color:#666;
+    }
+    .gjlist p.siteprofile {
+           height: 115px;
+
+    }
+     p.siteprofile > span > a {
+            color:#666;
+
+    }
+    .visit img{
+    margin-left:5px;
+ 
     }
 </style>
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            @{
-                Html.RenderAction("_TagCrtl", "Tags");
-            }
+@foreach (var item in Model)
+{
+    <div class="gjlist">
+        <div class="pic">
+            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> 
+                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
+            </a>
         </div>
-        <div class="col-md-8">
-            <p> 共计：@Model.Count() 条</p>
-            <ul class="list-group">
-                @foreach (var item in Model)
-                {
-                    <li class="list-group-item li-site-item">
-                        <h4 class="list-group-item-heading">
-                            @*<a href="@item.SiteUrl" target="_blank">@item.SiteName</a>*@
-                            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
-                            <br /><small>@item.SiteUrl</small>
-                            <br /><small class="site-add-date">@item.SiteAddDate</small>
-                        </h4>
-                        <h5>类别: <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>
-                        <p>
-                            @Html.Raw(item.SiteProfile)
-
-                        </p>
-                        <div class="div-SiteTags" style="margin:6px auto -3px 30px;"></div>   @*<a class="btn btn-default btn-xs disabled" href="/Sites/DR">@item.SiteTagsName</a>*@
-                        <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
-                        @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
-                    </li>
-                }
-</ul>
-            @*@foreach (var item in Model)
-                                {
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <h4 class="list-group-item-heading">@item.SiteName</h4>
-                                    <p class="list-group-item-text">@item.SiteUrl</p>
-                                </div>
-
-                            </div>
-                }*@
-            @*<table class="table  table-hover">
-                    <tr>
-                        <th>首页－视频</th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <h4>@item.SiteName</h4>
-                                <div>
-                                    <a href="#">访问站点</a>
-                                    <a href="#">站点介绍</a>
-                                </div>
-                            </td>
-                        </tr>
-                        }
-                </table>*@
-        </div>
-        <div class="col-md-2">
-            本类热门站点
+        <div class="incon">
+            <h2 class="fl">
+                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                <span>@item.SiteClickQuantity</span>        
+               
+            </h2>
+            <p>类别：<a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
+            <p class="siteprofile">
+                
+                @Html.Raw(item.SiteProfile)
+                <span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
+                @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@
+                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                    <img src="~/Images/ie.png" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                </a>
+               
+            </p>
+            <p class="l fl div-SiteTags">               
+                标签：               
+            </p>
+            <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
+            <p class="l fr site-add-date">@item.SiteAddDate</p>
         </div>
     </div>
-</div>
-@section scripts {
- <!--<script>
-    //标签云的处理
+    @*<div class="article">
+            <div class="pic">
+                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="156" />
+            </div>
+            <div class="incon">
+
+
+                <h2><span>@item.SiteName</span></h2><div class="clr"></div>
+                <p><span class="site-add-date"><a href="#">@item.SiteAddDate</a></span> &nbsp;|&nbsp; <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
+
+                <p>
+                    @Html.Raw(item.SiteProfile)
+                </p>
+                <div class="div-SiteTags" style="display:inline; margin:6px auto -3px 30px;"></div>
+                <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
+                <p class="spec1">
+                    <a href="#" class="com"><span>11</span> Comments</a>
+                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl" class="rm">Read more &raquo;</a>
+                </p>
+            </div>
+        </div>*@
+}
+@*<p class="pages"><small>Page 1 of 2 &nbsp;&nbsp;&nbsp;</small> <span>1</span> <a href="#">2</a> <a href="#">&raquo;</a></p>*@
+<form method="get" action="">
+    <p class="pages"> <a href="#">&laquo;</a> <a href="#">&raquo;</a></p>
+    <input type="text" name="page"/>
+    <input type="submit" value="提交" />
+</form>
+@section Scripts
+{
+    <script>
         jQuery(function () {
-            debugger;
-            var urlPath = location.href.match(/\/([^\/]+)$/)[1];
-            var urlFilenameArr = urlPath.split('?');
-            var urlFilename = '';
-            //debugger;
-            if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
-                urlFilename = '' + urlPath;
-                if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
-                    urlFilename += '&';
-                }
-            } else {
-                urlFilename = '' + urlFilenameArr[0];
-                if (urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
-                    urlFilename += '?';
-                }
-            }
-            jQuery('.Tag-Single').each(function (_i, _e) {
-                var _ej=jQuery(_e);
-                if (_ej.find('.active').length) {
-                    _ej.children().attr('href', urlFilename.replace('Tag=' + encodeURI(_ej.children().text()) + '&', ''));
-                } else {
-                    _ej.children().attr('href', urlFilename + 'Tag=' + encodeURI(_ej.children().text()));
-                }
-            });
-        })
-</script>-->
-    @*<script>
-        jQuery(function () {     
-            // debugger;
-            //为标签绑定事件
-            //jQuery('form [name=Tag]').each(function (i, elem) {
-            //    elem.onchange = function () {
-            //        jQuery('form').submit();
-            //    };
-            //});
-            //为每个标签添加事件
-           // debugger;
-            // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];
-            var localhrefmat = location.href.match(/\/([^\/]+)$/);
-            if (localhrefmat) {
-                var urlPath = localhrefmat[1];
-                var urlFilenameArr = urlPath.split('?');
-                var urlFilename = '';
-                //debugger;
-                if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
-                    urlFilename = '' + urlPath;
-                    if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
-                        urlFilename += '&';
-                    }
-                } else {
-                    urlFilename = '' + urlFilenameArr[0];
-                    if (urlFilename==''||urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
-                        urlFilename += '?';
-                    }
-                }
-                //debugger;
-                //为每个站点的标签添加事件
-                var paramValueArr = urlFilenameArr[1] ? urlFilenameArr[1].split('&') : [];
-                var siteItemArr = jQuery('.li-site-item');
-                jQuery.each(siteItemArr, function (i_site, n_site) {
-                    var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                    //var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
-                    if (siteTagsName) {
-                        var siteTagsNameArr = siteTagsName.split(',');
-                        // var siteTagsIdArr = siteTagsId.split(',');
-                        var htmlArr = [];
-                        for (var i = 0; i < siteTagsNameArr.length; i++) {
-                            if (paramValueArr.contains('Tag=' + encodeURI(siteTagsNameArr[i]))) {
-                                // htmlArr.push('<a class="btn btn-default btn-xs disabled" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                                htmlArr.push('<a class="btn btn-default btn-xs active" href="' + urlFilename.replace('Tag=' + encodeURI(siteTagsNameArr[i]) + '&', '') + '">' + siteTagsNameArr[i] + '</a>');
-                            } else {
-                                //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                                htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                            }
-                        }
-                        jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
-                    }
-                });
-                ///为标签云添加事件
-                jQuery('.Tag-Single').each(function (_i, _e) {
-                    var _ej = jQuery(_e);
-                    if (_ej.find('.active').length) {
-                        _ej.children().attr('href', urlFilename.replace('Tag=' + encodeURI(_ej.children().text()) + '&', ''));
-                    } else {
-                        _ej.children().attr('href', urlFilename + 'Tag=' + encodeURI(_ej.children().text()));
-                    }
-                });
-                ///活动菜单
-                //var urlFilename = location.href.match(/\/([^\/]+)$/);
-                if (urlFilenameArr[0]) {
-                    $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
-                }
-            }
-      
-            //搜索辅助功能
-            //jQuery('#SearchForm').keyup(function (e) {
-            //    if (e.keyCode == 13) {
-            var txt = decodeURI(Url.getParam('SearchText'));          
-            if (txt != 'undefined') { jQuery('#SearchForm').val(txt).focus(); }
-                    ////Search();
-                    //if (txt) {
-                    //    jQuery('.li-site-item').css('display', 'none');
-                    //    jQuery('.li-site-item:contains(' + txt + ')').css('display', 'block');
-                    //} else {
-                    //    jQuery('.li-site-item').css('display', 'block');
-                    //}
-                    //高亮显示
-                    //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
-            var site_a = jQuery('.li-site-item h4').children();//.text().replace(txt, '<b>' + txt + '</b>');
-                   jQuery.each(site_a, function (i, n) {
-                       //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
-                       jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
-                       //jQuery(n).next().html(jQuery(n).next().text().replace(txt, '<mark>' + txt + '</mark>'));
-                   });
+            //jQuery(".new-site a").each(function (n, ele) {
+            //    // if ((ele.innerText.replace(/[^\x00-\xff]/, 'aa')).length > 12) {  //一个全角字符2个长度
+            //    if ((ele.innerText).length > 12) {
+            //        // ele.innerText = ele.innerText.substr(0, 12) + '..';
+            //        ele.innerText = ele.innerText.substring(0, 12) + '..';
             //    }
             //});
-            //搜索标签功能
-                   jQuery('#SearchTag').keyup(function (e) {
-                       if (e.keyCode == 13) {
-                           var _this = jQuery(this);
-                           $(".Tag-Single a").css('font-weight', 'normal');
-                           var tagName = _this.val();
-                           if (tagName) {
-                               _this.next().css('display', 'none');
-                               ///var exisTag = $(".Tag-Single label:contains('" + tagName + "')");
-                               //if (exisTag.length) {
-                               //    exisTag.css('font-weight', 'bold');
-                               //    return;
-                               //} else {
-                               //    jQuery(this).next().css('display', 'initial');
-                               //}
-                              /// debugger;
-                               var isn = false;
-                               $(".Tag-Single a").each(function (i, e) {
-                                   if (jQuery(e).text().toLowerCase().indexOf(tagName.toLowerCase()) > -1) {
-                                       jQuery(e).css('font-weight', 'bold');
-                                       isn = true;
-                                   }
-                               });
-                               if (!isn) _this.next().css('display', 'initial');
-                           }
-                       }
-                   });
-        });
-    </script>*@
+            //debugger;
+            //为每个站点的标签添加事件
+            var urlFilename = location.href;
+            var siteItemArr = jQuery('.gjlist');
+            jQuery.each(siteItemArr, function (i_site, n_site) {
+                var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
+                if (siteTagsName) {
+                    var siteTagsNameArr = siteTagsName.split(',');
+                    var htmlArr = [];
+                    for (var i = 0; i < siteTagsNameArr.length; i++) {
+                        htmlArr.push('<a href="' + urlFilename + 'Sites/?Tag=' + siteTagsNameArr[i] + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                    }
+                    jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
+                }
+            });
+            //分页
+
+        })
+    </script>
 }

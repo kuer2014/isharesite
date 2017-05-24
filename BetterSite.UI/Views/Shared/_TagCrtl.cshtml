@@ -3,99 +3,13 @@
 }
 @model  IList<BetterSite.Domain.M_Tags>
 
-    <style type="text/css">
-        .Tags-Block {
-            background-color: #f1f1f1;
-            padding: 10px 10px 0 10px;
-        }
-        /*.Tags-Block form{
-        margin-bottom:5px;
-        margin-top:5px;
-        }*/
-        .Tag-Single {
-            display: inline-block;
-            margin:1px;
-        }
-         /*.Tag-Single label{
-            font-weight:normal;
-        }*/
-        code {        
-        display:none;
-        }
-    </style>
+<ul class="sb_menu">
+    @foreach (var item in Model)
+    {
+        <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
 
+    }
+</ul>
+@section scripts {
 
-    <div class="Tags-Block">
-        <div class="">
-            <input type="text" class="form-control input-sm" id="SearchTag" placeholder="搜索标签...">
-            <code>无匹配!</code> 
-        </div>
-       @*@using (Html.BeginRouteForm("Site",FormMethod.Get))      
-        {
-            if (ViewBag.CheckdTags != null)
-            {
-                foreach (var item in Model)
-                {
-                    if (ViewBag.CheckdTags.Contains(item.TagName))
-                    {
-                        <div class="Tag-Single">
-                            <input id="@item.TagId" name="Tag" value="@item.TagName" type="checkbox" checked="checked" />
-                            <label for="@item.TagId">@item.TagName</label>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="Tag-Single">
-                            <input id="@item.TagId" name="Tag" value="@item.TagName" type="checkbox" />
-                            <label for="@item.TagId">@item.TagName</label>
-                        </div>
-                    }
-                }
-            }
-            else
-            { 
-                foreach (var item in Model)
-                {
-                    <div class="Tag-Single">
-                        <input id="@item.TagId" name="Tag" value="@item.TagName" type="checkbox" />
-                        <label for="@item.TagId">@item.TagName</label>
-                    </div>
-                }
-            }
-            @*<input type="submit" value="提交" />*
-        }*@
-        @{
-            if (ViewBag.CheckdTags != null)
-            {
-                foreach (var item in Model)
-                {
-                    if (ViewBag.CheckdTags.Contains(item.TagName))
-                    {
-                        <div class="Tag-Single">
-                            <a class="btn btn-default btn-xs active" href="?Tag=@item.TagName">@item.TagName</a>                           
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="Tag-Single">
-                            <a class="btn btn-default btn-xs" href="?Tag=@item.TagName">@item.TagName</a>      
-                        </div>
-                    }
-                }
-            }
-            else
-            {
-                foreach (var item in Model)
-                {
-                    <div class="Tag-Single">
-                        <a class="btn btn-default btn-xs" href="?Tag=@item.TagName">@item.TagName</a> 
-                    </div>
-                }
-            }
-            @*<input type="submit" value="提交" />*@
-        }
-
-    </div>
-    @section scripts {
- 
-        }
+}

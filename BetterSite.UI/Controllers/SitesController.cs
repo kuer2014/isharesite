@@ -64,13 +64,13 @@ namespace BetterSite.UI.Controllers
             //    //IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
             //    //where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
             //    ///标签关系[或]end
-                
+
             //    ///标签关系[且]start
             //    Hashtable htTagsId = new Hashtable();
             //    htTagsId.Add("TagsId", tagsId);
             //    htTagsId.Add("TagCount", TagId.Count());
             //    IList<M_SiteTag> tags = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
-               
+
             //    if (tags.Count == 0) {
             //        where.SiteId = Guid.NewGuid().ToString();
             //    }
@@ -82,6 +82,8 @@ namespace BetterSite.UI.Controllers
             #endregion
             ////var count = sitesBO.QueryForList(where).Count;
             ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
+            where.Rows = 15;
+            where.Page=where.Page == 0 ? where.Page = 1 : where.Page;
             var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             //var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().ToList();  
             //标题

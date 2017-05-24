@@ -99,6 +99,7 @@
     </dynamic>
     </select> 
     <select id="Tab_SitesStuffTags_Select" listClass="ArrayList" resultMap="Tab_Sites_SitesStuffTags_Result" parameterClass="Hashtable">
+      WITH T AS(
       SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,T.TypeName,T.TypeCode, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate,SiteProfile,
       stuff((select ','+convert(varchar(20), TagName)
       from (SELECT T.TagName,ST.SiteId  FROM  Tab_SiteTag ST
@@ -119,6 +120,12 @@
          <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
          <isNotEmpty prepend="and" property="searchText">(UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
     </dynamic>
+      )
+      SELECT TOP $Rows$ * FROM T WHERE SiteId NOT IN
+      (
+      SELECT TOP ($Rows$*($Page$-1)) SiteId FROM T ORDER BY $sort$ $order$
+      )
+      ORDER BY $sort$ $order$
     </select>
     <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
       WITH T AS(
