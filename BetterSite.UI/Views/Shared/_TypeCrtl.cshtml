@@ -4,6 +4,7 @@
 @model  IList<BetterSite.Domain.M_Types>
 
 <ul class="nav navbar-nav">
+    <li>@Html.ActionLink("首页", "", "")</li>
     @foreach (var item in Model)
     {
         <li>@Html.ActionLink(item.TypeName, "Index", "Sites", new { @TypeCode = item.TypeCode }, null)</li>

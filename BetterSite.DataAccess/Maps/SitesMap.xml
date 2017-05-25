@@ -98,7 +98,7 @@
          <isNotEmpty prepend="and" property="searchText">(UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
     </dynamic>
     </select> 
-    <select id="Tab_SitesStuffTags_Select" listClass="ArrayList" resultMap="Tab_Sites_SitesStuffTags_Result" parameterClass="Hashtable">
+    <select id="Tab_SitesStuffTags_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_SitesStuffTags_Result" parameterClass="Hashtable">
       WITH T AS(
       SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,T.TypeName,T.TypeCode, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate,SiteProfile,
       stuff((select ','+convert(varchar(20), TagName)
@@ -126,6 +126,28 @@
       SELECT TOP ($Rows$*($Page$-1)) SiteId FROM T ORDER BY $sort$ $order$
       )
       ORDER BY $sort$ $order$
+    </select>
+    <select id="Tab_SitesStuffTags_Select" listClass="ArrayList" resultMap="Tab_Sites_SitesStuffTags_Result" parameterClass="Hashtable">
+      SELECT CONVERT(VARCHAR(40), SiteId) SiteId,SiteCode,SiteName,SiteUrl,CONVERT(VARCHAR(40), S.TypeId) TypeId,T.TypeName,T.TypeCode, CONVERT(varchar, SiteAddDate, 120 ) SiteAddDate,SiteIsTop,SiteIsHome,SiteClickQuantity,SiteFavoriteQuantity,SiteApproveQuantity,SiteOrderNumber,SiteIsActive,SiteCollectionDate,SiteProfile,
+      stuff((select ','+convert(varchar(20), TagName)
+      from (SELECT T.TagName,ST.SiteId  FROM  Tab_SiteTag ST
+      INNER JOIN Tab_Tags T ON ST.TagId = T.TagId) TAG
+      where TAG.SiteId = S.SiteId FOR XML PATH('')), 1, 1, ''  )  SiteTagsName,
+      stuff((select ','+convert(varchar(40), TagId)
+      from (SELECT T.TagId,ST.SiteId  FROM  Tab_SiteTag ST
+      INNER JOIN Tab_Tags T ON ST.TagId = T.TagId) TAG
+      where TAG.SiteId = S.SiteId FOR XML PATH('')), 1, 1, ''  )  SiteTagsId
+      FROM  Tab_Sites S
+      INNER JOIN Tab_Types T ON S.TypeId=T.TypeId
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="SiteIsActive">SiteIsActive = #SiteIsActive#</isNotEmpty>
+        <!--<isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="SiteId">SiteId IN('$SiteId$')</isNotEmpty>
+        <isNotEmpty prepend="and" property="TypeId">S.TypeId= #TypeId#</isNotEmpty>
+        <isNotEmpty prepend="and" property="SiteCode">S.SiteCode= #SiteCode#</isNotEmpty>
+        <isNotEmpty prepend="and" property="TypeCode">T.TypeCode= #TypeCode#</isNotEmpty>
+        <isNotEmpty prepend="and" property="searchText">(UPPER(SiteName) LIKE UPPER('%$searchText$%') OR UPPER(SiteUrl) LIKE UPPER('%$searchText$%'))</isNotEmpty>
+      </dynamic>   
     </select>
     <select id="Tab_Sites_SelectPageList" listClass="ArrayList" resultMap="Tab_Sites_JionType_Result" parameterClass="Hashtable">
       WITH T AS(

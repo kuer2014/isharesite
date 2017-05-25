@@ -149,7 +149,22 @@
         <script src="~/Scripts/Common.js"></script>
     @RenderSection("scripts", required: false)
     <script>
-                jQuery(function () {
+        jQuery(function () {
+
+            jQuery('#menu li a').mouseover(function () {
+               // debugger;
+                var _this = this;
+                $('.sb_menu').css('display', 'none');
+                $('.' + _this.id).css('display', 'block');
+                $('#menu li').removeClass('active');
+                $(_this).parent().addClass('active');
+
+            })
+            //function areamosover(n) {
+            //    debugger;
+            //    $('.sb_menu').css('display', 'none');
+            //    $('.sb_menu .' + n).css('display', 'block');
+            //}
                     // debugger;
                     //为标签绑定事件
                     //jQuery('form [name=Tag]').each(function (i, elem) {

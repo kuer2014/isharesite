@@ -82,10 +82,13 @@ namespace BetterSite.UI.Controllers
             #endregion
             ////var count = sitesBO.QueryForList(where).Count;
             ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
-            where.Rows = 15;
+            int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
+            where.Rows = pagesize;
             where.Page=where.Page == 0 ? where.Page = 1 : where.Page;
-            var list = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
-            //var list = sitesBO.QueryForJoinTagList(where).Cast<M_Sites>().ToList();  
+            var list = sitesBO.QueryForStuffTagsPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            var listCount = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().Count();
+            ViewBag.Page = where.Page;
+            ViewBag.PageCount = (int)Math.Ceiling(Convert.ToDouble(listCount) / Convert.ToDouble(pagesize));  ;
             //标题
             string title = "优站分享|致力于分享实用的优秀网站";
             if (string.IsNullOrWhiteSpace(where.TypeCode))

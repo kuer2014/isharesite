@@ -3,146 +3,15 @@
 }
 @model IList<BetterSite.Domain.M_Sites>
 <style>
-     .gjlist {
-        border-bottom: 1px dotted #ccc;
-        clear: both;
-        overflow: hidden;
-        width: 100%;
-        padding: 15px 0;
-    }
-    .gjlist .pic {
-        float: left;
-        width: 200px;
-        margin: 16px 0 0 30px;
-    }
-
-    .gjlist .incon {
-        float: right;
-        width: 420px;
-    }
- .gjlist h2 {
-            position: relative;
-            width: 99%;
-            margin-top: 2px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-   .gjlist p {
-        line-height: 150%;
-        color: #666;
-        /*margin-top: 20px;*/
-        font-size: 12px;
-         text-indent: 26px;
-    }
-     .gjlist p.l {
-            color: #999;
-        }
-    .fl {
-        float: left;
-    }  
-    .fr {
-        float: right;
-    }
-    .gjlist h2 span {    
-        background: url('../../Images/eye.jpg')0 4px no-repeat;
-        padding-left: 23px;
-        color: #fd7658;
-        position: absolute;
-        right: 0;
-    }
-    .title {
-        width: 340px;
-        display: block;
-        overflow: hidden;
-        word-break: keep-all;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        float:left;
-    }
-    .gjlist p.siteprofile {
-           height: 115px;
-
-    }
+  
 </style>
-@foreach (var item in ViewBag.New)
-{
-    <div class="gjlist">
-        <div class="pic">
-            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> 
-                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
-            </a>
-        </div>
-        <div class="incon">
-            <h2 class="fl">
-                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-                <span>@item.SiteClickQuantity</span>        
-               
-            </h2>
-            <p class="siteprofile">
-                @Html.Raw(item.SiteProfile)
-                <span>[<a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a>]</span>
-                <span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>
-                @*<a href="https://smiletherapy.co/" class="visit" target="_blank" rel="nofollow">
-                    <img src="http://www.egouz.com/statics/images/v9/visit.gif" width="14" height="12" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                </a>*@
-            </p>
-            <p class="l fl div-SiteTags">
-                标签：
-               
-            </p>
-            <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
-            <p class="l fr site-add-date">@item.SiteAddDate</p>
-        </div>
-    </div>
-    @*<div class="article">
-            <div class="pic">
-                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="156" />
-            </div>
-            <div class="incon">
 
-
-                <h2><span>@item.SiteName</span></h2><div class="clr"></div>
-                <p><span class="site-add-date"><a href="#">@item.SiteAddDate</a></span> &nbsp;|&nbsp; <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
-
-                <p>
-                    @Html.Raw(item.SiteProfile)
-                </p>
-                <div class="div-SiteTags" style="display:inline; margin:6px auto -3px 30px;"></div>
-                <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
-                <p class="spec1">
-                    <a href="#" class="com"><span>11</span> Comments</a>
-                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl" class="rm">Read more &raquo;</a>
-                </p>
-            </div>
-        </div>*@
-}
-<p class="pages"><small>Page 1 of 2 &nbsp;&nbsp;&nbsp;</small> <span>1</span> <a href="#">2</a> <a href="#">&raquo;</a></p>
+ 
 @section Scripts
 {
     <script>
         jQuery(function () {
-            //jQuery(".new-site a").each(function (n, ele) {
-            //    // if ((ele.innerText.replace(/[^\x00-\xff]/, 'aa')).length > 12) {  //一个全角字符2个长度
-            //    if ((ele.innerText).length > 12) {
-            //        // ele.innerText = ele.innerText.substr(0, 12) + '..';
-            //        ele.innerText = ele.innerText.substring(0, 12) + '..';
-            //    }
-            //});
-            //debugger;
-            //为每个站点的标签添加事件
-            var urlFilename = location.href;
-            var siteItemArr = jQuery('.gjlist');
-            jQuery.each(siteItemArr, function (i_site, n_site) {
-                var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                if (siteTagsName) {
-                    var siteTagsNameArr = siteTagsName.split(',');
-                    var htmlArr = [];
-                    for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        htmlArr.push('<a href="' + urlFilename + 'Sites/?Tag=' + siteTagsNameArr[i] + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                    }
-                    jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
-                }
-            })
+         
         })
     </script>
 }

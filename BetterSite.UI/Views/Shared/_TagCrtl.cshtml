@@ -2,14 +2,90 @@
     Layout = null;
 }
 @model  IList<BetterSite.Domain.M_Tags>
-
-<ul class="sb_menu">
-    @foreach (var item in Model)
-    {
-        <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
-
-    }
+    <style>
+    #menu {
+font-size: 12px;
+font-weight: bolder;
+}
+#menu li{
+list-style-image: none;
+list-style-type: none;
+background-color: #63c3e8;
+border-right-width: 2px;
+border-right-style: solid;
+border-right-color: #fff;
+float: left;
+}
+#menu li a{
+color: #FFFFFF;
+text-decoration: none;
+margin: 0px;
+padding-top: 6px;
+display: block; /* 作为一个块 */
+padding-right: 5px; /* 设置块的属性 */
+padding-bottom: 6px;
+padding-left: 5px;
+}
+ #menu li a:hover,
+#menu li.active a{
+background-color: #97d2fa;
+border-top-width: 1px;
+border-top-style: solid;
+border-top-color: #fff;
+}
+        .navdiv {
+            border: solid 1px #97d2fa;
+    display: inline-block;
+    width: 216px;
+    padding: 10px;
+        }
+    </style>
+<ul id="menu" >
+    <li  class=""><a id="tab1" href="#" >免费素材</a></li>
+    <li  class="active"><a id="tab2"  href="#">在线工具</a></li>
+    <li ><a  id="tab3" href="#">发现好玩</a></li>
+    <li><a  id="tab4" href="#">便民查询</a></li>
 </ul>
+<div class="navdiv">
+    <ul class="sb_menu tab1">
+        <li> 免费素材</li> 
+        @foreach (var item in Model)
+        {
+            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+
+        }
+    </ul>
+    <ul class="sb_menu tab2">
+        <li>在线工具</li> 
+        @foreach (var item in Model)
+        {
+            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+
+        }
+    </ul>
+    <ul class="sb_menu tab3">
+        @foreach (var item in Model)
+        {
+            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+
+        }
+    </ul>
+    <ul class="sb_menu tab4">
+        @foreach (var item in Model)
+        {
+            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+
+        }
+    </ul>
+</div>
+
 @section scripts {
+    @*<script type="text/javascript">
+        function areaover(n) {
+            debugger;
+            $('.sb_menu').css('display', 'none');
+            $('.sb_menu .' + n).css('display', 'block');
+        }
+</script>*@
 
 }

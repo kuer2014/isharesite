@@ -12,6 +12,7 @@ namespace BetterSite.UI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            /// /Sites/SITE1494393044614
             routes.MapRoute(
           name: "SiteDetail",
           url: "Sites/{SiteCode}",
@@ -22,14 +23,29 @@ namespace BetterSite.UI
                  SiteCode = @"SITE\d{13}"
              }
       );
+            /// /Sites/ZY/2.html           
             routes.MapRoute(
-              name: "Site",
-              url: "Sites/{TypeCode}",
-              defaults: new { controller = "Sites", action = "Index", TypeCode = UrlParameter.Optional },
+              name: "SiteListByType",
+              url: "{TypeCode}/{Page}.html",
+              defaults: new { controller = "Sites", action = "Index",  Page = 1 },
                namespaces: new string[] { "BetterSite.UI.Controllers" },
              constraints: new
              {
-                 TypeCode = @"[a-z]{2}"
+                 TypeCode = @"[a-z]{2}",
+                 Page = @"\d{0,5}"
+             }
+          );
+            ///
+            /// /Sites/zy/tag/学习/1.html
+            routes.MapRoute(
+              name: "SiteListByTag",
+              url: "{TypeCode}/{Tag}/{Page}.html",
+              defaults: new { controller = "Sites", action = "Index", Page =1 },
+               namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 TypeCode = @"[a-z]{2}",
+                 Page= @"\d{0,5}"
              }
           );
             routes.MapRoute(

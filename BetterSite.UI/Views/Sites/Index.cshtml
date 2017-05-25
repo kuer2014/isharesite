@@ -131,16 +131,32 @@
             </div>
         </div>*@
 }
-@*<p class="pages"><small>Page 1 of 2 &nbsp;&nbsp;&nbsp;</small> <span>1</span> <a href="#">2</a> <a href="#">&raquo;</a></p>*@
-<form method="get" action="">
+<p class="pages">
+    <small>Page @ViewBag.Page of @ViewBag.PageCount</small>
+     <a href="">&laquo;</a> 
+    <a href="">&raquo;</a>
+</p>
+@*<form method="get" action="">
     <p class="pages"> <a href="#">&laquo;</a> <a href="#">&raquo;</a></p>
     <input type="text" name="page"/>
     <input type="submit" value="提交" />
-</form>
+</form>*@
 @section Scripts
-{
+    {
     <script>
-        jQuery(function () {
+        jQuery(function () {         
+            //分页
+            var page= @ViewBag.Page;
+            var pageCount=@ViewBag.PageCount;
+            jQuery('.pages a').css('display','none');
+            if(page>1){
+                jQuery('.pages a:first').css('display','inline');
+                jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
+            }
+            if(page< pageCount){ 
+                jQuery('.pages a:last').css('display','inline');
+                jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
+            }
             //jQuery(".new-site a").each(function (n, ele) {
             //    // if ((ele.innerText.replace(/[^\x00-\xff]/, 'aa')).length > 12) {  //一个全角字符2个长度
             //    if ((ele.innerText).length > 12) {
@@ -151,15 +167,28 @@
             //debugger;
             //为每个站点的标签添加事件
             var urlFilename = location.href;
+            var urlarr=  location.pathname.split('/');
+            urlarr.pop();
+            urlarr.push('1.html');
             var siteItemArr = jQuery('.gjlist');
             jQuery.each(siteItemArr, function (i_site, n_site) {
                 var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
                 if (siteTagsName) {
                     var siteTagsNameArr = siteTagsName.split(',');
                     var htmlArr = [];
+                   
                     for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        htmlArr.push('<a href="' + urlFilename + 'Sites/?Tag=' + siteTagsNameArr[i] + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                        if(urlarr.length==3){//插入
+                            urlarr.splice(2,0,siteTagsNameArr[i]);   
+                            htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                        } else  if(urlarr.length==4){//修改
+                            urlarr.splice(2,1,siteTagsNameArr[i]);
+                            htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                        }
+                                    
+                       
                     }
+                   
                     jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
                 }
             });
