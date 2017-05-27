@@ -12,7 +12,27 @@
         h2 {
        font: normal 18px/1em Arial, Helvetica, sans-serif;
         }
+ 
+        .search_box {
+            padding:3px;
+            width:200px;
+        }
+        .search_box + input{
+        color: #fff;
+    background-color: #62bee3;   
+    height: 24px;
+    margin-left: -42px;
+    border: none;
+        }
+            .search_box + input:focus {
+                color: #97d2fa;
+            }
+
+            .search_box + input:hover {
+                background-color: #97d2fa;
+            }
     </style>
+
 </head>
 <body>
     <div class="main">
@@ -36,35 +56,38 @@
                     @RenderBody()
                 </div>
                 <div class="sidebar">
-                    <div class="searchform">
+                    @*<div class="searchform">
                         <form id="formsearch" name="formsearch" method="get" action="/Sites/@TempData["TypeCode"]">
                             <span><input name="SearchText" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
                             <input src="~/Content/images/search_btn.gif" class="button_search" type="image" />
                         </form>
-                        @*<form class="navbar-form navbar-right" action="/Sites/@TempData["TypeCode"]">                         
-                            <input type="text" name="SearchText" class="form-control" id="SearchForm" placeholder="搜索站点名称/URL...">
-                        </form>*@
-                     
-                    </div>
+                    </div>*@
                     <div class="gadget">
-                        <h2 class="star"><span>热门标签</span></h2>
-                        <div class="clr"></div>
-                        @{
-                            Html.RenderAction("_TagCrtl", "Tags");
-                        }
+                        @*<form class="" action="/@TempData["TypeCode"]/1.html">*@
+                            <form class="" action="1.html">
+                                <input type="text" name="SearchText" class="search_box" id="SearchForm" placeholder="搜索好站...">
+                                <input type="submit" value="搜索" />
+                            </form>
                     </div>
-                    <div class="gadget">
-                        <h2 class="star"><span>Sponsors</span></h2><div class="clr"></div>
-                        <ul class="ex_menu">
-                            <li><a href="#" title="Website Templates">DreamTemplate</a><br />Over 6,000+ Premium Web Templates</li>
-                            <li><a href="#/">TemplateSOLD</a><br />Premium WordPress &amp; Joomla Themes</li>
-                            <li><a href="#" title="Affordable Hosting">ImHosted.com</a><br />Affordable Web Hosting Provider</li>
-                            <li><a href="#" title="Stock Icons">MyVectorStore</a><br />Royalty Free Stock Icons</li>
-                            <li><a href="#" title="Website Builder">Evrsoft</a><br />Website Builder Software &amp; Tools</li>
-                            <li><a href="#" title="CSS Templates">CSS Hub</a><br />Premium CSS Templates</li>
-                        </ul>
+                        <div class="gadget">
+                            <h3 class="star"><span>热门标签</span></h3>
+                            <div class="clr"></div>
+                            @{
+                                Html.RenderAction("_TagCrtl", "Tags");
+                            }
+                        </div>
+                        @*<div class="gadget">
+                            <h2 class="star"><span>Sponsors</span></h2><div class="clr"></div>
+                            <ul class="ex_menu">
+                                <li><a href="#" title="Website Templates">DreamTemplate</a><br />Over 6,000+ Premium Web Templates</li>
+                                <li><a href="#/">TemplateSOLD</a><br />Premium WordPress &amp; Joomla Themes</li>
+                                <li><a href="#" title="Affordable Hosting">ImHosted.com</a><br />Affordable Web Hosting Provider</li>
+                                <li><a href="#" title="Stock Icons">MyVectorStore</a><br />Royalty Free Stock Icons</li>
+                                <li><a href="#" title="Website Builder">Evrsoft</a><br />Website Builder Software &amp; Tools</li>
+                                <li><a href="#" title="CSS Templates">CSS Hub</a><br />Premium CSS Templates</li>
+                            </ul>
+                        </div>*@
                     </div>
-                </div>
                 <div class="clr"></div>
             </div>
         </div>
@@ -114,11 +137,11 @@
             <div class="footer_resize">
                 <div style="display: inline-block;">
                     <ul class="fmenu">
-                        <li class="active"><a href="index.html">首页</a></li>
-                        <li><a href="support.html">免费素材</a></li>
-                        <li><a href="blog.html">在线工具</a></li>
-                        <li><a href="about.html">发现好玩</a></li>
-                        <li><a href="contact.html">便民查询</a></li>
+                        <li class=""><a href="index.html">首页</a></li>   
+                        <li><a href="/ZY/1.html">免费素材</a></li>
+                        <li><a href="/ZX/1.html">在线工具</a></li>
+                        <li><a href="/JS/1.html">发现好玩</a></li>
+                        <li><a href="/SH/1.html">便民查询</a></li>
                     </ul>
                 </div>
 
@@ -132,7 +155,7 @@
                         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1261815581'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261815581%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
                     </text>
                     @*<p class="lf">&copy; Copyright <a href="#">MyWebSite</a>. Collect From <a href="http://www.cssmoban.com/" title="网页模板">网页模板</a></p>*@
-
+                    <text><a href="http://www.isharesite.com/v1" title="网站历史版本" target="_blank" style="float:right;color:#bbb">优站分享v1</a></text>
                     <div class="clr"></div>
                 </div>
 
@@ -151,15 +174,15 @@
     <script>
         jQuery(function () {
 
-            jQuery('#menu li a').mouseover(function () {
-               // debugger;
-                var _this = this;
-                $('.sb_menu').css('display', 'none');
-                $('.' + _this.id).css('display', 'block');
-                $('#menu li').removeClass('active');
-                $(_this).parent().addClass('active');
+            //jQuery('#menu li a').mouseover(function () {
+            //   // debugger;
+            //    var _this = this;
+            //    $('.sb_menu').css('display', 'none');
+            //    $('.' + _this.id).css('display', 'block');
+            //    $('#menu li').removeClass('active');
+            //    $(_this).parent().addClass('active');
 
-            })
+            //})
             //function areamosover(n) {
             //    debugger;
             //    $('.sb_menu').css('display', 'none');
@@ -175,81 +198,77 @@
                     //为每个标签添加事件
                     // debugger;
                     // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];
-                    var localhrefmat = location.href.match(/\/([^\/]+)$/);
-                    if (localhrefmat) {
-                        var urlPath = localhrefmat[1];
-                        if (/SITE\d{13}/i.test(urlPath)) urlPath = '';//去掉SITE1489992926300
-                        var urlFilenameArr = urlPath.split('?');
-                        var urlFilename = '';
-                        // debugger;
-                        if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
-                            if (urlPath != 'Sites')
-                                urlFilename = '/Sites/' + urlPath;
-                            else
-                                urlFilename = '/Sites/';
-                            if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
-                                urlFilename += '&';
-                            }
-                        } else {
-                            if (urlFilenameArr[0] != 'Sites')
-                                urlFilename = '/Sites/' + urlFilenameArr[0];
-                            else
-                                urlFilename = '/Sites/';
-                            if (urlFilename == '' || urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
-                                urlFilename += '?';
-                            }
-                        }
-                        //debugger;
-                        //为每个站点的标签添加事件
-                        var paramValueArr = urlFilenameArr[1] ? urlFilenameArr[1].split('&') : [];
-                        var siteItemArr = jQuery('.article');
-                        jQuery.each(siteItemArr, function (i_site, n_site) {
-                            var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                            //var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
-                            if (siteTagsName) {
-                                var siteTagsNameArr = siteTagsName.split(',');
-                                // var siteTagsIdArr = siteTagsId.split(',');
-                                var htmlArr = [];
-                                for (var i = 0; i < siteTagsNameArr.length; i++) {
-                                    if (paramValueArr.contains('Tag=' + encodeURI(siteTagsNameArr[i]))) {
-                                        // htmlArr.push('<a class="btn btn-default btn-xs disabled" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                                        htmlArr.push('<a class="active" href="' + urlFilename.replace('Tag=' + encodeURI(siteTagsNameArr[i]) + '&', '') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                                    } else {
-                                        //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                                        htmlArr.push('<a class="" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                                    }
-                                }
-                                jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
-                            }
-                        });
-                        ///为标签云添加事件
-                        jQuery('.Tag-Single').each(function (_i, _e) {
-                            var _ej = jQuery(_e);
-                            if (_ej.find('.active').length) {
-                                _ej.children().attr('href', urlFilename.replace('Tag=' + encodeURI(_ej.children().text()) + '&', ''));
-                            } else {
-                                _ej.children().attr('href', urlFilename + 'Tag=' + encodeURI(_ej.children().text()));
-                            }
-                        });
-                        ///活动菜单
-                        //var urlFilename = location.href.match(/\/([^\/]+)$/);
-                        if (urlFilenameArr[0]) {
-                            $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
-                        }
-                    }
-
+                    //var localhrefmat = location.href.match(/\/([^\/]+)$/);
+                    //if (localhrefmat) {
+                    //    var urlPath = localhrefmat[1];
+                    //    if (/SITE\d{13}/i.test(urlPath)) urlPath = '';//去掉SITE1489992926300
+                    //    var urlFilenameArr = urlPath.split('?');
+                    //    var urlFilename = '';
+                    //    // debugger;
+                    //    if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
+                    //        if (urlPath != 'Sites')
+                    //            urlFilename = '/Sites/' + urlPath;
+                    //        else
+                    //            urlFilename = '/Sites/';
+                    //        if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
+                    //            urlFilename += '&';
+                    //        }
+                    //    } else {
+                    //        if (urlFilenameArr[0] != 'Sites')
+                    //            urlFilename = '/Sites/' + urlFilenameArr[0];
+                    //        else
+                    //            urlFilename = '/Sites/';
+                    //        if (urlFilename == '' || urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
+                    //            urlFilename += '?';
+                    //        }
+                    //    }
+                    //    //debugger;
+                    //    //为每个站点的标签添加事件
+                    //    var paramValueArr = urlFilenameArr[1] ? urlFilenameArr[1].split('&') : [];
+                    //    var siteItemArr = jQuery('.article');
+                    //    jQuery.each(siteItemArr, function (i_site, n_site) {
+                    //        var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
+                    //        //var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
+                    //        if (siteTagsName) {
+                    //            var siteTagsNameArr = siteTagsName.split(',');
+                    //            // var siteTagsIdArr = siteTagsId.split(',');
+                    //            var htmlArr = [];
+                    //            for (var i = 0; i < siteTagsNameArr.length; i++) {
+                    //                if (paramValueArr.contains('Tag=' + encodeURI(siteTagsNameArr[i]))) {
+                    //                    // htmlArr.push('<a class="btn btn-default btn-xs disabled" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                    //                    htmlArr.push('<a class="active" href="' + urlFilename.replace('Tag=' + encodeURI(siteTagsNameArr[i]) + '&', '') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                    //                } else {
+                    //                    //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
+                    //                    htmlArr.push('<a class="" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                    //                }
+                    //            }
+                    //            jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
+                    //        }
+                    //    });
+                    //    ///为标签云添加事件
+                    //    jQuery('.Tag-Single').each(function (_i, _e) {
+                    //        var _ej = jQuery(_e);
+                    //        if (_ej.find('.active').length) {
+                    //            _ej.children().attr('href', urlFilename.replace('Tag=' + encodeURI(_ej.children().text()) + '&', ''));
+                    //        } else {
+                    //            _ej.children().attr('href', urlFilename + 'Tag=' + encodeURI(_ej.children().text()));
+                    //        }
+                    //    });
+                     
+                    //}
+            ///活动菜单
+          //  debugger;
+            var urlFilename = location.pathname;
+            if (urlFilename && urlFilename.length >=3) {
+                $(".navbar-nav li").removeClass("active");
+                $(".navbar-nav li:has(a[href^='" + urlFilename.substr(0, 3) + "'])").addClass("active");
+            } 
                     //搜索辅助功能
                     //jQuery('#SearchForm').keyup(function (e) {
                     //    if (e.keyCode == 13) {
                     var txt = decodeURI(Url.getParam('SearchText'));
-                    if (txt != 'undefined') { jQuery('#SearchForm').val(txt).focus(); }
-                    ////Search();
-                    //if (txt) {
-                    //    jQuery('.li-site-item').css('display', 'none');
-                    //    jQuery('.li-site-item:contains(' + txt + ')').css('display', 'block');
-                    //} else {
-                    //    jQuery('.li-site-item').css('display', 'block');
-                    //}
+                    if (txt != 'undefined') { jQuery('#SearchForm').val(txt); }
+               
                     //高亮显示
                     //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
                     var site_a = jQuery('.li-site-item h4').children();//.text().replace(txt, '<b>' + txt + '</b>');

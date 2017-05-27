@@ -20,6 +20,7 @@ namespace BetterSite.Domain
         private string m_TagId;
 
         private string m_Tagcode = String.Empty;
+        private string m_TypeCode = String.Empty;
         private string m_Tagname = String.Empty;
         private int m_Tagclickquantity;
         private int m_Tagordernumber;
@@ -79,6 +80,19 @@ namespace BetterSite.Domain
         {
             get { return m_Tagordernumber; }
             set { m_Tagordernumber = value; }
+        }
+
+        public string TypeCode
+        {
+            get
+            {
+                return m_TypeCode;
+            }
+
+            set
+            {
+                m_TypeCode = value;
+            }
         }
         #endregion
     }

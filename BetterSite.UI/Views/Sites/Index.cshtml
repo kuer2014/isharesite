@@ -53,7 +53,7 @@
         position: absolute;
         right: 0;
     }
-    .title {
+            .title {
         width: 340px;
         display: block;
         overflow: hidden;
@@ -63,6 +63,10 @@
         float:left;
         text-decoration:none;
         color:#666;
+    }
+    .title:hover{
+         text-decoration:underline;
+        color:#62bee3;
     }
     .gjlist p.siteprofile {
            height: 115px;
@@ -82,28 +86,28 @@
     <div class="gjlist">
         <div class="pic">
             <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> 
-                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
+                <img src="~/Images/SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
             </a>
         </div>
         <div class="incon">
             <h2 class="fl">
-                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl"> @item.SiteName</a>
                 <span>@item.SiteClickQuantity</span>        
                
             </h2>
-            <p>类别：<a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
+            <p>类别:<a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
             <p class="siteprofile">
                 
                 @Html.Raw(item.SiteProfile)
                 <span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
                 @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@
                 <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                    <img src="~/Images/ie.png" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                    <img src="~/Content/images/visit.png" style="border: none;"  width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
                 </a>
                
             </p>
             <p class="l fl div-SiteTags">               
-                标签：               
+                标签:              
             </p>
             <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
             <p class="l fr site-add-date">@item.SiteAddDate</p>
@@ -111,7 +115,7 @@
     </div>
     @*<div class="article">
             <div class="pic">
-                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="156" />
+                <img src="~\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="156" />
             </div>
             <div class="incon">
 
@@ -184,16 +188,12 @@
                         } else  if(urlarr.length==4){//修改
                             urlarr.splice(2,1,siteTagsNameArr[i]);
                             htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                        }
-                                    
-                       
-                    }
-                   
+                        }     
+                    }                   
                     jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
                 }
             });
             //分页
-
         })
     </script>
 }

@@ -23,7 +23,7 @@ namespace BetterSite.UI
                  SiteCode = @"SITE\d{13}"
              }
       );
-            /// /Sites/ZY/2.html           
+            /// /ZY/2.html           
             routes.MapRoute(
               name: "SiteListByType",
               url: "{TypeCode}/{Page}.html",
@@ -36,7 +36,7 @@ namespace BetterSite.UI
              }
           );
             ///
-            /// /Sites/zy/tag/学习/1.html
+            /// /zy/tag/学习/1.html
             routes.MapRoute(
               name: "SiteListByTag",
               url: "{TypeCode}/{Tag}/{Page}.html",
@@ -46,6 +46,17 @@ namespace BetterSite.UI
              {
                  TypeCode = @"[a-z]{2}",
                  Page= @"\d{0,5}"
+             }
+          );
+            /// /2.html           
+            routes.MapRoute(
+              name: "AllSiteList",
+              url: "{Page}.html",
+              defaults: new { controller = "Sites", action = "Index", Page = 1 },
+               namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {              
+                 Page = @"\d{0,5}"
              }
           );
             routes.MapRoute(

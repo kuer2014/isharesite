@@ -1,14 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <meta name="keywords" content="@ViewBag.Keywords 网站分享,网站推荐,实用的网站大全,优秀网站导航,优秀网站大全,互联网技术导航" />
     <meta name="description" content="@ViewBag.Description 优站分享,致力于分享实用的优秀网站,论坛,博客,官网,关注网站涵盖了互联网技术,软件开发,编程,框架,架构,开源,前端,设计,移动端,数据库,大数据,人工智能,机器学习等,是IT人工作,学习的最佳导航网站。" />
     @*@Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
+        @Scripts.Render("~/bundles/modernizr")*@
     @*<link href="~/Content/bootstrap_min.css" rel="stylesheet" />*@
     @Styles.Render("~/Content/bootstrap/css")
     <style type="text/css">
@@ -38,31 +38,31 @@
             height: 100px; /*脚部的高度*/
             background: #f1f1f1;
             clear: both;
-            padding:10px;
+            padding: 10px;
         }
 
         body {
             padding-top: 70px;
         }
-      .navbar-inverse .navbar-nav > li > a {
-        color: #c2c2c2;
-    }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #c2c2c2;
+        }
         /*站点说明*/
         p {
-        margin: 0px;
-        color: #555;
-        display: block;
-        font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        line-height: 24px;
-        text-indent: 28px;
-    }
+            margin: 0px;
+            color: #555;
+            display: block;
+            font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 24px;
+            text-indent: 28px;
+        }
     </style>
-
 </head>
 <body>
     @{
-        Html.RenderAction("_TypeCrtl", "Types");
+        Html.RenderAction("_TypeCrtl", "Types", new { area = "v1" });
     }
     <div id="container">
         <div id="page">
@@ -71,37 +71,30 @@
         <!-- 页脚  -->
         <div id="footer" class="text-center">
             <footer>
-               
+
                 <div>
                     <a href="http://webscan.360.cn/index/checkwebsite/url/www.isharesite.com" target="_blank"><img border="0" src="http://img.webscan.360.cn/status/pai/hash/1ced5c2280259d57448ca60ec6a8d93e/?size=74x27" /></a>
                 </div>
                 优站分享,致力于分享实用的优秀网站
-           <br/>
-                Copyright © 2015-2017  <a href="http://www.isharesite.com/">IShareSite</a>.All Rights Reserved.  
-                 <a href="http://www.miibeian.gov.cn" title="网站备案号" target="_blank">京ICP备15047973号</a>    
-                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261815581'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261815581%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>        
+                <br />
+                Copyright © 2015-2017  <a href="http://www.isharesite.com/">IShareSite</a>.All Rights Reserved.
+                <a href="http://www.miibeian.gov.cn" title="网站备案号" target="_blank">京ICP备15047973号</a>
+                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1261815581'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261815581%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
             </footer>
         </div>
 
-        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"right","bdTop":"200.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+        <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "slide": { "type": "slide", "bdImg": "2", "bdPos": "right", "bdTop": "200.5" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
         @*<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"200.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>*@
     </div>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/common")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
     @*@Scripts.Render("~/bundles/jqueryui")*@
     @RenderSection("scripts", required: false)
     <script>
         jQuery(function () {
-            // debugger;
-            //为标签绑定事件
-            //jQuery('form [name=Tag]').each(function (i, elem) {
-            //    elem.onchange = function () {
-            //        jQuery('form').submit();
-            //    };
-            //});
             //为每个标签添加事件
-           // debugger;
+            // debugger;
             // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];
             var localhrefmat = location.href.match(/\/([^\/]+)$/);
             if (localhrefmat) {
@@ -109,21 +102,21 @@
                 if (/SITE\d{13}/i.test(urlPath)) urlPath = '';//去掉SITE1489992926300
                 var urlFilenameArr = urlPath.split('?');
                 var urlFilename = '';
-               // debugger;
-                if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
+                //  debugger;
+                if (urlFilenameArr.length == 3 && urlFilenameArr[2]) {
                     if (urlPath != 'Sites')
-                        urlFilename = '/Sites/' + urlPath;
+                        urlFilename = '/v1/Sites/' + urlPath;
                     else
-                        urlFilename = '/Sites/';
+                        urlFilename = '/v1/Sites/';
                     if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
                         urlFilename += '&';
                     }
                 } else {
-                    if (urlFilenameArr[0] != 'Sites')
-                        urlFilename = '/Sites/' + urlFilenameArr[0];
+                    if (urlFilenameArr[0] != 'v1')
+                        urlFilename = '/v1/Sites/' + urlFilenameArr[0];
                     else
-                        urlFilename = '/Sites/';
-                    if (urlFilename==''||urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
+                        urlFilename = '/v1/Sites/';
+                    if (urlFilename == '' || urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
                         urlFilename += '?';
                     }
                 }
@@ -138,6 +131,7 @@
                         var siteTagsNameArr = siteTagsName.split(',');
                         // var siteTagsIdArr = siteTagsId.split(',');
                         var htmlArr = [];
+                        //debugger;
                         for (var i = 0; i < siteTagsNameArr.length; i++) {
                             if (paramValueArr.contains('Tag=' + encodeURI(siteTagsNameArr[i]))) {
                                 // htmlArr.push('<a class="btn btn-default btn-xs disabled" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
@@ -162,7 +156,12 @@
                 ///活动菜单
                 //var urlFilename = location.href.match(/\/([^\/]+)$/);
                 if (urlFilenameArr[0]) {
-                    $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
+
+                    var _menu = $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])");
+                    if (_menu && _menu.length > 0) {
+                        $(".navbar li").removeClass("active");
+                        $(".navbar li:has(a[href$='/Sites/" + urlFilenameArr[0] + "'])").addClass("active");
+                    }
                 }
             }
 
@@ -171,56 +170,49 @@
             //    if (e.keyCode == 13) {
             var txt = decodeURI(Url.getParam('SearchText'));
             if (txt != 'undefined') { jQuery('#SearchForm').val(txt).focus(); }
-                    ////Search();
-                    //if (txt) {
-                    //    jQuery('.li-site-item').css('display', 'none');
-                    //    jQuery('.li-site-item:contains(' + txt + ')').css('display', 'block');
-                    //} else {
-                    //    jQuery('.li-site-item').css('display', 'block');
-                    //}
-                    //高亮显示
-                    //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
+            //高亮显示
+            //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
             var site_a = jQuery('.li-site-item h4').children();//.text().replace(txt, '<b>' + txt + '</b>');
-                   jQuery.each(site_a, function (i, n) {
-                       //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
-                       jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
-                       //jQuery(n).next().html(jQuery(n).next().text().replace(txt, '<mark>' + txt + '</mark>'));
-                   });
+            jQuery.each(site_a, function (i, n) {
+                //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
+                jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
+                //jQuery(n).next().html(jQuery(n).next().text().replace(txt, '<mark>' + txt + '</mark>'));
+            });
             //    }
             //});
             //搜索标签功能
-                   jQuery('#SearchTag').keyup(function (e) {
-                       if (e.keyCode == 13) {
-                           var _this = jQuery(this);
-                           $(".Tag-Single a").css('font-weight', 'normal');
-                           var tagName = _this.val();
-                           if (tagName) {
-                               _this.next().css('display', 'none');
-                               ///var exisTag = $(".Tag-Single label:contains('" + tagName + "')");
-                               //if (exisTag.length) {
-                               //    exisTag.css('font-weight', 'bold');
-                               //    return;
-                               //} else {
-                               //    jQuery(this).next().css('display', 'initial');
-                               //}
-                              /// debugger;
-                               var isn = false;
-                               $(".Tag-Single a").each(function (i, e) {
-                                   if (jQuery(e).text().toLowerCase().indexOf(tagName.toLowerCase()) > -1) {
-                                       jQuery(e).css('background-color', 'yellow');//('font-weight', 'bold');
-                                       isn = true;
-                                   }
-                               });
-                               if (!isn) _this.next().css('display', 'initial');
-                           }
-                       }
-                   });
+            jQuery('#SearchTag').keyup(function (e) {
+                if (e.keyCode == 13) {
+                    var _this = jQuery(this);
+                    $(".Tag-Single a").css('font-weight', 'normal');
+                    var tagName = _this.val();
+                    if (tagName) {
+                        _this.next().css('display', 'none');
+                        ///var exisTag = $(".Tag-Single label:contains('" + tagName + "')");
+                        //if (exisTag.length) {
+                        //    exisTag.css('font-weight', 'bold');
+                        //    return;
+                        //} else {
+                        //    jQuery(this).next().css('display', 'initial');
+                        //}
+                        /// debugger;
+                        var isn = false;
+                        $(".Tag-Single a").each(function (i, e) {
+                            if (jQuery(e).text().toLowerCase().indexOf(tagName.toLowerCase()) > -1) {
+                                jQuery(e).css('background-color', 'yellow');//('font-weight', 'bold');
+                                isn = true;
+                            }
+                        });
+                        if (!isn) _this.next().css('display', 'initial');
+                    }
+                }
+            });
             //站点添加时间显示样式
-                   jQuery(".site-add-date").each(function (n, ele) {
-                       if (ele.innerText.length > 0) {
-                           ele.innerText = ele.innerText.substr(0, 11);
-                       }
-                   });
+            jQuery(".site-add-date").each(function (n, ele) {
+                if (ele.innerText.length > 0) {
+                    ele.innerText = ele.innerText.substr(0, 11);
+                }
+            });
         });
     </script>
     <script>

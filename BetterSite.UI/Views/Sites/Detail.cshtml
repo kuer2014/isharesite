@@ -45,21 +45,79 @@
         font-size: 12px;
         text-indent: 26px;
     }
+               .title {
+        width: 450px;
+        display: block;
+        overflow: hidden;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float:left;
+        text-decoration:none;
+        color:#666;
+    }
+                 .title:hover{
+         text-decoration:underline;
+        color:#62bee3;
+    }
+
+        .visit{
+            text-decoration: none;
+            /*color: #666;*/
+            font-size: 15px;
+            float:right;
+            display:block;
+        }
+         .visit:hover{
+         text-decoration:underline;
+        color:#555;
+    }
+    .send {
+    padding:5px 8px 5px 8px;
+    }
+    /*.send {
+    width:150px;
+    height:30px;
+    display:block;
+    background-color:#fff;
+    border:1px solid #999;
+padding:10px;
+font-size:20px;
+text-decoration:none;
+    }*/
+    .sitetypedata{
+       padding: 10px 0 0 20px;
+       border-bottom:1px solid #ccc;
+       margin-bottom:15px;
+    }
+        .sitetypedata span {
+            margin: 0 10px 0 10px;
+        
+        }
+    .article hr {
+    margin:0 0 10px 0;
+    }
+
 </style>
 <div class="article">
     <h2>
         <span><a class="title" href="@Model.SiteUrl" target="_blank" title="@Model.SiteUrl"> @Model.SiteName</a></span>
         <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow">
-            <img src="~/Images/ie.png" width="16" height="16" alt="icon" title="打开官方网站 &#10; @Model.SiteUrl">
+            <text>直达网站</text> <img src="~/Content/images/visit.png" style="border: none;" width="25" height="25" alt="icon" title="打开网站 &#10; @Model.SiteUrl">
         </a>
-    </h2>
-
+        <span>
+            <small>               
+                <a class="title" style="color:#999;" href="@Model.SiteUrl" target="_blank" title="@Model.SiteName"> @Model.SiteUrl</a>
+            </small>
+        </span>
+    </h2>    
     <div class="clr"></div>
-    <p>
-        类别:<a href="/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a>
-        日期:<span class="l fr site-add-date">@Model.SiteAddDate</span>
-        浏览数:<span>@Model.SiteClickQuantity</span>
-    </p>
+    <div class="sitetypedata">
+        <span> 类别:<a href="/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></span>
+        <span>日期:<text class="site-add-date">@Model.SiteAddDate</text></span>
+        <span>浏览数:@Model.SiteClickQuantity</span>
+    </div>
+
     <img class="" src="\Images\SiteScreen\@{@Model.SiteCode}.jpg" alt="@Model.SiteName" title="@Model.SiteName" />
     <p class="siteprofile">
 
@@ -69,10 +127,18 @@
 
 
     </p>
+    <div>
+        <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow">
+            <text>直达网站</text> <img src="~/Content/images/visit.png" style="border: none;" width="25" height="25" alt="icon" title="打开网站 &#10; @Model.SiteUrl">
+        </a>
+    </div>
     <p class="l fl div-SiteTags">
-        标签：
+        标签:
     </p>
+   
+  <hr />
     <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
+
 </div>
 <div class="article">
     <div class="bshare-custom"><a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到新浪微博" class="bshare-sinaminiblog">新浪微博</a><a title="分享到QQ好友" class="bshare-qqim">QQ好友</a><a title="分享到QQ空间" class="bshare-qzone">QQ空间</a><a title="分享到微信" class="bshare-weixin">微信</a><a title="分享到豆瓣" class="bshare-douban">豆瓣</a><a title="分享到人人网" class="bshare-renren">人人网</a><a title="分享到i贴吧" class="bshare-itieba">i贴吧</a><a title="分享到复制网址" class="bshare-clipboard">复制网址</a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
@@ -125,6 +191,7 @@
             <li>
                 <input type="hidden" id="hidSiteId" value="@Model.SiteId" />
                 <button type="button" onclick="SubmitComment();" class="send">提交评论</button>
+                @*<a href="#"  onclick="SubmitComment();" class="send" title="提交评论">提交评论</a>*@
                 @*<input type="image" name="imageField" id="imageField" src="images/submit.gif" class="send" />*@
                 <div class="clr"></div>
             </li>

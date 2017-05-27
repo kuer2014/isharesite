@@ -72,7 +72,7 @@
                         <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName">@Model.SiteName</a>
                         <br /><small>@Model.SiteUrl</small>
                     </h4>
-                    <h5>类别: <a href="/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></h5>
+                    <h5>类别: <a href="/v1/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></h5>
                  
                     @*<input type="hidden" class="hid-SiteTagsId" value="@item.SiteTagsId" />*@
                     <p>
@@ -142,7 +142,7 @@
                         @foreach (var item in ViewBag.ListType)
                         {
                             <li style="height:25px;width:140px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                                <small>★</small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                                <small>★</small><a href="/v1/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
                             </li>
                         }
                     </ul>

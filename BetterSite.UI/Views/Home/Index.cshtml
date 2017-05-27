@@ -3,10 +3,230 @@
 }
 @model IList<BetterSite.Domain.M_Sites>
 <style>
-  
-</style>
+     .home_sitetype {
+            font-size: 12px;
+            font-weight: bolder;           
+        }
+       .home_site .divhr{           
+            border-top:1px solid #ccc;/*solid 1px #97d2fa;*/    
+            margin:-5px 0 10px 0;
+        }
 
- 
+            .home_sitetype li {
+                list-style-image: none;
+                list-style-type: none;
+                background-color: #fbfbfb;
+                /*border-right-width: 2px;
+                border-right-style: solid;
+                border-right-color: #fff;*/
+                float: left;
+                margin:5px;
+            }
+
+                .home_sitetype li a {
+                    /*color: #FFFFFF;*/
+                    text-decoration: none;
+                    margin: 0px;
+                    padding-top: 6px;
+                    /*display: block;*/ /* 作为一个块 */
+                    padding-right: 5px; /* 设置块的属性 */
+                    padding-bottom: 6px;
+                    padding-left: 5px;
+                }
+
+                    .home_sitetype li a:hover,
+                    .home_sitetype li.active a {
+                        /*background-color: #97d2fa;*/
+                        /*border-top-width: 1px;
+                        border-top-style: solid;
+                        border-top-color: #fff;*/
+                    }
+    .home_site {
+    margin:0 -10px 0 20px;
+    }
+    .home_site .pic {
+        float: left;
+        width: 50px;
+        height: 50px;
+        /*margin: 10px 0 0 10px;*/
+      
+    }
+    .home_site .pic a{
+        display:block;
+        margin:10px 5px;
+      font-size: 35px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align:center;
+    }
+    .home_site .incon {
+        float: right;
+        width: 160px;
+        height:50px;
+    }
+    .home_site .incon h4{
+    margin:2px;
+    }
+     .home_site .incon h4 a{
+    margin:2px;
+    padding:2px;
+    }
+    
+      .title,.siteprofile {
+        width: 150px;
+        /*display: block;*/
+        overflow: hidden;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float:left;
+        text-decoration:none;
+        color:#666;
+margin:2px;
+    }
+        .siteprofile .eyenum {
+             background: url('../../Content/images/eye.jpg')5px 0 no-repeat;       
+        padding-left: 33px;      
+        }
+    .siteprofile {
+    margin:-2px 0 0 80px
+    }
+    .title:hover{
+         text-decoration:underline;
+        color:#62bee3;
+    }
+    .home_site h2{
+         display:inline-table;
+     }
+    .home_site h2 span {
+        background: url('../../Content/images/menuicon.png')5px 0 no-repeat;       
+        padding-left: 33px;
+        /*position: absolute;*/
+    }
+</style>
+<div class="">
+    <div class="home_site">
+        <h2><span>免费素材</span></h2>
+        <div class="divhr"></div>
+        <ul class="home_sitetype">
+            @foreach (var item in ViewBag.ZY)
+            {
+                <li>
+                    <div class="pic">
+                      
+                        <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                            @item.SiteName.Substring(0, 1).ToUpper()
+                        </a>
+                    </div>
+                    <div class="incon">
+                        <h4 class="">
+                            <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+
+                        </h4>
+                        <p class="siteprofile">
+                            @*<span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+                         
+                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                            </a>
+                            <span class="eyenum">@item.SiteClickQuantity</span>
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="home_site">
+        <h2><span>在线工具</span></h2>
+        <div class="divhr"></div>
+        <ul class="home_sitetype">
+            @foreach (var item in ViewBag.ZX)
+            {
+                <li>
+                    <div class="pic">
+                        <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                            @item.SiteName.Substring(0, 1).ToUpper()
+                        </a>
+                    </div>
+                    <div class="incon">
+                        <h4 class="">
+                            <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+
+                        </h4>
+                        <p class="siteprofile">
+                            @*<span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+
+                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                            </a>
+                            <span class="eyenum">@item.SiteClickQuantity</span>
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="home_site">
+        <h2><span>发现好玩</span></h2>
+        <div class="divhr"></div>
+        <ul class="home_sitetype">
+            @foreach (var item in ViewBag.JS)
+            {
+                <li>
+                    <div class="pic">
+                        <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                            @item.SiteName.Substring(0, 1).ToUpper()
+                        </a>
+                    </div>
+                    <div class="incon">
+                        <h4 class="">
+                            <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+
+                        </h4>
+                        <p class="siteprofile">
+                            @*<span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+
+                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                            </a>
+                            <span class="eyenum">@item.SiteClickQuantity</span>
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="home_site">
+        <h2><span>便民查询</span></h2>
+        <div class="divhr"></div>
+        <ul class="home_sitetype">
+            @foreach (var item in ViewBag.SH)
+            {
+                <li>
+                    <div class="pic">
+                        <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                            @item.SiteName.Substring(0, 1).ToUpper()
+                        </a>
+                    </div>
+                    <div class="incon">
+                        <h4 class="">
+                            <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+
+                        </h4>
+                        <p class="siteprofile">
+                            @*<span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+
+                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                            </a>
+                            <span class="eyenum">@item.SiteClickQuantity</span>
+                        </p>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
 @section Scripts
 {
     <script>

@@ -7,7 +7,8 @@
       <result column="TagCode" property="TagCode" />
       <result column="TagName" property="TagName" />
       <result column="TagClickQuantity" property="TagClickQuantity" />
-      <result column="TagOrderNumber" property="TagOrderNumber" />
+      <result column="TagOrderNumber" property="TagOrderNumber" /> 
+      <result column="TypeCode" property="TypeCode" />
     </resultMap>
   </resultMaps>
   <statements>
@@ -23,13 +24,13 @@
       DELETE FROM  Tab_Tags  WHERE TagId= #TagId#
     </delete>
     <select id="Tab_Tags_Select" listClass="ArrayList" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
-      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
+      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TypeCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
       </dynamic>
     </select>
     <select id="Tab_Tags_SelectByTypeId" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
-      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
+      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TypeCode,TagName,TagClickQuantity,TagOrderNumber FROM  Tab_Tags
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="TypeId">
           TagId IN(
@@ -43,7 +44,7 @@
     </select>
     <select id="Tab_Tags_SelectPageList" listClass="ArrayList" resultMap="Tab_Tags_Result" parameterClass="Hashtable">
       WITH T AS(
-      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber
+      SELECT CONVERT(VARCHAR(40), TagId) TagId,TagCode,TypeCode,TagName,TagClickQuantity,TagOrderNumber
       FROM  Tab_Tags
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>
@@ -56,7 +57,7 @@
       ORDER BY TagId
     </select>
     <select id="Tab_Tags_SelectAll" listClass="ArrayList" resultMap="Tab_Tags_Result" >
-      SELECT TagId,TagCode,TagName,TagClickQuantity,TagOrderNumber
+      SELECT TagId,TagCode,TypeCode,TagName,TagClickQuantity,TagOrderNumber
       FROM  Tab_Tags
     </select>
   </statements>

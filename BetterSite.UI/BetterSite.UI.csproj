@@ -152,6 +152,11 @@
     <Compile Include="Areas\Admin\Controllers\SiteTagController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagsController .cs" />
     <Compile Include="Areas\Admin\Controllers\TypesController.cs" />
+    <Compile Include="Areas\v1\v1AreaRegistration.cs" />
+    <Compile Include="Areas\v1\Controllers\HomeController.cs" />
+    <Compile Include="Areas\v1\Controllers\SitesController.cs" />
+    <Compile Include="Areas\v1\Controllers\TagsController.cs" />
+    <Compile Include="Areas\v1\Controllers\TypesController.cs" />
     <Compile Include="Content\knockoutPagging\dataHandler.ashx.cs">
       <DependentUpon>dataHandler.ashx</DependentUpon>
     </Compile>
@@ -176,6 +181,7 @@
   <ItemGroup>
     <Content Include="baidutest.html" />
     <Content Include="captest.html" />
+    <Content Include="Content\images\eye.jpg" />
     <Content Include="Content\images\fbg_bg.jpg" />
     <Content Include="Content\images\fbg_rbg.jpg" />
     <Content Include="Content\images\global_bg.jpg" />
@@ -183,6 +189,7 @@
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\main_bg.jpg" />
     <Content Include="Content\images\menu.jpg" />
+    <Content Include="Content\images\menuicon.png" />
     <Content Include="Content\images\menu_a.jpg" />
     <Content Include="Content\images\pix1.jpg" />
     <Content Include="Content\images\pix2.jpg" />
@@ -195,6 +202,7 @@
     <Content Include="Content\images\spacer.gif" />
     <Content Include="Content\images\submit.gif" />
     <Content Include="Content\images\userpic.gif" />
+    <Content Include="Content\images\visit.png" />
     <Content Include="Content\jquery-easyui-1.4.2\datagrid-filter.js" />
     <Content Include="Content\bootstrap_min.css" />
     <Content Include="Content\jquery-easyui-1.4.2\changelog.txt" />
@@ -554,11 +562,13 @@
     <Content Include="Content\knockoutPagging\paginationViewModel.js" />
     <Content Include="Content\style.css" />
     <Content Include="Images\eye.jpg" />
+    <Content Include="Images\ffrrr.png" />
     <Content Include="Images\ie.png" />
     <Content Include="Images\Logo30px.png" />
     <Content Include="Images\Logo20px.png" />
     <Content Include="Images\Logo30px2.png" />
     <Content Include="Images\Logo40px.png" />
+    <Content Include="Images\rr.png" />
     <Content Include="Images\SiteScreen\SITE1440884041212.jpg" />
     <Content Include="Images\SiteScreen\SITE1440884041235.jpg" />
     <Content Include="Images\SiteScreen\SITE1440884041342.jpg" />
@@ -1022,7 +1032,18 @@
     <Content Include="Areas\Admin\Views\Tags\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Sites\Import.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="StaticHtml\Menu_Tab.html" />
     <Content Include="项目进度.js" />
+    <Content Include="Areas\v1\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\v1\Views\Home\Index.cshtml" />
+    <Content Include="Areas\v1\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\v1\Views\Shared\_TagCrtl.cshtml" />
+    <Content Include="Areas\v1\Views\Shared\_TypeCrtl.cshtml" />
+    <Content Include="Areas\v1\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\v1\Views\Sites\Detail.cshtml" />
+    <Content Include="Areas\v1\Views\Sites\Index.cshtml" />
+    <Content Include="Areas\v1\Views\Sites\ListGroup.cshtml" />
+    <Content Include="Areas\v1\Views\Web.config" />
     <None Include="Properties\PublishProfiles\AliHost.pubxml" />
     <None Include="Properties\PublishProfiles\LocalSite.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />

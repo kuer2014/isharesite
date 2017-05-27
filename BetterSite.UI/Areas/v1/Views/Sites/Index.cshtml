@@ -2,25 +2,10 @@
     //ViewBag.Title = ViewBag.Title+"-优站分享-为开发者提供一些便利";
 }
 @model IEnumerable<BetterSite.Domain.M_Sites>
-
-@*<div class="midd-top">
-        @{
-            Html.RenderAction("_TagCrtl", "Tags");
-        }
-    </div>*@
-@*<div>
-        @foreach (var item in Model )
-        {
-            <div>@item.SiteName</div>
-        }
-    </div>*@
 <style>
-
-
     small {
         word-wrap: break-word;
     }
-
     .list-group-item-heading {
         margin: 5px 0 3px 0;
     }
@@ -29,22 +14,22 @@
     <div class="row">
         <div class="col-md-2">
             @{
-                Html.RenderAction("_TagCrtl", "Tags");
+                Html.RenderAction("_TagCrtl", "Tags", new { area = "v1" });
             }
         </div>
         <div class="col-md-8">
-            <p> 共计：@Model.Count() 条</p>
+       
             <ul class="list-group">
                 @foreach (var item in Model)
                 {
                     <li class="list-group-item li-site-item">
                         <h4 class="list-group-item-heading">
                             @*<a href="@item.SiteUrl" target="_blank">@item.SiteName</a>*@
-                            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
+                            <a href="/v1/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl">@item.SiteName</a>
                             <br /><small>@item.SiteUrl</small>
                             <br /><small class="site-add-date">@item.SiteAddDate</small>
                         </h4>
-                        <h5>类别: <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>
+                        <h5>类别: <a href="/v1/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></h5>
                         <p>
                             @Html.Raw(item.SiteProfile)
 
@@ -55,33 +40,11 @@
                     </li>
                 }
 </ul>
-            @*@foreach (var item in Model)
-                                {
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <h4 class="list-group-item-heading">@item.SiteName</h4>
-                                    <p class="list-group-item-text">@item.SiteUrl</p>
-                                </div>
-
-                            </div>
-                }*@
-            @*<table class="table  table-hover">
-                    <tr>
-                        <th>首页－视频</th>
-                    </tr>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <h4>@item.SiteName</h4>
-                                <div>
-                                    <a href="#">访问站点</a>
-                                    <a href="#">站点介绍</a>
-                                </div>
-                            </td>
-                        </tr>
-                        }
-                </table>*@
+            <p class="pages">               
+                <a href="" class="btn btn-default">&laquo;上一页</a>
+                <span>@ViewBag.Page / @ViewBag.PageCount</span>
+                <a href="" class="btn btn-default">下一页&raquo;</a>
+            </p>     
         </div>
         <div class="col-md-2">
             本类热门站点
@@ -89,9 +52,53 @@
     </div>
 </div>
 @section scripts {
+    <script>
+        jQuery(function () {
+            //分页
+            var page= @ViewBag.Page;
+            var pageCount=@ViewBag.PageCount;
+            jQuery('.pages a').css('display','none');
+            var urlsearch=location.search;
+            var hrefstr=location.href;
+            var prepage='';
+            var nextpage='';
+            if(urlsearch){
+                prepage= hrefstr.replace(/page=\d{1,5}/,"page="+(-1+page));
+                if(prepage==hrefstr)
+                    prepage+="&page="+(-1+page);
+                nextpage= hrefstr.replace(/page=\d{1,5}/,"page="+(1+page));
+                if(nextpage==hrefstr)
+                    nextpage+="&page="+(1+page);
+            }else{
+                prepage="?page="+(-1+page);
+                nextpage="?page="+(1+page);
+            }
+            if(page>1){
+                jQuery('.pages a:first').css('display','inline');
+
+                jQuery('.pages a:first').attr('href',prepage);
+            }
+            if(page< pageCount){ 
+                jQuery('.pages a:last').css('display','inline');
+                jQuery('.pages a:last').attr('href',nextpage);
+            }
+        });
+    </script>
  <!--<script>
     //标签云的处理
         jQuery(function () {
+              //分页
+            var page= @ViewBag.Page;
+            var pageCount=@ViewBag.PageCount;
+            jQuery('.pages a').css('display','none');
+            if(page>1){
+                jQuery('.pages a:first').css('display','inline');
+                jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
+            }
+            if(page< pageCount){ 
+                jQuery('.pages a:last').css('display','inline');
+                jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
+            }
             debugger;
             var urlPath = location.href.match(/\/([^\/]+)$/)[1];
             var urlFilenameArr = urlPath.split('?');

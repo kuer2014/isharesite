@@ -1,91 +1,152 @@
-﻿@{
+﻿@model  IList<BetterSite.Domain.M_Tags>
+@{
     Layout = null;
+    var sucai = Model.Where(m => m.TypeCode.ToLower() == "sucai");
+    var gongju = Model.Where(m => m.TypeCode.ToLower() == "gongju");
+    var haowan = Model.Where(m => m.TypeCode.ToLower() == "haowan");
+    var chaxun = Model.Where(m => m.TypeCode.ToLower() == "chaxun");
 }
-@model  IList<BetterSite.Domain.M_Tags>
-    <style>
-    #menu {
-font-size: 12px;
-font-weight: bolder;
-}
-#menu li{
-list-style-image: none;
-list-style-type: none;
-background-color: #63c3e8;
-border-right-width: 2px;
-border-right-style: solid;
-border-right-color: #fff;
-float: left;
-}
-#menu li a{
-color: #FFFFFF;
-text-decoration: none;
-margin: 0px;
-padding-top: 6px;
-display: block; /* 作为一个块 */
-padding-right: 5px; /* 设置块的属性 */
-padding-bottom: 6px;
-padding-left: 5px;
-}
- #menu li a:hover,
-#menu li.active a{
-background-color: #97d2fa;
-border-top-width: 1px;
-border-top-style: solid;
-border-top-color: #fff;
-}
-        .navdiv {
-            border: solid 1px #97d2fa;
-    display: inline-block;
-    width: 216px;
-    padding: 10px;
-        }
-    </style>
-<ul id="menu" >
-    <li  class=""><a id="tab1" href="#" >免费素材</a></li>
-    <li  class="active"><a id="tab2"  href="#">在线工具</a></li>
-    <li ><a  id="tab3" href="#">发现好玩</a></li>
-    <li><a  id="tab4" href="#">便民查询</a></li>
+
+<style>
+        #menu span{
+    font-size: 12px;
+    /*font-weight: bolder;*/
+    width:200px;
+    display:block;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #ccc;
+    }
+    #menu li{
+    list-style-image: none;
+    list-style-type: none;
+    margin:5px;
+    /*background-color: #63c3e8;
+    border-right-width: 2px;
+    border-right-style: solid;
+    border-right-color: #fff;*/
+    float: left;
+    }
+            #menu ul {
+            width:200px;
+            }
+    #menu li a{
+    /*color: #555;
+    text-decoration: none;*/
+    margin: 0px;
+
+    /*display: block;*/ /* 作为一个块 */
+    /*padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;*/
+
+    }
+     #menu li a:hover,
+    #menu1 li.active a{
+         color: #555;
+         /*display: block;*/ /* 作为一个块 */
+
+    /*background-color: #97d2fa;*/
+    /*border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #fff;*/
+    }
+            .navdiv {
+                border: 1px dotted #97d2fa;/*solid 1px #97d2fa;*/
+        display: inline-block;
+        width: 216px;
+        padding: 10px;
+            }
+</style>
+<ul id="menu">
+    <li class="">
+        <span>免费素材</span>
+        <ul class="">
+            @foreach (var item in sucai)
+            {
+                <li><a href="/ZY/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
+
+            }
+        </ul>
+    </li>
+    <li class="">
+        <span>在线工具</span>
+        <ul class="">
+            @foreach (var item in gongju)
+            {
+                <li><a href="/ZX/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
+
+            }
+        </ul>
+    </li>
+    <li>
+        <span>发现好玩</span>
+        <ul class="">
+            @foreach (var item in haowan)
+            {
+                <li><a href="/JS/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
+
+            }
+        </ul>
+    </li>
+    <li>
+        <span>便民查询</span>
+        <ul class="">
+            @foreach (var item in chaxun)
+            {
+                <li><a href="/SH/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
+
+            }
+        </ul>
+    </li>
 </ul>
-<div class="navdiv">
-    <ul class="sb_menu tab1">
-        <li> 免费素材</li> 
-        @foreach (var item in Model)
-        {
-            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
-
-        }
+@*<ul id="menu" >
+        <li  class=""><a id="tab1" href="#" >免费素材</a></li>
+        <li  class="active"><a id="tab2"  href="#">在线工具</a></li>
+        <li ><a  id="tab3" href="#">发现好玩</a></li>
+        <li><a  id="tab4" href="#">便民查询</a></li>
     </ul>
-    <ul class="sb_menu tab2">
-        <li>在线工具</li> 
-        @foreach (var item in Model)
-        {
-            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+    <div class="navdiv">
+        <ul class="sb_menu tab1">
+            <li> 免费素材</li>
+            @foreach (var item in Model)
+            {
+                <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
 
-        }
-    </ul>
-    <ul class="sb_menu tab3">
-        @foreach (var item in Model)
-        {
-            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+            }
+        </ul>
+        <ul class="sb_menu tab2">
+            <li>在线工具</li>
+            @foreach (var item in Model)
+            {
+                <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
 
-        }
-    </ul>
-    <ul class="sb_menu tab4">
-        @foreach (var item in Model)
-        {
-            <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+            }
+        </ul>
+        <ul class="sb_menu tab3">
+            @foreach (var item in Model)
+            {
+                <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
 
-        }
-    </ul>
-</div>
+            }
+        </ul>
+        <ul class="sb_menu tab4">
+            @foreach (var item in Model)
+            {
+                <li><a href="?Tag=@item.TagName" title="@item.TagName">@item.TagName</a></li>
+
+            }
+        </ul>
+    </div>*@
 
 @section scripts {
     @*<script type="text/javascript">
-        function areaover(n) {
-            debugger;
-            $('.sb_menu').css('display', 'none');
-            $('.sb_menu .' + n).css('display', 'block');
-        }
-</script>*@
+                function areaover(n) {
+                    debugger;
+                    $('.sb_menu').css('display', 'none');
+                    $('.sb_menu .' + n).css('display', 'block');
+                }
+        </script>*@
 
 }

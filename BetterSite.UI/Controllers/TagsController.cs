@@ -28,24 +28,28 @@ namespace BetterSite.UI.Controllers
         /// <returns>标签数据</returns>
             public ActionResult _TagCrtl(string TypeCode, string[] Tag)
         {
-            var typeId = string.Empty;
-            IList<M_Tags> tags = new List<M_Tags>();
-            if (!string.IsNullOrWhiteSpace(TypeCode))
-            {
-                IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = TypeCode });
-                if (types != null && types.Count() > 0)
-                {
-                    typeId = types[0].TypeId;
-                    tags = tagsBO.QueryForEntityListByTypeId(typeId);
-                }
+            // var typeId = string.Empty;
+            // IList<M_Tags> tags = new List<M_Tags>();
+            // if (!string.IsNullOrWhiteSpace(TypeCode))
+            // {
+            //     IList<M_Types> types = typesBO.QueryForEntityList(new BetterSite.Domain.M_Types() { TypeCode = TypeCode });
+            //     if (types != null && types.Count() > 0)
+            //     {
+            //         typeId = types[0].TypeId;
+            //         tags = tagsBO.QueryForEntityListByTypeId(typeId);
+            //     }
 
-            }
-            else {
-                tags = tagsBO.QueryForEntityListByTypeId("");
-            }
-           
-            //IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
-            if (Tag != null && Tag.Count() > 0) ViewBag.CheckdTags = Tag.ToList();
+            // }
+            // else {
+            //     tags = tagsBO.QueryForEntityListByTypeId("");
+            // }
+            //// ViewBag.ZY=tags.Where(t=>t.TagCode== "ZY")
+            // tags = tags.Take(15).ToList();
+            // //IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
+            // if (Tag != null && Tag.Count() > 0) ViewBag.CheckdTags = Tag.ToList();
+
+            IList<M_Tags> tags = tagsBO.QueryForList(null).Cast<M_Tags>().Where(t=>!string.IsNullOrWhiteSpace(t.TypeCode)).ToList();
+
             return PartialView("_TagCrtl", tags);
         }     
     }

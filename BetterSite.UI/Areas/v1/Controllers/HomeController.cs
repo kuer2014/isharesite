@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BetterSite.UI.Controllers
+namespace BetterSite.UI.Areas.v1.Controllers
 {
     public class HomeController : Controller
     {
