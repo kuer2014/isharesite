@@ -338,13 +338,14 @@
                 return;
             }
             var tagId = Global.createGuid();
+            var typeId = $('#cc').combobox('getValue');
             //向服务器提交保存
             // debugger;
             $.ajax({
                 url: '/Admin/Tags/Create',
                 type: 'post',
                 async: false,
-                data: { TagId: tagId, TagCode: "fromSite", TagName: tagName },
+                data: { TagId: tagId, TagCode: "fromSite", TagName: tagName, TypeId: typeId },
                 success: function (result) {
                     if (!result.success) {
                         $.messager.show({

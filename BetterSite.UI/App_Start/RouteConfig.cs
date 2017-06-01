@@ -31,7 +31,7 @@ namespace BetterSite.UI
                namespaces: new string[] { "BetterSite.UI.Controllers" },
              constraints: new
              {
-                 TypeCode = @"[a-z]{2}",
+                 TypeCode = @"[a-z]{2,10}",
                  Page = @"\d{0,5}"
              }
           );
@@ -44,7 +44,7 @@ namespace BetterSite.UI
                namespaces: new string[] { "BetterSite.UI.Controllers" },
              constraints: new
              {
-                 TypeCode = @"[a-z]{2}",
+                 TypeCode = @"[a-z]{2,10}",
                  Page= @"\d{0,5}"
              }
           );

@@ -60,6 +60,8 @@ namespace BetterSite.Domain
             get { return m_Tagid; }
             set { m_Tagid = value; }
         }
+
+      
         #endregion
     }
     #endregion

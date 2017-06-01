@@ -65,11 +65,15 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         // POST: /Admin/Types/Create
 
         [HttpPost]
-        public JsonResult Create(BetterSite.Domain.M_Tags entity)
+        public JsonResult Create(BetterSite.Domain.M_Tags entity,string TypeId)
         {
             JsonResult json = new JsonResult();
             try
             {
+                var where = new M_Types() { TypeId = TypeId };
+                var typemodel = typesBO.QueryForList(where).Cast<M_Types>().FirstOrDefault();
+                if (typemodel != null)
+                    entity.TypeCode = typemodel.TypeCode;
                 // TODO: Add insert logic here
                 tagsBO.Insert(entity);
                 json.Data = new

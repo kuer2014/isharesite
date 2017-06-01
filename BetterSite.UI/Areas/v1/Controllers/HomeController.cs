@@ -36,20 +36,21 @@ namespace BetterSite.UI.Areas.v1.Controllers
             ViewBag.New = listNew;
             where.Sort =  "SiteOrderNumber";
             where.Order = "ASC";
-            //技术列表
-            where.TypeCode = "JS";
+         
+            //免费素材
+            where.TypeCode = "sucai";
             var listJS = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.JS = listJS;
-           //资源列表
-            where.TypeCode = "ZY";
+            //在线工具
+            where.TypeCode = "gongju";
             var listZY = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.ZY = listZY;
-            //资讯列表
-            where.TypeCode = "ZX";
+            //发现好玩
+            where.TypeCode = "haowan";
             var listZX = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.ZX = listZX;
-            //生活列表
-            where.TypeCode = "SH";
+            //便民查询
+            where.TypeCode = "chaxun";
             var listSH = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.SH = listSH;
             //默认列表

@@ -65,13 +65,13 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         {
             JsonResult json = new JsonResult();
             try
-            {
+            {          
                 // TODO: Add insert logic here
                 sitesBO.Insert(entity);
                 //插入标签信息
                 for (int i = 0; i < TagId.Length; i++)
                 {
-                    siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = TagId[i] });
+                    siteTagBO.Insert(new M_SiteTag { SiteId = entity.SiteId, TagId = TagId[i]});
                 }               
                 json.Data = new
                 {
@@ -99,6 +99,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             JsonResult json = new JsonResult();
             try
             {
+               
                 // TODO: Add insert logic here
                 sitesBO.Update(entity);
                 //修改标签信息（先根据siteId删除，再插入）
