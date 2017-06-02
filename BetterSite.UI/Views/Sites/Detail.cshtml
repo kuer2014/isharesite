@@ -113,7 +113,7 @@ text-decoration:none;
     </h2>    
     <div class="clr"></div>
     <div class="sitetypedata">
-        <span> 类别:<a href="/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></span>
+        <span> 类别:<a href="/@Model.TypeCode/1.html" target="_self" title="@Model.TypeName">@Model.TypeName</a></span>
         <span>日期:<text class="site-add-date">@Model.SiteAddDate</text></span>
         <span>浏览数:@Model.SiteClickQuantity</span>
     </div>
@@ -230,5 +230,19 @@ text-decoration:none;
                 }
             });
         }
+        jQuery(function () {
+            var urlOrigin = location.origin;  
+                var siteTagsName = jQuery('.hid-SiteTagsName').val();
+                if (siteTagsName) {
+                    var siteTagsNameArr = siteTagsName.split(',');
+                    var htmlArr = [];
+                    for (var i = 0; i < siteTagsNameArr.length; i++) {
+                        //插入                          
+                        htmlArr.push('<a href="' + urlOrigin + '/@Model.TypeCode/' +siteTagsNameArr[i] + '/1.html"><span>' + siteTagsNameArr[i] + '</span></a>');                       
+                    }
+                    jQuery('.div-SiteTags').append(htmlArr.join(' '));
+                }
+        
+        });
     </script>
 }

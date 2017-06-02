@@ -69,7 +69,7 @@
         color:#62bee3;
     }
     .gjlist p.siteprofile {
-           height: 115px;
+           height: 84px;
 
     }
      p.siteprofile > span > a {
@@ -95,10 +95,11 @@
                 <span>@item.SiteClickQuantity</span>        
                
             </h2>
-            <p>类别:<a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
+            <p>类别:<a href="/@item.TypeCode/1.html" target="_self" title="@item.TypeName">@item.TypeName</a></p>
             <p class="siteprofile">
-                
-                @Html.Raw(item.SiteProfile)
+                @if (item.SiteProfile != null) {
+                @Html.Raw(item.SiteProfile.Length > 130 ? item.SiteProfile.Substring(0, 130) : item.SiteProfile);
+                }...
                 <span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
                 @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@
                 <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">

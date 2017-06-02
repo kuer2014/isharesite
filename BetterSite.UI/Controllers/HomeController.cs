@@ -26,7 +26,7 @@ namespace BetterSite.UI.Controllers
             where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
             where.Page = 1;
-            where.Rows = 15;
+            where.Rows = 12;
           
           //  var count = sitesBO.QueryForList(where).Count;
          

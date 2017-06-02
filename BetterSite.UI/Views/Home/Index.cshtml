@@ -102,10 +102,16 @@ margin:2px;
         padding-left: 33px;
         /*position: absolute;*/
     }
+    .home_site .more-site {
+    float:right;
+    margin-top: 20px;
+    margin-right: 10px;
+    }
 </style>
 <div class="">
     <div class="home_site">
         <h2><span>免费素材</span></h2>
+        <span class="more-site"><a href="/sucai/1.html">更多</a></span>
         <div class="divhr"></div>
         <ul class="home_sitetype">
             @foreach (var item in ViewBag.ZY)
@@ -137,6 +143,7 @@ margin:2px;
     </div>
     <div class="home_site">
         <h2><span>在线工具</span></h2>
+        <span class="more-site"><a href="/gongju/1.html">更多</a></span>
         <div class="divhr"></div>
         <ul class="home_sitetype">
             @foreach (var item in ViewBag.ZX)
@@ -167,6 +174,7 @@ margin:2px;
     </div>
     <div class="home_site">
         <h2><span>发现好玩</span></h2>
+        <span class="more-site"><a href="/haowan/1.html">更多</a></span>
         <div class="divhr"></div>
         <ul class="home_sitetype">
             @foreach (var item in ViewBag.JS)
@@ -197,6 +205,7 @@ margin:2px;
     </div>
     <div class="home_site">
         <h2><span>便民查询</span></h2>
+        <span class="more-site"><a href="/chaxun/1.html">更多</a></span>
         <div class="divhr"></div>
         <ul class="home_sitetype">
             @foreach (var item in ViewBag.SH)
@@ -225,7 +234,7 @@ margin:2px;
             }
         </ul>
     </div>
-</div>
+ </div>
 
 @section Scripts
 {
