@@ -561,6 +561,7 @@
     <Content Include="Content\knockoutPagging\knockout.mapping-latest.js" />
     <Content Include="Content\knockoutPagging\paginationViewModel.js" />
     <Content Include="Content\style.css" />
+    <Content Include="defaultError.html" />
     <Content Include="Images\eye.jpg" />
     <Content Include="Images\ffrrr.png" />
     <Content Include="Images\ie.png" />
@@ -1100,6 +1101,7 @@
     <Content Include="SiteHandler.ashx" />
     <Content Include="Views\Shared\_Layout - 复制.cshtml" />
     <Content Include="Views\Sites\Detail - 复制.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

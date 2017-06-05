@@ -70,6 +70,10 @@ namespace BetterSite.UI.Controllers
            // return View(list);
             return View();
         }
+        public ActionResult Error() {
+
+            return View();
+        }
        #region demo_knockout
        public ActionResult _knockoutIndex()
         {
