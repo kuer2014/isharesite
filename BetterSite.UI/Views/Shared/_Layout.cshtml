@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <meta name="keywords" content="@ViewBag.Keywords 网站分享,网站推荐,实用的网站大全,优秀网站导航,优秀网站大全,互联网技术导航" />
-    <meta name="description" content="@ViewBag.Description 优站分享,致力于分享实用的优秀网站,论坛,博客,官网,关注网站涵盖了互联网技术,软件开发,编程,框架,架构,开源,前端,设计,移动端,数据库,大数据,人工智能,机器学习等,是IT人工作,学习的最佳导航网站。" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="description" content="@ViewBag.Description" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <style>
         h2 {
@@ -34,6 +34,10 @@
         .content .mainbar {
         padding-left:10px;
         }
+           /*.menu_nav ul li a{
+       margin:0px;
+       padding:15px;
+        }*/     
     </style>
 
 </head>
@@ -56,7 +60,7 @@
         <div class="content">
             <div class="content_resize">
                 <div class="mainbar">
-                    @RenderBody()
+                    @RenderBody()                 
                 </div>
                 <div class="sidebar">
                     @*<div class="searchform">
@@ -79,17 +83,6 @@
                                 Html.RenderAction("_TagCrtl", "Tags");
                             }
                         </div>
-                        @*<div class="gadget">
-                            <h2 class="star"><span>Sponsors</span></h2><div class="clr"></div>
-                            <ul class="ex_menu">
-                                <li><a href="#" title="Website Templates">DreamTemplate</a><br />Over 6,000+ Premium Web Templates</li>
-                                <li><a href="#/">TemplateSOLD</a><br />Premium WordPress &amp; Joomla Themes</li>
-                                <li><a href="#" title="Affordable Hosting">ImHosted.com</a><br />Affordable Web Hosting Provider</li>
-                                <li><a href="#" title="Stock Icons">MyVectorStore</a><br />Royalty Free Stock Icons</li>
-                                <li><a href="#" title="Website Builder">Evrsoft</a><br />Website Builder Software &amp; Tools</li>
-                                <li><a href="#" title="CSS Templates">CSS Hub</a><br />Premium CSS Templates</li>
-                            </ul>
-                        </div>*@
                     </div>
                 <div class="clr"></div>
             </div>

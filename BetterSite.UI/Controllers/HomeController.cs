@@ -18,22 +18,22 @@ namespace BetterSite.UI.Controllers
         {
          //   IList<M_Types> types = typesBO.QueryForEntityList(null);
          //   ViewBag.Types = types;
-          var tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
-           ViewBag.Tags = tags;
+          //var tags = tagsBO.QueryForList(null).Cast<M_Tags>().ToList();
+          // ViewBag.Tags = tags;
             //ViewBag.TypeText = "分类信息";
 
-            where.Sort = where.Sort ?? "SiteAddDate";
-            where.Order = where.Order ?? "Desc";
+            //where.Sort = where.Sort ?? "SiteAddDate";
+            //where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
             where.Page = 1;
             where.Rows = 12;
           
           //  var count = sitesBO.QueryForList(where).Count;
          
-           //最新收录
-           // var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
-            var listNew = sitesBO.QueryForStuffTagsPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).Take(10).ToList();
-            ViewBag.New = listNew;
+           ////最新收录
+           //// var listNew = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+           // var listNew = sitesBO.QueryForStuffTagsPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).Take(10).ToList();
+           // ViewBag.New = listNew;
             where.Sort =  "SiteOrderNumber";
             where.Order = "ASC";
             //免费素材
@@ -54,20 +54,36 @@ namespace BetterSite.UI.Controllers
             where.TypeCode = "chaxun";
             var listSH = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.SH = listSH;
-            //默认列表
-            //var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
-            //var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
-            where.TypeCode = string.Empty;
-            //站长推荐:显示置顶的网站
-            where.SiteIsTop = true;
-            var listIsTop = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
-            ViewBag.IsTop = listIsTop;
-            //常用站点：显示推到首页的网站
-            where.SiteIsTop = false;
-            where.SiteIsHome = true;
-            var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
-            ViewBag.IsHome = listIsHome;
-           // return View(list);
+            //个人提升
+            where.TypeCode = "tisheng";
+            var list_tisheng = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.tisheng = list_tisheng;
+            //行业专栏
+            where.TypeCode = "zhuanlan";
+            var list_zhuanlan = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.zhuanlan = list_zhuanlan;
+            //最新收录
+            where.Sort = "SiteAddDate";
+            where.Order = "Desc";
+            where.TypeCode = "";
+            var list_gengxin = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            ViewBag.gengxin = list_gengxin.Select(s=>new M_Sites { SiteCode=s.SiteCode, SiteName=s.SiteName, SiteAddDate=Convert.ToDateTime(s.SiteAddDate).Month+"/"+ Convert.ToDateTime(s.SiteAddDate).Day, SiteUrl=s.SiteUrl, SiteClickQuantity=s.SiteClickQuantity });
+            ////默认列表
+            ////var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
+            ////var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
+            //where.TypeCode = string.Empty;
+            ////站长推荐:显示置顶的网站
+            //where.SiteIsTop = true;
+            //var listIsTop = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            //ViewBag.IsTop = listIsTop;
+            ////常用站点：显示推到首页的网站
+            //where.SiteIsTop = false;
+            //where.SiteIsHome = true;
+            //var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            //ViewBag.IsHome = listIsHome;
+            // return View(list);
+            ViewBag.Keywords = "优站分享,网站分享,网站推荐,免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏";
+            ViewBag.Description = "优站分享,致力于分享实用的优秀网站。分享网站涵盖免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏等,优站分享正努力成为您工作、学习、生活的好帮手。";
             return View();
         }
         public ActionResult Error() {

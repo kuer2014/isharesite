@@ -1,6 +1,4 @@
-﻿@{
-    ViewBag.Title = "优站分享|致力于分享实用的优秀网站";
-}
+﻿
 @model IList<BetterSite.Domain.M_Sites>
 <style>
      .gjlist {
@@ -80,121 +78,109 @@
     margin-left:5px;
  
     }
+    .pagepath span {
+    margin:30px;   
+    }
+       .pagepath .divhr{           
+            border-top:1px solid #ccc;/*solid 1px #97d2fa;*/    
+          
+        }
 </style>
-@foreach (var item in Model)
-{
-    <div class="gjlist">
-        <div class="pic">
-            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName"> 
-                <img src="~/Images/SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
-            </a>
-        </div>
-        <div class="incon">
-            <h2 class="fl">
-                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl"> @item.SiteName</a>
-                <span>@item.SiteClickQuantity</span>        
-               
-            </h2>
-            <p>类别:<a href="/@item.TypeCode/1.html" target="_self" title="@item.TypeName">@item.TypeName</a></p>
-            <p class="siteprofile">
-                @if (item.SiteProfile != null) {
-                @Html.Raw(item.SiteProfile.Length > 130 ? item.SiteProfile.Substring(0, 130) : item.SiteProfile);
-                }...
-                <span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
-                @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@
-                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                    <img src="~/Content/images/visit.png" style="border: none;"  width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                </a>
-               
-            </p>
-            <p class="l fl div-SiteTags">               
-                标签:              
-            </p>
-            <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
-            <p class="l fr site-add-date">@item.SiteAddDate</p>
-        </div>
+<div class="pagepath">
+    <span>
+       共找到 @ViewBag.ListCount 个网站
+    </span>
+    <div class="divhr"></div>
     </div>
-    @*<div class="article">
+    @foreach (var item in Model)
+    {
+        <div class="gjlist">
             <div class="pic">
-                <img src="~\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="156" />
+                <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                    <img src="~/Images/SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
+                </a>
             </div>
             <div class="incon">
+                <h2 class="fl">
+                    <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl"> @item.SiteName</a>
+                    <span>@item.SiteClickQuantity</span>
 
+                </h2>
+                <p>类别:<a href="/@item.TypeCode/1.html" target="_self" title="@item.TypeName">@item.TypeName</a></p>
+                <p class="siteprofile">
+                    @if (item.SiteProfile != null)
+                    {
+                        @Html.Raw(item.SiteProfile.Length > 130 ? item.SiteProfile.Substring(0, 130) : item.SiteProfile);
+                }...
+                    <span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
+                    @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@<span><a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl"></a></span>
+                    <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                        <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                    </a>
 
-                <h2><span>@item.SiteName</span></h2><div class="clr"></div>
-                <p><span class="site-add-date"><a href="#">@item.SiteAddDate</a></span> &nbsp;|&nbsp; <a href="/Sites/@item.TypeCode" target="_self" title="@item.TypeName">@item.TypeName</a></p>
-
-                <p>
-                    @Html.Raw(item.SiteProfile)
                 </p>
-                <div class="div-SiteTags" style="display:inline; margin:6px auto -3px 30px;"></div>
+                <p class="l fl div-SiteTags">
+                    标签:
+                </p>
                 <input type="hidden" class="hid-SiteTagsName" value="@item.SiteTagsName" />
-                <p class="spec1">
-                    <a href="#" class="com"><span>11</span> Comments</a>
-                    <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl" class="rm">Read more &raquo;</a>
-                </p>
+                <p class="l fr site-add-date">@item.SiteAddDate</p>
             </div>
-        </div>*@
-}
-<p class="pages">
-    <small>Page @ViewBag.Page of @ViewBag.PageCount</small>
-     <a href="">&laquo;</a> 
-    <a href="">&raquo;</a>
-</p>
-@*<form method="get" action="">
-    <p class="pages"> <a href="#">&laquo;</a> <a href="#">&raquo;</a></p>
-    <input type="text" name="page"/>
-    <input type="submit" value="提交" />
-</form>*@
-@section Scripts
+        </div>
+    }
+    <p class="pages">
+        <small>@ViewBag.Page/@ViewBag.PageCount</small>
+        <a href="">&laquo;上一页</a>
+        <a href="">下一页&raquo;</a>
+    </p>
+    @section Scripts
     {
-    <script>
-        jQuery(function () {         
-            //分页
-            var page= @ViewBag.Page;
-            var pageCount=@ViewBag.PageCount;
-            jQuery('.pages a').css('display','none');
-            if(page>1){
-                jQuery('.pages a:first').css('display','inline');
-                jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
-            }
-            if(page< pageCount){ 
-                jQuery('.pages a:last').css('display','inline');
-                jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
-            }
-            //jQuery(".new-site a").each(function (n, ele) {
-            //    // if ((ele.innerText.replace(/[^\x00-\xff]/, 'aa')).length > 12) {  //一个全角字符2个长度
-            //    if ((ele.innerText).length > 12) {
-            //        // ele.innerText = ele.innerText.substr(0, 12) + '..';
-            //        ele.innerText = ele.innerText.substring(0, 12) + '..';
-            //    }
-            //});
-            //debugger;
-            //为每个站点的标签添加事件
-            var urlFilename = location.href;
-            var urlarr=  location.pathname.split('/');
-            urlarr.pop();
-            urlarr.push('1.html');
-            var siteItemArr = jQuery('.gjlist');
-            jQuery.each(siteItemArr, function (i_site, n_site) {
-                var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                if (siteTagsName) {
-                    var siteTagsNameArr = siteTagsName.split(',');
-                    var htmlArr = [];
-                   
-                    for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        if(urlarr.length==3){//插入
-                            urlarr.splice(2,0,siteTagsNameArr[i]);   
-                            htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                        } else  if(urlarr.length==4){//修改
-                            urlarr.splice(2,1,siteTagsNameArr[i]);
-                            htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                        }     
-                    }                   
-                    jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
+        <script>
+            jQuery(function () {
+                //分页
+                var page= @ViewBag.Page;
+                var pageCount=@ViewBag.PageCount;
+                jQuery('.pages a').css('display','none');
+                if(page>1){
+                    jQuery('.pages a:first').css('display','inline');
+                    jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
                 }
-            });
-            //分页
-        })
-    </script>
-}
+                if(page< pageCount){
+                    jQuery('.pages a:last').css('display','inline');
+                    jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
+                }
+                //jQuery(".new-site a").each(function (n, ele) {
+                //    // if ((ele.innerText.replace(/[^\x00-\xff]/, 'aa')).length > 12) {  //一个全角字符2个长度
+                //    if ((ele.innerText).length > 12) {
+                //        // ele.innerText = ele.innerText.substr(0, 12) + '..';
+                //        ele.innerText = ele.innerText.substring(0, 12) + '..';
+                //    }
+                //});
+                //debugger;
+                //为每个站点的标签添加事件
+                var urlFilename = location.href;
+                var urlarr=  location.pathname.split('/');
+                urlarr.pop();
+                urlarr.push('1.html');
+                var siteItemArr = jQuery('.gjlist');
+                jQuery.each(siteItemArr, function (i_site, n_site) {
+                    var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
+                    if (siteTagsName) {
+                        var siteTagsNameArr = siteTagsName.split(',');
+                        var htmlArr = [];
+
+                        for (var i = 0; i < siteTagsNameArr.length; i++) {
+                            if(urlarr.length==3){//插入
+                                urlarr.splice(2,0,siteTagsNameArr[i]);
+                                htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                            } else  if(urlarr.length==4){//修改
+                                urlarr.splice(2,1,siteTagsNameArr[i]);
+                                htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                            }
+                        }
+                        jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
+                    }
+                });
+                //分页
+            })
+        </script>
+    }

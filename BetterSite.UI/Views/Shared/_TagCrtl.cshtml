@@ -5,6 +5,8 @@
     var gongju = Model.Where(m => m.TypeCode.ToLower() == "gongju");
     var haowan = Model.Where(m => m.TypeCode.ToLower() == "haowan");
     var chaxun = Model.Where(m => m.TypeCode.ToLower() == "chaxun");
+    var tisheng = Model.Where(m => m.TypeCode.ToLower() == "tisheng");
+    var zhuanlan = Model.Where(m => m.TypeCode.ToLower() == "zhuanlan");
 }
 
 <style>
@@ -66,7 +68,6 @@
             @foreach (var item in sucai)
             {
                 <li><a href="/sucai/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
-
             }
         </ul>
     </li>
@@ -76,7 +77,6 @@
             @foreach (var item in gongju)
             {
                 <li><a href="/gongju/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
-
             }
         </ul>
     </li>
@@ -86,7 +86,6 @@
             @foreach (var item in haowan)
             {
                 <li><a href="/haowan/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
-
             }
         </ul>
     </li>
@@ -96,7 +95,24 @@
             @foreach (var item in chaxun)
             {
                 <li><a href="/chaxun/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
-
+            }
+        </ul>
+    </li>
+    <li>
+    <span>个人提升</span>
+    <ul class="">
+        @foreach (var item in tisheng)
+            {
+            <li><a href="/tisheng/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
+        }
+    </ul>
+</li>
+    <li>
+        <span>行业专栏</span>
+        <ul class="">
+            @foreach (var item in zhuanlan)
+            {
+                <li><a href="/zhuanlan/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
             }
         </ul>
     </li>

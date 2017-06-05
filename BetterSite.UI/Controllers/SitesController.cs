@@ -27,22 +27,13 @@ namespace BetterSite.UI.Controllers
             where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
             #region 根据标签Name查找对应的站点Id
-           // var m_SiteTag = new M_SiteTag();
             if (Tag != null && Tag.Count() > 0)
             {
-                string tagsName = string.Join("','", Tag);
-               // m_SiteTag.TagId = tagsId;
-                /// 标签关系[或]
-                //IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
-                //where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
-                ///标签关系[或]end
-
-                ///标签关系[且]start
+                string tagsName = string.Join("','", Tag);           
                 Hashtable htTagsId = new Hashtable();
                 htTagsId.Add("TagsName", tagsName);
                 htTagsId.Add("TagCount", Tag.Count());
                 IList<M_SiteTag> tags = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
-
                 if (tags.Count == 0)
                 {
                     where.SiteId = Guid.NewGuid().ToString();
@@ -51,64 +42,49 @@ namespace BetterSite.UI.Controllers
                 {
                     where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
                 }
-                ///标签关系[且]end
             }
-            #endregion
-            #region 根据标签Id查找对应的站点Id
-            //var m_SiteTag = new M_SiteTag();
-            //if (TagId != null && TagId.Count() > 0)
-            //{
-            //    string tagsId=string.Join("','", TagId);
-            //    m_SiteTag.TagId = tagsId;
-            //    /// 标签关系[或]
-            //    //IList<M_SiteTag> tags = siteTagBO.QueryForList(m_SiteTag).Cast<M_SiteTag>().ToList();
-            //    //where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
-            //    ///标签关系[或]end
-
-            //    ///标签关系[且]start
-            //    Hashtable htTagsId = new Hashtable();
-            //    htTagsId.Add("TagsId", tagsId);
-            //    htTagsId.Add("TagCount", TagId.Count());
-            //    IList<M_SiteTag> tags = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
-
-            //    if (tags.Count == 0) {
-            //        where.SiteId = Guid.NewGuid().ToString();
-            //    }
-            //    else { 
-            //    where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
-            //    }
-            //    ///标签关系[且]end
-            //}
-            #endregion
-            ////var count = sitesBO.QueryForList(where).Count;
-            ////  var list = sitesBO.QueryForPageList(where).Cast<M_Tags>().ToList();
-            int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
-            where.Rows = pagesize;
-            where.Page=where.Page == 0 ? where.Page = 1 : where.Page;
-            var list = sitesBO.QueryForStuffTagsPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
-            var listCount = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().Count();
-            ViewBag.Page = where.Page;
-            ViewBag.PageCount = (int)Math.Ceiling(Convert.ToDouble(listCount) / Convert.ToDouble(pagesize));  ;
+            #endregion          
+         
+         
             //标题
             string title = "优站分享|致力于分享实用的优秀网站";
+            string keywords = "";
             if (string.IsNullOrWhiteSpace(where.TypeCode))
             {
-                title = "全部-"+ title;
+                title = "全部 - " + title;
+                keywords = "优站分享,网站分享,网站推荐,免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏";
+            }
+            else if (where.TypeCode.ToLower() == "gengxin")
+            {
+                title = "最新收录 - " + title;
+                keywords = "最新收录,优站分享,网站分享,网站推荐";
+                where.TypeCode = "";
             }
             else
             {
                 var types = typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
                 if (types.Count > 0)
                 {
-                    title = types[0].TypeName + "-" + title;
+                    title = types[0].TypeName + " - " + title;
+                    keywords = types[0].TypeName + ",优站分享,网站分享,网站推荐";
                 }
-                else {
-                    return Redirect("/Sites");
-                }               
+                //else {
+                //    return Redirect("/sites");
+                //}               
             }
             ViewBag.Title = title;
-           // ViewData["TypeCode"] = where.TypeCode;
-            TempData["TypeCode"] = where.TypeCode;//跨控制器
+            ViewBag.Keywords = keywords;
+            ViewBag.Description = "优站分享,致力于分享实用的优秀网站。分享网站涵盖免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏等,优站分享正努力成为您工作、学习、生活的好帮手。";
+        // ViewData["TypeCode"] = where.TypeCode;
+       // TempData["TypeCode"] = where.TypeCode;//跨控制器
+            int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
+            where.Rows = pagesize;
+            where.Page = where.Page == 0 ? where.Page = 1 : where.Page;
+            var list = sitesBO.QueryForStuffTagsPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
+            var listCount = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().Count();
+            ViewBag.ListCount = listCount;
+            ViewBag.Page = where.Page;
+            ViewBag.PageCount = (int)Math.Ceiling(Convert.ToDouble(listCount) / Convert.ToDouble(pagesize)); ;
             return View(list);
         }
         // GET /Sites/SITE1489992926300
@@ -117,8 +93,8 @@ namespace BetterSite.UI.Controllers
             var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();
             if (model != null)
             {
-                ViewBag.Title = model.SiteName + " 优站分享|致力于分享实用的优秀网站";
-                ViewBag.Keywords = model.SiteName;
+                ViewBag.Title = model.SiteName + " - 优站分享|致力于分享实用的优秀网站";
+                ViewBag.Keywords = model.SiteTagsName+","+model.TypeName+",优站分享";
                 ViewBag.Description = model.SiteName+","+model.SiteProfile;
                 //加载评论
                 ViewBag.CommentList=sitesBO.QuerySiteCommentForList(new M_SiteComment {SiteId= model.SiteId,Status=1 });

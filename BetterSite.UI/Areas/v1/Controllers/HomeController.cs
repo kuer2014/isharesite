@@ -66,7 +66,8 @@ namespace BetterSite.UI.Areas.v1.Controllers
             where.SiteIsHome = true;
             var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             ViewBag.IsHome = listIsHome;
-           // return View(list);
+            // return View(list);
+       
             return View();
         }
        #region demo_knockout
