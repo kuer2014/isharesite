@@ -36,8 +36,9 @@
              text-decoration:underline;
             color:#555;
         }
-        .send {
+         .article .send {
         padding:5px 8px 5px 8px;
+        margin:5px 0 0 20px;
         }    
         .sitetypedata{
            padding: 10px 0 0 20px;
@@ -51,7 +52,12 @@
         .article hr {
         margin:0 0 10px 0;
         }
-
+ .article .panel-body, 
+ .article .comment-form,
+ .article .bshare-custom,
+ .article .nocommnettxt {
+        margin:0 15px;
+        }
 </style>
 <div class="article">
     <h2>
@@ -115,6 +121,10 @@
 </div>
 <div class="article">
     <h3><span></span> 最新评论</h3><div class="clr"></div>
+    @if (ViewBag.CommentList == null || ViewBag.CommentList.Count == 0)
+    {
+        <span class="nocommnettxt">暂无评论</span>
+    }
     @foreach (var item in ViewBag.CommentList)
             {
     <div class="comment">
