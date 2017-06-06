@@ -82,6 +82,7 @@ namespace BetterSite.UI.Controllers
             //var listIsHome = sitesBO.QueryForPageList(where).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
             //ViewBag.IsHome = listIsHome;
             // return View(list);
+            ViewBag.Title = "优站分享|致力于分享实用的优秀网站";
             ViewBag.Keywords = "优站分享,网站分享,网站推荐,免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏";
             ViewBag.Description = "优站分享,致力于分享实用的优秀网站。分享网站涵盖免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏等,优站分享正努力成为您工作、学习、生活的好帮手。";
             return View();

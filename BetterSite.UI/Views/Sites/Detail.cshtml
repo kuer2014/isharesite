@@ -1,99 +1,56 @@
 ﻿@model BetterSite.Domain.M_Sites
 <style>
-    /*p {
-        margin: 0px 20px 0px 20px;
-        color: #555;
-        display: block;
-        font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 14px;
-        line-height: 24px;
-        text-indent: 30px;
-    }
-    small {
-        word-wrap: break-word;
-    }
-
-    .list-group-item-heading {
-        margin: 5px 0 3px 0;
-    }
-    .pic_shadow{border:1px solid #dadada;}
-
-    .pic_position {
-    margin:15px auto 15px auto;
-    }
-    input {
-    max-width:200px;
-    }
-    .panel-heading {
-    padding:6px;
-    }
-    .panel-default {
-    margin-top:5px;
-    }
-    .div-SiteTags {
-    margin:6px auto 15px 30px;
-    }*/
-    .article p {
-        /*line-height: 150%;*/
-        /*margin:0px;
-        padding:0px;*/
-        color: #666;
-        /*margin-top: 20px;*/
-        font-size: 12px;
-        text-indent: 26px;
-    }
-               .title {
-        width: 450px;
-        display: block;
-        overflow: hidden;
-        word-break: keep-all;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        float:left;
-        text-decoration:none;
-        color:#666;
-    }
-                 .title:hover{
-         text-decoration:underline;
-        color:#62bee3;
-    }
-
-        .visit{
-            text-decoration: none;
-            /*color: #666;*/
-            font-size: 15px;
-            float:right;
-            display:block;
+        .article p {
+            /*line-height: 150%;*/
+            /*margin:0px;
+            padding:0px;*/
+            color: #666;
+            /*margin-top: 20px;*/
+            font-size: 12px;
+            text-indent: 26px;
         }
-         .visit:hover{
-         text-decoration:underline;
-        color:#555;
-    }
-    .send {
-    padding:5px 8px 5px 8px;
-    }
-    /*.send {
-    width:150px;
-    height:30px;
-    display:block;
-    background-color:#fff;
-    border:1px solid #999;
-padding:10px;
-font-size:20px;
-text-decoration:none;
-    }*/
-    .sitetypedata{
-       padding: 10px 0 0 20px;
-       border-bottom:1px solid #ccc;
-       margin-bottom:15px;
-    }
-        .sitetypedata span {
-            margin: 0 10px 0 10px;
-        
+                   .title {
+            width: 450px;
+            display: block;
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            float:left;
+            text-decoration:none;
+            color:#666;
         }
-    .article hr {
-    margin:0 0 10px 0;
-    }
+                     .title:hover{
+             text-decoration:underline;
+            color:#62bee3;
+        }
+
+            .visit{
+                text-decoration: none;
+                /*color: #666;*/
+                font-size: 15px;
+                float:right;
+                display:block;
+            }
+             .visit:hover{
+             text-decoration:underline;
+            color:#555;
+        }
+        .send {
+        padding:5px 8px 5px 8px;
+        }    
+        .sitetypedata{
+           padding: 10px 0 0 20px;
+           border-bottom:1px solid #ccc;
+           margin-bottom:15px;
+        }
+            .sitetypedata span {
+                margin: 0 10px 0 10px;
+
+            }
+        .article hr {
+        margin:0 0 10px 0;
+        }
 
 </style>
 <div class="article">
@@ -103,26 +60,23 @@ text-decoration:none;
             <text>直达网站</text> <img src="~/Content/images/visit.png" style="border: none;" width="25" height="25" alt="icon" title="打开网站 &#10; @Model.SiteUrl">
         </a>
         <span>
-            <small>               
+            <small>
                 <a class="title" style="color:#999;" href="@Model.SiteUrl" target="_blank" title="@Model.SiteName"> @Model.SiteUrl</a>
             </small>
         </span>
-    </h2>    
+    </h2>
     <div class="clr"></div>
     <div class="sitetypedata">
-        <span> 类别:<a href="/@Model.TypeCode/1.html" target="_self" title="@Model.TypeName">@Model.TypeName</a></span>
-        <span>日期:<text class="site-add-date">@Model.SiteAddDate</text></span>
-        <span>浏览数:@Model.SiteClickQuantity</span>
+        <span> 类别: <a href="/@Model.TypeCode/1.html" target="_self" title="@Model.TypeName">@Model.TypeName</a></span>
+        <span>日期: <text class="site-add-date">@Model.SiteAddDate</text></span>
+        <span>浏览数: @Model.SiteClickQuantity</span>
     </div>
-
     <img class="" src="\Images\SiteScreen\@{@Model.SiteCode}.jpg" alt="@Model.SiteName" title="@Model.SiteName" />
     <p class="siteprofile">
 
         @Html.Raw(Model.SiteProfile)
         @*<span>[<a href="/Sites/@Model.SiteCode" target="_blank" title="更多网站介绍">更多</a>]</span>*@
         @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@
-
-
     </p>
     <div>
         <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow">
@@ -132,8 +86,8 @@ text-decoration:none;
     <p class="l fl div-SiteTags">
         标签:
     </p>
-   
-  <hr />
+
+    <hr />
     <input type="hidden" class="hid-SiteTagsName" value="@Model.SiteTagsName" />
 
 </div>
@@ -151,9 +105,9 @@ text-decoration:none;
         <ul class="list-unstyled ">
             @foreach (var item in ViewBag.ListType)
             {
-                <li style="height:25px;width:600px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                    <small> ★ </small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
-                </li>
+            <li style="height:25px;width:600px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                <small> ★ </small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+            </li>
             }
         </ul>
     </div>
@@ -163,13 +117,13 @@ text-decoration:none;
     <h3><span></span> 最新评论</h3><div class="clr"></div>
     @foreach (var item in ViewBag.CommentList)
             {
-        <div class="comment">
-            <div>@item.CommentUserNickname:</div>
-            <span>@item.CreateTime</span>
-            <p>
-                @item.CommentContent
-            </p>
-        </div>
+    <div class="comment">
+        <div>@item.CommentUserNickname:</div>
+        <span>@item.CreateTime</span>
+        <p>
+            @item.CommentContent
+        </p>
+    </div>
     }
 </div>
 <div class="article">
@@ -195,9 +149,7 @@ text-decoration:none;
         </ol>
     </form>
 </div>
-
 @section scripts {
-
     <script>
         function SubmitComment() {
             var commentContent = $('#CommentContent').val();
@@ -228,18 +180,18 @@ text-decoration:none;
             });
         }
         jQuery(function () {
-            var urlOrigin = location.origin;  
-                var siteTagsName = jQuery('.hid-SiteTagsName').val();
-                if (siteTagsName) {
-                    var siteTagsNameArr = siteTagsName.split(',');
-                    var htmlArr = [];
-                    for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        //插入                          
-                        htmlArr.push('<a href="' + urlOrigin + '/@Model.TypeCode/' +siteTagsNameArr[i] + '/1.html"><span>' + siteTagsNameArr[i] + '</span></a>');                       
-                    }
-                    jQuery('.div-SiteTags').append(htmlArr.join(' '));
+            var urlOrigin = location.origin;
+            var siteTagsName = jQuery('.hid-SiteTagsName').val();
+            if (siteTagsName) {
+                var siteTagsNameArr = siteTagsName.split(',');
+                var htmlArr = [];
+                for (var i = 0; i < siteTagsNameArr.length; i++) {
+                    //插入
+                    htmlArr.push('<a href="' + urlOrigin + '/@Model.TypeCode/' + siteTagsNameArr[i] + '/1.html"><span>' + siteTagsNameArr[i] + '</span></a>');
                 }
-        
+                jQuery('.div-SiteTags').append(htmlArr.join(', '));
+            }
+
         });
     </script>
 }

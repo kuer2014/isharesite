@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -9,50 +9,49 @@
     <meta name="description" content="@ViewBag.Description" />
     <link href="~/Content/style.css" rel="stylesheet" />
     <style>
-        h2 {
-       font: normal 18px/1em Arial, Helvetica, sans-serif;
-        }
- 
-        .search_box {
-            padding:3px;
-            width:200px;
-        }
-        .search_box + input{
-        color: #fff;
-    background-color: #62bee3;   
-    height: 24px;
-    margin-left: -42px;
-    border: none;
-        }
-            .search_box + input:focus {
-                color: #97d2fa;
-            }
+         h2 {
+             font: normal 18px/1em Arial, Helvetica, sans-serif;
+         }
 
-            .search_box + input:hover {
-                background-color: #97d2fa;
-            }
-        .content .mainbar {
-        padding-left:10px;
-        }
-           /*.menu_nav ul li a{
-       margin:0px;
-       padding:15px;
-        }*/     
+         .search_box {
+             padding: 3px;
+             width: 200px;
+         }
+
+             .search_box + input {
+                 color: #fff;
+                 background-color: #62bee3;
+                 height: 24px;
+                 margin-left: -42px;
+                 border: none;
+                 padding-bottom: 2px;
+             }
+
+                 .search_box + input:focus {
+                     color: #97d2fa;
+                 }
+
+                 .search_box + input:hover {
+                     background-color: #97d2fa;
+                 }
+
+         .content .mainbar {
+             padding-left: 10px;
+         }
     </style>
-
 </head>
 <body>
     <div class="main">
         <div class="header">
             <div class="header_resize">
                 @*<a class="navbar-brand" href="/" style="padding-bottom:5px;padding-top:12px;">
-                    <img src="~/Images/Logo30px.png" width="25" /><b><em style="margin-left:15px;color:#eee">IShareSite</em></b>
-                </a>*@
+                        <img src="~/Images/Logo30px.png" width="25" /><b><em style="margin-left:15px;color:#eee">IShareSite</em></b>
+                    </a>*@
                 <div class="logo"><h1><a href="/">IShareSite</a> <small>优站分享,致力于分享实用的优秀网站</small></h1></div>
                 <div class="menu_nav">
                     @{
                         Html.RenderAction("_TypeCrtl", "Types");
-                    }                    
+                    }
                 </div>
                 <div class="clr"></div>
             </div>
@@ -60,72 +59,70 @@
         <div class="content">
             <div class="content_resize">
                 <div class="mainbar">
-                    @RenderBody()                 
+                    @RenderBody()
                 </div>
                 <div class="sidebar">
                     @*<div class="searchform">
-                        <form id="formsearch" name="formsearch" method="get" action="/Sites/@TempData["TypeCode"]">
-                            <span><input name="SearchText" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
-                            <input src="~/Content/images/search_btn.gif" class="button_search" type="image" />
-                        </form>
-                    </div>*@
+                            <form id="formsearch" name="formsearch" method="get" action="/Sites/@TempData["TypeCode"]">
+                                <span><input name="SearchText" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
+                                <input src="~/Content/images/search_btn.gif" class="button_search" type="image" />
+                            </form>
+                        </div>*@
                     <div class="gadget">
                         @*<form class="" action="/@TempData["TypeCode"]/1.html">*@
-                            <form class="" action="1.html">
-                                <input type="text" name="SearchText" class="search_box" id="SearchForm" placeholder="搜索好站...">
-                                <input type="submit" value="搜索" />
-                            </form>
+                        <form class="" action="1.html">
+                            <input type="text" name="SearchText" class="search_box" id="SearchForm" placeholder="搜索好站...">
+                            <input type="submit" value="搜索" />
+                        </form>
                     </div>
-                        <div class="gadget">
-                            <h3 class="star"><span>热门标签</span></h3>
-                            <div class="clr"></div>
-                            @{
-                                Html.RenderAction("_TagCrtl", "Tags");
-                            }
-                        </div>
+                    <div class="gadget">
+                        <h3 class="star"><span>热门标签</span></h3>
+                        <div class="clr"></div>
+                        @{
+                            Html.RenderAction("_TagCrtl", "Tags");
+                        }
                     </div>
+                </div>
                 <div class="clr"></div>
             </div>
         </div>
         <!-- 页脚  -->
         @*<div id="footer" class="text-center">
-            <footer>
+                <footer>
 
-                <div>
-                    <a href="http://webscan.360.cn/index/checkwebsite/url/www.isharesite.com" target="_blank"><img border="0" src="http://img.webscan.360.cn/status/pai/hash/1ced5c2280259d57448ca60ec6a8d93e/?size=74x27" /></a>
-                </div>
-                优站分享,致力于分享实用的优秀网站
-                <br />
-                Copyright © 2015-2017  <a href="http://www.isharesite.com/">IShareSite</a>.All Rights Reserved.
-                <a href="http://www.miibeian.gov.cn" title="网站备案号" target="_blank">京ICP备15047973号</a>
-                <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1261815581'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261815581%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
-            </footer>
-        </div>*@
-
-     <!--备用-->
+                    <div>
+                        <a href="http://webscan.360.cn/index/checkwebsite/url/www.isharesite.com" target="_blank"><img border="0" src="http://img.webscan.360.cn/status/pai/hash/1ced5c2280259d57448ca60ec6a8d93e/?size=74x27" /></a>
+                    </div>
+                    优站分享,致力于分享实用的优秀网站
+                    <br />
+                    Copyright © 2015-2017  <a href="http://www.isharesite.com/">IShareSite</a>.All Rights Reserved.
+                    <a href="http://www.miibeian.gov.cn" title="网站备案号" target="_blank">京ICP备15047973号</a>
+                    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1261815581'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1261815581%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+                </footer>
+            </div>*@
+        <!--备用-->
         <div class="fbg">
-        <div class="fbg_resize">
-           
-                 <!--  <div class="col c1">
-                    <h2><span>Image Gallery</span></h2>
-                    <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
-                    <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
-                </div>
-                <div class="col c2">
-                    <h2><span>Lorem Ipsum</span></h2>
-                    <p>Lorem ipsum dolor<br />Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum odio, ac blandit ante orci ut diam.</p>
-                </div>
-                <div class="col c3">
-                    <h2><span>Contact</span></h2>
-                    <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue.</p>
-                    <p><a href="mailto:support@yoursite.com">support@yoursite.com</a></p>
-                    <p>+1 (123) 444-5677<br />+1 (123) 444-5678</p>
-                    <p>Address: 123 TemplateAccess Rd1</p>
-                </div>--> 
+            <div class="fbg_resize">
+                @*<div class="col c1">
+                        <h2><span>Image Gallery</span></h2>
+                        <a href="#"><img src="images/pix1.jpg" width="58" height="58" alt="pix" /></a>
+                        <a href="#"><img src="images/pix2.jpg" width="58" height="58" alt="pix" /></a>
+                        <a href="#"><img src="images/pix3.jpg" width="58" height="58" alt="pix" /></a>
+                        <a href="#"><img src="images/pix4.jpg" width="58" height="58" alt="pix" /></a>
+                        <a href="#"><img src="images/pix5.jpg" width="58" height="58" alt="pix" /></a>
+                        <a href="#"><img src="images/pix6.jpg" width="58" height="58" alt="pix" /></a>
+                    </div>
+                    <div class="col c2">
+                        <h2><span>Lorem Ipsum</span></h2>
+                        <p>Lorem ipsum dolor<br />Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec libero. Suspendisse bibendum. Cras id urna. Morbi tincidunt, orci ac convallis aliquam, lectus turpis varius lorem, eu posuere nunc justo tempus leo. Donec mattis, purus nec placerat bibendum, dui pede condimentum odio, ac blandit ante orci ut diam.</p>
+                    </div>
+                    <div class="col c3">
+                        <h2><span>Contact</span></h2>
+                        <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue.</p>
+                        <p><a href="mailto:support@yoursite.com">support@yoursite.com</a></p>
+                        <p>+1 (123) 444-5677<br />+1 (123) 444-5678</p>
+                        <p>Address: 123 TemplateAccess Rd1</p>
+                    </div>*@
                 <div class="clr"></div>
             </div>
         </div>
@@ -133,7 +130,7 @@
             <div class="footer_resize">
                 <div style="display: inline-block;">
                     <ul class="fmenu">
-                        <li class=""><a href="index.html">首页</a></li>   
+                        <li class=""><a href="index.html">首页</a></li>
                         <li><a href="/sucai/1.html">免费素材</a></li>
                         <li><a href="/gongju/1.html">在线工具</a></li>
                         <li><a href="/haowan/1.html">发现好玩</a></li>
@@ -142,8 +139,7 @@
                         <li><a href="/zhuanlan/1.html">行业专栏</a></li>
                     </ul>
                 </div>
-
-                <div >
+                <div>
                     <text>
                         优站分享,致力于分享实用的优秀网站 |
                     </text>
@@ -156,186 +152,63 @@
                     <text><a href="http://www.isharesite.com/v1" title="网站历史版本" target="_blank" style="float:right;color:#bbb">优站分享v1</a></text>
                     <div class="clr"></div>
                 </div>
-
             </div>
         </div>
         <!--备用-->
     </div>
-                <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "slide": { "type": "slide", "bdImg": "2", "bdPos": "right", "bdTop": "200.5" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
-                @*<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"200.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>*@
-           
-   
-  
-        @Scripts.Render("~/bundles/jquery")
-        <script src="~/Scripts/Common.js"></script>
+    <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "slide": { "type": "slide", "bdImg": "2", "bdPos": "right", "bdTop": "200.5" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+    @*<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"200.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>*@
+ @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/Common.js"></script>
     @RenderSection("scripts", required: false)
     <script>
         jQuery(function () {
-
-            //jQuery('#menu li a').mouseover(function () {
-            //   // debugger;
-            //    var _this = this;
-            //    $('.sb_menu').css('display', 'none');
-            //    $('.' + _this.id).css('display', 'block');
-            //    $('#menu li').removeClass('active');
-            //    $(_this).parent().addClass('active');
-
-            //})
-            //function areamosover(n) {
-            //    debugger;
-            //    $('.sb_menu').css('display', 'none');
-            //    $('.sb_menu .' + n).css('display', 'block');
-            //}
-                    // debugger;
-                    //为标签绑定事件
-                    //jQuery('form [name=Tag]').each(function (i, elem) {
-                    //    elem.onchange = function () {
-                    //        jQuery('form').submit();
-                    //    };
-                    //});
-                    //为每个标签添加事件
-                    // debugger;
-                    // var urlFilename = (location.href.match(/\/([^\/]+)$/)[1]).split('?')[0];
-                    //var localhrefmat = location.href.match(/\/([^\/]+)$/);
-                    //if (localhrefmat) {
-                    //    var urlPath = localhrefmat[1];
-                    //    if (/SITE\d{13}/i.test(urlPath)) urlPath = '';//去掉SITE1489992926300
-                    //    var urlFilenameArr = urlPath.split('?');
-                    //    var urlFilename = '';
-                    //    // debugger;
-                    //    if (urlFilenameArr.length == 2 && urlFilenameArr[1]) {
-                    //        if (urlPath != 'Sites')
-                    //            urlFilename = '/Sites/' + urlPath;
-                    //        else
-                    //            urlFilename = '/Sites/';
-                    //        if (urlFilename.lastIndexOf('&') != (urlFilename.length - 1)) {
-                    //            urlFilename += '&';
-                    //        }
-                    //    } else {
-                    //        if (urlFilenameArr[0] != 'Sites')
-                    //            urlFilename = '/Sites/' + urlFilenameArr[0];
-                    //        else
-                    //            urlFilename = '/Sites/';
-                    //        if (urlFilename == '' || urlFilename.lastIndexOf('?') != (urlFilename.length - 1)) {
-                    //            urlFilename += '?';
-                    //        }
-                    //    }
-                    //    //debugger;
-                    //    //为每个站点的标签添加事件
-                    //    var paramValueArr = urlFilenameArr[1] ? urlFilenameArr[1].split('&') : [];
-                    //    var siteItemArr = jQuery('.article');
-                    //    jQuery.each(siteItemArr, function (i_site, n_site) {
-                    //        var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                    //        //var siteTagsId = jQuery(n_site).find('.hid-SiteTagsId').val();
-                    //        if (siteTagsName) {
-                    //            var siteTagsNameArr = siteTagsName.split(',');
-                    //            // var siteTagsIdArr = siteTagsId.split(',');
-                    //            var htmlArr = [];
-                    //            for (var i = 0; i < siteTagsNameArr.length; i++) {
-                    //                if (paramValueArr.contains('Tag=' + encodeURI(siteTagsNameArr[i]))) {
-                    //                    // htmlArr.push('<a class="btn btn-default btn-xs disabled" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                    //                    htmlArr.push('<a class="active" href="' + urlFilename.replace('Tag=' + encodeURI(siteTagsNameArr[i]) + '&', '') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                    //                } else {
-                    //                    //htmlArr.push('<a class="btn btn-default btn-xs" href="' + urlFilename + 'TagId=' + siteTagsIdArr[i] + '">' + siteTagsNameArr[i] + '</a>');
-                    //                    htmlArr.push('<a class="" href="' + urlFilename + 'Tag=' + siteTagsNameArr[i] + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                    //                }
-                    //            }
-                    //            jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(' '));
-                    //        }
-                    //    });
-                    //    ///为标签云添加事件
-                    //    jQuery('.Tag-Single').each(function (_i, _e) {
-                    //        var _ej = jQuery(_e);
-                    //        if (_ej.find('.active').length) {
-                    //            _ej.children().attr('href', urlFilename.replace('Tag=' + encodeURI(_ej.children().text()) + '&', ''));
-                    //        } else {
-                    //            _ej.children().attr('href', urlFilename + 'Tag=' + encodeURI(_ej.children().text()));
-                    //        }
-                    //    });
-                     
-                    //}
             ///活动菜单
-          //  debugger;
+            //debugger;
             var urlFilename = location.pathname;
-            if (urlFilename && urlFilename.length >=3) {
+            if (urlFilename && urlFilename.length > 7) {
                 $(".navbar-nav li").removeClass("active");
-                $(".navbar-nav li:has(a[href^='" + urlFilename.substr(0, 3) + "'])").addClass("active");
-            } 
-                    //搜索辅助功能
-                    //jQuery('#SearchForm').keyup(function (e) {
-                    //    if (e.keyCode == 13) {
-                    var txt = decodeURI(Url.getParam('SearchText'));
-                    if (txt != 'undefined') { jQuery('#SearchForm').val(txt); }
-               
-                    //高亮显示
-                    //jQuery('.li-site-item a').text().replace(txt, '<b>' + txt + '</b>');
-                    var site_a = jQuery('.li-site-item h4').children();//.text().replace(txt, '<b>' + txt + '</b>');
-                    jQuery.each(site_a, function (i, n) {
-                        //jQuery(n).html(jQuery(n).text().replace(txt, '&ltb&gt' + txt + '&lt/b&gt'));
-                        jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
-                        //jQuery(n).next().html(jQuery(n).next().text().replace(txt, '<mark>' + txt + '</mark>'));
-                    });
-                    //    }
-                    //});
-                    //搜索标签功能
-                    jQuery('#SearchTag').keyup(function (e) {
-                        if (e.keyCode == 13) {
-                            var _this = jQuery(this);
-                            $(".Tag-Single a").css('font-weight', 'normal');
-                            var tagName = _this.val();
-                            if (tagName) {
-                                _this.next().css('display', 'none');
-                                ///var exisTag = $(".Tag-Single label:contains('" + tagName + "')");
-                                //if (exisTag.length) {
-                                //    exisTag.css('font-weight', 'bold');
-                                //    return;
-                                //} else {
-                                //    jQuery(this).next().css('display', 'initial');
-                                //}
-                                /// debugger;
-                                var isn = false;
-                                $(".Tag-Single a").each(function (i, e) {
-                                    if (jQuery(e).text().toLowerCase().indexOf(tagName.toLowerCase()) > -1) {
-                                        jQuery(e).css('background-color', 'yellow');//('font-weight', 'bold');
-                                        isn = true;
-                                    }
-                                });
-                                if (!isn) _this.next().css('display', 'initial');
-                            }
-                        }
-                    });
-                    //站点添加时间显示样式
-                    jQuery(".site-add-date").each(function (n, ele) {
-                        if (ele.innerText.length > 0) {
-                            ele.innerText = ele.innerText.substr(0, 11);
-                        }
-                    });
-                });
+                $(".navbar-nav li:has(a[href^='" + urlFilename.substr(0, 6) + "'])").addClass("active");
+            }
+            //搜索辅助功能
+            var txt = decodeURI(Url.getParam('SearchText'));
+            if (txt != 'undefined') { jQuery('#SearchForm').val(txt); }
+            //高亮显示
+            var site_a = jQuery('.li-site-item h4').children();
+            jQuery.each(site_a, function (i, n) {
+                jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
+            });
+            //站点添加时间显示样式
+            jQuery(".site-add-date").each(function (n, ele) {
+                if (ele.innerText.length > 0) {
+                    ele.innerText = ele.innerText.substr(0, 11);
+                }
+            });
+        });
     </script>
     <script>
-                //百度自动推送
-                (function () {
-                    var bp = document.createElement('script');
-                    var curProtocol = window.location.protocol.split(':')[0];
-                    if (curProtocol === 'https') {
-                        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-                    }
-                    else {
-                        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-                    }
-                    var s = document.getElementsByTagName("script")[0];
-                    s.parentNode.insertBefore(bp, s);
-                })();
+        //百度自动推送
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
 
-                //百度统计
-                var _hmt = _hmt || [];
-                (function () {
-                    var hm = document.createElement("script");
-                    hm.src = "https://hm.baidu.com/hm.js?5f86045996483139413748abc268c7f6";
-                    var s = document.getElementsByTagName("script")[0];
-                    s.parentNode.insertBefore(hm, s);
-                })();
+        //百度统计
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?5f86045996483139413748abc268c7f6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
     </script>
 </body>
-
 </html>
