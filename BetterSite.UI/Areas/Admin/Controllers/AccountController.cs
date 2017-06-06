@@ -25,6 +25,11 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         //[AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            var user = System.Web.HttpContext.Current.Request.Cookies["user"];
+            if (user != null) { 
+            ViewBag.userName = user["userName"];
+            ViewBag.password = user["password"];
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -40,7 +45,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
 /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(string userName, string password, string returnUrl, bool isPersistent = true)
+        public ActionResult Login(string userName, string password, string returnUrl,string rememberMe, bool isPersistent = true)
         {
             string _userName = System.Configuration.ConfigurationManager.AppSettings["userName"].ToLower();
             string _password = System.Configuration.ConfigurationManager.AppSettings["password"];
@@ -69,6 +74,14 @@ namespace BetterSite.UI.Areas.Admin.Controllers
                 //cookie.Expires = DateTime.Now.AddHours(1); 
                 //System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
                 //                ///System.Web.HttpContext.Current.Response.AppendCookie(cookie);     
+
+                if (HttpContext.Request.Form["rememberMe"]!=null&&HttpContext.Request.Form["rememberMe"].ToLower()=="on") {
+                    HttpCookie cookie = new HttpCookie("user");
+                    cookie["userName"] = userName;
+                    cookie["password"] = password;
+                    cookie.Expires = DateTime.Now.AddDays(10);
+                    System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+                }
                 Session.Timeout = 10;//10分钟不操作页面即失效
                 Session["userName"] = userName;
                 return RedirectToLocal(returnUrl);
