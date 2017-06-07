@@ -206,6 +206,17 @@
                 }
             }
             jQuery('.curpostion').append(postionhtml);
+            //搜索辅助功能
+            var txt = decodeURI(Url.getParam('keyword'));
+            if (txt != 'undefined') {
+                jQuery('#SearchForm').val(txt);
+                jQuery('.curpostion').append(' > 搜索“'+txt+'”');
+            }
+            ////高亮显示
+            //var site_a = jQuery('.li-site-item h4').children();
+            //jQuery.each(site_a, function (i, n) {
+            //    jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
+            //});
         })
     </script>
 }

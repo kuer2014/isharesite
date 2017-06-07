@@ -21,12 +21,12 @@ namespace BetterSite.Domain
             get { return rows; }
             set { rows = value; }
         }
-        protected string searchText;
+        protected string keyword;
 
-        public string SearchText
+        public string Keyword
         {
-            get { return searchText; }
-            set { searchText = value; }
+            get { return keyword; }
+            set { keyword = value; }
         }
         protected string sort;
 

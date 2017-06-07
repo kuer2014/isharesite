@@ -34,7 +34,7 @@ namespace BetterSite.UnitTest
             M_Sites where = new M_Sites();
             where.SiteIsActive = true;
             where.TypeCode = "ZX";
-            //where.SearchText = "鸠摩电子书搜索引擎";
+            //where.keyword = "鸠摩电子书搜索引擎";
             var list = sitesBO.QueryForList(where).Cast<M_Sites>();
             OLayer ow = new OLayer();
             foreach (var site in list)

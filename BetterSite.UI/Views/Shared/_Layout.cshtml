@@ -64,14 +64,14 @@
                 <div class="sidebar">
                     @*<div class="searchform">
                             <form id="formsearch" name="formsearch" method="get" action="/Sites/@TempData["TypeCode"]">
-                                <span><input name="SearchText" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
+                                <span><input name="keyword" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
                                 <input src="~/Content/images/search_btn.gif" class="button_search" type="image" />
                             </form>
                         </div>*@
                     <div class="gadget">
                         @*<form class="" action="/@TempData["TypeCode"]/1.html">*@
                         <form class="" action="1.html">
-                            <input type="text" name="SearchText" class="search_box" id="SearchForm" placeholder="搜索好站...">
+                            <input type="text" name="keyword" class="search_box" id="SearchForm" placeholder="搜索好站...">
                             <input type="submit" value="搜索" />
                         </form>
                     </div>
@@ -170,14 +170,7 @@
                 $(".navbar-nav li").removeClass("active");
                 $(".navbar-nav li:has(a[href^='" + urlFilename.substr(0, 6) + "'])").addClass("active");
             }
-            //搜索辅助功能
-            var txt = decodeURI(Url.getParam('SearchText'));
-            if (txt != 'undefined') { jQuery('#SearchForm').val(txt); }
-            //高亮显示
-            var site_a = jQuery('.li-site-item h4').children();
-            jQuery.each(site_a, function (i, n) {
-                jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
-            });
+          
             //站点添加时间显示样式
             jQuery(".site-add-date").each(function (n, ele) {
                 if (ele.innerText.length > 0) {
