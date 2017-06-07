@@ -111,13 +111,13 @@
 {
     <div class="gjlist">
         <div class="pic">
-            <a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
                 <img src="~/Images/SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" width="190" />
             </a>
         </div>
         <div class="incon">
             <h2 class="fl">
-                <a class="title" href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteUrl"> @item.SiteName</a>
+                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteUrl"> @item.SiteName</a>
                 <span>@item.SiteClickQuantity</span>
 
             </h2>
@@ -127,11 +127,12 @@
                 {
                     @Html.Raw(item.SiteProfile.Length > 130 ? item.SiteProfile.Substring(0, 130) : item.SiteProfile);
                 }...
-                <span><a href="/Sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
-                @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@<span><a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl"></a></span><span><a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl"></a></span>
-                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                </a>
+                <span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
+                <span>
+                    <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                        <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                    </a>
+                </span>
             </p>
             <p class="l fl div-SiteTags">
                 标签:
