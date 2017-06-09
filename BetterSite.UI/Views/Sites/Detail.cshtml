@@ -112,7 +112,7 @@
             @foreach (var item in ViewBag.ListType)
             {
             <li style="height:25px;width:600px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                <small> ★ </small><a href="/Sites/@item.SiteCode" target="_blank" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
+                <small> ★ </small><a href="/Sites/@item.SiteCode" target="_self" title="@item.SiteName &#10; @item.SiteUrl"> @item.SiteName</a>
             </li>
             }
         </ul>
@@ -201,7 +201,12 @@
                 }
                 jQuery('.div-SiteTags').append(htmlArr.join(', '));
             }
-
+            //活动菜单
+            var typelink = jQuery('.sitetypedata span a').attr('href');
+        if(typelink){
+            $(".navbar-nav li").removeClass("active");
+            $(".navbar-nav li:has(a[href^='" + typelink + "'])").addClass("active");
+        }
         });
     </script>
 }

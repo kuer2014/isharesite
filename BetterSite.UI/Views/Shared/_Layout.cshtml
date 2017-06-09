@@ -166,7 +166,7 @@
             ///活动菜单
             //debugger;
             var urlFilename = location.pathname;
-            if (urlFilename && urlFilename.length > 7) {
+            if (urlFilename && urlFilename.length > 7 && urlFilename.substr(0,7)!='/sites/') {
                 $(".navbar-nav li").removeClass("active");
                 $(".navbar-nav li:has(a[href^='" + urlFilename.substr(0, 6) + "'])").addClass("active");
             }

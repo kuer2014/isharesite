@@ -98,7 +98,7 @@ namespace BetterSite.UI.Controllers
                 ViewBag.Description = model.SiteName+","+model.SiteProfile;
                 //加载评论
                 ViewBag.CommentList=sitesBO.QuerySiteCommentForList(new M_SiteComment {SiteId= model.SiteId,Status=1 });
-                //同类站点 和常用站点
+                #region 同类站点 和常用站点
                 BetterSite.Domain.M_Sites siteWhere = new M_Sites();
                 siteWhere.SiteIsActive = true;
                 siteWhere.Page = 1;
@@ -106,6 +106,20 @@ namespace BetterSite.UI.Controllers
                 siteWhere.Sort = "SiteOrderNumber";
                 siteWhere.Order = "ASC";
                 //同类站点
+                ////找同标签
+                if (!string.IsNullOrWhiteSpace(model.SiteTagsName)) { 
+                Hashtable htTagsId = new Hashtable();
+                htTagsId.Add("TagsName", string.Join("','", model.SiteTagsName.Split(',')));
+                htTagsId.Add("TagCount", 0);//表示有一个标签匹配即可
+               htTagsId.Add("SiteCode", model.SiteCode);
+               // htTagsId.Add("TagCount", Tag.Count());//表示全部标签完全匹配
+                IList<M_SiteTag> tagsForSiteId = siteTagBO.QueryForListByTags(htTagsId).Cast<M_SiteTag>().ToList();
+                if (tagsForSiteId!=null&&tagsForSiteId.Count > 0)
+                {
+                    siteWhere.SiteId = string.Join("','", tagsForSiteId.Select(s => s.SiteId));
+                }
+                }
+                ////找同标签
                 siteWhere.TypeCode =model.TypeCode;
                 var listType = sitesBO.QueryForPageList(siteWhere).Cast<M_Sites>().ToList();
                 ViewBag.ListType = listType;
@@ -119,6 +133,7 @@ namespace BetterSite.UI.Controllers
                 //siteWhere.SiteIsHome = true;
                 //var listIsHome = sitesBO.QueryForPageList(siteWhere).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
                 //ViewBag.IsHome = listIsHome;
+                #endregion 同类站点 和常用站点
                 return View(model);
             }
             else {               

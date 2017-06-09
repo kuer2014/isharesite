@@ -28,20 +28,22 @@
      </delete>
     <select id="Tab_SiteTag_Select" listClass="ArrayList" resultMap="Tab_SiteTag_Result" parameterClass="Hashtable">
       SELECT CONVERT(VARCHAR(40), SiteTagId) SiteTagId,CONVERT(VARCHAR(40), SiteId) SiteId,CONVERT(VARCHAR(40), TagId) TagId FROM  Tab_SiteTag
-        <dynamic prepend="WHERE">
-             <isNotEmpty prepend="and" property="SiteTagId">SiteTagId= #SiteTagId#</isNotEmpty>
-      <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
-         <!--<isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>-->
-          <isNotEmpty prepend="and" property="TagId">TagId IN('$TagId$')</isNotEmpty>
-    </dynamic>
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="SiteTagId">SiteTagId= #SiteTagId#</isNotEmpty>
+        <isNotEmpty prepend="and" property="SiteId">SiteId= #SiteId#</isNotEmpty>
+        <!--<isNotEmpty prepend="and" property="TagId">TagId= #TagId#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="TagId">TagId IN('$TagId$')</isNotEmpty>
+      </dynamic>
     </select>
     <select id="Tab_SiteTag_SelectSiteIdByTag" listClass="ArrayList"  resultMap="Tab_SiteTag_ResultSiteId"  parameterClass="Hashtable">
       SELECT  CONVERT(VARCHAR(40), ST.SiteId) SiteId
       FROM dbo.Tab_SiteTag ST
       INNER JOIN Tab_Tags T ON ST.TagId = T.TagId
+      INNER JOIN Tab_Sites S ON ST.SiteId = S.SiteId
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="TagsId">ST.TagId IN('$TagsId$')</isNotEmpty>
         <isNotEmpty prepend="and" property="TagsName">T.TagName IN('$TagsName$')</isNotEmpty>
+        <isNotEmpty prepend="and" property="SiteCode">S.SiteCode !=#SiteCode#</isNotEmpty>
       </dynamic>
       GROUP BY ST.SiteId
       HAVING COUNT(ST.SiteId) <![CDATA[>=]]> #TagCount#
