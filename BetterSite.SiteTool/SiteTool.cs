@@ -31,11 +31,13 @@ namespace BetterSite.SiteTool
         {
             ////这里构造一个List，当然也可以从数据库中获取
             List<M_Types> typeList = new List<M_Types>() {                 
-                 new M_Types { TypeName="找资源",TypeId="7670B2EA-5E3C-4072-B02E-577D893AA7F9"},
-                  new M_Types { TypeName="学技术",TypeId="984E08AE-CADE-4522-A674-7EFEDC056B91"},
-                new M_Types { TypeName="善发现",TypeId="50822E1E-C5E2-4B3C-B023-0B857BA40E18"},             
-                   new M_Types { TypeName="爱生活",TypeId="914DD8D4-9934-4CDD-8DC3-E07C0CE87BF6"},
-                     new M_Types { TypeName="待审核",TypeId="712A8505-D927-49DD-9B4E-1F276EDE6746"},
+                 new M_Types { TypeName="个人提升",TypeId="BE4D99A2-0BA8-4578-AEA5-09AD5BDED64A"},
+                  new M_Types { TypeName="在线工具",TypeId="50822E1E-C5E2-4B3C-B023-0B857BA40E18"},
+                new M_Types { TypeName="免费素材",TypeId="7670B2EA-5E3C-4072-B02E-577D893AA7F9"},             
+                   new M_Types { TypeName="发现好玩",TypeId="984E08AE-CADE-4522-A674-7EFEDC056B91"},
+                     new M_Types { TypeName="行业专栏",TypeId="1C942B35-A249-4A7B-90FF-982457C69793"},
+                        new M_Types { TypeName="便民查询",TypeId="914DD8D4-9934-4CDD-8DC3-E07C0CE87BF6"},
+                         new M_Types { TypeName="其它",TypeId="712A8505-D927-49DD-9B4E-1F276EDE6746"},
             };
             TypeId.DataSource = typeList;//绑定
             TypeId.DisplayMember = "TypeName";//显示的文本
