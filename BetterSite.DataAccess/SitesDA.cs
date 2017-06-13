@@ -39,6 +39,11 @@ namespace BetterSite.DataAccess
         {
             return BaseDA.Update<Hashtable>("Tab_Sites_ToHome", param);
         }
+        ///更新点击数
+        public int UpdateSiteClickQuantity(Hashtable param)
+        {
+            return BaseDA.Update<Hashtable>("Tab_Sites_UpdateSiteClickQuantity", param);
+        }
         ///删除
         public int Delete(string siteId)
       {

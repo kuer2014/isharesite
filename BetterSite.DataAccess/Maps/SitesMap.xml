@@ -82,6 +82,10 @@
       UPDATE  Tab_Sites  SET SiteIsHome =#SiteIsHome#
       WHERE SiteId in($sitesId$)
     </update>
+    <update id="Tab_Sites_UpdateSiteClickQuantity" parameterClass="Hashtable">
+      UPDATE  Tab_Sites  SET SiteClickQuantity =SiteClickQuantity+1
+      WHERE SiteId= #siteId#
+    </update>
     <delete id="Tab_Sites_Delete2" parameterClass="Hashtable">
       DELETE FROM  Tab_Sites  WHERE SiteId= #SiteId#
     </delete>

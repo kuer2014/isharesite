@@ -63,6 +63,13 @@ namespace BetterSite.BusinessObject
             param.Add("sitesId", sitesId);
             param.Add("SiteIsHome", isHome);
             return da.ToHome(param);
+        }  
+        ///更新点击数
+        public int UpdateSiteClickQuantity(string siteId)
+        {
+            Hashtable param = new Hashtable();
+            param.Add("siteId", siteId);        
+            return da.UpdateSiteClickQuantity(param);
         }
         ///删除
         public int Delete(string siteId)

@@ -134,6 +134,8 @@ namespace BetterSite.UI.Controllers
                 //var listIsHome = sitesBO.QueryForPageList(siteWhere).Cast<M_Sites>().OrderByDescending(s => s.SiteAddDate).ToList();
                 //ViewBag.IsHome = listIsHome;
                 #endregion 同类站点 和常用站点
+                //更新点击数
+                sitesBO.UpdateSiteClickQuantity(model.SiteId);
                 return View(model);
             }
             else {               
