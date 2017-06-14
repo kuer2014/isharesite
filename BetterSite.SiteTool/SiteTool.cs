@@ -137,7 +137,7 @@ namespace BetterSite.SiteTool
             m.SiteCode = SiteCode.Text;
             m.SiteName = SiteName.Text;
             m.SiteUrl = SiteUrl.Text;
-            m.SiteProfile = SiteProfile.Text;
+            m.SiteProfile = SiteProfile.Text;// System.Web.HttpUtility.UrlEncode( SiteProfile.Text);
 
             m.TypeId = TypeId.SelectedValue.ToString();
             m.SiteOrderNumber = int.Parse(SiteOrderNumber.Text);
@@ -148,7 +148,7 @@ namespace BetterSite.SiteTool
             }
             // string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&entityJson=" + JsonConvert.SerializeObject(m));
             string result = RequestHelper.PostHttp("http://www.isharesite.com/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags="+ sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
-            //string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags=" + sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
+           // string result = RequestHelper.PostHttp("http://localhost:8080/siteapi/Add/", "token=2CBa31gg4s7dB&sitetags=" + sitetags + "&entityJson=" + JsonConvert.SerializeObject(m));
             //var newSitefile=sitefile.Where(s=>s.SiteUrl != SiteUrl.Text ).ToList();
            // sitefile = newSitefile;
             sitefile.Remove(sitefile.Where(s => s.SiteUrl == SiteUrl.Text).FirstOrDefault());

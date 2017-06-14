@@ -41,6 +41,7 @@ namespace BetterSite.UI.Controllers
         // POST: /SiteApi/Create
 
         [HttpPost]
+        [ValidateInput(false)]
         public string Add(string entityJson, string token, string sitetags)
         {
             if (token != "2CBa31gg4s7dB") {
@@ -61,6 +62,7 @@ namespace BetterSite.UI.Controllers
                     ImageHelper.Base64ToFile(entity.SiteImgBase64.Replace('-', '+').Replace('_', '/'), Server.MapPath("~/Images/SiteScreen"), entity.SiteCode);
                     entity.SiteId = Guid.NewGuid().ToString();
                     entity.SiteCollectionDate = DateTime.Now;
+                 //   entity.SiteProfile = System.Web.HttpUtility.UrlDecode(entity.SiteProfile);
                     var result = sitesBO.Insert(entity);  //(SiteId,SiteCode,SiteName,SiteUrl,TypeId,SiteOrderNumber,SiteCollectionDate,SiteProfile)
                     if (!string.IsNullOrWhiteSpace(sitetags))
                     {

@@ -94,6 +94,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         // POST: /Admin/Sites/Edit/5
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(M_Sites entity, string[] TagId)
         {
             JsonResult json = new JsonResult();

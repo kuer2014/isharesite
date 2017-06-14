@@ -125,7 +125,7 @@
             <p class="siteprofile">
                 @if (item.SiteProfile != null)
                 {
-                    @Html.Raw(item.SiteProfile.Length > 130 ? item.SiteProfile.Substring(0, 130) : item.SiteProfile);
+                    @Html.Raw((item.SiteProfile.Length > 130 ? item.SiteProfile.Substring(0, 130) : item.SiteProfile).Replace("<p/>","") );
                 }...
                 <span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>
                 <span>
