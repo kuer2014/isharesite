@@ -15,9 +15,9 @@ namespace BetterSite.UI.Controllers
         private readonly SiteTagBO siteTagBO = new SiteTagBO();
         private readonly TypesBO typesBO = new TypesBO();
         private readonly TagsBO tagsBO = new TagsBO();
-        static string  title = System.Configuration.ConfigurationManager.AppSettings["title"];
-        static string  keywords = System.Configuration.ConfigurationManager.AppSettings["keywords"];
-        static string description = System.Configuration.ConfigurationManager.AppSettings["description"];
+         string  title = System.Configuration.ConfigurationManager.AppSettings["title"];
+         string  keywords = System.Configuration.ConfigurationManager.AppSettings["keywords"];
+         string description = System.Configuration.ConfigurationManager.AppSettings["description"];
         /// <summary>
         /// 站点数据，条件为TypeCode 和TagId
         /// </summary>
@@ -29,11 +29,33 @@ namespace BetterSite.UI.Controllers
             where.Sort = where.Sort ?? "SiteAddDate";
             where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
+      //
+            if (string.IsNullOrWhiteSpace(where.TypeCode))
+            {
+                title = "全部 - " + title;
+            }
+            else if (where.TypeCode.ToLower() == "gengxin")
+            {
+                title = "最新收录 - " + title;
+                where.TypeCode = "";
+            }
+            else
+            {
+                var types = typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
+                if (types.Count > 0)
+                {
+                    title = types[0].TypeName + " - " + title;
+                    keywords = types[0].TypeName +","+ keywords;
+                }
+                //else {
+                //    return Redirect("/sites");
+                //}               
+            }
             #region 根据标签Name查找对应的站点Id
             if (Tag != null && Tag.Count() > 0)
             {
                 string tagsName = string.Join("','", Tag);
-                keywords = tagsName+",";       
+                keywords = tagsName + ","+ keywords;
                 Hashtable htTagsId = new Hashtable();
                 htTagsId.Add("TagsName", tagsName);
                 htTagsId.Add("TagCount", Tag.Count());
@@ -47,33 +69,7 @@ namespace BetterSite.UI.Controllers
                     where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
                 }
             }
-            #endregion  
-            //标题
-           // string title = "优站分享|致力于分享实用的优秀网站";
-          //  string keywords = "";
-            if (string.IsNullOrWhiteSpace(where.TypeCode))
-            {
-                title = "全部 - " + title;
-              //  keywords = "优站分享,网站分享,网站推荐,免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏";
-            }
-            else if (where.TypeCode.ToLower() == "gengxin")
-            {
-                title = "最新收录 - " + title;
-              //  keywords = "最新收录,优站分享,网站分享,网站推荐";
-                where.TypeCode = "";
-            }
-            else
-            {
-                var types = typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
-                if (types.Count > 0)
-                {
-                    title = types[0].TypeName + " - " + title;
-                    keywords += types[0].TypeName + ",优站分享,网站分享,网站推荐";
-                }
-                //else {
-                //    return Redirect("/sites");
-                //}               
-            }
+            #endregion    
             ViewBag.Title = title;
             ViewBag.Keywords = keywords;
             ViewBag.Description =description;
