@@ -32,7 +32,8 @@ namespace BetterSite.UI.Controllers
             #region 根据标签Name查找对应的站点Id
             if (Tag != null && Tag.Count() > 0)
             {
-                string tagsName = string.Join("','", Tag);           
+                string tagsName = string.Join("','", Tag);
+                keywords = tagsName+",";       
                 Hashtable htTagsId = new Hashtable();
                 htTagsId.Add("TagsName", tagsName);
                 htTagsId.Add("TagCount", Tag.Count());
@@ -46,9 +47,7 @@ namespace BetterSite.UI.Controllers
                     where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
                 }
             }
-            #endregion          
-         
-         
+            #endregion  
             //标题
            // string title = "优站分享|致力于分享实用的优秀网站";
           //  string keywords = "";
@@ -69,7 +68,7 @@ namespace BetterSite.UI.Controllers
                 if (types.Count > 0)
                 {
                     title = types[0].TypeName + " - " + title;
-                    keywords = types[0].TypeName + ",优站分享,网站分享,网站推荐";
+                    keywords += types[0].TypeName + ",优站分享,网站分享,网站推荐";
                 }
                 //else {
                 //    return Redirect("/sites");
