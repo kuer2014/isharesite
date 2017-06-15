@@ -15,6 +15,9 @@ namespace BetterSite.UI.Controllers
         private readonly SiteTagBO siteTagBO = new SiteTagBO();
         private readonly TypesBO typesBO = new TypesBO();
         private readonly TagsBO tagsBO = new TagsBO();
+        static string  title = System.Configuration.ConfigurationManager.AppSettings["title"];
+        static string  keywords = System.Configuration.ConfigurationManager.AppSettings["keywords"];
+        static string description = System.Configuration.ConfigurationManager.AppSettings["description"];
         /// <summary>
         /// 站点数据，条件为TypeCode 和TagId
         /// </summary>
@@ -47,17 +50,17 @@ namespace BetterSite.UI.Controllers
          
          
             //标题
-            string title = "优站分享|致力于分享实用的优秀网站";
-            string keywords = "";
+           // string title = "优站分享|致力于分享实用的优秀网站";
+          //  string keywords = "";
             if (string.IsNullOrWhiteSpace(where.TypeCode))
             {
                 title = "全部 - " + title;
-                keywords = "优站分享,网站分享,网站推荐,免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏";
+              //  keywords = "优站分享,网站分享,网站推荐,免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏";
             }
             else if (where.TypeCode.ToLower() == "gengxin")
             {
                 title = "最新收录 - " + title;
-                keywords = "最新收录,优站分享,网站分享,网站推荐";
+              //  keywords = "最新收录,优站分享,网站分享,网站推荐";
                 where.TypeCode = "";
             }
             else
@@ -74,7 +77,7 @@ namespace BetterSite.UI.Controllers
             }
             ViewBag.Title = title;
             ViewBag.Keywords = keywords;
-            ViewBag.Description = "优站分享,致力于分享实用的优秀网站。分享网站涵盖免费素材,在线工具,发现好玩,便民查询,个人提升,行业专栏等,优站分享正努力成为您工作、学习、生活的好帮手。";
+            ViewBag.Description =description;
         // ViewData["TypeCode"] = where.TypeCode;
        // TempData["TypeCode"] = where.TypeCode;//跨控制器
             int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
@@ -93,9 +96,13 @@ namespace BetterSite.UI.Controllers
             var model = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().FirstOrDefault();
             if (model != null)
             {
-                ViewBag.Title = model.SiteName + " - 优站分享|致力于分享实用的优秀网站";
+                ViewBag.Title = model.SiteName + " - "+title;
                 ViewBag.Keywords = model.SiteTagsName+","+model.TypeName+",优站分享";
-                ViewBag.Description = model.SiteName+","+model.SiteProfile;
+                string desc = model.SiteProfile;
+                if (!string.IsNullOrWhiteSpace(desc)&& model.SiteProfile.Length > 100) {
+                    desc = desc.Substring(0, 100)+"...";
+                }
+                ViewBag.Description = desc;
                 //加载评论
                 ViewBag.CommentList=sitesBO.QuerySiteCommentForList(new M_SiteComment {SiteId= model.SiteId,Status=1 });
                 #region 同类站点 和常用站点
