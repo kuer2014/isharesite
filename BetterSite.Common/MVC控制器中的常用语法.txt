@@ -1,0 +1,117 @@
+﻿
+        //**该文件内容假设在Controller环境下，包括Controller和ApiController**//
+一、 常用特性，标记在action上使用
+ 使用示例
+        [ValidateInput(false)] //该特性设置为false时,提交的表单可以包含html标签，否则提示有潜在不安全因素等提示
+        public string Add(){
+		//your logic code
+		}
+ (一)、	Controller中
+	1、  ValidateInput特性
+		//该特性设置为false时,提交的表单可以包含html标签，否则提示有潜在不安全因素等提示
+    2、
+    3、
+	4、
+	5、
+	6、
+	7、
+	8、
+	9、
+	10、
+ (二)、ApiController中
+	1、 [AcceptVerbs("GET", "POST")]  //指定该action的请求方式
+    2、   [ActionName("activeup")] //如果想要请求的方法名和action的名称不一致，可以自定义action的名称
+    3、   [Route("Ad/Active_Callback")] //一个action定义了特性路由之后，就能通过特性路由上面的路由规则找到。
+	4、
+	5、
+	6、
+	7、
+	8、
+	9、
+	10、
+二、上下文操作
+   (一)、Controller中
+   (二)、ApiController中
+      1、//参数
+	     ◆  HttpContext.Current.Request["chid"]   //一般参数
+	      ◆ var files = HttpContext.Current.Request.InputStream;  //接收上传的文件
+		  ◆◆动态参数示例 public string Post(dynamic param)
+				{
+					var name = Convert.ToString(param.name);
+					return "Post:"+name;
+				}
+				js请求  contentType: 'application/json', data: JSON.stringify({ name: "Jim" })
+		  ◆◆数组参数示例 public string Post(string[] ids)
+				{
+					var name = Convert.ToString(param.name);
+					return "Post:"+name;
+				}
+				js请求  contentType: 'application/json', data: JSON.stringify(["1", "2", "3", "4"])
+		    var operateIP = System.Web.HttpContext.Current.Request.UserHostAddress;  //ip
+            var operatePhone = System.Web.HttpContext.Current.Request.UserHostName; //主机名
+			string MachineName = System.Web.HttpContext.Current.Server.MachineName;//服务器名
+		 ◆◆实体参数示例 public string Post(person param)
+				{
+					var name = Convert.ToString(param.name);
+					return "Post:"+name;
+				}
+				js请求  contentType: 'application/json', data: JSON.stringify({ ID: "1", name: "Jim", CREATETIME: "1988-09-11" }),  
+				     或者 'application/x-www-form-urlencoded'(默认), data: { ID: "1", name: "Jim", CREATETIME: "1988-09-11" },  
+	  2、System.Web.HttpUtility.UrlDecode()    //编码
+	  3、System.Web.HttpContext.Current.Request.Url.AbsoluteUri; //来源url，请求该方法时使用的 url，为UrlEncode后的，正常显示需要Urldecode下
+	  4、重定向（action返回类型为 IHttpActionResult） 
+	       ◆ 到新地址
+                    HttpContext.Current.Response.StatusCode=301;
+                    HttpContext.Current.Response.Status = "301 Moved Permanently";
+                    HttpContext.Current.Response.RedirectLocation = redirectUrl + "?r=ok"; 
+                    HttpContext.Current.Response.End();
+	   　　　◆返回404
+	            return NotFound();
+	      　◆返回200
+	        return Ok();
+		   ◆跳转返回302
+			return  Redirect(redirectUrl);
+	  5、下载文件 （action返回类型为 HttpResponseMessage）
+	      ◆ var stream = new FileStream(descFilename, FileMode.Open);//从指定路径打开文件到流
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+                response.Content = new StreamContent(stream);
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-apple-aspen-config");// ("application/octet-stream");
+                response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = "desc.mobileconfig"
+                };
+                stream.Flush();
+                //stream.Dispose();               
+                return response;
+			◆出错不能正常下载时返回如下
+			     return new HttpResponseMessage(HttpStatusCode.NoContent);
+	  6、路径
+	      var descTemplatePath = System.Web.HttpContext.Current.Request.MapPath(@"~\Content\iosdescfile\desc_template.xml"); //转绝对路径
+	  7、头像修改上传
+	      ◆基于base64格式的图片
+		    if (user.Id > 0)
+            {
+                try
+                {                 
+                    //"data:image/png;base64"文件扩展名获取//user.Photo为base64字符串
+                    if (user.Photo.Length > 10 && user.Photo.Substring(0, 10) == "data:image")
+                    {
+                        string photoPath = "/UserPhone/";
+                        string filePath = System.Web.HttpContext.Current.Request.MapPath("~" + photoPath);
+                        string fileName = Utility.Base64StringToFile(user.Photo, filePath);//保存到服务器硬盘并返回文件名
+                        Common.Log4NetHelper.Debug($"图片绝对路径：{filePath}");
+
+                        user.Photo = "/api" + photoPath + fileName;    //头像路径，保存到数据库，最终返回到客户端是能访问到照片的
+                    }
+                    user.UpdateTime = DateTime.Now;
+                    UserBI.Instance.Update(user);
+                    r.Msg = "更新成功";
+                    r.Status = 1;
+                }
+                catch (Exception ex) {
+                    r.Msg = "更新失败,请查看日志";
+                    r.Status = 0;
+                    Common.Log4NetHelper.Error(ex.Message, ex);
+                }
+            }
+		  ◆

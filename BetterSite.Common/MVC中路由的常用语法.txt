@@ -1,0 +1,21 @@
+﻿  //**该文件内容假设在路由设置文件环境下，包括RouteConfig和WebApiConfig**//
+   ///匹配地址： /ZY/2.html           
+            routes.MapRoute(
+              name: "SiteListByType",
+              url: "{TypeCode}/{Page}.html",
+              defaults: new { controller = "Sites", action = "Index",  Page = 1 },
+               namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 TypeCode = @"[a-z]{2,10}",
+                 Page = @"\d{0,5}"
+             }
+          );
+    \\action返回数据格式设置
+	 GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            //默认返回 json  
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.MediaTypeMappings.Add(
+                new QueryStringMapping("datatype", "json", "application/json"));
+            //返回格式选择 datatype 可以替换为任何参数   
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.MediaTypeMappings.Add(
+                new QueryStringMapping("datatype", "xml", "application/xml"));
