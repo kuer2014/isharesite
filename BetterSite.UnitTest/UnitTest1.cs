@@ -18,7 +18,7 @@ namespace BetterSite.UnitTest
         [TestMethod]
         public void BuildSingleImage()
         {
-            string siteUrl = "https://500px.com/", siteCode = "SITE1455949163534";
+            string siteUrl = "http://xiuxiu.web.meitu.com/plugin/batch/taobao.html", siteCode = "SITE111";
             OLayer ow = new OLayer();
        
                ow.CaptureImage(siteUrl, "D:\\cap\\" + siteCode + ".jpg");
