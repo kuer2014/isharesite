@@ -2,6 +2,7 @@
 <style>
     .gjlist {
         border-bottom: 1px dotted #ccc;
+         /*border-top: 1px dotted #ccc;*/
         clear: both;
         overflow: hidden;
         width: 100%;
@@ -100,12 +101,37 @@
             border-top: 1px solid #ccc; /*solid 1px #97d2fa;*/
             margin-left:10px;
         }
+    .tagmenu li {
+        list-style-image: none;
+        list-style-type: none;
+        margin: 5px;
+        float: left;
+    }
+    .tagmenu {
+        height:30px;
+        padding:0 40px 0 40px;
+    }
+        .tagmenu li a {
+            margin: 0px;
+        }
+    .tagmenu li a:hover,
+    #menu1 li.active a {
+        color: #555;
+    }
 </style>
 <div class="pagepath">
     <span class="curpostion">当前位置: </span>
-
     <div class="divhr"></div>
-    <span> 共找到 @ViewBag.ListCount 个网站</span>
+    <span> 共找到 <b>@ViewBag.ListCount</b> 个网站</span>
+        <ul class="tagmenu">
+            <li><label>本类别热门标签:</label></li>
+            @foreach (var item in ViewBag.TypeTags)
+            {
+                <li>
+            <a href="/@ViewBag.TypeCode/@item.TagName/1.html" title="@item.TagName">@item.TagName</a>
+                </li>
+            }
+        </ul>
 </div>
 @foreach (var item in Model)
 {
@@ -143,81 +169,94 @@
         </div>
     </div>
     }
-<p class="pages">
-    <small>@ViewBag.Page/@ViewBag.PageCount</small>
-    <a href="">&laquo;上一页</a>
-    <a href="">下一页&raquo;</a>
-</p>
-@section Scripts
+<div>
+    <ul class="tagmenu">
+        <li><label>本类别热门标签:</label></li>
+        @foreach (var item in ViewBag.TypeTags)
+            {
+            <li>
+                <a href="/@ViewBag.TypeCode/@item.TagName/1.html" title="@item.TagName">@item.TagName</a>
+            </li>
+        }
+    </ul>
+</div>
+<div>
+    <p class="pages">       
+        <a href="">&laquo;上一页</a>
+        <label>@ViewBag.Page/@ViewBag.PageCount</label>
+        <a href="">下一页&raquo;</a>
+    </p>
+</div>
+    @section Scripts
     {
-    <script>
-        jQuery(function () {
-            //分页
-            var page= @ViewBag.Page;
-            var pageCount=@ViewBag.PageCount;
-            jQuery('.pages a').css('display','none');
-            if(page>1){
-                jQuery('.pages a:first').css('display','inline');
-                jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
-            }
-            if(page< pageCount){
-                jQuery('.pages a:last').css('display','inline');
-                jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
-            }
-            //debugger;
-            //为每个站点的标签添加事件
-            var urlFilename = location.href;
-            var urlarr=  location.pathname.toLowerCase().split('/');
-            urlarr.pop();
-            urlarr.push('1.html');
-            var siteItemArr = jQuery('.gjlist');
-            jQuery.each(siteItemArr, function (i_site, n_site) {
-                var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
-                var siteTypeCode = jQuery(n_site).find('.hid-SiteTypeCode').val();
-                if (siteTagsName) {
-                    var siteTagsNameArr = siteTagsName.split(',');
-                    var htmlArr = [];
+        <script>
+            jQuery(function () {
+                //分页
+                var page= @ViewBag.Page;
+                var pageCount=@ViewBag.PageCount;
+                jQuery('.pages a').css('display','none');
+                if(page>1){
+                    jQuery('.pages a:first').css('display','inline');
+                    jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
+                }
+                if(page< pageCount){
+                    jQuery('.pages a:last').css('display','inline');
+                    jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
+                }
+                //debugger;
+                //为每个站点的标签添加事件
+                var urlFilename = location.href;
+                var urlarr=  location.pathname.toLowerCase().split('/');
+                urlarr.pop();
+                urlarr.push('1.html');
+                var siteItemArr = jQuery('.gjlist');
+                jQuery.each(siteItemArr, function (i_site, n_site) {
+                    var siteTagsName = jQuery(n_site).find('.hid-SiteTagsName').val();
+                    var siteTypeCode = jQuery(n_site).find('.hid-SiteTypeCode').val();
+                    if (siteTagsName) {
+                        var siteTagsNameArr = siteTagsName.split(',');
+                        var htmlArr = [];
 
-                    for (var i = 0; i < siteTagsNameArr.length; i++) {
-                        if(urlarr.length==3){//插入
-                            urlarr.splice(2,0,siteTagsNameArr[i]);
-                            htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                        } else  if(urlarr.length==4){//修改
-                            urlarr.splice(2,1,siteTagsNameArr[i]);
-                            htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
-                        }else  if(urlarr.length==2){//首页搜索进入
-                            //urlarr.splice(2,1,siteTagsNameArr[i]);
-                            htmlArr.push('<a href="/' +siteTypeCode +'/'+ siteTagsNameArr[i]+ '/1.html"><span>' + siteTagsNameArr[i] + '</span></a>');
+                        for (var i = 0; i < siteTagsNameArr.length; i++) {
+                            if(urlarr.length==3){//插入
+                                urlarr.splice(2,0,siteTagsNameArr[i]);
+                                htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                            } else  if(urlarr.length==4){//修改
+                                urlarr.splice(2,1,siteTagsNameArr[i]);
+                                htmlArr.push('<a href="' + urlarr.join('/') + '"><span>' + siteTagsNameArr[i] + '</span></a>');
+                            }else  if(urlarr.length==2){//首页搜索进入
+                                //urlarr.splice(2,1,siteTagsNameArr[i]);
+                                htmlArr.push('<a href="/' +siteTypeCode +'/'+ siteTagsNameArr[i]+ '/1.html"><span>' + siteTagsNameArr[i] + '</span></a>');
+                            }
                         }
+                        jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(', '));
                     }
-                    jQuery(n_site).find('.div-SiteTags').append(htmlArr.join(', '));
+                });
+                //位置导航
+                var types={sucai:'免费素材',gongju:'在线工具',haowan:'发现好玩',chaxun:'便民查询',tisheng:'个人提升',zhuanlan:'行业专栏',sites:'全部',other:'其它',gengxin:'最新收录'};
+                var postionhtml='<a href="/" title="home">首页</a>';
+                urlarr=decodeURI( location.pathname).toLowerCase().split('/');
+                urlarr.pop();
+                if(urlarr&&urlarr.length>1){
+                    var curtype=urlarr[1];
+                    postionhtml+=' &gt; <a href="/'+curtype+'/1.html" title="'+curtype+'">'+types[curtype]+'</a>';
+                    if(urlarr.length>2){
+                        var curtag=urlarr[2];
+                        postionhtml+=' &gt; <a href="/'+curtype+'/'+curtag+'/1.html" title="'+curtag+'">'+curtag+'</a> ';
+                    }
                 }
-            });
-            //位置导航
-            var types={sucai:'免费素材',gongju:'在线工具',haowan:'发现好玩',chaxun:'便民查询',tisheng:'个人提升',zhuanlan:'行业专栏',sites:'全部',other:'其它',gengxin:'最新收录'};
-            var postionhtml='<a href="/" title="home">首页</a>';
-            urlarr=decodeURI( location.pathname).toLowerCase().split('/');
-            urlarr.pop();
-            if(urlarr&&urlarr.length>1){
-                var curtype=urlarr[1];
-                postionhtml+=' &gt; <a href="/'+curtype+'/1.html" title="'+curtype+'">'+types[curtype]+'</a>';
-                if(urlarr.length>2){
-                    var curtag=urlarr[2];
-                    postionhtml+=' &gt; <a href="/'+curtype+'/'+curtag+'/1.html" title="'+curtag+'">'+curtag+'</a> ';
+                jQuery('.curpostion').append(postionhtml);
+                //搜索辅助功能
+                var txt = decodeURI(Url.getParam('keyword'));
+                if (txt != 'undefined') {
+                    jQuery('#SearchForm').val(txt);
+                    jQuery('.curpostion').append(' > 搜索“'+txt+'”');
                 }
-            }
-            jQuery('.curpostion').append(postionhtml);
-            //搜索辅助功能
-            var txt = decodeURI(Url.getParam('keyword'));
-            if (txt != 'undefined') {
-                jQuery('#SearchForm').val(txt);
-                jQuery('.curpostion').append(' > 搜索“'+txt+'”');
-            }
-            ////高亮显示
-            //var site_a = jQuery('.li-site-item h4').children();
-            //jQuery.each(site_a, function (i, n) {
-            //    jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
-            //});
-        })
-    </script>
-}
+                ////高亮显示
+                //var site_a = jQuery('.li-site-item h4').children();
+                //jQuery.each(site_a, function (i, n) {
+                //    jQuery(n).html(jQuery(n).text().replace(txt, '<mark>' + txt + '</mark>'));
+                //});
+            })
+        </script>
+    }

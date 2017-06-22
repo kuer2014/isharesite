@@ -73,8 +73,15 @@ namespace BetterSite.UI.Controllers
             ViewBag.Title = title;
             ViewBag.Keywords = keywords;
             ViewBag.Description =description;
-        // ViewData["TypeCode"] = where.TypeCode;
-       // TempData["TypeCode"] = where.TypeCode;//跨控制器
+            // ViewData["TypeCode"] = where.TypeCode;
+            // TempData["TypeCode"] = where.TypeCode;//跨控制器
+            #region 根据类别找标签
+            if (!string.IsNullOrWhiteSpace(where.TypeCode)) { 
+            IList<M_Tags> typeTags = tagsBO.QueryForList(null).Cast<M_Tags>().Where(t => !string.IsNullOrWhiteSpace(t.TypeCode) && t.TypeCode==where.TypeCode).ToList();
+            ViewBag.TypeTags = typeTags;
+                ViewBag.TypeCode = where.TypeCode;
+            }
+            #endregion 根据类别找标签
             int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
             where.Rows = pagesize;
             where.Page = where.Page == 0 ? where.Page = 1 : where.Page;
@@ -82,7 +89,7 @@ namespace BetterSite.UI.Controllers
             var listCount = sitesBO.QueryForStuffTagsList(where).Cast<M_Sites>().Count();
             ViewBag.ListCount = listCount;
             ViewBag.Page = where.Page;
-            ViewBag.PageCount = (int)Math.Ceiling(Convert.ToDouble(listCount) / Convert.ToDouble(pagesize)); ;
+            ViewBag.PageCount = (int)Math.Ceiling(Convert.ToDouble(listCount) / Convert.ToDouble(pagesize));
             return View(list);
         }
         // GET /Sites/SITE1489992926300
