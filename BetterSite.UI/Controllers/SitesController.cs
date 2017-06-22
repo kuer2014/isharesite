@@ -76,11 +76,11 @@ namespace BetterSite.UI.Controllers
             // ViewData["TypeCode"] = where.TypeCode;
             // TempData["TypeCode"] = where.TypeCode;//跨控制器
             #region 根据类别找标签
-            if (!string.IsNullOrWhiteSpace(where.TypeCode)) { 
+           // if (!string.IsNullOrWhiteSpace(where.TypeCode)) { 
             IList<M_Tags> typeTags = tagsBO.QueryForList(null).Cast<M_Tags>().Where(t => !string.IsNullOrWhiteSpace(t.TypeCode) && t.TypeCode==where.TypeCode).ToList();
             ViewBag.TypeTags = typeTags;
                 ViewBag.TypeCode = where.TypeCode;
-            }
+           // }
             #endregion 根据类别找标签
             int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
             where.Rows = pagesize;
