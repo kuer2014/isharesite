@@ -179,8 +179,9 @@
     <Compile Include="Utility\WebsiteToImage.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="baidutest.html" />
-    <Content Include="captest.html" />
+    <Content Include="TestHtml\svgtest.html" />
+    <Content Include="TestHtml\baidutest.html" />
+    <Content Include="TestHtml\captest.html" />
     <Content Include="Content\images\eye.jpg" />
     <Content Include="Content\images\fbg_bg.jpg" />
     <Content Include="Content\images\fbg_rbg.jpg" />
@@ -561,7 +562,6 @@
     <Content Include="Content\knockoutPagging\knockout.mapping-latest.js" />
     <Content Include="Content\knockoutPagging\paginationViewModel.js" />
     <Content Include="Content\style.css" />
-    <Content Include="defaultError.html" />
     <Content Include="Images\eye.jpg" />
     <Content Include="Images\ffrrr.png" />
     <Content Include="Images\ie.png" />
@@ -1034,6 +1034,7 @@
     <Content Include="Areas\Admin\Views\Sites\Import.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="StaticHtml\Menu_Tab.html" />
+    <Content Include="TestHtml\你的生命有什么可能.svg" />
     <Content Include="项目进度.js" />
     <Content Include="Areas\v1\Views\_ViewStart.cshtml" />
     <Content Include="Areas\v1\Views\Home\Index.cshtml" />

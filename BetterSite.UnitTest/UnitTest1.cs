@@ -18,15 +18,16 @@ namespace BetterSite.UnitTest
         [TestMethod]
         public void BuildSingleImage()
         {
-            string siteUrl = "http://xiuxiu.web.meitu.com/plugin/batch/taobao.html", siteCode = "SITE111";
+            string siteUrl = "http://www.huangjiwei.com/blog/", siteCode = "SITE111";
             OLayer ow = new OLayer();
        
                ow.CaptureImage(siteUrl, "D:\\cap\\" + siteCode + ".jpg");
-          
+            
         }
         /// <summary>
         /// 根据类别生成网站缩略图
         /// </summary>
+        [Ignore]
         [TestMethod]
         public void BuildImageByType()
         {
@@ -43,8 +44,9 @@ namespace BetterSite.UnitTest
             }
         }
         /// <summary>
-        /// 百度推送  curl推送
+        /// 百度站长－主动推送  curl推送
         /// </summary>
+        [Ignore]
         [TestMethod]
         public void CurlTest() {
             string url = "http://data.zz.baidu.com/urls?site=www.isharesite.com&token=hzM0UEGaAryxFNUx";
@@ -53,10 +55,12 @@ namespace BetterSite.UnitTest
             string msg = "";
                msg = RequestHelper.PostData(url,param);
         }
+        [Ignore]
         [TestMethod]
         public void GetGUID() {
             string[] guids = { Guid.NewGuid().ToString().ToUpper(), Guid.NewGuid().ToString().ToUpper(), Guid.NewGuid().ToString().ToUpper(), Guid.NewGuid().ToString().ToUpper() };
         }
+        [Ignore]
         [TestMethod]
         public void base64Tofile() {
             string ss = @"
