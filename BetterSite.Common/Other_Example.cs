@@ -46,17 +46,21 @@ namespace BetterSite.Common
         }
         void datetimeFunc()
         {
-            //计算与客户端时间差
+            //1 计算与客户端时间差
             long clientTimeStamp = 1489992926300;//客户端的时间
             System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1)); //1970年1月1号在本地时区的时间
             DateTime cNowTime = startTime.AddMilliseconds(clientTimeStamp);//计算客户端的时间
             DateTime sNowTime = DateTime.Now;
             TimeSpan dif = cNowTime - sNowTime; //计算差
+
+            //2 toString()
+            DateTime.Now.ToString("yyyy年MM月dd日 HH:mm:ss");
         }
         void jsonFunc() {
             ///json字符串到对象
            // var equipment = JsonConvert.DeserializeObject<EquipmentEntity>(paramstr);
         }
+      
 
     }
 }

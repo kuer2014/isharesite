@@ -3,4 +3,6 @@
 IW -IW -Controller 文件夹整理完成
 
 IW -IW 完成
-IW -IW.Admin -AdvertiserController 进行中
+IW -IW.Admin -AdvertiserController 
+
+IW -IW.Admin -ManageController 进行中

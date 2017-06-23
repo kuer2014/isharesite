@@ -1,38 +1,44 @@
 ﻿
         //**该文件内容假设在Controller环境下，包括Controller和ApiController**//
-一、 常用特性，标记在action上使用
+一、 常用特性，标记在action上使用******************************************************************************************
  使用示例
         [ValidateInput(false)] //该特性设置为false时,提交的表单可以包含html标签，否则提示有潜在不安全因素等提示
         public string Add(){
 		//your logic code
 		}
- (一)、	Controller中
-	1、  ValidateInput特性
-		//该特性设置为false时,提交的表单可以包含html标签，否则提示有潜在不安全因素等提示
-    2、过滤器相关（权限）
-	  ◆ [Authorize] //指定对控制器或操作方法的访问只限于满足授权要求的用户。
-	  ◆  [AllowAnonymous] //用于标记在授权期间要跳过 System.Web.Mvc.AuthorizeAttribute 的控制器和操作。
-    3、 [ValidateAntiForgeryToken] //表示用于阻止伪造请求的特性。
-	4、
-	5、
-	6、
-	7、
-	8、
-	9、
-	10、
- (二)、ApiController中
-	1、 [AcceptVerbs("GET", "POST")]  //指定该action的请求方式
-    2、   [ActionName("activeup")] //如果想要请求的方法名和action的名称不一致，可以自定义action的名称
-    3、   [Route("Ad/Active_Callback")] //一个action定义了特性路由之后，就能通过特性路由上面的路由规则找到。
-	4、
-	5、
-	6、
-	7、
-	8、
-	9、
-	10、
-二、上下文操作
+	 (一)、	Controller中
+		1、  ValidateInput特性
+			//该特性设置为false时,提交的表单可以包含html标签，否则提示有潜在不安全因素等提示
+		2、过滤器相关（权限）
+		  ◆ [Authorize] //指定对控制器或操作方法的访问只限于满足授权要求的用户。
+		  ◆  [AllowAnonymous] //用于标记在授权期间要跳过 System.Web.Mvc.AuthorizeAttribute 的控制器和操作。
+		3、 [ValidateAntiForgeryToken] //表示用于阻止伪造请求的特性。
+		4、
+		5、
+		6、
+		7、
+		8、
+		9、
+		10、
+	 (二)、ApiController中
+		1、 [AcceptVerbs("GET", "POST")]  //指定该action的请求方式
+		2、   [ActionName("activeup")] //如果想要请求的方法名和action的名称不一致，可以自定义action的名称
+		3、   [Route("Ad/Active_Callback")] //一个action定义了特性路由之后，就能通过特性路由上面的路由规则找到。
+		4、
+		5、
+		6、
+		7、
+		8、
+		9、
+		10、
+二、上下文操作 *************************************************************************************************************
    (一)、Controller中
+   1、路径  Request.MapPath("~/temp/"); //转绝对路径
+   2、下载文件 
+         ◆下载EXCEL
+         var excelContent = System.IO.File.ReadAllBytes(path);
+            System.IO.File.Delete(path);
+            return File(excelContent, "application/ms-excel", HttpUtility.UrlEncode(excelFileName, System.Text.Encoding.UTF8));
    (二)、ApiController中
       1、//参数
 	     ◆  HttpContext.Current.Request["chid"]   //一般参数
@@ -117,3 +123,31 @@
                 }
             }
 		  ◆
+
+三、为view封装数据 操作 *************************************************************************************************************
+    (一)、Controller中
+	    1、返回值  return RedirectToAction("Index");  //跳转到指定action
+		2、视图页cshtml中下拉框
+		－－取数据－－－－－－－－－－－－－－－－－－－－－－－－－－－
+			 public static Dictionary<dynamic, dynamic> GetAdvertiser()
+			   {
+				using (IDbConnection connection = new MySqlConnection(DbConnString))
+				{
+					connection.Open();
+					var result = connection.Query("SELECT a.Id,a.`Name` FROM advertiser a  WHERE  Status =1;").ToDictionary(key => key.Id, value => value.Name); // (t=>new {ID=t.Id,Name=t.Name });
+					return result;
+				}
+			   }
+		   －－－Controller中－－－－－－－－－－－－－－－－－－
+			   var selectItemListAd = new List<SelectListItem>() {
+					  // new SelectListItem(){Value="0",Text="全部"}// new SelectListItem(){Value="0",Text="全部",Selected=true}
+				   };
+				var advertiserDic = Utility.GetAdvertiser();
+				var selectListAd = new SelectList(advertiserDic, "key", "value");
+				selectItemListAd.AddRange(selectListAd);
+				ViewBag.advertiserDic = selectItemListAd;
+			－－－cshtml中－－－－－－－－－－－－－－－－－－
+			   @Html.DropDownList("AdvertiserId", ViewBag.advertiserDic as IEnumerable<SelectListItem>, new { @class = "form-control" })
+		  
+
+		  10、其它 ModelState.IsValid  验证
