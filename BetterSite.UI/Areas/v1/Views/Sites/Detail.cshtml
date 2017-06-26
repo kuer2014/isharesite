@@ -69,7 +69,7 @@
             <ul class="list-group">              
                 <li class="list-group-item li-site-item">
                     <h4 class="list-group-item-heading">
-                        <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName">@Model.SiteName</a>
+                        <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName" rel="nofollow">@Model.SiteName</a>
                         <br /><small>@Model.SiteUrl</small>
                     </h4>
                     <h5>类别: <a href="/v1/Sites/@Model.TypeCode" target="_self" title="@Model.TypeName">@Model.TypeName</a></h5>
@@ -80,7 +80,7 @@
                         @Html.Raw(Model.SiteProfile)
                     </p>
                     <div class="pic_position">
-                        <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName" >
+                        <a href="@Model.SiteUrl" target="_blank" title="@Model.SiteName"  rel="nofollow">
                             <img  class="pic_shadow img-responsive center-block" src="\Images\SiteScreen\@{@Model.SiteCode}.jpg" alt="@Model.SiteName" title="@Model.SiteName"/>
                         </a>
                     </div>
