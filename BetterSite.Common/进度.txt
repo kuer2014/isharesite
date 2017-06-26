@@ -5,4 +5,5 @@ IW -IW -Controller 文件夹整理完成
 IW -IW 完成
 IW -IW.Admin -AdvertiserController 
 
-IW -IW.Admin -ManageController 进行中
+IW -IW.Admin -ManageController 
+IW解决方案中  除socket项目都完成了
