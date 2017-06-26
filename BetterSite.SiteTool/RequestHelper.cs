@@ -12,6 +12,15 @@ namespace BetterSite.SiteTool
 {
     public class RequestHelper
     {
+        #region HttpClient方式
+        public static string GetHttp(string url)
+        {
+            using (var client = new HttpClient())
+            {
+                var responseString = client.GetStringAsync(url);
+                return responseString.Result;
+            } 
+        }
         /// <summary>
         /// HttpClient 实现,异步
         /// </summary>
@@ -46,6 +55,27 @@ namespace BetterSite.SiteTool
              response.Wait();//等待 Task 完成执行过程
             return response;
         }
+        #endregion HttpClient方式
+        #region WebRequest
+        public static string GetRequest(string url)
+        {
+            string result = string.Empty;
+            //创建WebRequest
+            HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
+            webrequest.Method = "GET";
+            //webrequest.UserAgent = "iTunes/12.5.5(Windows; Microsoft Windows 7 x64 Ultimate Edition Service Pack 1(Build 7601); x64) AppleWebKit/7602.4008.0.22";
+
+            //获取返回数据
+            HttpWebResponse response = (HttpWebResponse)webrequest.GetResponse();
+            //转码
+            StreamReader sr = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            //返回的结果
+            result = sr.ReadToEnd();
+            //关闭
+            sr.Close();
+            response.Close();
+            return result;
+        }
         /// <summary>
         /// 轻量版
         /// </summary>
@@ -75,37 +105,7 @@ namespace BetterSite.SiteTool
             httpWebResponse.Close();
 
             return responseContent;
-        }
-        public static string GetHttp(string url)
-        {
-            using (var client = new HttpClient())
-            {
-                var responseString = client.GetStringAsync(url);
-                return responseString.Result;
-            }   //byte[] btBodys = Encoding.UTF8.GetBytes(param);
-                //HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-
-                //httpWebRequest.ContentType = "application/x-www-form-urlencoded";
-                //// httpWebRequest.ContentType = "text/plain";
-                //httpWebRequest.Method = "GET";
-                //httpWebRequest.Timeout = 50000;
-
-                //httpWebRequest.ContentLength = btBodys.Length;
-                //httpWebRequest.GetRequestStream().Write(btBodys, 0, btBodys.Length);
-
-                //HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                //StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream());
-                //string responseContent = streamReader.ReadToEnd();
-
-                //httpWebResponse.Close();
-                //streamReader.Close();
-                //httpWebRequest.Abort();
-                //httpWebResponse.Close();
-
-                //return responseContent;
-            }
-
-
+        } 
         /// <summary>
         ///完整版 post提交数据
         /// </summary>
@@ -150,6 +150,7 @@ namespace BetterSite.SiteTool
                 return ex.Message;
             }
         }
+        #endregion WebRequest
         ///// <summary>
         ///// 百度推送  curl推送
         ///// </summary>

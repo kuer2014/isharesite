@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,8 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataStuct_Example.cs" />
+    <Compile Include="ExcelHelper.cs" />
+    <Compile Include="MVC模型绑定.cs" />
     <Compile Include="Other_Example.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="单元测试语法.cs" />
+    <Compile Include="设计模式实例.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MVC中路由的常用语法.txt" />

@@ -29,6 +29,21 @@ namespace BetterSite.Common
                 parameter2 = "defaultWorkspace"
             };
         }
+        /// <summary>
+        /// 返回字典结构数据列表
+        /// </summary>
+        /// <returns></returns>
+        public static Dictionary<dynamic, dynamic> GetApp()
+        {
+
+            //using (IDbConnection connection = new MySqlConnection(DbConnString))
+            //{
+            //    connection.Open();
+            //    var result = connection.Query("SELECT Id,`Name` FROM app WHERE `Status`=1;").ToDictionary(key => key.Id, value => value.Name);
+            //    return result;
+            //}
+            return new Dictionary<dynamic, dynamic>();//使用时去掉此句，取消注释上边代码
+        }
 
     }
 }

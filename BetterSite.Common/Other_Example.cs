@@ -55,12 +55,34 @@ namespace BetterSite.Common
 
             //2 toString()
             DateTime.Now.ToString("yyyy年MM月dd日 HH:mm:ss");
+            //字符串到时间
+            DateTime resTime;
+            DateTime.TryParse("2017-06-26 10:50:11", out resTime);
         }
         void jsonFunc() {
             ///json字符串到对象
            // var equipment = JsonConvert.DeserializeObject<EquipmentEntity>(paramstr);
         }
-      
+        /// <summary>
+        /// 验证苹果手机 IDFA格式是否正确
+        /// </summary>
+        /// <param name="idfa"></param>
+        /// <returns></returns>
+        public static bool TestIDFA(string idfa)
+        {
+            if (idfa == "00000000-0000-0000-0000-000000000000") return false;
+            //  IDFA: CCD6E1CD - 8C4B - 40CB - 8A62 - 4BBC7AFE07D6
+            System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$");
+            return r.IsMatch(idfa);
+            //MatchCollection mc = r.Matches(idfa);
+            //return mc != null;
+            //string reg = @"〔\w{1}〕";
+            //Regex.Matches(files, reg)            
+        }
+        public static void stringfunc()
+        {
+            "a".PadLeft(3, '0');  //不够3位补0
+        }
 
     }
 }
