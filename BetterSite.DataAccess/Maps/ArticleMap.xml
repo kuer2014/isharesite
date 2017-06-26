@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_Article,BetterSite.Domain" id="Tab_Article_Result">
+      <result column="Id" property="Id" />
+      <result column="Category" property="Category" />
+      <result column="Content" property="Content" />
+      <result column="CreateDate" property="CreateDate" />
+      <result column="Status" property="Status" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="Tab_Article_Insert" parameterClass="BetterSite.Domain.M_Article">
+      INSERT INTO  Tab_Article  (Category,Content)
+      VALUES (#Category#,#Content#)
+    </insert>
+    <update id="Tab_Article_Update" parameterClass="BetterSite.Domain.M_Article">
+      UPDATE  Tab_Article  SET Category= #Category#,Content= #Content#
+      WHERE Id= #Id#
+    </update>
+    <delete id="Tab_Article_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_Article  WHERE Id= #id#
+    </delete>
+    <select id="Tab_Article_Select" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
+      SELECT CONVERT(VARCHAR(40), Id) Id,Category,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>
+      </dynamic>
+    </select>
+    <select id="Tab_Article_SelectList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
+      SELECT Id,Category,Content,CreateDate,Status FROM  Tab_Article
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>
+      </dynamic>
+    </select>
+    <select id="Tab_Article_SelectPageList" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
+      WITH T AS(
+      SELECT Id,Category,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status
+      FROM  Tab_Article
+      <dynamic prepend="WHERE">
+        <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
+      </dynamic>
+      )
+      SELECT TOP $Rows$ * FROM T WHERE Id NOT IN
+      (
+      SELECT TOP ($Rows$*($Page$-1)) Id FROM T ORDER BY CreateDate
+      )
+      ORDER BY CreateDate
+    </select>
+    <select id="Tab_Article_SelectAll" listClass="ArrayList" resultMap="Tab_Article_Result" >
+      SELECT Id,Category,Content,CreateDate,Status
+      FROM  Tab_Article
+    </select>
+  </statements>
+</sqlMap>

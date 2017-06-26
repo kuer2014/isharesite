@@ -44,6 +44,7 @@
     <Compile Include="M_SiteTag.cs" />
     <Compile Include="M_SiteComment.cs" />
     <Compile Include="M_Tags.cs" />
+    <Compile Include="M_Article.cs" />
     <Compile Include="M_Types.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,0 +1,108 @@
+﻿
+@section Scripts
+{
+    <script type="text/javascript">
+    var url;
+    function Add() {
+        $('#dlg').dialog('open').dialog('setTitle', '添加');
+        $('#fm').form('clear');
+        url = '/Admin/Article/Create';
+    }
+    function Edit() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $('#dlg').dialog('open').dialog('setTitle', '修改');
+            $('#fm').form('load', row);
+            url = '/Admin/Article/Edit/';
+        }
+    }
+    function Save() {
+        if (!$('#fm').form('validate')) { return; }
+        var formData = $('#fm').formSerialize(); //jquery.form 插件
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: formData,
+            success: function (result) {
+                //debugger;
+                //  var result = eval('(' + result + ')');
+                if (!result.success) {
+                    $.messager.show({
+                        title: 'Error',
+                        msg: result.msg
+                    });
+                } else {
+                    $('#dlg').dialog('close');        // close the dialog
+                    $('#dg').datagrid('reload');    // reload the user data
+                }
+            }, dataType: 'json'
+        });
+    }
+    function Del() {
+        var row = $('#dg').datagrid('getSelected');
+        if (row) {
+            $.messager.confirm('Confirm', '删除?', function (r) {
+                if (r) {
+                    $.post('/Admin/Article/Delete/', { TypeId: row.TypeId }, function (result) {
+                        if (result.success) {
+                            $('#dg').datagrid('reload');    // reload the user data
+                        } else {
+                            $.messager.show({    // show error message
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        }
+                    }, 'json');
+                }
+            });
+        }
+    }
+    </script>
+
+}
+
+<table id="dg" title="文章管理" class="easyui-datagrid" style="width:auto;"
+       url="/Admin/Article/GetAllEntitys"
+       toolbar="#toolbar" pagination="true"
+       rownumbers="true" fitcolumns="true" singleselect="true">
+    <thead>
+        <tr>
+            <th field="Id" width="50" height="30">Id</th>
+            <th field="Category" width="50">类别Id</th>
+            <th field="CreateDate" width="50">创建日期</th>
+            <th field="Status" width="50">状态</th>
+        </tr>
+    </thead>
+</table>
+<div id="toolbar">
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-add" plain="true" onclick="Add()">添加</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-edit" plain="true" onclick="Edit()">修改</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
+</div>
+
+<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;"
+     closed="true" modal="true" buttons="#dlg-buttons">
+   
+    <form id="fm" method="post" novalidate>
+        <input type="hidden" name="Id" />
+        @*<div class="fitem">
+            <label>Id:</label>
+            <input name="Category" class="easyui-textbox" required="true">
+        </div>*@
+        <div class="fitem">
+            <label>类别Id:</label>
+            <input name="Category" class="easyui-textbox" required="true">
+        </div>
+        <div class="fitem">
+            <label>内容:</label>
+            <input name="Content" class="easyui-textbox" required="true">
+        </div>
+       
+    </form>
+</div>
+<div id="dlg-buttons">
+    <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">取消</a>
+</div>
+
+
