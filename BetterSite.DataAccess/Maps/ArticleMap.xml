@@ -27,13 +27,13 @@
     <select id="Tab_Article_Select" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
       SELECT CONVERT(VARCHAR(40), Id) Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
       <dynamic prepend="WHERE">
-        <isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>
+        <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
       </dynamic>
     </select>
     <select id="Tab_Article_SelectList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
       SELECT Id,Category,Title,PageView,Content,CreateDate,Status FROM  Tab_Article
       <dynamic prepend="WHERE">
-        <isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>
+      
         <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>
       </dynamic>
     </select>

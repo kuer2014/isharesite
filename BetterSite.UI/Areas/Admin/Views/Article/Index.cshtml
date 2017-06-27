@@ -7,6 +7,7 @@
         $('#dlg').dialog('open').dialog('setTitle', '添加');
         $('#fm').form('clear');
         ue.execCommand('cleardoc');
+        $('#cc').combobox('setValue', '1');
         url = '/Admin/Article/Create';
     }
     function Edit() {
@@ -20,13 +21,22 @@
         }
     }
     function Save() {
-        if (!$('#fm').form('validate')) { return; }
-        var formData = $('#fm').formSerialize(); //jquery.form 插件
-      
+      //  if (!$('#fm').form('validate')) { return; }
+        // var formData = $('#fm').formSerialize(); //jquery.form 插件
+        var category = $('input[name="Category"]').val();
+        var title = $('input[name="Title"]').val();
+        var content = ue.getContent();
+        if (!(category && title && content)) {
+            $.messager.show({
+                title: 'Error',
+                msg: '必填项不能为空'
+            });
+            return;
+        }
         $.ajax({
             url: url,
             type: 'post',
-            data: formData + "&Content=" + ue.getContent(),
+            data: "Category=" + category + "&Title=" + title + "&Content=" + ue.getContent(),
             success: function (result) {
                 //debugger;
                 //  var result = eval('(' + result + ')');
@@ -70,6 +80,25 @@
         else
             return "";
     }
+    function ToCategoryName(val, row, index) {
+        debugger;
+        var name = '';
+        switch (val) {
+            case 1: name = '实用';
+                break;
+            case 2: name = '有趣';
+                break;
+            case 3: name = '热点';
+                break;
+            case 4: name = '随笔';
+                break;
+            case 5: name = '读书';
+                break;
+            default: break;
+        }
+       
+            return name;
+    }
     </script>
 <script src="~/Content/ueditor1_4_3_3-utf8-net/ueditor.config.js"></script>
 <script src="~/Content/ueditor1_4_3_3-utf8-net/ueditor.all.min.js"></script>
@@ -89,9 +118,9 @@
     <thead>
         <tr>
             <th field="Id" width="50" height="30">Id</th>
-            <th field="Category" width="50">类别Id</th>
+            <th field="Category" width="50" formatter="ToCategoryName">类别Id</th>
             <th field="Title" width="50">标题</th>
-            <th field="PageView" width="50">标题</th>
+            <th field="PageView" width="50">浏览量</th>
             @*<th field="Content" width="50" formatter="ContentPreview">内容</th>*@
             <th field="CreateDate" width="50">创建日期</th>
             <th field="Status" width="50">状态</th>
@@ -114,11 +143,18 @@
             </div>*@
         <div class="fitem">
             <label>类别Id:</label>
-            <input name="Category" class="easyui-textbox" required="true" />
+            @*<input name="Category" class="easyui-validatebox" required="true"/>*@
+            <select id="cc" class="easyui-combobox" name="Category" style="width:200px;" >
+                <option selected="selected" value="1">实用</option>
+                <option value="2">有趣</option>
+                <option value="3">热点</option>
+                <option value="4">随笔</option>
+                <option value="5">读书</option>
+            </select>
         </div>
         <div class="fitem">
             <label>标题:</label>
-            <input name="Title" class="easyui-textbox" required="true" />
+            <input name="Title" class="easyui-textbox"  style="width:500px;"/>
         </div>
         <div class="fitem">
             <label>内容:</label>
