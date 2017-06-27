@@ -1,0 +1,65 @@
+﻿@model IList<BetterSite.Domain.M_Article>
+    <style>
+          .pagepath {
+        margin-top: 10px;
+    }
+        .pagepath span {
+            margin: 30px;
+        }
+        .pagepath .divhr {
+            border-top: 1px solid #ccc; /*solid 1px #97d2fa;*/
+            margin-left:10px;
+        }
+        .articleList .site-add-date {
+        float:right;
+        }
+        .articleList {
+            border-bottom: 1px dotted #ccc;
+            margin-left: 30px;
+            margin-right: 20px;
+            padding: 10px 0px 0px 10px;
+        }
+    </style>
+<div class="pagepath">
+    <span class="curpostion">当前位置:<a href="/" title="home">首页</a>&gt; 文章 </span>
+    <div class="divhr"></div>
+</div>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="articleList">
+                <a href="/Article/@item.Id" title="@item.Title">@item.Title</a><span  class="site-add-date">@item.CreateDate</span>
+            </div>
+        </li>
+    }
+</ul>
+<div>
+    <p class="pages">
+        <a href="">&laquo;上一页</a>
+        <label>@ViewBag.Page/@ViewBag.PageCount</label>
+        <a href="">下一页&raquo;</a>
+    </p>
+</div>
+@section Scripts
+    {
+    <script>
+            jQuery(function () {
+                //分页
+                var page= @ViewBag.Page;
+                var pageCount=@ViewBag.PageCount;
+                jQuery('.pages a').css('display','none');
+                if(page>1){
+                    jQuery('.pages a:first').css('display','inline');
+                    jQuery('.pages a:first').attr('href',location.href.replace(/\d{1,5}\.html/ ,(-1+page)+'.html'));
+                }
+                if(page< pageCount){
+                    jQuery('.pages a:last').css('display','inline');
+                    jQuery('.pages a:last').attr('href',location.href.replace(/\d{1,5}\.html/ ,(1+page)+'.html'));
+                }
+
+            })
+    </script>
+}
+
+

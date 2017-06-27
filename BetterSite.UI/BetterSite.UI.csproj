@@ -169,6 +169,7 @@
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\SiteApiController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1391,6 +1392,8 @@
     <Content Include="Views\Shared\_Layout - 复制.cshtml" />
     <Content Include="Views\Sites\Detail - 复制.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -26,9 +26,9 @@ namespace BetterSite.DataAccess
           return BaseDA.Delete("Tab_Article_Delete", id+"");
       }
       ///查询对象
-      public M_Article Get(string siteId)
+      public M_Article Get(int id)
       {
-          return BaseDA.Get<M_Article>("", siteId);
+          return BaseDA.Get<M_Article>("Tab_Article_SelectEntity", id+"");
       }
       ///查询列表
       public IList<M_Article> QueryForEntityList(M_Article where)

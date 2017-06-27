@@ -12,6 +12,28 @@ namespace BetterSite.UI
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            /// /Article/2.html           
+            routes.MapRoute(
+              name: "AllArticleList",
+              url: "Article/{Page}.html",
+              defaults: new { controller = "Article", action = "Index", Page = 1 },
+               namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 Page = @"\d{1,5}"
+             }
+          );
+            /// /Article/1
+            routes.MapRoute(
+          name: "ArticleDetail",
+          url: "Article/{id}",
+          defaults: new { controller = "Article", action = "Details", id= 1 },
+           namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 id = @"\d{1,5}"
+             }
+      );
             /// /Sites/SITE1494393044614
             routes.MapRoute(
           name: "SiteDetail",
@@ -59,6 +81,7 @@ namespace BetterSite.UI
                  Page = @"\d{0,5}"
              }
           );
+        
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

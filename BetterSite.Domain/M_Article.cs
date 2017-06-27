@@ -19,7 +19,7 @@ namespace BetterSite.Domain
     {
         private int m_Id;
 
-        private int m_Category;
+        private int? m_Category;
         private string m_Content = String.Empty;
         private string m_CreateDate;
         private int m_Status;
@@ -47,7 +47,7 @@ namespace BetterSite.Domain
         /// <summary>
         /// 
         /// </summary>
-        public int Category
+        public int? Category
         {
             get
             {

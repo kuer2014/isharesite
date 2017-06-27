@@ -45,9 +45,9 @@ namespace BetterSite.BusinessObject
           return da.Delete(id);
       }
       ///查询对象
-      public M_Article Get(string siteId)
+      public M_Article Get(int id)
       {
-          return da.Get(siteId);
+          return da.Get(id);
       }
       ///查询列表
       public IList<M_Article> QueryForEntityList(M_Article where)

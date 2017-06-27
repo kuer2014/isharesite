@@ -25,16 +25,23 @@
       DELETE FROM  Tab_Article  WHERE Id= #id#
     </delete>
     <select id="Tab_Article_Select" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
-      SELECT CONVERT(VARCHAR(40), Id) Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
+      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
       </dynamic>
     </select>
-    <select id="Tab_Article_SelectList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
-      SELECT Id,Category,Title,PageView,Content,CreateDate,Status FROM  Tab_Article
+    <select id="Tab_Article_SelectEntity" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="System.String">
+      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
       <dynamic prepend="WHERE">
-      
-        <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Id">Id= #id#</isNotEmpty>
+      </dynamic>
+    </select>
+    <select id="Tab_Article_SelectList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
+      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
+      <dynamic prepend="WHERE">
+        <!--<isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="Id">Id=#Id#</isNotEmpty>
       </dynamic>
     </select>
     <select id="Tab_Article_SelectPageList" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
@@ -43,13 +50,15 @@
       FROM  Tab_Article
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>
       </dynamic>
       )
       SELECT TOP $Rows$ * FROM T WHERE Id NOT IN
       (
-      SELECT TOP ($Rows$*($Page$-1)) Id FROM T ORDER BY CreateDate
+      SELECT TOP ($Rows$*($Page$-1)) Id FROM T ORDER BY CreateDate DESC
       )
-      ORDER BY CreateDate
+      ORDER BY CreateDate DESC
     </select>
     <select id="Tab_Article_SelectAll" listClass="ArrayList" resultMap="Tab_Article_Result" >
       SELECT Id,Category,Title,PageView,Content,CreateDate,Status
