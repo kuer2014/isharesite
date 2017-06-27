@@ -41,6 +41,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult Create(BetterSite.Domain.M_Article entity)
         {
             JsonResult json = new JsonResult();
@@ -70,6 +71,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         // POST: /Admin/Types/Edit/5
 
         [HttpPost]
+        [ValidateInput(false)]
         public JsonResult Edit(BetterSite.Domain.M_Article entity)
         {
             JsonResult json = new JsonResult();

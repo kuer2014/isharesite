@@ -5,6 +5,8 @@
     <resultMap class="BetterSite.Domain.M_Article,BetterSite.Domain" id="Tab_Article_Result">
       <result column="Id" property="Id" />
       <result column="Category" property="Category" />
+      <result column="Title" property="Title" />  
+      <result column="PageView" property="PageView" />
       <result column="Content" property="Content" />
       <result column="CreateDate" property="CreateDate" />
       <result column="Status" property="Status" />
@@ -12,24 +14,24 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Article_Insert" parameterClass="BetterSite.Domain.M_Article">
-      INSERT INTO  Tab_Article  (Category,Content)
-      VALUES (#Category#,#Content#)
+      INSERT INTO  Tab_Article  (Category,Title,Content)
+      VALUES (#Category#,#Title#,#Content#)
     </insert>
     <update id="Tab_Article_Update" parameterClass="BetterSite.Domain.M_Article">
-      UPDATE  Tab_Article  SET Category= #Category#,Content= #Content#
+      UPDATE  Tab_Article  SET Category= #Category#,Title= #Title#,Content= #Content#
       WHERE Id= #Id#
     </update>
     <delete id="Tab_Article_Delete" parameterClass="Hashtable">
       DELETE FROM  Tab_Article  WHERE Id= #id#
     </delete>
     <select id="Tab_Article_Select" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
-      SELECT CONVERT(VARCHAR(40), Id) Id,Category,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
+      SELECT CONVERT(VARCHAR(40), Id) Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>
       </dynamic>
     </select>
     <select id="Tab_Article_SelectList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
-      SELECT Id,Category,Content,CreateDate,Status FROM  Tab_Article
+      SELECT Id,Category,Title,PageView,Content,CreateDate,Status FROM  Tab_Article
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>
         <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>
@@ -37,7 +39,7 @@
     </select>
     <select id="Tab_Article_SelectPageList" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
       WITH T AS(
-      SELECT Id,Category,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status
+      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status
       FROM  Tab_Article
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
@@ -50,7 +52,7 @@
       ORDER BY CreateDate
     </select>
     <select id="Tab_Article_SelectAll" listClass="ArrayList" resultMap="Tab_Article_Result" >
-      SELECT Id,Category,Content,CreateDate,Status
+      SELECT Id,Category,Title,PageView,Content,CreateDate,Status
       FROM  Tab_Article
     </select>
   </statements>

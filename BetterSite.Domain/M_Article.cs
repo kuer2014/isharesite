@@ -23,6 +23,8 @@ namespace BetterSite.Domain
         private string m_Content = String.Empty;
         private string m_CreateDate;
         private int m_Status;
+        private string m_Title;
+        private int m_PageView;
 
         // Instantiate empty M_Types for inserting
         public M_Article() { }
@@ -85,6 +87,32 @@ namespace BetterSite.Domain
             set
             {
                 m_Status = value;
+            }
+        }
+
+        public string Title
+        {
+            get
+            {
+                return m_Title;
+            }
+
+            set
+            {
+                m_Title = value;
+            }
+        }
+
+        public int PageView
+        {
+            get
+            {
+                return m_PageView;
+            }
+
+            set
+            {
+                m_PageView = value;
             }
         }
 

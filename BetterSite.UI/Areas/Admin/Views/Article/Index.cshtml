@@ -6,6 +6,7 @@
     function Add() {
         $('#dlg').dialog('open').dialog('setTitle', '添加');
         $('#fm').form('clear');
+        ue.execCommand('cleardoc');
         url = '/Admin/Article/Create';
     }
     function Edit() {
@@ -13,16 +14,19 @@
         if (row) {
             $('#dlg').dialog('open').dialog('setTitle', '修改');
             $('#fm').form('load', row);
+          //  debugger;
+            ue.setContent(row.Content);
             url = '/Admin/Article/Edit/';
         }
     }
     function Save() {
         if (!$('#fm').form('validate')) { return; }
         var formData = $('#fm').formSerialize(); //jquery.form 插件
+      
         $.ajax({
             url: url,
             type: 'post',
-            data: formData,
+            data: formData + "&Content=" + ue.getContent(),
             success: function (result) {
                 //debugger;
                 //  var result = eval('(' + result + ')');
@@ -34,6 +38,7 @@
                 } else {
                     $('#dlg').dialog('close');        // close the dialog
                     $('#dg').datagrid('reload');    // reload the user data
+                    ue.execCommand('cleardoc');
                 }
             }, dataType: 'json'
         });
@@ -43,7 +48,7 @@
         if (row) {
             $.messager.confirm('Confirm', '删除?', function (r) {
                 if (r) {
-                    $.post('/Admin/Article/Delete/', { TypeId: row.TypeId }, function (result) {
+                    $.post('/Admin/Article/Delete/', { Id: row.Id }, function (result) {
                         if (result.success) {
                             $('#dg').datagrid('reload');    // reload the user data
                         } else {
@@ -57,8 +62,24 @@
             });
         }
     }
+    function ContentPreview(val, row, index) {
+        debugger;
+        if (val)
+          
+            return val.length > 20 ? val.substr(0, 20) : val;
+        else
+            return "";
+    }
     </script>
+<script src="~/Content/ueditor1_4_3_3-utf8-net/ueditor.config.js"></script>
+<script src="~/Content/ueditor1_4_3_3-utf8-net/ueditor.all.min.js"></script>
 
+<script type="text/javascript">
+
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+    </script>
 }
 
 <table id="dg" title="文章管理" class="easyui-datagrid" style="width:auto;"
@@ -69,6 +90,9 @@
         <tr>
             <th field="Id" width="50" height="30">Id</th>
             <th field="Category" width="50">类别Id</th>
+            <th field="Title" width="50">标题</th>
+            <th field="PageView" width="50">标题</th>
+            @*<th field="Content" width="50" formatter="ContentPreview">内容</th>*@
             <th field="CreateDate" width="50">创建日期</th>
             <th field="Status" width="50">状态</th>
         </tr>
@@ -80,24 +104,28 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;"
+<div id="dlg" class="easyui-dialog" style="width:700px;height:660px;"
      closed="true" modal="true" buttons="#dlg-buttons">
-   
     <form id="fm" method="post" novalidate>
         <input type="hidden" name="Id" />
         @*<div class="fitem">
-            <label>Id:</label>
-            <input name="Category" class="easyui-textbox" required="true">
-        </div>*@
+                <label>Id:</label>
+                <input name="Category" class="easyui-textbox" required="true">
+            </div>*@
         <div class="fitem">
             <label>类别Id:</label>
-            <input name="Category" class="easyui-textbox" required="true">
+            <input name="Category" class="easyui-textbox" required="true" />
+        </div>
+        <div class="fitem">
+            <label>标题:</label>
+            <input name="Title" class="easyui-textbox" required="true" />
         </div>
         <div class="fitem">
             <label>内容:</label>
-            <input name="Content" class="easyui-textbox" required="true">
+            @*<input  id="editor"  name="Content" class="easyui-textbox" required="true">*@
+            <script id="editor" type="text/plain" style="width:600px;height:380px;">
+            </script>
         </div>
-       
     </form>
 </div>
 <div id="dlg-buttons">
