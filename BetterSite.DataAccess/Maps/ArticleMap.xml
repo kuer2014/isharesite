@@ -42,6 +42,7 @@
       Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Article
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
       </dynamic>
     </select>
     <select id="Tab_Article_SelectEntity" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="System.String">
