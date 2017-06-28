@@ -61,6 +61,20 @@ namespace BetterSite.BusinessObject
       public IList QueryForPageList(M_Article where)
       {
           return da.QueryForPageList(where);
-      }
+        }  ///更新点击数
+        public int UpdateArticleClickQuantity(int id)
+        {
+            Hashtable param = new Hashtable();
+            param.Add("Id", id);
+            return da.UpdateArticleClickQuantity(param);
+        }
+        public object AddArticleComment(M_ArticleComment model)
+        {
+            return da.AddArticleComment(model);
+        }
+        public IList QueryArticleCommentForList(M_ArticleComment where)
+        {
+            return da.QueryArticleCommentForList(where);
+        }
     }
 }

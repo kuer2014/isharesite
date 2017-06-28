@@ -43,5 +43,18 @@ namespace BetterSite.DataAccess
       {
           return BaseDA.QueryForList("Tab_Article_SelectPageList", where);
       }
+        ///更新点击数
+        public int UpdateArticleClickQuantity(Hashtable param)
+        {
+            return BaseDA.Update<Hashtable>("Tab_Sites_UpdateArticleClickQuantity", param);
+        }
+        public object AddArticleComment(M_ArticleComment model)
+        {
+            return BaseDA.Insert<M_ArticleComment>("Tab_ArticleComment_Insert", model);
+        }
+        public IList QueryArticleCommentForList(M_ArticleComment where)
+        {
+            return BaseDA.QueryForList("Tab_ArticleComment_Select", where);
+        }
     }
 }

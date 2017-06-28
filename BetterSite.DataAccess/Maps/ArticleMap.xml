@@ -10,43 +10,82 @@
       <result column="Content" property="Content" />
       <result column="CreateDate" property="CreateDate" />
       <result column="Status" property="Status" />
+      <result column="Description" property="Description" />
+      <result column="CategoryName" property="CategoryName" />
+    </resultMap>
+    <resultMap class="BetterSite.Domain.M_ArticleComment,BetterSite.Domain" id="Tab_ArticleComment_Result">
+      <result column="CreateTime" property="CreateTime" />
+      <result column="CommentUserNickname" property="CommentUserNickname" />
+      <result column="CommentUserIp" property="CommentUserIp" />
+      <result column="CommentContent" property="CommentContent" />
     </resultMap>
   </resultMaps>
   <statements>
     <insert id="Tab_Article_Insert" parameterClass="BetterSite.Domain.M_Article">
-      INSERT INTO  Tab_Article  (Category,Title,Content)
-      VALUES (#Category#,#Title#,#Content#)
+      INSERT INTO  Tab_Article  (Category,Title,Content,Description)
+      VALUES (#Category#,#Title#,#Content#,#Description#)
     </insert>
     <update id="Tab_Article_Update" parameterClass="BetterSite.Domain.M_Article">
-      UPDATE  Tab_Article  SET Category= #Category#,Title= #Title#,Content= #Content#
+      UPDATE  Tab_Article  SET Category= #Category#,Title= #Title#,Content= #Content#,Description= #Description#
       WHERE Id= #Id#
     </update>
     <delete id="Tab_Article_Delete" parameterClass="Hashtable">
       DELETE FROM  Tab_Article  WHERE Id= #id#
     </delete>
+    <update id="Tab_Sites_UpdateArticleClickQuantity" parameterClass="Hashtable">
+      UPDATE  Tab_Article  SET PageView =PageView+1
+      WHERE Id= #Id#
+    </update>
     <select id="Tab_Article_Select" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
-      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
+      SELECT Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Article
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
       </dynamic>
     </select>
     <select id="Tab_Article_SelectEntity" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="System.String">
-      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
+      SELECT Id,Category,
+        case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Article
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="Id">Id= #id#</isNotEmpty>
       </dynamic>
     </select>
     <select id="Tab_Article_SelectList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
-      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status FROM  Tab_Article
-      <dynamic prepend="WHERE">
-        <!--<isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
-        <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>-->
-        <isNotEmpty prepend="and" property="Id">Id=#Id#</isNotEmpty>
-      </dynamic>
+      SELECT * from (
+      SELECT top 1 Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,
+      CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
+      FROM  Tab_Article
+      WHERE id<![CDATA[<]]>#Id#
+      AND Status=#Status#
+      order by id desc)prerecord
+      UNION ALL
+      SELECT Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,
+      CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
+      FROM  Tab_Article
+      WHERE id=#Id#
+      AND Status=#Status#
+      UNION ALL
+      SELECT * from (
+      SELECT top 1 Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,
+      CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
+      FROM  Tab_Article
+      WHERE id<![CDATA[>]]>#Id#
+      AND Status=#Status#
+      order by id asc) nextrecord
     </select>
     <select id="Tab_Article_SelectPageList" listClass="ArrayList" resultMap="Tab_Article_Result" parameterClass="Hashtable">
       WITH T AS(
-      SELECT Id,Category,Title,PageView,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status
+      SELECT Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status,Description
       FROM  Tab_Article
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
@@ -61,8 +100,24 @@
       ORDER BY CreateDate DESC
     </select>
     <select id="Tab_Article_SelectAll" listClass="ArrayList" resultMap="Tab_Article_Result" >
-      SELECT Id,Category,Title,PageView,Content,CreateDate,Status
+      SELECT Id,Category,
+        case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CreateDate,Status,Description
       FROM  Tab_Article
+    </select>
+    <insert id="Tab_ArticleComment_Insert" parameterClass="BetterSite.Domain.M_ArticleComment">
+      INSERT INTO  Tab_ArticleComment  ( [ArticleId], [CreateTime], [CommentUserNickname], [CommentUserIp], [CommentContent], [Status])
+      VALUES (#ArticleId#, #CreateTime#, #CommentUserNickname#, #CommentUserIp#, #CommentContent#, #Status#)
+    </insert>
+    <select id="Tab_ArticleComment_Select" listClass="ArrayList" resultMap="Tab_ArticleComment_Result" >
+      SELECT [Id], [ArticleId], [CreateTime], [CommentUserNickname], [CommentUserIp], [CommentContent], [Status]
+      FROM  Tab_ArticleComment
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+        <isNotEmpty prepend="and" property="ArticleId">ArticleId= #ArticleId#</isNotEmpty>
+        <!--<isNotEmpty prepend="and" property="SiteId">S.SiteId IN('$SiteId$')</isNotEmpty>-->
+      </dynamic>
+      ORDER BY CreateTime DESC;
     </select>
   </statements>
 </sqlMap>

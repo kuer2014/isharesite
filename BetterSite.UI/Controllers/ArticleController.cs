@@ -22,7 +22,7 @@ namespace BetterSite.UI.Controllers
             ViewBag.Title = "文章 - " + title;
             ViewBag.Keywords = keywords;
             ViewBag.Description = description;
-            int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pagesize"]);
+            int pagesize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["articlepagesize"]);
             where.Status = 1;
            where.Category = null;
             where.Rows = pagesize;
@@ -40,10 +40,34 @@ namespace BetterSite.UI.Controllers
 
         public ActionResult Details(int id)
         {
-           var model= articleBO.QueryForEntityList(new M_Article { Id = id }).FirstOrDefault();
-            var listType = articleBO.QueryForPageList(new M_Article { Category = model.Category,Status=1,Rows=10,Page=1 });
+            var modelList = articleBO.QueryForEntityList(new M_Article { Id = id, Status = 1 });
+           var model= modelList.Where(m=>m.Id==id).FirstOrDefault();
+            if (model != null)
+            {
+                ViewBag.Title = model.Title + " - " + title;
+                ViewBag.Keywords = model.Title + ",优站分享";
+                string desc = model.Description;
+                if (!string.IsNullOrWhiteSpace(desc) && desc.Length > 100)
+                {
+                    desc = desc.Substring(0, 100) + "...";
+                }
+                ViewBag.Description = desc;
+                ///同类文章
+                var listType = articleBO.QueryForPageList(new M_Article { Category = model.Category,Status=1,Rows=10,Page=1 });
             ViewBag.ListType = listType;
-            return View(model);
+            //加载评论
+            ViewBag.CommentList = articleBO.QueryArticleCommentForList(new M_ArticleComment { ArticleId = model.Id, Status = 1 });
+                //上一条，下一条
+                ViewBag.Pre= modelList.Where(m => m.Id < id).FirstOrDefault();
+                ViewBag.Next = modelList.Where(m => m.Id > id).FirstOrDefault();
+                //更新点击数
+                articleBO.UpdateArticleClickQuantity(model.Id);
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         //
@@ -122,6 +146,51 @@ namespace BetterSite.UI.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public JsonResult AddArticleComment(int articleId, string nickname, string commentContent)
+        {
+            JsonResult json = new JsonResult();
+            if (articleId>0 && !string.IsNullOrWhiteSpace(nickname) && !string.IsNullOrWhiteSpace(commentContent))
+            {
+                try
+                {
+                    // TODO: Add insert logic here
+                    M_ArticleComment entity = new M_ArticleComment();
+                    //entity.Id = Guid.NewGuid().ToString().ToUpper();
+                    entity.ArticleId = articleId;
+                    entity.CreateTime = DateTime.Now;
+                    entity.CommentUserNickname = nickname;
+                    entity.CommentUserIp = System.Web.HttpContext.Current.Request.UserHostAddress;
+                    entity.CommentContent = commentContent;
+                    entity.Status = 2;//待审核
+                    articleBO.AddArticleComment(entity);
+
+                    json.Data = new
+                    {
+                        success = true,
+                        msg = "添加成功"
+                    };
+                }
+                catch (Exception ex)
+                {
+                    json.Data = new
+                    {
+                        success = false,
+                        msg = ex.Message
+                    };
+                }
+            }
+            else
+            {
+                json.Data = new
+                {
+                    success = false,
+                    msg = "参数有误"
+                };
+            }
+            //json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return json;
         }
     }
 }

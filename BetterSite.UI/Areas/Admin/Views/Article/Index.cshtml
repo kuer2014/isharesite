@@ -23,10 +23,12 @@
     function Save() {
       //  if (!$('#fm').form('validate')) { return; }
         // var formData = $('#fm').formSerialize(); //jquery.form 插件
+        var id = $('input[name="Id"]').val();
         var category = $('input[name="Category"]').val();
         var title = $('input[name="Title"]').val();
         var content = ue.getContent();
-        if (!(category && title && content)) {
+        var description = $('#Description').val();
+        if (!(category && title && content && description)) {
             $.messager.show({
                 title: 'Error',
                 msg: '必填项不能为空'
@@ -36,7 +38,7 @@
         $.ajax({
             url: url,
             type: 'post',
-            data: "Category=" + category + "&Title=" + title + "&Content=" + ue.getContent(),
+            data: "Id=" + id + "&Category=" + category + "&Title=" + title + "&Content=" + content + "&Description=" + description,
             success: function (result) {
                 //debugger;
                 //  var result = eval('(' + result + ')');
@@ -73,30 +75,13 @@
         }
     }
     function ContentPreview(val, row, index) {
-        debugger;
-        if (val)
-          
+        if (val)          
             return val.length > 20 ? val.substr(0, 20) : val;
         else
             return "";
     }
     function ToCategoryName(val, row, index) {
-        debugger;
-        var name = '';
-        switch (val) {
-            case 1: name = '实用';
-                break;
-            case 2: name = '有趣';
-                break;
-            case 3: name = '热点';
-                break;
-            case 4: name = '随笔';
-                break;
-            case 5: name = '读书';
-                break;
-            default: break;
-        }
-       
+        var name = '';       
             return name;
     }
     </script>
@@ -118,7 +103,8 @@
     <thead>
         <tr>
             <th field="Id" width="50" height="30">Id</th>
-            <th field="Category" width="50" formatter="ToCategoryName">类别Id</th>
+            @*<th field="Category" width="50" formatter="ToCategoryName">类别Id</th>*@
+            <th field="CategoryName" width="50">类别</th>
             <th field="Title" width="50">标题</th>
             <th field="PageView" width="50">浏览量</th>
             @*<th field="Content" width="50" formatter="ContentPreview">内容</th>*@
@@ -133,7 +119,7 @@
     <a href="javascript:void(0)" class="easyui-linkbutton" iconcls="icon-remove" plain="true" onclick="Del()">删除</a>
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:700px;height:660px;"
+<div id="dlg" class="easyui-dialog" style="width:700px;height:750px;"
      closed="true" modal="true" buttons="#dlg-buttons">
     <form id="fm" method="post" novalidate>
         <input type="hidden" name="Id" />
@@ -162,7 +148,11 @@
             <script id="editor" type="text/plain" style="width:600px;height:380px;">
             </script>
         </div>
-    </form>
+        <div class="fitem">
+            <label>描述:</label>
+            <textarea type="textarea" name="Description" id="Description" rows="3" style="width:98%"></textarea>
+            </div>
+</form>
 </div>
 <div id="dlg-buttons">
     <a href="javascript:void(0)" class="easyui-linkbutton c6" iconcls="icon-ok" onclick="Save()" style="width:90px">保存</a>

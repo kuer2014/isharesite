@@ -21,6 +21,8 @@ namespace BetterSite.UI.Areas.Admin.Controllers
         {
             //  where.PageIndex = page;
             // where.PageSize = rows;
+            where.Status = 1;
+            where.Category = null;
             var count = articleBO.QueryForList(where).Count;
             var list = articleBO.QueryForPageList(where);
             var data = new
@@ -48,6 +50,7 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             try
             {
                 // TODO: Add insert logic here
+              //  entity.Content = System.Web.HttpUtility.UrlDecode(entity.Content);
                 articleBO.Insert(entity);
                 json.Data = new
                 {

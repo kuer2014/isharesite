@@ -25,7 +25,8 @@ namespace BetterSite.Domain
         private int m_Status;
         private string m_Title;
         private int m_PageView;
-
+        private string m_Description;
+        private string m_CategoryName;
         // Instantiate empty M_Types for inserting
         public M_Article() { }
 
@@ -113,6 +114,32 @@ namespace BetterSite.Domain
             set
             {
                 m_PageView = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return m_Description;
+            }
+
+            set
+            {
+                m_Description = value;
+            }
+        }
+
+        public string CategoryName
+        {
+            get
+            {
+                return m_CategoryName;
+            }
+
+            set
+            {
+                m_CategoryName = value;
             }
         }
 

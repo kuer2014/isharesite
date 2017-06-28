@@ -7,7 +7,7 @@
             text-indent: 26px;
         }
                    .title {
-            width: 450px;
+            width: 570px;
             display: block;
             overflow: hidden;
             word-break: keep-all;
@@ -16,24 +16,30 @@
             float:left;
             text-decoration:none;
             color:#666;
+            text-align:center;
         }
-                     .title:hover{
+                     /*.title:hover{
              text-decoration:underline;
             color:#62bee3;
-        }
-    .return {
-  text-align:center;
+        }*/
+    /*.return {
+
       font-size: 15px;
-       display:block;
-    }
+   margin:auto;
+       width:30px;
+    }*/
+        /*.return a {
+        margin:0 10px 0 10px
+        }*/
            .article .send {
         padding:5px 8px 5px 8px;
         margin:5px 0 0 20px;
         }    
         .sitetypedata{
-           padding: 10px 0 0 20px;
-           border-bottom:1px solid #ccc;
+           padding: 10px 0 0 0;
+           /*border-bottom:1px solid #ccc;*/
            margin-bottom:15px;
+           text-align:center;
         }
             .sitetypedata span {
                 margin: 0 10px 0 10px;
@@ -48,122 +54,185 @@
  .article .nocommnettxt {
         margin:0 15px;
         }
+      .pagepath {
+        margin-top: 10px;
+    }
+        .pagepath span {
+            margin: 30px;
+        }
+        .pagepath .divhr {
+            border-top: 1px solid #ccc; /*solid 1px #97d2fa;*/
+            
+        }
+    .content .mainbar .smallarticle {
+    margin:0 20px 0 20px;
+    }
+       .pre-article,
+       .next-article {
+            width: 250px;
+            display: block;
+            overflow: hidden;
+            word-break: keep-all;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            /*float:left;
+            text-decoration:none;
+            color:#666;*/
+            margin:0px;
+        }
+    .pre-article {
+    position:absolute;
+    }
+      .next-article {
+ float:right
+    }
 </style>
 <div class="article">
+    <div class="pagepath">
+        <span class="curpostion">当前位置:  <a href="/" title="home">首页</a> &gt; <a class="" href="/article/1.html" title="文章列表">文章</a> </span>
+        <div class="divhr"></div>
+    </div>
+    </div>
+<div class="article smallarticle">
     <h2>
         <span class="title">@Model.Title </span>
-        </h2>
+    </h2>
     <div class="clr"></div>
     <div class="sitetypedata">
-        <span> 类别: @Model.Category</span>
+        <span> 类别: @Model.CategoryName</span>
         <span>日期: <text class="site-add-date">@Model.CreateDate</text></span>
         <span>浏览数: @Model.PageView</span>
-    </div>   
+    </div>
     <p class="siteprofile">
-        @Html.Raw(Model.Content )       
+        @Html.Raw(Model.Content)
     </p>
-  
-    <div class="return">
-        <a href="/article/1.html" title="返回文章列表">
-            返回列表
-        </a>
-    </div> 
-    <hr />
-</div>
-<div class="article">
-    <div class="bshare-custom"><a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到新浪微博" class="bshare-sinaminiblog">新浪微博</a><a title="分享到QQ好友" class="bshare-qqim">QQ好友</a><a title="分享到QQ空间" class="bshare-qzone">QQ空间</a><a title="分享到微信" class="bshare-weixin">微信</a><a title="分享到豆瓣" class="bshare-douban">豆瓣</a><a title="分享到人人网" class="bshare-renren">人人网</a><a title="分享到i贴吧" class="bshare-itieba">i贴吧</a><a title="分享到复制网址" class="bshare-clipboard">复制网址</a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
-    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a>
-    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
-
-</div>
- 
-@*同类站点*@
-<div class="article">
-    <div class="panel-heading">
-        <h4 class="panel-title">你可能喜欢</h4>
-    </div>
-    <div class="panel-body">
-        <ul class="list-unstyled ">
-            @foreach (var item in ViewBag.ListType)
+    <div>
+        <span class="pre-article">
+            上一篇:
+            @if (ViewBag.Pre != null)
             {
-                <li style="height:25px;width:600px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
-                    <small> ★ </small><a href="/Article/@item.Id" target="_self" title="@item.Title"> @item.Title</a>
-                </li>
+                <a href="/article/@ViewBag.Pre.Id" title="@ViewBag.Pre.Title">
+                    @ViewBag.Pre.Title
+                </a>
             }
-        </ul>
+            else
+            {
+                <span>已经是第一篇了</span>
+            }
+        </span>
+        <span class="next-article">
+            下一篇:
+            @if (ViewBag.Next != null)
+            {
+                <a href="/article/@ViewBag.Next.Id" title="@ViewBag.Next.Title">
+                    @ViewBag.Next.Title
+                </a>
+            }
+            else
+            {
+                <span>已经是最后一篇了</span>
+            }
+        </span>
     </div>
 
 </div>
-<div class="article">
-    <h3><span></span> 最新评论</h3><div class="clr"></div>
-    @*@if (ViewBag.CommentList == null || ViewBag.CommentList.Count == 0)
-    {
-        <span class="nocommnettxt">暂无评论</span>
-    }
-    @foreach (var item in ViewBag.CommentList)
-            {
-        <div class="comment">
-            <div>@item.CommentUserNickname:</div>
-            <span>@item.CreateTime</span>
-            <p>
-                @item.CommentContent
-            </p>
+    <div class="article">
+        <hr />
+        <div class="bshare-custom"><a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到新浪微博" class="bshare-sinaminiblog">新浪微博</a><a title="分享到QQ好友" class="bshare-qqim">QQ好友</a><a title="分享到QQ空间" class="bshare-qzone">QQ空间</a><a title="分享到微信" class="bshare-weixin">微信</a><a title="分享到豆瓣" class="bshare-douban">豆瓣</a><a title="分享到人人网" class="bshare-renren">人人网</a><a title="分享到i贴吧" class="bshare-itieba">i贴吧</a><a title="分享到复制网址" class="bshare-clipboard">复制网址</a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div>
+        <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a>
+        <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    </div>
+    @*同类站点*@
+    <div class="article">
+        <div class="panel-heading">
+            <h4 class="panel-title">你可能喜欢</h4>
         </div>
-    }*@
-</div>
-<div class="article">
-    <h3>添加评论</h3>
-    <div class="clr"></div>
-    <form action="#" method="post" id="leavereply" class="comment-form">
-        <ol>
-            <li>
-                <label for="name">昵称</label>
-                <input type="text" class="text" id="Nickname" placeholder="网友">
-            </li>
-            <li>
-                <label for="message">评论内容</label>
-                <textarea class="form-control" id="CommentContent" rows="4" placeholder="文明上网理性发言，评论审核后显示，谢谢。"></textarea>
-            </li>
-            <li>
-                <input type="hidden" id="hidArticleId" value="@Model.Id" />
-                <button type="button" onclick="SubmitComment();" class="send">提交评论</button>
-                <div class="clr"></div>
-            </li>
-        </ol>
-    </form>
-</div>
-@section scripts {
-    <script>
-        function SubmitComment() {
-            var commentContent = $('#CommentContent').val();
-            if (!commentContent) return;
-            var siteId = $('#hidArticleId').val();
-            var nickname = $('#Nickname').val();
-            if (!nickname) nickname = '网友';
-            //  var formData = encodeURI('siteId=' + siteId + '&nickname=' + nickname + '&commentContent=' + commentContent);
-            var formData = 'siteId=' + siteId + '&nickname=' + nickname + '&commentContent=' + commentContent;
-            $.ajax({
-                url: 'AddSiteComment',
-                type: 'post',
-                //  dataType: 'application/x-www-form-urlencoded;charset=UTF-8',
-                async: true,
-                data: formData,
-                success: function (data, status, xhr) {
-                    if (data.success) {
-                        //  oriAlert(data.msg + ",将在审核后显示");
-                        $('.comment-form').append('<div class="alert alert-info" role="alert">添加成功,评论将在24小时内审核后显示.</div>');
-                    }
-                    else
-                        $('.comment-form').append('<div class="alert alert-warning" role="alert">' + data.msg + '</div>');
-                    // oriAlert(data.msg);
-                },
-                fail: function () {
-                    console.log("fail");
+        <div class="panel-body">
+            <ul class="list-unstyled ">
+                @foreach (var item in ViewBag.ListType)
+            {
+                    <li style="height:25px;width:600px; white-space:nowrap;overflow:hidden;text-overflow:ellipsis; ">
+                        <small> ★ </small><a href="/Article/@item.Id" target="_self" title="@item.Title"> @item.Title</a>
+                    </li>
                 }
-            });
+            </ul>
+        </div>
+
+    </div>
+    <div class="article">
+        @*<h3><span></span> 最新评论</h3>*@
+        <label>最新评论</label>
+        <div class="clr"></div>
+        @if (ViewBag.CommentList == null || ViewBag.CommentList.Count == 0)
+        {
+            <span class="nocommnettxt">暂无评论</span>
         }
-        jQuery(function () {
-     
-        });
-    </script>
-}
+        @foreach (var item in ViewBag.CommentList)
+            {
+            <div class="comment">
+                <div>@item.CommentUserNickname:</div>
+                <span>@item.CreateTime</span>
+                <p>
+                    @item.CommentContent
+                </p>
+            </div>
+        }
+    </div>
+
+    <div class="article">
+        <label>添加评论</label>
+        <div class="clr"></div>
+        <form action="#" method="post" id="leavereply" class="comment-form">
+            <ol>
+                <li>
+                    <label for="name">昵称</label>
+                    <input type="text" class="text" id="Nickname" placeholder="网友">
+                </li>
+                <li>
+                    <label for="message">评论内容</label>
+                    <textarea class="form-control" id="CommentContent" rows="4" placeholder="文明上网理性发言，评论审核后显示，谢谢。"></textarea>
+                </li>
+                <li>
+                    <input type="hidden" id="hidArticleId" value="@Model.Id" />
+                    <button type="button" onclick="SubmitComment();" class="send">提交评论</button>
+                    <div class="clr"></div>
+                </li>
+            </ol>
+        </form>
+    </div>
+
+    @section scripts {
+        <script>
+            function SubmitComment() {
+                var commentContent = $('#CommentContent').val();
+                if (!commentContent) return;
+                var articleId = $('#hidArticleId').val();
+                var nickname = $('#Nickname').val();
+                if (!nickname) nickname = '网友';
+                //  var formData = encodeURI('articleId=' + articleId + '&nickname=' + nickname + '&commentContent=' + commentContent);
+                var formData = 'articleId=' + articleId + '&nickname=' + nickname + '&commentContent=' + commentContent;
+                $.ajax({
+                    url: 'AddArticleComment',
+                    type: 'post',
+                    //  dataType: 'application/x-www-form-urlencoded;charset=UTF-8',
+                    async: true,
+                    data: formData,
+                    success: function (data, status, xhr) {
+                        if (data.success) {
+                            //  oriAlert(data.msg + ",将在审核后显示");
+                            $('.comment-form').append('<div class="alert alert-info" role="alert">添加成功,评论将在24小时内审核后显示.</div>');
+                        }
+                        else
+                            $('.comment-form').append('<div class="alert alert-warning" role="alert">' + data.msg + '</div>');
+                        // oriAlert(data.msg);
+                    },
+                    fail: function () {
+                        console.log("fail");
+                    }
+                });
+            }
+            jQuery(function () {
+
+            });
+        </script>
+    }

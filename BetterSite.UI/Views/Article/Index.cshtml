@@ -13,23 +13,35 @@
         .articleList .site-add-date {
         float:right;
         }
+        .list {
+            list-style-type: none;
+        }
         .articleList {
+            list-style-type:none;
             border-bottom: 1px dotted #ccc;
             margin-left: 30px;
             margin-right: 20px;
-            padding: 10px 0px 0px 10px;
+            padding: 20px 0px 0px 10px;
+        }
+        .articleList a {  
+    text-decoration: none;
+    color: #666;
+}
+                  .articleList a:hover{
+             text-decoration:underline;
+            color:#62bee3;
         }
     </style>
 <div class="pagepath">
-    <span class="curpostion">当前位置:<a href="/" title="home">首页</a>&gt; 文章 </span>
+    <span class="curpostion">当前位置:  <a href="/" title="home">首页</a> &gt; 文章 </span>
     <div class="divhr"></div>
 </div>
 <ul>
     @foreach (var item in Model)
     {
-        <li>
+        <li class="list">
             <div class="articleList">
-                <a href="/Article/@item.Id" title="@item.Title">@item.Title</a><span  class="site-add-date">@item.CreateDate</span>
+               <span>[ @item.CategoryName ]: </span> <a href="/Article/@item.Id" title="@item.Description">@item.Title</a><span  class="site-add-date">@item.CreateDate</span>
             </div>
         </li>
     }
