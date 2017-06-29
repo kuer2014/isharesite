@@ -55,6 +55,7 @@ namespace BetterSite.UI.Controllers
             if (Tag != null && Tag.Count() > 0)
             {
                 string tagsName = string.Join("','", Tag);
+                title = tagsName + "," + title;
                 keywords = tagsName + ","+ keywords;
                 Hashtable htTagsId = new Hashtable();
                 htTagsId.Add("TagsName", tagsName);
