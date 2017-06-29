@@ -13,7 +13,7 @@
 		  ◆ [Authorize] //指定对控制器或操作方法的访问只限于满足授权要求的用户。
 		  ◆  [AllowAnonymous] //用于标记在授权期间要跳过 System.Web.Mvc.AuthorizeAttribute 的控制器和操作。
 		  ◆  [Authorize(Roles = "Admin,User")]
-		3、 [ValidateAntiForgeryToken] //表示用于阻止伪造请求的特性。
+		3、 [ValidateAntiForgeryToken] //表示用于阻止伪造请求的特性。配合view中 @Html.AntiForgeryToken()
 		4、Bind    //获取或设置允许绑定的属性名称的列表（各属性名称之间用逗号分隔）。 Exclude排除  Include 包含
 		   示例： public async Task<ActionResult> Edit([Bind(Include = "Name,Id")] RoleViewModel roleModel)
 		5、 [HttpPost, ActionName("Delete")]  ActionName 类似于api中的

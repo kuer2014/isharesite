@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <b>超链接</b>
+       <br/> @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        <br />  感谢你确认电子邮件。请@Html.ActionLink("单击此处登录", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        <br />   @Html.ActionLink("返回", "Index")
+
+    </div>
+    <div>
+        <b>表单</b>
+        <br />@using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+
+        }
+        <br />  @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+        <br />@Html.AntiForgeryToken() //表示用于阻止伪造请求的特性。配合控制器中Action加 [ValidateAntiForgeryToken]
+        <br /> @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" }) // 使用指定消息和 HTML 特性，为由指定表达式表示的每个数据字段的验证错误消息返回对应的 HTML 标记。
+        <br /> @Html.ValidationSummary("", new { @class = "text-danger" })//返回 System.Web.Mvc.ModelStateDictionary 对象中的验证消息的未排序列表（ul 元素）
+        <br /> @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <br />  @Html.ValidationSummary(true)
+        <div class="checkbox">
+            <br />  @Html.CheckBoxFor(m => m.RememberMe)
+            <br />   @Html.LabelFor(m => m.RememberMe)
+        </div>
+        <br />  @Html.Label("将要删除的角色名称")
+        <br /> @Html.LabelFor(model => model.Adress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <br />  @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <br />  @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        <br />  @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        <br />  @Html.TextAreaFor(model => model.PlayComment, new { htmlAttributes = new { @class = "form-control" }, @cols = 35 })
+        <br />  @Html.Hidden("rememberMe", @Model.RememberMe)
+        <br />  @Html.HiddenFor(model => model.Id)
+        <br />   @Html.DropDownListFor(model => model.SelectedProvider, Model.Providers)
+        <br />   @Html.DropDownList("GenreId", ViewBag.genDic as IEnumerable<SelectListItem>
+            , new { @class = "form-control" })   //  关于ViewBag.genDic内容请看页底部
+            }
+            <br /> @Html.DisplayNameFor(model => model.Name)
+            <br />  @Html.DisplayFor(modelItem => item.Name)
+            <br />   @Html.ActionLink("编辑", "Edit", new { id=item.Id }) |
+            <br /> <b>行内的判断写法 一、</b>
+            <br />   @if (item.Status == 2) {
+            <br />  @Html.ActionLink("上架", "Putaway", new { id=item.Id, status=1 })
+            <br />  }else{
+            <br />  @Html.ActionLink("下架", "Putaway", new { id = item.Id, status = 2 })
+            <br />   }
+            <br /> <b>行内的判断写法 二、</b>
+            <br />   @if (item.Statu.Split('|').Length == 3 && item.Statu.Split('|')[1] == DateTime.Now.Day.ToString())
+            <br />   {
+            <br />  <span>@item.Statu.Split('|')[0]:<br />今天 @item.Statu.Split('|')[2].Substring(0,5)</span>
+            <br />  }
+            <br />   else if (item.Statu.Split('|').Length == 3)
+            <br />  {
+            <br />  <span>@item.Statu.Split('|')[0]:<br />明天 @item.Statu.Split('|')[2].Substring(0,5)</span>
+            <br />  }
+            <br />  else {
+            <br />   @Html.DisplayFor(modelItem => item.Statu)
+            <br />    }
+
+            <br />     <b>导出</b>
+            <br /> @Html.ActionLink("导出EXCEL", "ExportExcel", new { category = "TaskList" })
+            <br /> <a href="javascript:window.location.href='/Admin/Task/ExportExcel?category=TaskDetailList&taskId='+$('#hidTaskId').val();">导出EXCEL</a>
+            <br />
+    </div>
+    <div>
+        <b>其它</b>
+        <div>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</div>
+         @Html.Partial("_LoginPartial")   // 以 HTML 编码字符串的形式呈现指定的分部视图。
+      
+    </div>
+</body>
+</html>
+<b>后台代码</b>
+@{
+  var selectItemListGen = new List<SelectListItem> () {
+    //  new SelectListItem(){Value="0",Text="全部"}// new SelectListItem(){Value="0",Text="全部",Selected=true}
+    };
+    Dictionary<dynamic, dynamic> genreDic = connection.Query("SELECT a.Id,a.GenreCnName Name FROM genre a  WHERE  Status =1;").ToDictionary(key => key.Id, value => value.Name); 
+    var selectListGen = new SelectList(genreDic, "key", "value");
+    selectItemListGen.AddRange(selectListGen);
+    ViewBag.genDic = selectItemListGen;
+    }

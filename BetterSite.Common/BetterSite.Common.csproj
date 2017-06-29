@@ -52,6 +52,7 @@
   <ItemGroup>
     <Content Include="MVC中路由的常用语法.txt" />
     <Content Include="MVC控制器中的常用语法.txt" />
+    <Content Include="视图页中常用语法.html" />
     <Content Include="进度.txt" />
   </ItemGroup>
   <ItemGroup>
