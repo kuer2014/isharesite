@@ -61,8 +61,8 @@
 </style>
 <div class="article">
     <h2>
-        <span><a class="title" href="@Model.SiteUrl" target="_blank" title="@Model.SiteUrl"> @Model.SiteName</a></span>
-        <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow">
+        <span><a class="title" href="@Model.SiteUrl" target="_blank" title="@Model.SiteName"> @Model.SiteName</a></span>
+        <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow" title="打开该网站:@Model.SiteUrl">
             <text>直达网站</text> <img src="~/Content/images/visit.png" style="border: none;" width="25" height="25" alt="icon" title="打开网站 &#10; @Model.SiteUrl">
         </a>
         <span>
@@ -74,7 +74,7 @@
     </h2>
     <div class="clr"></div>
     <div class="sitetypedata">
-        <span> 类别: <a href="/@Model.TypeCode/1.html" target="_self" title="@Model.TypeName">@Model.TypeName</a></span>
+        <span> 类别: <a href="/@Model.TypeCode/1.html" target="_self" title="查看 @Model.TypeName 分类下的全部网站">@Model.TypeName</a></span>
         <span>日期: <text class="site-add-date">@Model.SiteAddDate</text></span>
         <span>浏览数: @Model.SiteClickQuantity</span>
     </div>
@@ -86,7 +86,7 @@
         @*<span>[<a href="/Sites/@item.SiteCode" target="_blank" title="直达官方网站 &#10; @item.SiteUrl">直达</a>]</span>*@
     </p>
     <div>
-        <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow">
+        <a href="@Model.SiteUrl" class="visit" target="_blank" rel="nofollow" title="打开该网站:@Model.SiteUrl">
             <text>直达网站</text> <img src="~/Content/images/visit.png" style="border: none;" width="25" height="25" alt="icon" title="打开网站 &#10; @Model.SiteUrl">
         </a>
     </div>
@@ -198,7 +198,7 @@
                 var htmlArr = [];
                 for (var i = 0; i < siteTagsNameArr.length; i++) {
                     //插入
-                    htmlArr.push('<a href="' + urlOrigin + '/@Model.TypeCode/' + siteTagsNameArr[i] + '/1.html"><span>' + siteTagsNameArr[i] + '</span></a>');
+                    htmlArr.push('<a href="' + urlOrigin + '/@Model.TypeCode/' + siteTagsNameArr[i] + '/1.html" title="查看包含 ' + siteTagsNameArr[i] + ' 标签的全部网站"><span>' + siteTagsNameArr[i] + '</span></a>');
                 }
                 jQuery('.div-SiteTags').append(htmlArr.join(', '));
             }

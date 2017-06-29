@@ -41,7 +41,14 @@
     {
         <li class="list">
             <div class="articleList">
-               <span>[ @item.CategoryName ]: </span> <a href="/Article/@item.Id" title="@item.Description">@item.Title</a><span  class="site-add-date">@item.CreateDate</span>
+                @if (item.Description.Length > 20)
+                {
+                    <span>[ @item.CategoryName ]: </span> <a href="/Article/@item.Id" title="@item.Description.Substring(0, 20)...">@item.Title</a><span class="site-add-date">@item.CreateDate</span>
+                }
+                else
+                {
+                    <span>[ @item.CategoryName ]: </span> <a href="/Article/@item.Id" title="@item.Description...">@item.Title</a><span class="site-add-date">@item.CreateDate</span>
+                }
             </div>
         </li>
     }
