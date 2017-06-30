@@ -195,6 +195,8 @@
     <Content Include="Content\images\eye.png" />
     <Content Include="Content\images\eye2.jpg" />
     <Content Include="Content\images\visit2.png" />
+    <Content Include="Content\viewerjs\viewer.min.css" />
+    <Content Include="Content\viewerjs\viewer.min.js" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\dialogs\anchor\anchor.html" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\dialogs\attachment\attachment.css" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\dialogs\attachment\attachment.html" />
@@ -460,6 +462,7 @@
     <Content Include="Content\ueditor1_4_3_3-utf8-net\ueditor.all.min.js" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\ueditor.config.js" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\ueditor.parse.min.js" />
+    <Content Include="Images\Article\MindMap\你的生命有什么可能.svg" />
     <Content Include="TestHtml\svgtest.html" />
     <Content Include="TestHtml\baidutest.html" />
     <Content Include="TestHtml\captest.html" />
@@ -1404,7 +1407,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Images\Article\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

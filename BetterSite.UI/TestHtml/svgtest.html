@@ -4,29 +4,80 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 	<meta charset="utf-8" />
+    <style>
+        .bigsvg {
+       // display:none;
+        }
+        .x_svgimg {
+        width:150px;
+        }
+    </style>
+    <link href="../Content/viewerjs/viewer.min.css" rel="stylesheet" />
 </head>
-<body>
-    <hr />
-    <form action="User" method="put">
- 
-      
-        <input type="button" onclick="submit1();" value="推送" />
-    </form>
 
-    <img src="你的生命有什么可能.svg" class="svgimg"/>
-    <input type="button" value="放大" onclick="setsize(0.1);" />
-    <input type="button" value="还原" onclick="setsize(0);" />
-    <input type="button" value="缩小" onclick="setsize(-0.1);" />
-   
+<body>
+    <img width="510" src="/Images/Article/MindMap/你的生命有什么可能.svg" class="v_svgimg" alt="《你的生命有什么可能》思维导图"/> 
+    <a href="/Images/Article/MindMap/你的生命有什么可能.svg" title="《你的生命有什么可能》思维导图高清版下载">下载高清导图</a>
+    <hr />
+    <a href="javascript:ViewSvg('block');">
+        <img src="你的生命有什么可能.svg" class="x_svgimg" />
+    </a>
+    <div class="bigsvg">
+        <img src="你的生命有什么可能.svg" class="svgimg" />
+        <input type="button" value="放大" onclick="setsize(0.1);" />
+        <input type="button" value="还原" onclick="setsize(0);" />
+        <input type="button" value="缩小" onclick="setsize(-0.1);" />
+        <input type="button" value="关闭" onclick="ViewSvg('none');" />
+    </div>
+
     <script src="../Scripts/jquery-1.8.2.min.js"></script>
-    <script>    
+    <script src="../Content/viewerjs/viewer.min.js"></script>
+    <script>
+
+        $('.v_svgimga').viewer({
+            scalable: false, //默认值：true。图片是否可以翻转。
+            rotatable: false,//默认值：true。图片是否可以旋转。
+            navbar: false,  //默认值：true。显示导航条。
+            toolbar: false, //默认值：true。显示工具栏。
+            inline: false  //默认值：false。使用内联模式来查看图片。
+        });
+
+        function ViewSvg(display) {
+            $('.bigsvg').css("display", display);
+        }
         function setsize(num) {
-            debugger;
+          //  debugger;
             if (num)
                 $('.svgimg').width($('.svgimg').width() * (1 + num));
             else
                 $('.svgimg').width(1155);
         }
+        /***********************
+* 函数：判断滚轮滚动方向
+* 作者：walkingp
+* 参数：event
+* 返回：滚轮方向 1：向上 -1：向下
+*************************/
+        var scrollFunc = function (e) {
+            var direct = 0;
+            e = e || window.event;
+
+            // var t1 = document.getElementById("wheelDelta");
+            //   var t2 = document.getElementById("detail");
+            if (e.wheelDelta) {//IE/Opera/Chrome
+                setsize(e.wheelDelta / 1000);
+                //  t1.value = e.wheelDelta;
+            } else if (e.detail) {//Firefox
+                setsize(e.wheelDelta);
+                // t2.value = e.detail;
+            }
+            // ScrollText(direct);
+        }
+        /*注册事件*/
+        if (document.addEventListener) {
+            document.addEventListener('DOMMouseScroll', scrollFunc, false);
+        }//W3C
+        window.onmousewheel = document.onmousewheel = scrollFunc;//IE/Opera/Chrome/Safari
     </script>
 </body>
 </html>
