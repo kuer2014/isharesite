@@ -62,6 +62,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.CmbViewSite = new System.Windows.Forms.ComboBox();
             this.BtnViewData = new System.Windows.Forms.Button();
+            this.SaveImg = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.SiteImg)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -377,11 +379,22 @@
             this.BtnViewData.UseVisualStyleBackColor = true;
             this.BtnViewData.Click += new System.EventHandler(this.BtnViewData_Click);
             // 
+            // SaveImg
+            // 
+            this.SaveImg.Location = new System.Drawing.Point(949, 573);
+            this.SaveImg.Name = "SaveImg";
+            this.SaveImg.Size = new System.Drawing.Size(75, 23);
+            this.SaveImg.TabIndex = 15;
+            this.SaveImg.Text = "保存图片";
+            this.SaveImg.UseVisualStyleBackColor = true;
+            this.SaveImg.Click += new System.EventHandler(this.SaveImg_Click);
+            // 
             // SiteTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 708);
+            this.Controls.Add(this.SaveImg);
             this.Controls.Add(this.BtnViewData);
             this.Controls.Add(this.CmbViewSite);
             this.Controls.Add(this.label10);
@@ -461,6 +474,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox CmbViewSite;
         private System.Windows.Forms.Button BtnViewData;
+        private System.Windows.Forms.Button SaveImg;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

@@ -343,5 +343,20 @@ namespace BetterSite.SiteTool
             string sitedataPath=CmbViewSite.SelectedValue.ToString();
             FillForm(sitedataPath);
         }
+
+        private void SaveImg_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = folderBrowserDialog1.ShowDialog();// 是调用文件浏览器控件；      
+            if (dr == System.Windows.Forms.DialogResult.OK) // 是判断文件浏览器控件是否返回ok，即用户是否确定选择。如果确定选择，则弹出用户在文件浏览器中选择的路径：   
+            {
+                //    MessageBox.Show(folderBrowserDialog1.SelectedPath);
+                // SiteImg.Image.Save(folderBrowserDialog1.SelectedPath + "\\" + SiteCode.Text + ".jpg");//,System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                string filename = ImageHelper.Base64StringToFile(SiteImgBase64.Text, folderBrowserDialog1.SelectedPath, SiteCode.Text);
+                if (filename != string.Empty) {
+                    MessageBox.Show("保存成功");
+                }
+            }
+        }
     }
 }

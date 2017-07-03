@@ -90,8 +90,8 @@ namespace BetterSite.SiteTool
         /// <summary>
         /// Base64格式的文体保存到本地
         /// </summary>
-        /// <param name="fileBody"></param>
-        /// <param name="filePath">文件绝对路径</param>
+        /// <param name="fileBody"> base64编码的文本</param>
+        /// <param name="filePath">文件绝对路径；文件名称为GUID</param>
         /// <returns>文件名</returns>
         public static string Base64StringToFile(string fileBody, string filePath)
         {
@@ -113,6 +113,39 @@ namespace BetterSite.SiteTool
             catch (Exception ex)
             {                
                // Common.Log4NetHelper.Debug("Base64StringToFile 转换失败\nException:" + ex.Message);
+                return string.Empty;
+            }
+        }
+        /// <summary>
+        ///  Base64格式的文体保存到磁盘
+        /// </summary>
+        /// <param name="fileBody"> base64编码的文本</param>
+        /// <param name="filePath">绝对地址</param>
+        /// <param name="fileName">不用带扩展名</param>
+        /// <param name="fileExt">不指定时从base64字符串中取</param>
+        /// <returns></returns>
+        public static string Base64StringToFile(string fileBody, string filePath,string fileName,string fileExt="")
+        {
+            try
+            {
+                //if (!System.IO.File.Exists(filePath))
+                //{
+                //    System.IO.File.Create(filePath);
+                //}
+                if (string.IsNullOrWhiteSpace(fileExt)) { 
+                //"data:image/png;base64"文件扩展名获取
+                fileExt = fileBody.Substring(fileBody.IndexOf('/') + 1, fileBody.IndexOf(';') - fileBody.IndexOf('/') - 1);
+                }
+                // string filepath = Request.MapPath("~/Upload");
+                fileName = fileName + "." + fileExt;
+                byte[] arr = Convert.FromBase64String(fileBody.Split(',')[1]);
+                System.IO.File.WriteAllBytes(filePath + "\\" + fileName, arr);
+                // return filePath + "\\" + fileName;
+                return fileName;
+            }
+            catch (Exception ex)
+            {
+                // Common.Log4NetHelper.Debug("Base64StringToFile 转换失败\nException:" + ex.Message);
                 return string.Empty;
             }
         }
