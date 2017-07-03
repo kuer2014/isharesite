@@ -63,16 +63,16 @@
 </style>
 <ul id="menu">
     <li class="">
-        <span>免费素材</span>
-        <ul class="">
-            @foreach (var item in sucai)
+        <h3><span>免费素材</span></h3>
+            <ul class="">
+                @foreach (var item in sucai)
             {
-                <li><a href="/sucai/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
-            }
-        </ul>
-    </li>
+                    <li><a href="/sucai/@item.TagName/1.html" title="@item.TagName">@item.TagName</a></li>
+                }
+            </ul>
+</li>
     <li class="">
-        <span>在线工具</span>
+        <h3><span>在线工具</span></h3>
         <ul class="">
             @foreach (var item in gongju)
             {
@@ -81,7 +81,7 @@
         </ul>
     </li>
     <li>
-        <span>发现好玩</span>
+        <h3><span>发现好玩</span></h3>
         <ul class="">
             @foreach (var item in haowan)
             {
@@ -90,7 +90,7 @@
         </ul>
     </li>
     <li>
-        <span>便民查询</span>
+        <h3> <span>便民查询</span></h3>
         <ul class="">
             @foreach (var item in chaxun)
             {
@@ -99,7 +99,7 @@
         </ul>
     </li>
     <li>
-    <span>个人提升</span>
+        <h3><span>个人提升</span></h3>
     <ul class="">
         @foreach (var item in tisheng)
             {
@@ -108,7 +108,7 @@
     </ul>
 </li>
     <li>
-        <span>行业专栏</span>
+        <h3><span>行业专栏</span></h3>
         <ul class="">
             @foreach (var item in zhuanlan)
             {

@@ -9,18 +9,15 @@
         padding: 15px 0;
         margin-left:10px;
     }
-
         .gjlist .pic {
             float: left;
             width: 200px;
             margin: 10px 0 0 20px;
         }
-
         .gjlist .incon {
             float: right;
             width: 420px;
         }
-
         .gjlist h2 {
             position: relative;
             width: 99%;
@@ -29,7 +26,6 @@
             margin-bottom: 0px;
             /*padding-bottom:0px;*/
         }
-
         .gjlist p {
             /*line-height: 150%;*/
             margin: 0px;
@@ -39,19 +35,15 @@
             font-size: 12px;
             text-indent: 26px;
         }
-
             .gjlist p.l {
                 color: #999;
             }
-
     .fl {
         float: left;
     }
-
     .fr {
         float: right;
     }
-
     .gjlist h2 span {
         background: url('../../Content/images/eye.png')0 0px no-repeat;
         padding-left: 23px;
@@ -59,7 +51,6 @@
         position: absolute;
         right: 0;
     }
-
     .title {
         width: 340px;
         display: block;
@@ -71,28 +62,22 @@
         text-decoration: none;
         color: #666;
     }
-
         .title:hover {
             text-decoration: underline;
             color: #62bee3;
         }
-
     .gjlist p.siteprofile {
         height: 84px;
     }
-
     p.siteprofile > span > a {
         color: #666;
     }
-
     .visit img {
         margin-left: 5px;
     }
-
     .pagepath {
         margin-top: 10px;
     }
-
         .pagepath span {
             margin: 30px;
         }
@@ -128,7 +113,14 @@
             @foreach (var item in ViewBag.TypeTags)
             {
                 <li>
-            <a href="/@ViewBag.TypeCode/@item.TagName/1.html" title="@item.TagName">@item.TagName</a>
+                    @if (Context.Request.Url.LocalPath.Equals(string.Format("/{0}/{1}/1.html", @ViewBag.TypeCode, @item.TagName)))
+                    {
+                        <label>@item.TagName</label>
+                    }
+                    else
+                    {
+                        <a href="/@ViewBag.TypeCode/@item.TagName/1.html" title="@item.TagName">@item.TagName</a>
+                    }                
                 </li>
             }
         </ul>
@@ -175,7 +167,14 @@
         @foreach (var item in ViewBag.TypeTags)
             {
             <li>
-                <a href="/@ViewBag.TypeCode/@item.TagName/1.html" title="@item.TagName">@item.TagName</a>
+                @if (Context.Request.Url.LocalPath.Equals(string.Format("/{0}/{1}/1.html", @ViewBag.TypeCode, @item.TagName )))
+                {
+                    <label>@item.TagName</label>
+                }
+                else
+                {
+                     <a href="/@ViewBag.TypeCode/@item.TagName/1.html" title="@item.TagName">@item.TagName</a>
+                }                
             </li>
         }
     </ul>
