@@ -23,16 +23,13 @@
                     margin:5px;
                 }
 
-                    .home_sitetype li a {
-                        /*color: #FFFFFF;*/
+                    /*.home_sitetype li a {                       
                         text-decoration: none;
                         margin: 0px;
-                        padding-top: 6px;
-                        /*display: block;*/ /* 作为一个块 */
-                        /*padding-right: 5px;*/ /* 设置块的属性 */
+                        padding-top: 6px;                     
                         padding-bottom: 6px;
                         padding-left: 5px;
-                    }
+                    }*/
 
                         .home_sitetype li a:hover,
                         .home_sitetype li.active a {
@@ -51,13 +48,19 @@
             /*margin: 10px 0 0 10px;*/
 
         }
-        .home_site .pic a{
+         .home_site .pic img{           
+            width: 48px;
+            height: 48px;
+            /*margin: 10px 0 0 10px;*/
+            border:1px  solid #efefef;
+        }
+        /*.home_site .pic a{
             display:block;
             margin:10px 5px;
           font-size: 35px;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align:center;
-        }
+        }*/
         .home_site .incon {
             float: right;
             width: 160px;
@@ -90,6 +93,9 @@
         .siteprofile {
         margin:-2px 0 0 80px
         }
+        .siteprofile a{
+          text-decoration: none;
+          }
         .title:hover{
              text-decoration:underline;
             color:#62bee3;
@@ -110,6 +116,20 @@
     .visit img {
     margin-bottom:-3px;
     }
+          .gengxing a{            
+                        text-decoration: none;                      
+                        padding-top: 6px;                     
+                        padding-bottom: 6px;
+                        padding-left: 5px;
+                    }
+            .gengxing .pic a{
+            display:block;
+            margin:10px 5px;
+          font-size: 35px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align:center;                               
+           
+                    }
 </style>
 <div class="">
     <div class="home_site">
@@ -123,7 +143,8 @@
             <li>
                 <div class="pic">
                     <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                        @item.SiteName.Substring(0, 1).ToUpper()
+                        @*@item.SiteName.Substring(0, 1).ToUpper()*@
+                        <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
                     </a>
                 </div>
                 <div class="incon">
@@ -154,7 +175,7 @@
             <li>
                 <div class="pic">
                     <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                        @item.SiteName.Substring(0, 1).ToUpper()
+                        <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
                     </a>
                 </div>
                 <div class="incon">
@@ -186,7 +207,7 @@
             <li>
                 <div class="pic">
                     <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                        @item.SiteName.Substring(0, 1).ToUpper()
+                        <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
                     </a>
                 </div>
                 <div class="incon">
@@ -218,7 +239,7 @@
                 <li>
                     <div class="pic">
                         <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            @item.SiteName.Substring(0, 1).ToUpper()
+                            <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
                         </a>
                     </div>
                     <div class="incon">
@@ -250,7 +271,7 @@
                 <li>
                     <div class="pic">
                         <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            @item.SiteName.Substring(0, 1).ToUpper()
+                            <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
                         </a>
                     </div>
                     <div class="incon">
@@ -282,7 +303,7 @@
                 <li>
                     <div class="pic">
                         <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            @item.SiteName.Substring(0, 1).ToUpper()
+                            <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
                         </a>
                     </div>
                     <div class="incon">
@@ -303,7 +324,7 @@
             }
         </ul>
     </div>
-    <div class="home_site">
+    <div class="home_site gengxing">
         <h2><span>最新收录</span></h2>
         <text> - 为保证网站质量,可能做不到每天更新</text>
         <span class="more-site"><a href="/gengxin/1.html">更多</a></span>
