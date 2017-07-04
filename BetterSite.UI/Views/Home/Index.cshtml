@@ -1,361 +1,355 @@
-﻿@{
-    
-}
-@model IList<BetterSite.Domain.M_Sites>
+﻿@model IList<BetterSite.Domain.M_Sites>
 <style>
-         .home_sitetype {
-                font-size: 12px;
-                font-weight: bolder;
-            }
-           .home_site .divhr{
-                border-top:1px solid #ccc;/*solid 1px #97d2fa;*/
-                margin:-5px 0 10px 0;
-            }
+    .home_sitetype {
+        font-size: 12px;
+        font-weight: bolder;
+    }
 
-                .home_sitetype li {
-                    list-style-image: none;
-                    list-style-type: none;
-                    background-color: #fbfbfb;
-                    /*border-right-width: 2px;
+    .home_site .divhr {
+        border-top: 1px solid #ccc; /*solid 1px #97d2fa;*/
+        margin: -5px 0 10px 0;
+    }
+
+    .home_sitetype li {
+        list-style-image: none;
+        list-style-type: none;
+        background-color: #fbfbfb;
+        /*border-right-width: 2px;
                     border-right-style: solid;
                     border-right-color: #fff;*/
-                    float: left;
-                    margin:5px;
-                }
+        float: left;
+        margin: 5px;
+    }
 
-                    /*.home_sitetype li a {                       
-                        text-decoration: none;
-                        margin: 0px;
-                        padding-top: 6px;                     
-                        padding-bottom: 6px;
-                        padding-left: 5px;
-                    }*/
+    .home_site {
+        margin: 0 -10px 0 20px;
+    }
 
-                        .home_sitetype li a:hover,
-                        .home_sitetype li.active a {
-                            /*background-color: #97d2fa;*/
-                            /*border-top-width: 1px;
-                            border-top-style: solid;
-                            border-top-color: #fff;*/
-                        }
-        .home_site {
-        margin:0 -10px 0 20px;
-        }
         .home_site .pic {
             float: left;
             width: 50px;
             height: 50px;
             /*margin: 10px 0 0 10px;*/
+        }
 
-        }
-         .home_site .pic img{           
-            width: 48px;
-            height: 48px;
-            /*margin: 10px 0 0 10px;*/
-            border:1px  solid #efefef;
-        }
-        /*.home_site .pic a{
-            display:block;
-            margin:10px 5px;
-          font-size: 35px;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-align:center;
-        }*/
+            .home_site .pic img {
+                width: 48px;
+                height: 48px;
+                /*margin: 10px 0 0 10px;*/
+                border: 1px solid #efefef;
+            }
+
         .home_site .incon {
             float: right;
             width: 160px;
-            height:50px;
-        }
-        .home_site .incon h4{
-        margin:2px;
-        }
-         .home_site .incon h4 a{
-        margin:2px;
-        padding:2px;
+            height: 50px;
         }
 
-          .title,.siteprofile {
-            width: 150px;
-            /*display: block;*/
-            overflow: hidden;
-            word-break: keep-all;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            float:left;
-            text-decoration:none;
-            color:#666;
-    margin:2px;
-        }
-            .siteprofile .eyenum {
-                 background: url('../../Content/images/eye.png')2px 0 no-repeat;
-            padding-left: 24px;
+            .home_site .incon h4 {
+                margin: 2px;
             }
-        .siteprofile {
-        margin:-2px 0 0 80px
+
+                .home_site .incon h4 a {
+                    margin: 2px;
+                    padding: 2px;
+                }
+
+    .title, .siteprofile {
+        width: 150px;
+        /*display: block;*/
+        overflow: hidden;
+        word-break: keep-all;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        float: left;
+        text-decoration: none;
+        color: #666;
+        margin: 2px;
+    }
+
+        .siteprofile .eyenum {
+            background: url('../../Content/images/eye.png')2px 0 no-repeat;
+            padding-left: 24px;
         }
-        .siteprofile a{
-          text-decoration: none;
-          }
-        .title:hover{
-             text-decoration:underline;
-            color:#62bee3;
+
+    .siteprofile {
+        margin: -2px 0 0 80px;
+    }
+
+        .siteprofile a {
+            text-decoration: none;
         }
-        .home_site h2{
-             display:inline-table;
-         }
+
+    .title:hover {
+        text-decoration: underline;
+        color: #62bee3;
+    }
+
+    .home_site h2 {
+        display: inline-table;
+    }
+
         .home_site h2 span {
             background: url('../../Content/images/menuicon.png')5px 0 no-repeat;
             padding-left: 33px;
             /*position: absolute;*/
         }
-        .home_site .more-site {
-        float:right;
-        margin-top: 22px;
-        margin-right: 10px;
-        }
-    .visit img {
-    margin-bottom:-3px;
+
+    .home_site .more-site {
+        float: right;
+        /*margin-top: 22px;*/
+        margin-right: 20px;
     }
-          .gengxing a{            
-                        text-decoration: none;                      
-                        padding-top: 6px;                     
-                        padding-bottom: 6px;
-                        padding-left: 5px;
-                    }
-            .gengxing .pic a{
-            display:block;
-            margin:10px 5px;
-          font-size: 35px;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-align:center;                               
-           
-                    }
+
+        .home_site .more-site a {
+            color: #959595;
+            text-decoration: underline;
+        }
+
+            .home_site .more-site a:hover {
+                color: #62bee3;
+                text-decoration: underline;
+            }
+
+    .visit img {
+        margin-bottom: -3px;
+    }
+
+    .gengxing a {
+        text-decoration: none;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 5px;
+    }
+
+    .gengxing .pic a {
+        display: block;
+        margin: 10px 5px;
+        font-size: 35px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+    }
 </style>
 <div class="">
     <div class="home_site">
         <h2><span>免费素材</span></h2>
         <text> - 找素材,当然要免费的</text>
-        <span class="more-site"><a href="/sucai/1.html">更多</a></span>
         <div class="divhr"></div>
         <ul class="home_sitetype">
             @foreach (var item in ViewBag.ZY)
             {
-            <li>
-                <div class="pic">
-                    <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                        @*@item.SiteName.Substring(0, 1).ToUpper()*@
-                        <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-                    </a>
-                </div>
-                <div class="incon">
-                    <h4 class="">
-                        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-                    </h4>
-                    <p class="siteprofile">
-                        @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-                        <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                            <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                        </a>
-                        <span class="eyenum">@item.SiteClickQuantity</span>
-                    </p>
-                </div>
-            </li>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                @*@item.SiteName.Substring(0, 1).ToUpper()*@
+    <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+</a>
+</div>
+<div class="incon">
+    <h4 class="">
+        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
-    <div class="home_site">
-        <h2><span>在线工具</span></h2>
-        <text> - 告别繁琐的软件安装过程</text>
-        <span class="more-site"><a href="/gongju/1.html">更多</a></span>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.ZX)
+</ul>
+<span class="more-site"><a href="/sucai/1.html">更多</a></span>
+</div>
+<div class="home_site">
+    <h2><span>在线工具</span></h2>
+    <text> - 告别繁琐的软件安装过程</text>
+
+    <div class="divhr"></div>
+    <ul class="home_sitetype">
+        @foreach (var item in ViewBag.ZX)
             {
-            <li>
-                <div class="pic">
-                    <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                        <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-                    </a>
-                </div>
-                <div class="incon">
-                    <h4 class="">
-                        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+            </a>
+        </div>
+        <div class="incon">
+            <h4 class="">
+                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
 
-                    </h4>
-                    <p class="siteprofile">
-                        @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-                        <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                            <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                        </a>
-                        <span class="eyenum">@item.SiteClickQuantity</span>
-                    </p>
-                </div>
-            </li>
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
-    <div class="home_site">
-        <h2><span>发现好玩</span></h2>
-        <text> - 看到更大的互联网世界</text>
-        <span class="more-site"><a href="/haowan/1.html">更多</a></span>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.JS)
+</ul>
+<span class="more-site"><a href="/gongju/1.html">更多</a></span>
+</div>
+<div class="home_site">
+    <h2><span>发现好玩</span></h2>
+    <text> - 看到更大的互联网世界</text>
+
+    <div class="divhr"></div>
+    <ul class="home_sitetype">
+        @foreach (var item in ViewBag.JS)
             {
-            <li>
-                <div class="pic">
-                    <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                        <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-                    </a>
-                </div>
-                <div class="incon">
-                    <h4 class="">
-                        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-
-                    </h4>
-                    <p class="siteprofile">
-                        @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-                        <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                            <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                        </a>
-                        <span class="eyenum">@item.SiteClickQuantity</span>
-                    </p>
-                </div>
-            </li>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+            </a>
+        </div>
+        <div class="incon">
+            <h4 class="">
+                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
-    <div class="home_site">
-        <h2><span>便民查询</span></h2>
-        <text> - 万事不求人,一查知所有</text>
-        <span class="more-site"><a href="/chaxun/1.html">更多</a></span>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.SH)
+</ul>
+<span class="more-site"><a href="/haowan/1.html">更多</a></span>
+</div>
+<div class="home_site">
+    <h2><span>便民查询</span></h2>
+    <text> - 万事不求人,一查知所有</text>
+    <div class="divhr"></div>
+    <ul class="home_sitetype">
+        @foreach (var item in ViewBag.SH)
             {
-                <li>
-                    <div class="pic">
-                        <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-                        </a>
-                    </div>
-                    <div class="incon">
-                        <h4 class="">
-                            <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+            </a>
+        </div>
+        <div class="incon">
+            <h4 class="">
+                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
 
-                        </h4>
-                        <p class="siteprofile">
-                            @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                            </a>
-                            <span class="eyenum">@item.SiteClickQuantity</span>
-                        </p>
-                    </div>
-                </li>
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
-    <div class="home_site">
-        <h2><span>个人提升</span></h2>
-        <text> - 活到老,学到老,一天不学没头脑</text>
-        <span class="more-site"><a href="/tisheng/1.html">更多</a></span>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.tisheng)
+</ul>
+<span class="more-site"><a href="/chaxun/1.html">更多</a></span>
+</div>
+<div class="home_site">
+    <h2><span>个人提升</span></h2>
+    <text> - 活到老,学到老,一天不学没头脑</text>
+    <div class="divhr"></div>
+    <ul class="home_sitetype">
+        @foreach (var item in ViewBag.tisheng)
             {
-                <li>
-                    <div class="pic">
-                        <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-                        </a>
-                    </div>
-                    <div class="incon">
-                        <h4 class="">
-                            <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+            </a>
+        </div>
+        <div class="incon">
+            <h4 class="">
+                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
 
-                        </h4>
-                        <p class="siteprofile">
-                            @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                            </a>
-                            <span class="eyenum">@item.SiteClickQuantity</span>
-                        </p>
-                    </div>
-                </li>
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
-    <div class="home_site">
-        <h2><span>行业专栏</span></h2>
-        <text> - 一行一世界,行行出状元</text>
-        <span class="more-site"><a href="/zhuanlan/1.html">更多</a></span>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.zhuanlan)
+</ul>
+<span class="more-site"><a href="/tisheng/1.html">更多</a></span>
+</div>
+<div class="home_site">
+    <h2><span>行业专栏</span></h2>
+    <text> - 一行一世界,行行出状元</text>
+    <div class="divhr"></div>
+    <ul class="home_sitetype">
+        @foreach (var item in ViewBag.zhuanlan)
             {
-                <li>
-                    <div class="pic">
-                        <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-                        </a>
-                    </div>
-                    <div class="incon">
-                        <h4 class="">
-                            <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+            </a>
+        </div>
+        <div class="incon">
+            <h4 class="">
+                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
 
-                        </h4>
-                        <p class="siteprofile">
-                            @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                            </a>
-                            <span class="eyenum">@item.SiteClickQuantity</span>
-                        </p>
-                    </div>
-                </li>
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
-    <div class="home_site gengxing">
-        <h2><span>最新收录</span></h2>
-        <text> - 为保证网站质量,可能做不到每天更新</text>
-        <span class="more-site"><a href="/gengxin/1.html">更多</a></span>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.gengxin)
+</ul>
+<span class="more-site"><a href="/zhuanlan/1.html">更多</a></span>
+</div>
+<div class="home_site gengxing">
+    <h2><span>最新收录</span></h2>
+    <text> - 为保证网站质量,可能做不到每天更新</text>
+    <div class="divhr"></div>
+    <ul class="home_sitetype">
+        @foreach (var item in ViewBag.gengxin)
             {
-                <li>
-                    <div class="pic">
-                        <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                            @item.SiteName.Substring(0, 1).ToUpper()
-                        </a>
-                    </div>
-                    <div class="incon">
-                        <h4 class="">
-                            <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+    <li>
+        <div class="pic">
+            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                @item.SiteName.Substring(0, 1).ToUpper()
+</a>
+</div>
+<div class="incon">
+    <h4 class="">
+        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
 
-                        </h4>
-                        <p class="siteprofile">
-                            @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-                            <text style="position:absolute;margin-left:-40px;">@item.SiteAddDate </text>
-                            <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-                                <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-                            </a>
-                            <span class="eyenum">@item.SiteClickQuantity</span>
-                        </p>
-                    </div>
-                </li>
+</h4>
+<p class="siteprofile">
+    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
+<text style="position:absolute;margin-left:-40px;">@item.SiteAddDate </text>
+<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+</a>
+<span class="eyenum">@item.SiteClickQuantity</span>
+</p>
+</div>
+</li>
             }
-        </ul>
-    </div>
+</ul>
+<span class="more-site"><a href="/gengxin/1.html">更多</a></span>
+</div>
 </div>
 @section Scripts
 {
