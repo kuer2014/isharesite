@@ -15,6 +15,7 @@ namespace BetterSite.UnitTest
         /// <summary>
         /// 生成一个网站的缩略图
         /// </summary>
+        [Ignore]
         [TestMethod]
         public void BuildSingleImage()
         {
@@ -46,7 +47,7 @@ namespace BetterSite.UnitTest
         /// <summary>
         /// 百度站长－主动推送  curl推送
         /// </summary>
-        [Ignore]
+      //  [Ignore]
         [TestMethod]
         public void CurlTest() {
             string url = "http://data.zz.baidu.com/urls?site=www.isharesite.com&token=hzM0UEGaAryxFNUx";
