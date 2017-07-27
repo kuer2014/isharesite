@@ -1,5 +1,6 @@
 ﻿using BetterSite.BusinessObject;
 using BetterSite.Domain;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -191,6 +192,59 @@ namespace BetterSite.UI.Controllers
             }
             //json.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return json;
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public string Add(string entityJson, string token)
+        {
+            if (token != "2CBa31gg4s7dB")
+            {
+                return "非法操作!";
+            }
+            List<M_Article> entityList = JsonConvert.DeserializeObject<List<M_Article>>(entityJson);
+            string msg = string.Empty;
+            try
+            {
+                foreach (var entity in entityList)
+                {
+                    if (!string.IsNullOrWhiteSpace(entity.Title)
+                       && !string.IsNullOrWhiteSpace(entity.Content))
+                    {
+                        entity.Content = SubStr(entity.Content);
+                        entity.Description = entity.Content.Length > 100 ? entity.Content.Substring(0, 150) : entity.Content;
+                        entity.Description = entity.Description.Replace("<p>", "").Replace("</p>", "");
+                        entity.Category = 3;//热点
+                        entity.Status = 3;// 3 / 导入
+                        var r = articleBO.Insert(entity);
+                        //int num = 0;
+                        //int.TryParse(r+"", out num);
+                        //msg = num + "";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                msg = ex.Message;
+
+            }
+            return msg;
+        }
+        /// <summary>
+        /// 去掉括号和括号内的内容，只去首次出现的
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns></returns>
+        public static string SubStr(string txt) {
+            //string txt = "<p>（本报美里26日讯）拿督）格拉（瓦表示﹐为了）应付多年来的交通";
+            txt = txt.Replace("（", "(").Replace("）", ")");
+            int n = txt.IndexOf("(");
+            int m = txt.IndexOf(")");
+            if (n > 0 && m > n) { 
+                string _txt = txt.Substring(n, m - n + 1);
+                txt = txt.Replace(_txt, "");  //string ntxt = "<p>拿督）格拉（瓦表示﹐为了）应付多年来的交通";
+            }            
+            return txt;
         }
     }
 }
