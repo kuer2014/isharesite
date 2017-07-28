@@ -47,7 +47,7 @@ namespace BetterSite.UnitTest
         /// <summary>
         /// 百度站长－主动推送  curl推送
         /// </summary>
-       // [Ignore]
+        [Ignore]
         [TestMethod]
         public void CurlTest() {
             string url = "http://data.zz.baidu.com/urls?site=www.isharesite.com&token=hzM0UEGaAryxFNUx";
@@ -86,13 +86,15 @@ data:image/jpg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDA
             //http://api.bshare.cn/share/sinaminiblog?publisherUuid=facdfab6-01e9-45d8-a71c-de4ee72b40e0&url=http://t.sina.com.cn&title=优站分享&summary=分享好网站&pic=pic
             string msg = RequestHelper.PostData(turl, "");
         }
-
+        /// <summary>
+        /// 把抓取的文章数据（JSON)发送到数据库
+        /// </summary>
          [Ignore]
         [TestMethod]
         public void PushArticle()
         {
-            string url = "http://localhost:8080/article/add/";
-            // string url = "http://www.isharesite.com/article/add/";
+           // string url = "http://localhost:8080/article/add/";
+             string url = "http://www.isharesite.com/article/add/";
             string sitedata = File.ReadAllText("F:\\NavSite\\capture\\sitestxt.txt");
             string param = "token=2CBa31gg4s7dB&entityJson=" + sitedata;
             string result = RequestHelper.PostHttp(url, param);

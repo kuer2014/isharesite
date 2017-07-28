@@ -83,6 +83,24 @@ namespace BetterSite.Common
         {
             "a".PadLeft(3, '0');  //不够3位补0
         }
+        /// <summary>
+        /// 去掉括号和括号内的内容，只去首次出现的
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns></returns>
+        public static string SubStr(string txt)
+        {
+            //string txt = "<p>（本报美里26日讯）拿督）格拉（瓦表示﹐为了）应付多年来的交通";
+            txt = txt.Replace("（", "(").Replace("）", ")");
+            int n = txt.IndexOf("(");
+            int m = txt.IndexOf(")");
+            if (n > 0 && m > n)
+            {
+                string _txt = txt.Substring(n, m - n + 1);
+                txt = txt.Replace(_txt, "");  //string ntxt = "<p>拿督）格拉（瓦表示﹐为了）应付多年来的交通";
+            }
+            return txt;
+        }
 
     }
 }
