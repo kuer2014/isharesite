@@ -131,227 +131,230 @@
         text-align: center;
     }
 </style>
-<div class="">
-    <div class="home_site">
-        <h2><span>免费素材</span></h2>
-        <text> - 找素材,当然要免费的</text>
-        <div class="divhr"></div>
-        <ul class="home_sitetype">
-            @foreach (var item in ViewBag.ZY)
+<div>
+        <div class="home_site gengxing1">
+            <h2><span>最新收录</span></h2>
+            <text> - 为保证网站质量,可能做不到每天更新</text>
+            <div class="divhr"></div> 
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.gengxin)
             {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                @*@item.SiteName.Substring(0, 1).ToUpper()*@
-    <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-</a>
-</div>
-<div class="incon">
-    <h4 class="">
-        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/sucai/1.html">更多</a></span>
-</div>
-<div class="home_site">
-    <h2><span>在线工具</span></h2>
-    <text> - 告别繁琐的软件安装过程</text>
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                @*@item.SiteName.Substring(0, 1).ToUpper()*@
+                                <img src="\Images\SiteScreen\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
 
-    <div class="divhr"></div>
-    <ul class="home_sitetype">
-        @foreach (var item in ViewBag.ZX)
-            {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-            </a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
+                                <text style="position:absolute;margin-left:-40px;">@item.SiteAddDate </text>
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <span class="more-site"><a href="/gengxin/1.html">更多</a></span>
         </div>
-        <div class="incon">
-            <h4 class="">
-                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/gongju/1.html">更多</a></span>
-</div>
-<div class="home_site">
-    <h2><span>发现好玩</span></h2>
-    <text> - 看到更大的互联网世界</text>
-
-    <div class="divhr"></div>
-    <ul class="home_sitetype">
-        @foreach (var item in ViewBag.JS)
+        <div class="home_site">
+            <h2><span>免费素材</span></h2>
+            <text> - 找素材,当然要免费的</text>
+            <div class="divhr"></div>
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.ZY)
             {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-            </a>
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                @*@item.SiteName.Substring(0, 1).ToUpper()*@
+                                <img src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+    }
+            </ul>
+            <span class="more-site"><a href="/sucai/1.html">更多</a></span>
         </div>
-        <div class="incon">
-            <h4 class="">
-                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/haowan/1.html">更多</a></span>
-</div>
-<div class="home_site">
-    <h2><span>便民查询</span></h2>
-    <text> - 万事不求人,一查知所有</text>
-    <div class="divhr"></div>
-    <ul class="home_sitetype">
-        @foreach (var item in ViewBag.SH)
+        <div class="home_site">
+            <h2><span>在线工具</span></h2>
+            <text> - 告别繁琐的软件安装过程</text>
+
+            <div class="divhr"></div>
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.ZX)
             {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-            </a>
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                <img src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+    }
+            </ul>
+            <span class="more-site"><a href="/gongju/1.html">更多</a></span>
         </div>
-        <div class="incon">
-            <h4 class="">
-                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
+        <div class="home_site">
+            <h2><span>发现好玩</span></h2>
+            <text> - 看到更大的互联网世界</text>
 
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/chaxun/1.html">更多</a></span>
-</div>
-<div class="home_site">
-    <h2><span>个人提升</span></h2>
-    <text> - 活到老,学到老,一天不学没头脑</text>
-    <div class="divhr"></div>
-    <ul class="home_sitetype">
-        @foreach (var item in ViewBag.tisheng)
+            <div class="divhr"></div>
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.JS)
             {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-            </a>
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                <img src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+    }
+            </ul>
+            <span class="more-site"><a href="/haowan/1.html">更多</a></span>
         </div>
-        <div class="incon">
-            <h4 class="">
-                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
-
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/tisheng/1.html">更多</a></span>
-</div>
-<div class="home_site">
-    <h2><span>行业专栏</span></h2>
-    <text> - 一行一世界,行行出状元</text>
-    <div class="divhr"></div>
-    <ul class="home_sitetype">
-        @foreach (var item in ViewBag.zhuanlan)
+        <div class="home_site">
+            <h2><span>便民查询</span></h2>
+            <text> - 万事不求人,一查知所有</text>
+            <div class="divhr"></div>
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.SH)
             {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                <img class="" src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
-            </a>
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                <img src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
+
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+    }
+            </ul>
+            <span class="more-site"><a href="/chaxun/1.html">更多</a></span>
         </div>
-        <div class="incon">
-            <h4 class="">
-                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
-
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/zhuanlan/1.html">更多</a></span>
-</div>
-<div class="home_site gengxing">
-    <h2><span>最新收录</span></h2>
-    <text> - 为保证网站质量,可能做不到每天更新</text>
-    <div class="divhr"></div>
-    <ul class="home_sitetype">
-        @foreach (var item in ViewBag.gengxin)
+        <div class="home_site">
+            <h2><span>个人提升</span></h2>
+            <text> - 活到老,学到老,一天不学没头脑</text>
+            <div class="divhr"></div>
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.tisheng)
             {
-    <li>
-        <div class="pic">
-            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
-                @item.SiteName.Substring(0, 1).ToUpper()
-</a>
-</div>
-<div class="incon">
-    <h4 class="">
-        <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                <img src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span><span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
 
-</h4>
-<p class="siteprofile">
-    @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
-<text style="position:absolute;margin-left:-40px;">@item.SiteAddDate </text>
-<a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
-    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
-</a>
-<span class="eyenum">@item.SiteClickQuantity</span>
-</p>
-</div>
-</li>
-            }
-</ul>
-<span class="more-site"><a href="/gengxin/1.html">更多</a></span>
-</div>
-</div>
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+    }
+            </ul>
+            <span class="more-site"><a href="/tisheng/1.html">更多</a></span>
+        </div>
+        <div class="home_site">
+            <h2><span>行业专栏</span></h2>
+            <text> - 一行一世界,行行出状元</text>
+            <div class="divhr"></div>
+            <ul class="home_sitetype">
+                @foreach (var item in ViewBag.zhuanlan)
+            {
+                    <li>
+                        <div class="pic">
+                            <a href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName">
+                                <img src="\Images\SiteScreen_48px\@{@item.SiteCode}.jpg" alt="@item.SiteName" title="@item.SiteName" />
+                            </a>
+                        </div>
+                        <div class="incon">
+                            <h4>
+                                <a class="title" href="/sites/@item.SiteCode" target="_blank" title="@item.SiteName"> @item.SiteName</a>
+                            </h4>
+                            <p class="siteprofile">
+                                @*<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍">更多</a></span>*@<span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span><span><a href="/sites/@item.SiteCode" target="_blank" title="更多网站介绍"></a></span>
+
+                                <a href="@item.SiteUrl" class="visit" target="_blank" rel="nofollow">
+                                    <img src="~/Content/images/visit.png" style="border: none;" width="14" height="14" alt="icon" title="直达官方网站 &#10; @item.SiteUrl">
+                                </a>
+                                <span class="eyenum">@item.SiteClickQuantity</span>
+                            </p>
+                        </div>
+                    </li>
+    }
+            </ul>
+            <span class="more-site"><a href="/zhuanlan/1.html">更多</a></span>
+        </div>
+
+    </div>
+
 @section Scripts
 {
 }

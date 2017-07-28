@@ -63,12 +63,12 @@ namespace BetterSite.UI.Controllers
             var list_zhuanlan = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.zhuanlan = list_zhuanlan;
             //最新收录
-            where.Rows = 24;
+            where.Rows = 12;
             where.Sort = "SiteAddDate";
             where.Order = "Desc";
             where.TypeCode = "";
             var list_gengxin = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
-            ViewBag.gengxin = list_gengxin.Select(s=>new M_Sites { SiteCode=s.SiteCode, SiteName=s.SiteName, SiteAddDate=Convert.ToDateTime(s.SiteAddDate).Month+"/"+ Convert.ToDateTime(s.SiteAddDate).Day, SiteUrl=s.SiteUrl, SiteClickQuantity=s.SiteClickQuantity });
+            ViewBag.gengxin = list_gengxin.Select(s=>new M_Sites { SiteCode=s.SiteCode, SiteName=s.SiteName, SiteAddDate=Convert.ToDateTime(s.SiteAddDate).Month+"/"+ Convert.ToDateTime(s.SiteAddDate).Day, SiteUrl=s.SiteUrl, SiteClickQuantity=s.SiteClickQuantity }).ToList();
             ////默认列表
             ////var list = sitesBO.QueryForList(where).Cast<M_Sites>().ToList();
             ////var list = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
