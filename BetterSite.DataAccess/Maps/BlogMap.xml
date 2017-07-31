@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_Blog,BetterSite.Domain" id="Tab_Blog_Result">
+      <result column="Id" property="Id" />
+      <result column="Category" property="Category" />
+      <result column="Title" property="Title" />  
+      <result column="PageView" property="PageView" />
+      <result column="Content" property="Content" />
+      <result column="CreateDate" property="CreateDate" />
+      <result column="Status" property="Status" />
+      <result column="Description" property="Description" />
+      <result column="CategoryName" property="CategoryName" />
+    </resultMap>
+    <resultMap class="BetterSite.Domain.M_BlogComment,BetterSite.Domain" id="Tab_BlogComment_Result">
+      <result column="CreateTime" property="CreateTime" />
+      <result column="CommentUserNickname" property="CommentUserNickname" />
+      <result column="CommentUserIp" property="CommentUserIp" />
+      <result column="CommentContent" property="CommentContent" />
+    </resultMap>
+  </resultMaps>
+  <statements>
+    <insert id="Tab_Blog_Insert" parameterClass="BetterSite.Domain.M_Blog">
+      INSERT INTO  Tab_Blog  (Category,Title,Content,Description)
+      VALUES (#Category#,#Title#,#Content#,#Description#)
+    </insert>
+    <update id="Tab_Blog_Update" parameterClass="BetterSite.Domain.M_Blog">
+      UPDATE  Tab_Blog  SET Category= #Category#,Title= #Title#,Content= #Content#,Description= #Description#
+      WHERE Id= #Id#
+    </update>
+    <delete id="Tab_Blog_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_Blog  WHERE Id= #id#
+    </delete>
+    <update id="Tab_Sites_UpdateBlogClickQuantity" parameterClass="Hashtable">
+      UPDATE  Tab_Blog  SET PageView =PageView+1
+      WHERE Id= #Id#
+    </update>
+    <select id="Tab_Blog_Select" listClass="ArrayList" resultMap="Tab_Blog_Result" parameterClass="Hashtable">
+      SELECT Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Blog 
+      <dynamic prepend="WHERE">
+        <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+      </dynamic>
+      ORDER BY Id DESC
+    </select>
+    <select id="Tab_Blog_SelectEntity" listClass="ArrayList" resultMap="Tab_Blog_Result" parameterClass="System.String">
+      SELECT Id,Category,
+        case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Blog
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Id">Id= #id#</isNotEmpty>
+      </dynamic>
+    </select>
+    <select id="Tab_Blog_SelectList" resultMap="Tab_Blog_Result" parameterClass="Hashtable">
+      SELECT * from (
+      SELECT top 1 Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,
+      CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
+      FROM  Tab_Blog
+      WHERE id<![CDATA[<]]>#Id#
+      AND Status=#Status#
+      order by id desc)prerecord
+      UNION ALL
+      SELECT Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,
+      CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
+      FROM  Tab_Blog
+      WHERE id=#Id#
+      AND Status=#Status#
+      UNION ALL
+      SELECT * from (
+      SELECT top 1 Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,
+      CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
+      FROM  Tab_Blog
+      WHERE id<![CDATA[>]]>#Id#
+      AND Status=#Status#
+      order by id asc) nextrecord
+    </select>
+    <select id="Tab_Blog_SelectPageList" listClass="ArrayList" resultMap="Tab_Blog_Result" parameterClass="Hashtable">
+      WITH T AS(
+      SELECT Id,Category,
+      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status,Description
+      FROM  Tab_Blog
+      <dynamic prepend="WHERE">
+        <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Category">Category= #Category#</isNotEmpty>
+      </dynamic>
+      )
+      SELECT TOP $Rows$ * FROM T WHERE Id NOT IN
+      (
+      SELECT TOP ($Rows$*($Page$-1)) Id FROM T ORDER BY CreateDate DESC
+      )
+      ORDER BY Id DESC
+    </select>
+    <select id="Tab_Blog_SelectAll" listClass="ArrayList" resultMap="Tab_Blog_Result" >
+      SELECT Id,Category,
+        case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      Title,PageView,Content,CreateDate,Status,Description
+      FROM  Tab_Blog
+    </select>
+    <insert id="Tab_BlogComment_Insert" parameterClass="BetterSite.Domain.M_BlogComment">
+      INSERT INTO  Tab_BlogComment  ( [BlogId], [CreateTime], [CommentUserNickname], [CommentUserIp], [CommentContent], [Status])
+      VALUES (#BlogId#, #CreateTime#, #CommentUserNickname#, #CommentUserIp#, #CommentContent#, #Status#)
+    </insert>
+    <select id="Tab_BlogComment_Select" listClass="ArrayList" resultMap="Tab_BlogComment_Result" >
+      SELECT [Id], [BlogId], [CreateTime], [CommentUserNickname], [CommentUserIp], [CommentContent], [Status]
+      FROM  Tab_BlogComment
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+        <isNotEmpty prepend="and" property="BlogId">BlogId= #BlogId#</isNotEmpty>
+        <!--<isNotEmpty prepend="and" property="SiteId">S.SiteId IN('$SiteId$')</isNotEmpty>-->
+      </dynamic>
+      ORDER BY CreateTime DESC;
+    </select>
+  </statements>
+</sqlMap>

@@ -170,6 +170,7 @@
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\SiteApiController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Utility\WebsiteToImage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\blogstyle.css" />
     <Content Include="Content\images\eye.png" />
     <Content Include="Content\images\eye2.jpg" />
     <Content Include="Content\images\visit2.png" />
@@ -535,6 +537,7 @@
     <Content Include="Images\SiteScreen_48px\SITE1499144490898.jpg" />
     <Content Include="Images\SiteScreen_48px\SITE1499147833272.jpg" />
     <Content Include="Images\SiteScreen_48px\SITE1499154306416.jpg" />
+    <Content Include="TestHtml\life.html" />
     <Content Include="TestHtml\svgtest.html" />
     <Content Include="TestHtml\baidutest.html" />
     <Content Include="TestHtml\captest.html" />
@@ -1469,6 +1472,8 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\Details.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

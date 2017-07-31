@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        .body {
+            margin:20px;
+          height:768px;
+        }
+        .year {
+            display:block;
+            float:left;
+        width:60px;      
+        height:768px;
+        background-color:burlywood;
+        }
+            .year .past {
+                 display:block;
+             width:60px;      
+        height:268px;
+         background-color:burlywood;
+            }
+            .year .curt {
+            
+            
+            }
+        .moon {
+ display:block;
+ float:left;
+            width:35px;      
+        height:768px;
+        background-color:#fce45b;
+        }
+            .moon label {
+                 display:block;
+            height:60px;
+            }
+                .day {
+ display:block;
+ float:left;
+            width:40px;      
+        height:768px;
+        background-color:#ffd800;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <span class="year">
+            
+        </span>
+            <!--<span class="year"><span style="display:block;height:280px;">1988年</span><span class="past">2017年</span>2088年</span>-->
+
+            <span class="moon">
+                <label>1月</label>
+                <label>2月</label>
+                <label>3月</label>
+                <label>4月</label>
+                <label>5月</label>
+                <label>6月</label>
+                <label>7月</label>
+                <label>8月</label>
+                <label>9月</label>
+                <label>10月</label>
+                <label>11月</label>
+                <label>12月</label>
+            </span>
+            <span class="day">11日</span>
+</div>
+    <script src="../Scripts/jquery-1.8.2.min.js"></script>
+    <script>
+        $(function () {
+            var yearhtml = [];
+            var yearnum = 0;
+            var curyearnum = new Date().getFullYear();
+            for (var i = 0; i <= 100; i += 5) {
+                yearnum = 1988 + i;
+             
+                
+                yearhtml.push(" <label>" + yearnum + "年</label>");
+                if (yearnum < curyearnum && yearnum + 5 > curyearnum)
+                    yearhtml.push(" <label>[" + curyearnum + "]</label>");
+            }
+            $(".year").append(yearhtml.join(''));
+        })
+    </script>
+</body>
+</html>

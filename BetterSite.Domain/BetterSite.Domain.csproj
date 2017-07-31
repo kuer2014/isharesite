@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel.cs" />
+    <Compile Include="M_BlogComment.cs" />
+    <Compile Include="M_Blog.cs" />
     <Compile Include="M_ArticleComment.cs" />
     <Compile Include="M_Sites.cs" />
     <Compile Include="M_SiteTag.cs" />

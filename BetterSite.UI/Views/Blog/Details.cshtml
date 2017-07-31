@@ -1,0 +1,20 @@
+﻿@model BetterSite.Domain.M_Blog
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.Title</title>
+    <link href="~/Content/blogstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="body">
+        <div class="title"><h2>@Model.Title</h2></div>
+        <div class="content">           
+                @Html.Raw(Model.Content)     
+        </div>
+    </div>
+</body>
+</html>

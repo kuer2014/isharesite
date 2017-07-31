@@ -81,7 +81,25 @@ namespace BetterSite.UI
                  Page = @"\d{0,5}"
              }
           );
-        
+            /// /Blog/1
+            routes.MapRoute(
+          name: "BlogDetail",
+          url: "blog/{id}",
+          defaults: new { controller = "Blog", action = "Details" },
+           namespaces: new string[] { "BetterSite.UI.Controllers" },
+             constraints: new
+             {
+                 id = @"\d{1,5}"
+             }
+      );
+            /// /Blog/
+            routes.MapRoute(
+          name: "BlogList",
+          url: "blog",
+          defaults: new { controller = "Blog", action = "Index" },
+           namespaces: new string[] { "BetterSite.UI.Controllers" }
+           
+      );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

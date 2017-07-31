@@ -1,0 +1,14 @@
+﻿body {
+}
+        .body {
+        width:600px;
+       margin:50px auto;
+        }
+        /*博客标题*/
+        .title {
+        text-align:center;
+        }
+        /*博客正文*/
+        p {
+        text-indent:32px;
+        }

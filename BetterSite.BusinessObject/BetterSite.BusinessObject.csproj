@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogBO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiteTagBO.cs" />
     <Compile Include="TagsBO.cs" />
