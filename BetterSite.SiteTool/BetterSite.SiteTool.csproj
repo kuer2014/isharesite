@@ -79,9 +79,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Capture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Capture.Designer.cs">
+      <DependentUpon>Capture.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImageHelper.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="PhantomjsHelper.cs" />
+    <Compile Include="PushBaidu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PushBaidu.Designer.cs">
+      <DependentUpon>PushBaidu.cs</DependentUpon>
+    </Compile>
     <Compile Include="RequestHelper.cs" />
     <Compile Include="SiteTool.cs">
       <SubType>Form</SubType>
@@ -91,6 +103,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Capture.resx">
+      <DependentUpon>Capture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PushBaidu.resx">
+      <DependentUpon>PushBaidu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SiteTool.resx">
       <DependentUpon>SiteTool.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,8 +166,13 @@
     <Content Include="Phantomjs\tempdata\sitedata.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Python\seehua.py">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Python\tempdata\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

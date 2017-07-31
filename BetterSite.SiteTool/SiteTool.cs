@@ -358,5 +358,28 @@ namespace BetterSite.SiteTool
                 }
             }
         }
+        /// <summary>
+        /// 文档采集
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Capture childForm = new Capture();
+           // Form childForm = new Form();
+           // childForm.MdiParent = this;
+           // childForm.Show();
+            childForm.ShowDialog();
+        }
+        /// <summary>
+        /// 百度推送
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            PushBaidu childForm = new PushBaidu();
+            childForm.ShowDialog();
+        }
     }
 }
