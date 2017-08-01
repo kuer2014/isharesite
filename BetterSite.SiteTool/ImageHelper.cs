@@ -150,5 +150,17 @@ namespace BetterSite.SiteTool
             }
         }
         #endregion 用法2
+        /// <summary>
+        /// 图片转base64字符串
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <returns></returns>
+        public static string ToBase64String(string filepath) {
+            string ext =Path.GetExtension(filepath).Remove(0,1);
+            var byteArray = File.ReadAllBytes(filepath);
+            string base64string = Convert.ToBase64String(byteArray);
+            base64string = $"data:image/{ext};base64,{base64string}";
+            return base64string;
+        }
     }
 }

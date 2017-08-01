@@ -67,6 +67,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SiteImg)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -425,11 +427,34 @@
             this.label11.TabIndex = 18;
             this.label11.Text = "|";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(730, 667);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(53, 12);
+            this.linkLabel1.TabIndex = 19;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "打开网站";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(868, 573);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 20;
+            this.button4.Text = "装载图片";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // SiteTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 708);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -518,6 +543,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button button4;
     }
 }
 

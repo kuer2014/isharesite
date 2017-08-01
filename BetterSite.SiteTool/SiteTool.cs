@@ -381,5 +381,34 @@ namespace BetterSite.SiteTool
             PushBaidu childForm = new PushBaidu();
             childForm.ShowDialog();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //用默认浏览器打开
+            this.linkLabel1.Links[0].LinkData = "http://www.isharesite.com";
+            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
+            //用IE打开
+            //System.Diagnostics.Process.Start("iexplore.exe", "http://www.isharesite.com");
+        }
+        /// <summary>
+        /// 选择本地图片作为站点图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //初始化一个OpenFileDialog类
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            //判断用户是否正确的选择了文件
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+               string selfile= fileDialog.FileName;    
+                string imgBase64 = ImageHelper.ToBase64String(selfile);
+                SiteImgBase64.Text = imgBase64;             
+               SiteImg.ImageLocation = selfile;
+              //  Image img = Image.FromFile(selfile);
+              //  SiteImgBase64.Text= ImageHelper.ToBase64(img);
+            }        
+        }
     }
 }

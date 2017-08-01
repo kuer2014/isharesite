@@ -95,7 +95,8 @@ namespace BetterSite.SiteTool
                   MessageBox.Show(  $"验证通过,共计{articlelist.Count()}条.");
                 }
                 else {
-                    capmsg.Text = $"验证未通过,请查看文件:{capmsg.Text}.";
+                    //capmsg.Text = $"验证未通过,请查看文件:{capmsg.Text}.";
+                    MessageBox.Show("验证未通过,请查看文件.");
                 }
             }
             catch(Exception ex) {
@@ -122,6 +123,26 @@ namespace BetterSite.SiteTool
             }
             else
             { capmsg.Text = result; }
+        }
+
+        /// <summary>
+        ///  打开json文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(capmsg.Text);
+        }
+        /// <summary>
+        /// 打开网站的文章列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel1.Links[0].LinkData = "http://www.isharesite.com/Article/1.html";
+            System.Diagnostics.Process.Start(e.Link.LinkData.ToString());
         }
     }
 }
