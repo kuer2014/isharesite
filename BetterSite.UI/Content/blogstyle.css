@@ -1,14 +1,58 @@
 ﻿body {
 }
-        .body {
-        width:600px;
-       margin:50px auto;
+
+.body {
+    width: 500px;
+    margin: 50px auto 10px auto;
+}
+.footer {
+    width:80px;
+     margin: 0px auto;
+    
+}
+    .footer a {
+      text-decoration: none;
+        color: #999;
+    }
+        .footer a:hover {
+           text-decoration: none;
+            color: #333;
         }
-        /*博客标题*/
-        .title {
-        text-align:center;
-        }
-        /*博客正文*/
-        p {
-        text-indent:32px;
+/*博客详情页*/
+.detail {
+ display: inline-block;
+}
+.detail .title {
+    text-align: center;
+}
+
+.detail p {
+    text-indent: 32px;
+    line-height: 30px;
+}
+.detail .writedate {
+float:right;
+padding:20px 50px;
+}
+/*博客列表页*/
+.date {
+    width: 40px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+li {
+    list-style-type: none;
+    line-height: 28px;
+}
+
+    li .title a {
+        text-decoration: none;
+        color: #333;
+    }
+
+        li .title a:hover {
+            text-decoration: none;
+            color: #999;
         }

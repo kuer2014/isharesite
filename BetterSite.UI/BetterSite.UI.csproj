@@ -147,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SitesController.cs" />
@@ -1413,6 +1414,7 @@
     <Content Include="Content\ueditor1_4_3_3-utf8-net\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\third-party\video-js\font\vjs.woff" />
     <Content Include="Content\ueditor1_4_3_3-utf8-net\net\Web.config" />
+    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <None Include="Properties\PublishProfiles\AliHost.pubxml" />
     <None Include="Properties\PublishProfiles\LocalSite.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />

@@ -38,17 +38,17 @@
     </update>
     <select id="Tab_Blog_Select" listClass="ArrayList" resultMap="Tab_Blog_Result" parameterClass="Hashtable">
       SELECT Id,Category,
-      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
-      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Blog 
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
+      Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Blog
       <dynamic prepend="WHERE">
         <!--<isNotEmpty prepend="and" property="Id">Id= #Id#</isNotEmpty>-->
         <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
       </dynamic>
-      ORDER BY Id DESC
+      ORDER BY CreateDate DESC
     </select>
     <select id="Tab_Blog_SelectEntity" listClass="ArrayList" resultMap="Tab_Blog_Result" parameterClass="System.String">
       SELECT Id,Category,
-        case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
       Title,PageView,Content,CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description FROM  Tab_Blog
       <dynamic prepend="WHERE">
         <isNotEmpty prepend="and" property="Id">Id= #id#</isNotEmpty>
@@ -57,7 +57,7 @@
     <select id="Tab_Blog_SelectList" resultMap="Tab_Blog_Result" parameterClass="Hashtable">
       SELECT * from (
       SELECT top 1 Id,Category,
-      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
       Title,PageView,Content,
       CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
       FROM  Tab_Blog
@@ -66,7 +66,7 @@
       order by id desc)prerecord
       UNION ALL
       SELECT Id,Category,
-      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
       Title,PageView,Content,
       CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
       FROM  Tab_Blog
@@ -75,7 +75,7 @@
       UNION ALL
       SELECT * from (
       SELECT top 1 Id,Category,
-      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
       Title,PageView,Content,
       CONVERT(varchar, CreateDate, 120 )CreateDate,Status,Description
       FROM  Tab_Blog
@@ -86,7 +86,7 @@
     <select id="Tab_Blog_SelectPageList" listClass="ArrayList" resultMap="Tab_Blog_Result" parameterClass="Hashtable">
       WITH T AS(
       SELECT Id,Category,
-      case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
       Title,PageView,Content,CONVERT(varchar, CreateDate, 120 ) CreateDate,Status,Description
       FROM  Tab_Blog
       <dynamic prepend="WHERE">
@@ -99,11 +99,11 @@
       (
       SELECT TOP ($Rows$*($Page$-1)) Id FROM T ORDER BY CreateDate DESC
       )
-      ORDER BY Id DESC
+      ORDER BY CreateDate DESC
     </select>
     <select id="Tab_Blog_SelectAll" listClass="ArrayList" resultMap="Tab_Blog_Result" >
       SELECT Id,Category,
-        case Category when 1 then '实用' when 2 then '有趣' when 3 then '热点' when 4 then '随笔' when 5 then '读书' end CategoryName,
+      case Category when 1 then '随笔' else '其他'  end CategoryName,
       Title,PageView,Content,CreateDate,Status,Description
       FROM  Tab_Blog
     </select>

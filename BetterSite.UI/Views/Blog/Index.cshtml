@@ -1,11 +1,8 @@
 ﻿@model IList<BetterSite.Domain.M_Blog>
-
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -15,11 +12,29 @@
 <body>
     <div class="body">
         <ul>
-            <li></li>
+            <li><span class="date">@DateTime.Now.Month 月</span></li>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <li>
+                    <span class="date">@Convert.ToDateTime(Model[i].CreateDate).Day</span>
+                    <span class="title"><a href="/blog/@Model[i].Id" title="">@Model[i].Title</a></span>
+                </li>
+                if ((i + 1) < Model.Count())
+                {
+                    if (Convert.ToDateTime(Model[i].CreateDate).Year != Convert.ToDateTime(Model[i + 1].CreateDate).Year)
+                    {
+                        <li><span class="date">@Convert.ToDateTime(Model[i + 1].CreateDate).Year </span></li>
+                    }
+                    if (Convert.ToDateTime(Model[i].CreateDate).Month != Convert.ToDateTime(Model[i + 1].CreateDate).Month)
+                    {
+                        <li><span class="date">@Convert.ToDateTime(Model[i + 1].CreateDate).Month 月</span></li>
+                    }
+                }
+            }
         </ul>
-        <div class="article">
-
-        </div>        
+        <div class="footer">
+            <a href="/blog">我的世界</a>
+        </div>
     </div>
 </body>
 </html>

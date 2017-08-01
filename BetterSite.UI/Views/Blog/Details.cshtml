@@ -6,14 +6,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@Model.Title</title>
+    <title>@Model.Title | 我的世界</title>
     <link href="~/Content/blogstyle.css" rel="stylesheet" />
 </head>
 <body>
     <div class="body">
-        <div class="title"><h2>@Model.Title</h2></div>
-        <div class="content">           
-                @Html.Raw(Model.Content)     
+        <div class="detail">
+            <div class="title"><h2>@Model.Title</h2></div>
+            <div class="content">
+                @Html.Raw(Model.Content)
+            </div>
+            <div class="writedate">@Convert.ToDateTime(Model.CreateDate).ToString("yy.M.d")</div>
+        </div>
+        <div class="footer">
+            <a href="/blog">我的世界</a>
         </div>
     </div>
 </body>
