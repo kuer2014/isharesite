@@ -38,6 +38,11 @@ namespace BetterSite.BusinessObject
       public int Update(M_Blog model)
       {
           return da.Update(model);
+      }  
+        ///更新状态
+      public int UpdateStatus(M_Blog model)
+      {
+          return da.UpdateStatus(model);
       }
       ///删除
       public int Delete(int id)

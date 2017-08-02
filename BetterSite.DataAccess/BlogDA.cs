@@ -19,6 +19,11 @@ namespace BetterSite.DataAccess
       public int Update(M_Blog model)
       {
           return BaseDA.Update<M_Blog>("Tab_Blog_Update", model);
+      } 
+        ///更新
+      public int UpdateStatus(M_Blog model)
+      {
+          return BaseDA.Update<M_Blog>("Tab_Blog_UpdateStatus", model);
       }
       ///删除
       public int Delete(int id)

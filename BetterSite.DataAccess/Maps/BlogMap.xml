@@ -32,6 +32,10 @@
     <delete id="Tab_Blog_Delete" parameterClass="Hashtable">
       DELETE FROM  Tab_Blog  WHERE Id= #id#
     </delete>
+    <update id="Tab_Blog_UpdateStatus" parameterClass="Hashtable">
+      UPDATE  Tab_Blog  SET Status= #Status#
+      WHERE Id= #Id#
+    </update>
     <update id="Tab_Sites_UpdateBlogClickQuantity" parameterClass="Hashtable">
       UPDATE  Tab_Blog  SET PageView =PageView+1
       WHERE Id= #Id#

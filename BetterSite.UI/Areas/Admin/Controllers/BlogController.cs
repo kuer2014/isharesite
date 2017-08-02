@@ -111,7 +111,10 @@ namespace BetterSite.UI.Areas.Admin.Controllers
             try
             {
                 // TODO: Add insert logic here
-                articleBO.Delete(entity.Id);
+               // articleBO.Delete(entity.Id);
+               //逻辑删除，修改状态
+                entity.Status = 0;                
+                articleBO.UpdateStatus(entity);
                 json.Data = new
                 {
                     success = true,
