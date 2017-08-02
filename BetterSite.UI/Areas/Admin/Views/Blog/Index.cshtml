@@ -8,13 +8,19 @@
         $('#fm').form('clear');
         ue.execCommand('cleardoc');
         $('#cc').combobox('setValue', '1');
+        $('#cc').combobox('setValue', '1');
+        $('#CreateDate').datetimebox('setValue', new Date().toISOString());
         url = '/Admin/Blog/Create';
     }
-    function Edit() {
+    function Edit() {       
+        $('#CreateDate').combobox('disable');
         var row = $('#dg').datagrid('getSelected');
         if (row) {
+          //  debugger;
             $('#dlg').dialog('open').dialog('setTitle', '修改');
             $('#fm').form('load', row);
+            // $('#CreateDate').datebox('setValue', new Date(row.CreateDate).toISOString());
+             $('#CreateDate').datetimebox('setValue', '');
           //  debugger;
             ue.setContent(row.Content);
             url = '/Admin/Blog/Edit/';
@@ -28,7 +34,8 @@
         var title = $('input[name="Title"]').val();
         var content = ue.getContent();
         var description = $('#Description').val();
-        if (!(category && title && content && description)) {
+        var createDate = $('#CreateDate').datebox('getValue');
+        if (!(category && title && content && createDate)) {
             $.messager.show({
                 title: 'Error',
                 msg: '必填项不能为空'
@@ -38,7 +45,7 @@
         $.ajax({
             url: url,
             type: 'post',
-            data: "Id=" + id + "&Category=" + category + "&Title=" + title + "&Content=" + content + "&Description=" + description,
+            data: "Id=" + id + "&Category=" + category + "&Title=" + title + "&Content=" + content + "&CreateDate=" + createDate + "&Description=" + description,
             success: function (result) {
                 //debugger;
                 //  var result = eval('(' + result + ')');
@@ -134,10 +141,12 @@
                 <option selected="selected" value="1">随笔</option>
                 <option value="2">其它</option>
             </select>
+            <label>记录日期:</label>
+            <input id="CreateDate" name="CreateDate" class="easyui-datetimebox" style="width:200px;"/>
         </div>
         <div class="fitem">
             <label>标题:</label>
-            <input name="Title" class="easyui-textbox"  style="width:500px;"/>
+            <input name="Title" class="easyui-textbox"  style="width:500px;"/>           
         </div>
         <div class="fitem">
             <label>内容:</label>
@@ -146,7 +155,7 @@
             </script>
         </div>
         <div class="fitem">
-            <label>描述:</label>
+            <label>描述(非必填):</label>
             <textarea type="textarea" name="Description" id="Description" rows="3" style="width:98%"></textarea>
             </div>
 </form>

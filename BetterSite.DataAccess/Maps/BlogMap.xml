@@ -22,8 +22,8 @@
   </resultMaps>
   <statements>
     <insert id="Tab_Blog_Insert" parameterClass="BetterSite.Domain.M_Blog">
-      INSERT INTO  Tab_Blog  (Category,Title,Content,Description)
-      VALUES (#Category#,#Title#,#Content#,#Description#)
+      INSERT INTO  Tab_Blog  (Category,Title,Content,Description,CreateDate)
+      VALUES (#Category#,#Title#,#Content#,#Description#,#CreateDate#)
     </insert>
     <update id="Tab_Blog_Update" parameterClass="BetterSite.Domain.M_Blog">
       UPDATE  Tab_Blog  SET Category= #Category#,Title= #Title#,Content= #Content#,Description= #Description#
