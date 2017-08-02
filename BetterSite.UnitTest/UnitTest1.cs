@@ -95,7 +95,8 @@ data:image/jpg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDA
         {
            // string url = "http://localhost:8080/article/add/";
              string url = "http://www.isharesite.com/article/add/";
-            string sitedata = File.ReadAllText("F:\\NavSite\\capture\\sitestxt.txt");
+          //  string sitedata = File.ReadAllText("F:\\NavSite\\capture\\sitestxt.txt");
+            string sitedata = File.ReadAllText("F:\\NavSite\\capture\\dist\\sitestxt.txt");
             string param = "token=2CBa31gg4s7dB&entityJson=" + sitedata;
             string result = RequestHelper.PostHttp(url, param);
         }
