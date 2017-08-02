@@ -15,7 +15,7 @@ namespace BetterSite.UI.Controllers
         private readonly BlogBO blogBO = new BlogBO();
         public ActionResult Index(BetterSite.Domain.M_Blog where)
         {
-            int pagesize = 30;// int.Parse(System.Configuration.ConfigurationManager.AppSettings["articlepagesize"]);
+            int pagesize = 300;// int.Parse(System.Configuration.ConfigurationManager.AppSettings["articlepagesize"]);
             where.Status = 1;
             where.Category = null;
             where.Rows = pagesize;
