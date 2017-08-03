@@ -27,14 +27,13 @@ def GetContent(url):
         print(_p)
         #wfile.write(str(_p))
         #wfile.write('\n')
-        if 'http' not in str(_p).lower():
-            all_p+=str(_p)
+        all_p+=str(_p)
     #wfile.write('<p><small>(内容来源于网络)</small></p>')
     all_p +='<p><small>(内容来源于网络)</small></p>'
     resultDic = {"Title": title[0].getText(),"Content":all_p}
 
     resultList.append(resultDic)
-    #print('resultList:' + str(resultList))
+    print('resultList:' + str(resultList))
     #wfile.write('\r\n')
     nextUrl=noStarchSoup.select('.td-post-next-prev-content a')[0].attrs['href']
     print('nextUrl:'+nextUrl)
@@ -58,16 +57,6 @@ if(len(sys.argv)==3):
     wfile.close()
 else:
     print('-1') #参数有误
-    # 调试参数
-    # print('请输入URL地址：')
-    # url=input() #http://news.seehua.com/?p=292391
-    # print('请输入条数：')
-    # _i=int(input())   #采集文章数
-    # wfile = open(r'sitestxt.txt', 'w', encoding='utf-8')
-    # resultList = []
-    # GetContent(url)  # 娱乐分类
-    # wfile.write(json.dumps(resultList, ensure_ascii=False))
-    # wfile.close()
-    # 调试参数
+
 # SQLAlchemy ORM
 #python db-api http://tech.it168.com/a2009/1014/759/000000759444.shtml
