@@ -11,27 +11,29 @@
 </head>
 <body>
     <div class="body">
-        <ul>
-            <li><span class="date">@DateTime.Now.Month 月</span></li>
-            @for (int i = 0; i < Model.Count(); i++)
+        <div class="container">
+            <ul>
+                <li><span class="date">@DateTime.Now.Month 月</span></li>
+                @for (int i = 0; i < Model.Count(); i++)
             {
                 <li>
                     <span class="date">@Convert.ToDateTime(Model[i].CreateDate).Day</span>
                     <span class="title"><a href="/blog/@Model[i].Id" title="">@Model[i].Title</a></span>
                 </li>
-                if ((i + 1) < Model.Count())
-                {
-                    if (Convert.ToDateTime(Model[i].CreateDate).Year != Convert.ToDateTime(Model[i + 1].CreateDate).Year)
+                    if ((i + 1) < Model.Count())
                     {
-                        <li><span class="date">@Convert.ToDateTime(Model[i + 1].CreateDate).Year </span></li>
-                    }
-                    if (Convert.ToDateTime(Model[i].CreateDate).Month != Convert.ToDateTime(Model[i + 1].CreateDate).Month)
-                    {
-                        <li><span class="date">@Convert.ToDateTime(Model[i + 1].CreateDate).Month 月</span></li>
+                        if (Convert.ToDateTime(Model[i].CreateDate).Year != Convert.ToDateTime(Model[i + 1].CreateDate).Year)
+                        {
+                <li><span class="date">@Convert.ToDateTime(Model[i + 1].CreateDate).Year </span></li>
+                        }
+                        if (Convert.ToDateTime(Model[i].CreateDate).Month != Convert.ToDateTime(Model[i + 1].CreateDate).Month)
+                        {
+                <li><span class="date">@Convert.ToDateTime(Model[i + 1].CreateDate).Month 月</span></li>
+                        }
                     }
                 }
-            }
-        </ul>
+            </ul>
+        </div>
         <div class="footer">
             <a href="/blog">我的世界</a>
         </div>

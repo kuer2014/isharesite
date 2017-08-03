@@ -1,15 +1,26 @@
-﻿body {
-}
+﻿
+body{
 
+} 
 .body {
     width: 500px;
     margin: 50px auto 10px auto;
+    /*min-height:100%;
+    height:auto !important;
+    height:100%;*//*ie6不识别min-height,如上述处理*/
+    /*position:relative;*/
 }
+.container {
+     /*padding-bottom:60px;*//*padding等于footer的高度*/
+}
+
 .footer {
-    width:80px;
-     margin: 30px auto;
-    
-}
+    width: 500px;
+    margin: 20px auto;
+    position: absolute;
+    bottom: 0;
+    text-align:center;
+} 
     .footer a {
       text-decoration: none;
         color: #999;
