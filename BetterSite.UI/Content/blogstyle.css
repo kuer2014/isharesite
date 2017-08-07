@@ -3,23 +3,26 @@ body{
 
 } 
 .body {
-    width: 500px;
-    margin: 50px auto 10px auto;
+   
     /*min-height:100%;
     height:auto !important;
     height:100%;*//*ie6不识别min-height,如上述处理*/
     /*position:relative;*/
 }
-.container {
-     /*padding-bottom:60px;*//*padding等于footer的高度*/
+.list,
+.detail {
+     width: 500px;
+    margin: 50px auto 10px auto;
+     padding-bottom:60px;/*padding等于footer的高度*/
 }
 
 .footer {
     width: 500px;
     margin: 20px auto;
-    position: absolute;
-    bottom: 0;
     text-align:center;
+    /*position: absolute;
+    bottom: 0;
+    */
 } 
     .footer a {
       text-decoration: none;
@@ -31,7 +34,7 @@ body{
         }
 /*博客详情页*/
 .detail {
- display: inline-block;
+ /*display: inline-block;*/
 }
 .detail .title {
     text-align: center;
@@ -53,17 +56,34 @@ padding:20px 50px;
     margin-right: 10px;
 }
 
-li {
+ul li {
     list-style-type: none;
     line-height: 28px;
 }
 
-    li .title a {
+   ul  li .title a {
         text-decoration: none;
         color: #333;
     }
 
-        li .title a:hover {
+      ul   li .title a:hover {
             text-decoration: none;
             color: #999;
         }
+      /*首页-目标*/
+.mubiao {
+width:800px;
+ margin: 0 auto 10px auto;
+}
+    .mubiao .title {
+       text-align: center
+    }
+     .mubiao .title h4 {
+     margin-bottom:5px;
+    }
+    .mubiao ol {
+    font-size:13px;
+    }
+     /*.mubiao strong {
+    font-size:13px;
+    }*/
