@@ -1,25 +1,27 @@
 ﻿
 body{
-
+margin:0;
+padding:0;
 } 
 .body {
-   
+   margin:20px;
     /*min-height:100%;
     height:auto !important;
     height:100%;*//*ie6不识别min-height,如上述处理*/
     /*position:relative;*/
 }
-.list,
-.detail {
-     width: 500px;
-    margin: 50px auto 10px auto;
-     padding-bottom:60px;/*padding等于footer的高度*/
+.linebet {
+    width: 600px;
+margin: 50px auto 10px auto;
+text-align:center;
 }
+
 
 .footer {
     width: 500px;
     margin: 20px auto;
     text-align:center;
+    font-size:13px;
     /*position: absolute;
     bottom: 0;
     */
@@ -34,7 +36,9 @@ body{
         }
 /*博客详情页*/
 .detail {
- /*display: inline-block;*/
+     width: 500px;
+    margin: 50px auto 10px auto;
+     padding-bottom:60px;/*padding等于footer的高度*/
 }
 .detail .title {
     text-align: center;
@@ -49,6 +53,11 @@ float:right;
 padding:20px 50px;
 }
 /*博客列表页*/
+.list {
+     width: 430px;
+    margin: 20px auto 10px auto;
+     padding-bottom:60px;/*padding等于footer的高度*/
+}
 .date {
     width: 40px;
     text-align: right;
@@ -81,9 +90,15 @@ width:800px;
      .mubiao .title h4 {
      margin-bottom:5px;
     }
-    .mubiao ol {
+    /*.mubiao ol {
     font-size:13px;
-    }
+    }*/
      /*.mubiao strong {
     font-size:13px;
     }*/
+     /*关于我*/
+.aboutme {
+     width: 450px;
+    margin: 200px auto;
+    text-align:center;
+}

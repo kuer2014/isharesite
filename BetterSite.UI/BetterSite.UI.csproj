@@ -1476,6 +1476,7 @@
     <Content Include="Views\Article\Details.cshtml" />
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\About.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
