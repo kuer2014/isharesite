@@ -13,36 +13,40 @@ import json
 import sys
 def GetContent(url):
     global resultList
-    res=requests.get(url)
-    res.raise_for_status()
-    noStarchSoup=bs4.BeautifulSoup(res.text,'html.parser')
-    title=noStarchSoup.select('.entry-title')
+    try:
+        res=requests.get(url)
+        res.raise_for_status()
+        noStarchSoup=bs4.BeautifulSoup(res.text,'html.parser')
+        title=noStarchSoup.select('.entry-title')
 
-    print(title[0].getText())
-    #wfile.write(title[0].getText())
-    #wfile.write('\n')
-    content_p = noStarchSoup.select('.td-post-content p')
-    all_p=""
-    for _p in content_p:
-        print(_p)
-        #wfile.write(str(_p))
+        print(title[0].getText())
+        #wfile.write(title[0].getText())
         #wfile.write('\n')
-        if 'http' not in str(_p).lower():
-            all_p+=str(_p)
-    #wfile.write('<p><small>(内容来源于网络)</small></p>')
-    all_p +='<p><small>(内容来源于网络)</small></p>'
-    resultDic = {"Title": title[0].getText(),"Content":all_p}
+        content_p = noStarchSoup.select('.td-post-content p')
+        all_p=""
+        for _p in content_p:
+            print(_p)
+            #wfile.write(str(_p))
+            #wfile.write('\n')
+            if 'http' not in str(_p).lower():
+                all_p+=str(_p)
+        #wfile.write('<p><small>(内容来源于网络)</small></p>')
+        all_p +='<p><small>(内容来源于网络)</small></p>'
+        resultDic = {"Title": title[0].getText(),"Content":all_p}
 
-    resultList.append(resultDic)
-    #print('resultList:' + str(resultList))
-    #wfile.write('\r\n')
-    nextUrl=noStarchSoup.select('.td-post-next-prev-content a')[0].attrs['href']
-    print('nextUrl:'+nextUrl)
-    global _i
-    _i -= 1
-    if(_i>0 and nextUrl!=None):
-       return GetContent(nextUrl)
-    else:
+        resultList.append(resultDic)
+        #print('resultList:' + str(resultList))
+        #wfile.write('\r\n')
+        nextUrl=noStarchSoup.select('.td-post-next-prev-content a')[0].attrs['href']
+        print('nextUrl:'+nextUrl)
+        global _i
+        _i -= 1
+        if(_i>0 and nextUrl!=None):
+           return GetContent(nextUrl)
+        else:
+            return resultList
+    except Exception as err:
+        print("打开url时出错:url: "+url+" ; err:"+str(err))
         return resultList
 if(len(sys.argv)==3):
     # print('请输入URL地址：')
@@ -59,15 +63,15 @@ if(len(sys.argv)==3):
 else:
     print('-1') #参数有误
     # 调试参数
-    # print('请输入URL地址：')
-    # url=input() #http://news.seehua.com/?p=292391
-    # print('请输入条数：')
-    # _i=int(input())   #采集文章数
-    # wfile = open(r'sitestxt.txt', 'w', encoding='utf-8')
-    # resultList = []
-    # GetContent(url)  # 娱乐分类
-    # wfile.write(json.dumps(resultList, ensure_ascii=False))
-    # wfile.close()
+    print('请输入URL地址：')
+    url=input() #http://news.seehua.com/?p=292391
+    print('请输入条数：')
+    _i=int(input())   #采集文章数
+    wfile = open(r'sitestxt.txt', 'w', encoding='utf-8')
+    resultList = []
+    GetContent(url)  # 娱乐分类
+    wfile.write(json.dumps(resultList, ensure_ascii=False))
+    wfile.close()
     # 调试参数
 # SQLAlchemy ORM
 #python db-api http://tech.it168.com/a2009/1014/759/000000759444.shtml

@@ -97,8 +97,8 @@ namespace BetterSite.SiteTool
                  // MessageBox.Show(  $"验证通过,共计{articlelist.Count()}条.");
                 }
                 else {
-                    capmsg.Text = $"验证未通过,请查看文件:{hidjsonpath.Text}.";
-                    //MessageBox.Show("验证未通过,请查看文件.");
+                    //capmsg.Text = $"验证未通过,请查看文件:{hidjsonpath.Text}.";
+                    MessageBox.Show("验证未通过,请查看Json文件.");
                 }
             }
             catch(Exception ex) {
@@ -151,6 +151,11 @@ namespace BetterSite.SiteTool
         {
             if (capmsg.Text != "")
                 Clipboard.SetDataObject(capmsg.Text);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            capurl.Text = "";
         }
     }
 }

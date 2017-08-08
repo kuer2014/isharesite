@@ -41,6 +41,7 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.hidjsonpath = new System.Windows.Forms.Label();
             this.copymsg = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +111,7 @@
             this.capmsg.Location = new System.Drawing.Point(14, 209);
             this.capmsg.Multiline = true;
             this.capmsg.Name = "capmsg";
-            this.capmsg.Size = new System.Drawing.Size(442, 49);
+            this.capmsg.Size = new System.Drawing.Size(458, 109);
             this.capmsg.TabIndex = 1;
             // 
             // backgroundWorker1
@@ -151,7 +152,7 @@
             // 
             // copymsg
             // 
-            this.copymsg.Location = new System.Drawing.Point(376, 265);
+            this.copymsg.Location = new System.Drawing.Point(381, 186);
             this.copymsg.Name = "copymsg";
             this.copymsg.Size = new System.Drawing.Size(75, 23);
             this.copymsg.TabIndex = 9;
@@ -159,11 +160,22 @@
             this.copymsg.UseVisualStyleBackColor = true;
             this.copymsg.Click += new System.EventHandler(this.copymsg_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(259, 35);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "清空URL";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Capture
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 330);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.copymsg);
             this.Controls.Add(this.hidjsonpath);
             this.Controls.Add(this.linkLabel2);
@@ -198,5 +210,6 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label hidjsonpath;
         private System.Windows.Forms.Button copymsg;
+        private System.Windows.Forms.Button button4;
     }
 }
