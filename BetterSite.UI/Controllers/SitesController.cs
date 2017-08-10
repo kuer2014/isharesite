@@ -29,14 +29,19 @@ namespace BetterSite.UI.Controllers
             where.Sort = where.Sort ?? "SiteAddDate";
             where.Order = where.Order ?? "Desc";
             where.SiteIsActive = true;
-      //
+            //
+            string type = string.Empty;
+            string tag = string.Empty;
             if (string.IsNullOrWhiteSpace(where.TypeCode))
             {
-                title = "全部 - " + title;
+                //title = "全部网站 - " + title;
+                type = "全部网站";
             }
             else if (where.TypeCode.ToLower() == "gengxin")
             {
-                title = "最新收录 - " + title;
+
+                //title = "最新收录的网站 - " + title;
+                type = "最新收录的网站";
                 where.TypeCode = "";
             }
             else
@@ -44,8 +49,10 @@ namespace BetterSite.UI.Controllers
                 var types = typesBO.QueryForEntityList(new M_Types { TypeCode = where.TypeCode });
                 if (types.Count > 0)
                 {
-                    title = types[0].TypeName + " - " + title;
-                    keywords = types[0].TypeName +","+ keywords;
+                    //title = types[0].TypeName + "网站 - " + title;
+                    ////keywords = types[0].TypeName +"网站,"+ keywords;
+                    //keywords = types[0].TypeName + "网站,优站分享";
+                    type = types[0].TypeName+"网站";
                 }
                 //else {
                 //    return Redirect("/sites");
@@ -55,8 +62,9 @@ namespace BetterSite.UI.Controllers
             if (Tag != null && Tag.Count() > 0)
             {
                 string tagsName = string.Join("','", Tag);
-                title = tagsName + "," + title;
-                keywords = tagsName + ","+ keywords;
+                //title = tagsName + "网站," + title;
+                ////keywords = tagsName + "网站,"+ keywords;
+                //keywords = tagsName + "网站,优站分享";
                 Hashtable htTagsId = new Hashtable();
                 htTagsId.Add("TagsName", tagsName);
                 htTagsId.Add("TagCount", Tag.Count());
@@ -69,10 +77,11 @@ namespace BetterSite.UI.Controllers
                 {
                     where.SiteId = string.Join("','", tags.Select(s => s.SiteId));
                 }
+                tag = tagsName+"网站,";
             }
             #endregion    
-            ViewBag.Title = title;
-            ViewBag.Keywords = keywords;
+            ViewBag.Title = $"{tag}{type} - {title}";
+            ViewBag.Keywords = $"{tag}{type},{title}";// keywords;
             ViewBag.Description =description;
             // ViewData["TypeCode"] = where.TypeCode;
             // TempData["TypeCode"] = where.TypeCode;//跨控制器
@@ -100,7 +109,8 @@ namespace BetterSite.UI.Controllers
             if (model != null)
             {
                 ViewBag.Title = model.SiteName + " - "+title;
-                ViewBag.Keywords = model.SiteTagsName+","+model.TypeName+",优站分享";
+                //ViewBag.Keywords = model.SiteTagsName+"网站,"+model.TypeName+"网站,优站分享";
+                ViewBag.Keywords = model.SiteTagsName.Replace(",","网站,")+ "网站," + model.TypeName + "网站," + title;
                 string desc = model.SiteProfile;
                 if (!string.IsNullOrWhiteSpace(desc)&& model.SiteProfile.Length > 100) {
                     desc = desc.Substring(0, 100)+"...";

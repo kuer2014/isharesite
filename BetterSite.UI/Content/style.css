@@ -15,6 +15,7 @@ h2 { font:normal 24px/1.5em Arial, Helvetica, sans-serif; padding:8px 0; margin:
 p { margin:8px 0; padding:0 0 8px 0; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
 p.spec { text-align:left; border-bottom:1px solid #efefef;}
 a { color:#62bee3; text-decoration:underline;}
+a:hover { color:#555; }
 a.rm { }
 a.com { margin:0; padding:0; text-decoration:none; float:right;}
 a.com span { margin:0; padding:0 4px 0 0; font:bold 14px/1em Arial, Helvetica, sans-serif;}
