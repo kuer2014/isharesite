@@ -10,6 +10,12 @@
             border-top: 1px solid #ccc; /*solid 1px #97d2fa;*/
             margin-left:10px;
         }
+               .articleList .site-pageview {
+                   width:26px;
+        float:right;
+            background: url(../../Content/images/eye.jpg)6px 5px no-repeat;
+    padding-left: 24px;
+        }
         .articleList .site-add-date {
         float:right;
         }
@@ -43,11 +49,17 @@
             <div class="articleList">
                 @if (item.Description.Length > 40)
                 {
-                    <span>[ @item.CategoryName ]: </span> <a href="/article/@item.Id" title="@item.Description.Substring(0, 40)...">@item.Title</a><span class="site-add-date">@item.CreateDate</span>
+                    <span>[ @item.CategoryName ]: </span> 
+                    <a href="/article/@item.Id" title="@item.Description.Substring(0, 40)...">@item.Title</a>
+                    <span class="site-add-date">@item.CreateDate</span>
+                <span  class="site-pageview eyenum">@item.PageView</span>               
                 }
                 else
                 {
-                    <span>[ @item.CategoryName ]: </span> <a href="/article/@item.Id" title="@item.Description...">@item.Title</a><span class="site-add-date">@item.CreateDate</span>
+                    <span>[ @item.CategoryName ]: </span>
+                     <a href="/article/@item.Id" title="@item.Description...">@item.Title</a>
+                <span class="site-add-date">@item.CreateDate</span>
+                <span class="site-pageview eyenum">@item.PageView</span>
                 }
             </div>
         </li>
