@@ -89,8 +89,7 @@ namespace BetterSite.UI.Controllers
             ViewBag.Description = System.Configuration.ConfigurationManager.AppSettings["description"];
             return View();
         }
-        public ActionResult Error() {
-
+        public ActionResult Error() {           
             return View();
         }
        #region demo_knockout

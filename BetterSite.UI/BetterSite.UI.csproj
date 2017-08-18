@@ -540,6 +540,7 @@
     <Content Include="Images\SiteScreen_48px\SITE1499147833272.jpg" />
     <Content Include="Images\SiteScreen_48px\SITE1499154306416.jpg" />
     <Content Include="TestHtml\life.html" />
+    <Content Include="TestHtml\seoMifeng\list.html" />
     <Content Include="TestHtml\svgtest.html" />
     <Content Include="TestHtml\baidutest.html" />
     <Content Include="TestHtml\captest.html" />
@@ -1394,6 +1395,8 @@
     <Content Include="Areas\Admin\Views\Sites\Import.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="StaticHtml\Menu_Tab.html" />
+    <Content Include="TestHtml\seoMifeng\home.html" />
+    <Content Include="TestHtml\seoMifeng\detail.html" />
     <Content Include="TestHtml\你的生命有什么可能.svg" />
     <Content Include="项目进度.js" />
     <Content Include="Areas\v1\Views\_ViewStart.cshtml" />
