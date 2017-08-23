@@ -22,6 +22,8 @@ namespace BetterSite.UI.Controllers
             where.Page = where.Page == 0 ? where.Page = 1 : where.Page;
             var list = blogBO.QueryForPageList(where).Cast<M_Blog>().ToList();
             var listCount = blogBO.QueryForList(where).Cast<M_Blog>().Count();
+            ViewBag.MonthPlan = list.Where(w => w.Category == 3).OrderByDescending(o => o.Id).FirstOrDefault();
+            ViewBag.YearPlan= list.Where(w => w.Category == 4).OrderByDescending(o => o.Id).FirstOrDefault();
             ViewBag.ListCount = listCount;
             ViewBag.Page = where.Page;
             ViewBag.PageCount = (int)Math.Ceiling(Convert.ToDouble(listCount) / Convert.ToDouble(pagesize));
