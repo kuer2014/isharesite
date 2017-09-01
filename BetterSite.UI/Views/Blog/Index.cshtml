@@ -14,7 +14,7 @@
         <div class="head">
             <div class="current-time"></div>
             <div class="mubiao">
-                <div class="title"><h3>年度方向与目标-2017年</h3>
+                <div class="title"><h3>年度方向与目标 - @DateTime.Now.Year 年</h3>
                     <h5>
                         本年已过 <span class="num-day">@DateTime.Now.DayOfYear</span> 天，还有 <span class="num-day">@{var n = 365 - DateTime.Now.DayOfYear;}@n</span> 天。
                         <span>剩余 <span class="num-day">@{var nsy = Math.Round(n / 365.00 * 100, 1);}@nsy%</span> 。</span>
@@ -36,7 +36,7 @@
                 }
             </div>
             <div class="mubiao">
-                <div class="title"><h3>月度方向与目标-8月</h3>
+                <div class="title"><h3>月度方向与目标 - @DateTime.Now.Month 月</h3>
                     <h5>本月已过 <span class="num-day">@DateTime.Now.Day</span> 天，还有 <span class="num-day"> @{var m=DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) - @DateTime.Now.Day; }@m</span> 天。
                         <span>剩余 <span class="num-day">@{var ysy = Math.Round(m/(Double) DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month) * 100,1);}@ysy%</span> 。</span>
                     </h5>
