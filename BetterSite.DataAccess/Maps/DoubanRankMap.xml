@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap namespace="BetterSite.DataAccess" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <resultMaps>
+    <resultMap class="BetterSite.Domain.M_DoubanRank,BetterSite.Domain" id="Tab_DoubanRank_Result">
+      <result column="Id" property="Id" />
+      <result column="Title" property="Title" />      
+      <result column="Url" property="Url" />
+      <result column="RatingNum" property="RatingNum" />
+      <result column="RatingPeople" property="RatingPeople" />
+      <result column="Category" property="Category" />
+      <result column="Status" property="Status" />
+      <result column="Type" property="Type" />
+      <result column="CreateDate" property="CreateDate" />
+    </resultMap>   
+  </resultMaps>
+  <statements>
+    <insert id="Tab_DoubanRank_Insert" parameterClass="BetterSite.Domain.M_DoubanRank">
+      INSERT INTO  Tab_DoubanRank  (Title)
+      VALUES (#Title#)
+    </insert>
+    <update id="Tab_DoubanRank_Update" parameterClass="BetterSite.Domain.M_DoubanRank">
+      UPDATE  Tab_DoubanRank  SET Title= #Title#
+      WHERE Id= #Id#
+    </update>
+    <delete id="Tab_DoubanRank_Delete" parameterClass="Hashtable">
+      DELETE FROM  Tab_DoubanRank  WHERE Id= #id#
+    </delete>
+    <select id="Tab_DoubanRank_Select" listClass="ArrayList" resultMap="Tab_DoubanRank_Result" parameterClass="Hashtable">
+      SELECT Id,Title,Url,CONVERT(varchar,RatingNum)RatingNum	,CONVERT(varchar,RatingPeople)RatingPeople,Category,Status,Type,
+      CONVERT(varchar,CreateDate,120)CreateDate
+      FROM Tab_DoubanRank
+      <dynamic prepend="WHERE">
+        <isNotEmpty prepend="and" property="Category">Category=#Category#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Type">Type= #Type#</isNotEmpty>
+        <isNotEmpty prepend="and" property="Status">Status= #Status#</isNotEmpty>
+      </dynamic>     
+    </select>
+  </statements>
+</sqlMap>

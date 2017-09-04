@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoubanRankDA.cs" />
     <Compile Include="BlogDA.cs" />
     <Compile Include="BaseDA.cs" />
     <Compile Include="MapperHelper.cs" />
@@ -95,6 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Maps\BlogMap.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Maps\DoubanRankMap.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

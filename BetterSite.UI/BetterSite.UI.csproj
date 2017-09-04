@@ -171,6 +171,7 @@
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\PathFormater.cs" />
     <Compile Include="Content\ueditor1_4_3_3-utf8-net\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\DoubanRankController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\SiteApiController.cs" />
     <Compile Include="Controllers\SitesController.cs" />
@@ -1481,6 +1482,7 @@
     <Content Include="Views\Blog\Details.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\About.cshtml" />
+    <Content Include="Views\DoubanRank\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

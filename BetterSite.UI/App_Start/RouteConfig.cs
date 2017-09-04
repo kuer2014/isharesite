@@ -99,6 +99,13 @@ namespace BetterSite.UI
           defaults: new { controller = "Blog", action = "Index" },
            namespaces: new string[] { "BetterSite.UI.Controllers" }
            
+      );  /// /DoubanRank/
+            routes.MapRoute(
+          name: "DoubanRank",
+          url: "douban/{desc}",
+          defaults: new { controller = "DoubanRank", action = "Index" },
+           namespaces: new string[] { "BetterSite.UI.Controllers" }
+
       );
             routes.MapRoute(
                 name: "Default",
