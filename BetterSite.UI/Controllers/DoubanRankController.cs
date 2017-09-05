@@ -17,34 +17,41 @@ namespace BetterSite.UI.Controllers
         public ActionResult Index(string desc)
         {
             desc=(desc+"").ToLower();
+            string titlePart= "豆瓣排行榜top100";
             M_DoubanRank where = new M_DoubanRank();
             where.Status = 1;
             switch (desc) {
-                case "豆瓣评分最高的图书排行榜top100":
+                case "douban-book-ratingnum-top100"://
                     where.Category = 1;where.Type = 1;
+                    titlePart = "豆瓣评分最高的图书排行榜top100";
                     break;
-                case "豆瓣评价人数最多的图书排行榜top100":
+                case "douban-book-ratingpeople-top100"://
                     where.Category = 1; where.Type = 2;
+                    titlePart = "豆瓣评价人数最多的图书排行榜top100";
                     break;
-                case "豆瓣评分最高的电影排行榜top100":
+                case "douban-movie-ratingnum-top100"://
                     where.Category = 2; where.Type = 1;
+                    titlePart = "豆瓣评分最高的电影排行榜top100";
                     break;
-                case "豆瓣评价人数最多的电影排行榜top100":
+                case "douban-movie-ratingpeople-top100"://
                     where.Category = 2; where.Type = 2;
+                    titlePart = "豆瓣评价人数最多的电影排行榜top100";
                     break;
-                case "豆瓣评分最高的音乐排行榜top100":
+                case "douban-music-ratingnum-top100"://
                     where.Category = 3; where.Type = 1;
+                    titlePart = "豆瓣评分最高的音乐排行榜top100";
                     break;
-                case "豆瓣评价人数最多的音乐排行榜top100":
+                case "douban-music-ratingpeople-top100"://
                     where.Category = 3; where.Type = 2;
+                    titlePart = "豆瓣评价人数最多的音乐排行榜top100";
                     break;
                 default:
                     break;
             }
-            ViewBag.Title = desc+ "(每周更新) - " + title;
+            ViewBag.Title = titlePart + " (每周更新) - " + title;
             //ViewBag.Title = "文章 - " + title;
-            ViewBag.Keywords = desc;
-            ViewBag.Description = desc + ",每周更新.";
+            ViewBag.Keywords = titlePart;
+            ViewBag.Description = titlePart + "优站分享每周整理豆瓣图书榜，豆瓣电影榜，豆瓣音乐榜，每个榜单分为评分最高top100和评价人数最多top100。每周更新，助您找到想要的内容。";
             var list = rankBO.QueryForList(where).Cast<M_DoubanRank>().ToList();
             if (where.Type == 2)
             {
