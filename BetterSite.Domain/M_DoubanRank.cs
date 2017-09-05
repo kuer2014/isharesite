@@ -20,8 +20,8 @@ namespace BetterSite.Domain
         private int m_Id;
         private string m_Title;
         private string m_Url;
-        private string m_RatingNum;
-        private string m_RatingPeople;
+        private decimal m_RatingNum;
+        private int m_RatingPeople;
         private int m_Category;
         private string m_CreateDate;
         private int m_Status;        
@@ -126,7 +126,7 @@ namespace BetterSite.Domain
             }
         }
 
-        public string RatingNum
+        public decimal RatingNum
         {
             get
             {
@@ -139,7 +139,7 @@ namespace BetterSite.Domain
             }
         }
 
-        public string RatingPeople
+        public int RatingPeople
         {
             get
             {

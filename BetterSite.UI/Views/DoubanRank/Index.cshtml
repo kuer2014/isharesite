@@ -1,54 +1,115 @@
 ﻿@model IList<BetterSite.Domain.M_DoubanRank>
-   <style>
-       .douban a {
-       
-        color:#62bee3; text-decoration:none;
-       }
-       .douban a:hover { color:#555; }
-       .douban li {
-       margin-bottom:10px;
-       }
-       .douban h3 {
-       margin:5px;
-       }
-       .douban span {
-       margin-right:10px;
-       }
-   </style>
+<style>
+    .douban a {
+        color: #62bee3;
+        text-decoration: none;
+    }
+
+        .douban a:hover {
+            color: #555;
+        }
+
+    .douban li {
+        margin-bottom: 10px;
+    }
+
+    .douban h2 {
+        margin-top: 20px;
+    }
+
+    .douban h3 {
+        margin: 15px 5px 5px 5px;
+    }
+
+    .douban span {
+        margin-right: 10px;
+    }
+
+    .douban .xgbd {
+        font-size: 14px;
+    }
+</style>
 <div class="article douban">
+    <div>相关榜单：</div>
+    <ol>
+        <li><a class="xgbd" href="/douban/豆瓣评分最高的图书排行榜top100" title="豆瓣评分最高的图书排行榜top100,每周更新" target="_self">豆瓣评分最高的图书排行榜 top100</a></li>
+        <li><a class="xgbd" href="/douban/豆瓣评价人数最多的图书排行榜top100" title="豆瓣评价人数最多的图书排行榜top100,每周更新" target="_self">豆瓣评价人数最多的图书排行榜 top100</a></li>
+        <li><a class="xgbd" href="/douban/豆瓣评分最高的电影排行榜top100" title="豆瓣评分最高的电影排行榜top100,每周更新" target="_self">豆瓣评分最高的电影排行榜 top100</a></li>
+        <li><a class="xgbd" href="/douban/豆瓣评价人数最多的电影排行榜top100" title="豆瓣评价人数最多的电影排行榜top100,每周更新" target="_self">豆瓣评价人数最多的电影排行榜 top100</a></li>
+        <li><a class="xgbd" href="/douban/豆瓣评分最高的音乐排行榜top100" title="豆瓣评分最高的音乐排行榜top100,每周更新" target="_self">豆瓣评分最高的音乐排行榜 top100</a></li>
+        <li><a class="xgbd" href="/douban/豆瓣评价人数最多的音乐排行榜top100" title="豆瓣评价人数最多的音乐排行榜top100,每周更新" target="_self">豆瓣评价人数最多的音乐排行榜 top100</a></li>
+    </ol>
     <h2>@ViewBag.Title </h2>
-   
-       
-            @if (Model.Count > 0)
+    @if (Model.Count > 0)
             {
-                <span>更新时间：@Model[0].CreateDate</span>
-                <p>
-                    <ol>
-                        @for (int i = 0; i < Model.Count; i++)
-                        {
-                            var item = Model[i];
-
-                            <li>
-                                <div><b>@(i + 1)</b></div>
-                                <div>
-                                    <h3>
-                                        <a href="@item.Url" title="@item.Title" target="_blank">《@Html.DisplayFor(modelItem => item.Title)》</a>
-                                    </h3>
-                                </div>
-                                <span>
-                                    评分：  @Html.DisplayFor(modelItem => item.RatingNum) 
-                                </span>
-                                <span>
-                                     评价人数： @Html.DisplayFor(modelItem => item.RatingPeople) 
-                                </span>
-                                <div>
-                                    链接：@Html.DisplayFor(modelItem => item.Url)
-                                </div>
-                            </li>
-                        }
-                    </ol>
-                </p>
+        <span>更新时间：@Model[0].CreateDate</span>
+        <p>
+            @if (Model[0].Type == 1)
+            {
+                <div><strong>评分最高 top100</strong></div>
             }
+            else
+            {
+                <div><strong>评价人数最多 top100</strong></div>
+            }
+            <ol>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    var item = Model[i];
+                    <li>
+                        @*<div><b>@(i + 1)</b></div>*@
+                        <div>
+                            <h3>
+                                @(i + 1). <a href="@item.Url" title="点击查看《@item.Title》豆瓣详情" target="_blank">《@Html.DisplayFor(modelItem => item.Title)》</a>
+                            </h3>
+                        </div>
+                        @if (item.Type == 1)
+                        {
+                            <div>
+                                <span>
+                                    评分：  <b>@item.RatingNum.ToString("0.0")</b>
+                                </span>
+                                <span>
+                                    评价人数：<b> @Html.DisplayFor(modelItem => item.RatingPeople)</b>
+                                </span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <span>
+                                    评价人数：<b> @Html.DisplayFor(modelItem => item.RatingPeople)</b>
+                                </span>
+                                <span>
+                                    评分：  <b>@item.RatingNum.ToString("0.0")</b>
+                                </span>
+                            </div>
+                        }
+                        <div>
+                            链接：@Html.DisplayFor(modelItem => item.Url)
+                        </div>
+                    </li>
+                }
+            </ol>
+        </p>
+    }
+        <div>相关榜单：</div>
+        <ol>
+            <li><a class="xgbd" href="/douban/豆瓣评分最高的图书排行榜top100" title="豆瓣评分最高的图书排行榜top100,每周更新" target="_self">豆瓣评分最高的图书排行榜 top100</a></li>
+            <li><a class="xgbd" href="/douban/豆瓣评价人数最多的图书排行榜top100" title="豆瓣评价人数最多的图书排行榜top100,每周更新" target="_self">豆瓣评价人数最多的图书排行榜 top100</a></li>
+            <li><a class="xgbd" href="/douban/豆瓣评分最高的电影排行榜top100" title="豆瓣评分最高的电影排行榜top100,每周更新" target="_self">豆瓣评分最高的电影排行榜 top100</a></li>
+            <li><a class="xgbd" href="/douban/豆瓣评价人数最多的电影排行榜top100" title="豆瓣评价人数最多的电影排行榜top100,每周更新" target="_self">豆瓣评价人数最多的电影排行榜 top100</a></li>
+            <li><a class="xgbd" href="/douban/豆瓣评分最高的音乐排行榜top100" title="豆瓣评分最高的音乐排行榜top100,每周更新" target="_self">豆瓣评分最高的音乐排行榜 top100</a></li>
+            <li><a class="xgbd" href="/douban/豆瓣评价人数最多的音乐排行榜top100" title="豆瓣评价人数最多的音乐排行榜top100,每周更新" target="_self">豆瓣评价人数最多的音乐排行榜 top100</a></li>
+        </ol> 
+</div>
+@section Scripts
+    {
+    <script>
+        jQuery(function () {
+            jQuery('li a[href="' + decodeURI(location.pathname) + '"]').removeAttr('href').css('color', '#000');
+        })
+    </script>
+}
 
-                
-    </div>
+

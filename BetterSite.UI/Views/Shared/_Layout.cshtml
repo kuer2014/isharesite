@@ -8,6 +8,7 @@
     <meta name="keywords" content="@ViewBag.Keywords" />
     <meta name="description" content="@ViewBag.Description" />
     <link href="~/Content/style.css" rel="stylesheet" />
+    <link href="~/Content/top/top.css" rel="stylesheet" />
     <style>
          h2 {
              font: normal 18px/1em Arial, Helvetica, sans-serif;
@@ -159,12 +160,14 @@
             </div>
         </div>
         <!--备用-->
+        <div id="top"></div>
     </div>
     <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "2", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "slide": { "type": "slide", "bdImg": "2", "bdPos": "right", "bdTop": "200.5" } }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
     @*<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"0","bdPos":"right","bdTop":"200.5"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>*@
  @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/Common.js"></script>
     @RenderSection("scripts", required: false)
+    <script src="~/Content/top/top.js"></script>
     <script>
         jQuery(function () {
             ///活动菜单

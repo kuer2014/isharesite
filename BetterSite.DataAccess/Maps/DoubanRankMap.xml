@@ -27,7 +27,7 @@
       DELETE FROM  Tab_DoubanRank  WHERE Id= #id#
     </delete>
     <select id="Tab_DoubanRank_Select" listClass="ArrayList" resultMap="Tab_DoubanRank_Result" parameterClass="Hashtable">
-      SELECT Id,Title,Url,CONVERT(varchar,RatingNum)RatingNum	,CONVERT(varchar,RatingPeople)RatingPeople,Category,Status,Type,
+      SELECT Id,Title,Url,RatingNum	,RatingPeople,Category,Status,Type,
       CONVERT(varchar,CreateDate,120)CreateDate
       FROM Tab_DoubanRank
       <dynamic prepend="WHERE">

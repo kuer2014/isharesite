@@ -1,0 +1,9 @@
+/*reset css*/
+/**{margin:0;padding:0;list-style:none;border:none;}
+body{height:2000px;background:#555;font-family:'microsoft yahei';}*/
+/*main css*/
+.izl-rmenu{position:fixed; left:50%; margin-left:380px; bottom:10px; padding-bottom:20px; z-index:999; }
+.izl-rmenu .btn{width:72px; height:73px; margin-bottom:1px; cursor:pointer; position:relative;}
+
+.izl-rmenu .btn-top{background:url(../images/r_top.png) 0px 0px no-repeat;  display:none;}
+.izl-rmenu .btn-top:hover{background-color:#62bee3;}
