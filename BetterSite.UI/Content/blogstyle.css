@@ -54,7 +54,7 @@ padding:20px 50px;
 }
 /*博客列表页*/
 .list {
-     width: 430px;
+     width: 500px;
     margin: 20px auto 10px auto;
      padding-bottom:60px;/*padding等于footer的高度*/
 }
@@ -81,7 +81,7 @@ ul li {
         }
       /*首页-目标*/
 .mubiao {
-width:800px;
+width:500px;
  margin: 0 auto 10px auto;
 }
     .mubiao .title {
