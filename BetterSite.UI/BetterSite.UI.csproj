@@ -177,6 +177,7 @@
     <Compile Include="Controllers\SitesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
+    <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Controllers\TypesController.cs" />
     <Compile Include="Filter\AuthorizeFilterAttribute.cs" />
     <Compile Include="Filter\CustomAuthAttribute.cs" />
@@ -543,6 +544,7 @@
     <Content Include="Images\SiteScreen_48px\SITE1499144490898.jpg" />
     <Content Include="Images\SiteScreen_48px\SITE1499147833272.jpg" />
     <Content Include="Images\SiteScreen_48px\SITE1499154306416.jpg" />
+    <Content Include="Scripts\jquery.cookie.js" />
     <Content Include="TestHtml\life.html" />
     <Content Include="TestHtml\seoMifeng\list.html" />
     <Content Include="TestHtml\svgtest.html" />
@@ -1486,6 +1488,7 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\About.cshtml" />
     <Content Include="Views\DoubanRank\Index.cshtml" />
+    <Content Include="Views\Tools\Translate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
