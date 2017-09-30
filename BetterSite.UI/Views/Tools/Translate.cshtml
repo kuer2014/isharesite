@@ -7,81 +7,120 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>双语阅读助手</title>
+    <title>英语文章阅读助手,读英文文章学单词的在线工具,帮你学好英语</title>
+    <meta name="keywords" content="英语文章阅读助手,读英文文章学单词,中英双语阅读,在线背单词工具,在线学英语" />
+    <meta name="description" content="英语文章阅读助手,读英文文章学单词的在线工具。双击单词选中,自动显示单词解释、相关词组和短语。可添加单词到生词本,方便保存到本地。" />
+
     <link href="~/Content/bootstrap_min.css" rel="stylesheet" />
+    <style>
+        .panel-compact {
+        margin:0;
+        padding:0;
+        }
+          .panel-compact .panel-body,
+          .panel-newword .panel-body {
+        margin:0;
+        padding:0;
+        }
+        #newwords {
+            margin:0px;
+        }#newwords li {
+            padding-bottom:0px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
 
         <div class="page-header">
-            <h1>双语阅读助手</h1>
-            <p class="lead">提取生词、词组、短语</p>
+            <h1>英语文章阅读助手,帮你学好英语</h1>
+            <p class="lead">提取英文文章的生词、词组、短语</p>
         </div>
-        <h3>翻译助手</h3>
-        <p>双击单词 <strong>自动选中，并显示单词解释、相关词组和短语</strong>可添加单词到生词本，并保存到本地</p>
+        <h3>学英语小工具</h3>
+        <p><strong>双击单词选中，自动显示单词解释、相关词组和短语。可添加单词到生词本，方便保存到本地。</strong></p>
         <div class="row">
             <div class="col-md-6">
-                <div class="panel panel-default" style="margin-bottom:0px;">
+                <div class="panel panel-default">
                     <div class="panel-heading">英文文章</div>
                     <div class="panel-body" style="padding:0;">
-                        <textarea id="source" class="form-control" rows="15" style="border:0;">
-                            Only when he finished his homework did he realize that he had made a mistake. People say that money cannot buy happiness. This was true for Howard Hughes.
-                            He was one of the richest and most powerful men of his time.
-                        </textarea>
+                        <textarea id="source" class="form-control" rows="15" style="border:0;">Copy the English articles you are going to read here</textarea>
                     </div>
                 </div>
                 <div>
-                    <span>查询历史:</span>
-                    <span id="searchhistory"></span>
+                    <a class="btn btn-default center-block" href="#" role="button" onclick="BuildFullTrans();">显示全文翻译</a>
                 </div>
-                <div class="panel panel-default" style="margin-top:10px;">
-                    <div class="panel-heading">全文翻译</div>
-                    <div class="panel-body">
-
-
+                <div class="panel panel-default">
+                    @*<div class="panel-heading">全文翻译</div>*@
+                    <div class="panel-body" id="fulltrans">
+                        功能正在开发中...
                     </div>
                 </div>
             </div>
+
             <div class="col-md-3">
-                <div class="panel panel-default">
+
+                <div class="panel panel-default" style="margin-bottom:5px;">
                     <div class="panel-heading">单词解释</div>
+                    <div style="float:right">
+                        <small id="addmsg"></small>
+                        <a class="btn btn-default btn-xs" href="#" role="button" onclick="AddNewWord();">+ 生词本</a>
+                    </div>
                     <div class="panel-body" id="wordmeans">
 
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">相关词组和短语</div>
-                    <div class="panel-body" id="wordsuggst">
-                     
+                <div class="panel panel-compact">
+                    <div class="panel-body">
+                        <small>历史记录: </small>
+                        <span id="searchhistory"></span>
                     </div>
+                    @*<span class="" id="searchhistory" style="white-space: nowrap;"></span>*@
                 </div>
             </div>
             <div class="col-md-3">
-
                 <div class="panel panel-default">
-                    <div class="panel-heading">生词本</div>
-                    <div class="panel-body">
-                        Panel content<br />
-                        People say that money cannot buy happiness. This was true for Howard Hughes. <br />
-                        He was one of the richest and most powerful men of his time.
+                    <div class="panel-heading">相关词组和短语</div>
+                    <div class="panel-body" id="wordsuggst">
+
                     </div>
                 </div>
             </div>
         </div>
-    </div> <!-- /container -->
-    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery.cookie.js"></script>
-    <script type="text/javascript">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default panel-newword">
+                    <div class="panel-heading">生词本<small> ( 依赖缓存，默认保存7天，可复制到本地文件保存，打印 )</small></div>
+                    <div class="panel-body">
+                        <ul class="list-group" id="newwords"></ul>
+                    </div>
+                    <span> <a class="btn btn-default btn-xs" style="float:right" href="#" role="button" onclick="ClearNewWord();">清空生词本</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-4">
+                        <footer class="blog-footer">
+                            <p> 阅读助手2017</p>
+                        </footer>      
+            </div>
+        </div>
+            </div> <!-- /container -->
+          
+            <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            <script src="~/Scripts/jquery.cookie.js"></script>
+            <script type="text/javascript">
         $(function () {
             //if ($.cookie('d')) {
             //    var cachewords = $.cookie('d').split(',');
             //    $('#searchhistory').html(cachewords.join());
             //}
             BuildHistory();
+            AddNewWord();
             $("#source").dblclick(Search) ;
         })
-       // var word = '';     
+       // var word = '';
 
         function Search(wordtxt) {
             if (wordtxt) {
@@ -90,7 +129,7 @@
                 //word=document.selection.createRange().text;
                 if (!(typeof wordtxt == 'string'))
                     wordtxt = document.getSelection().toString();
-                
+
                 //word= document.execCommand('Copy');
                 word = wordtxt.toLocaleLowerCase().trim();
                 if (word) {
@@ -118,13 +157,22 @@
                     if (data && data.errno == 0) {
                         var baseInfo = data.baesInfo;
                         if (baseInfo.symbols && baseInfo.symbols.length > 0) {//成功查到
+
+                            var wordtxtatt = [];////追加到生词本备用
                             //1
                             wordStrArr.push('<div><h4>' + baseInfo.word_name + '</h4> </div>');
+                            wordtxtatt.push('<b>' + baseInfo.word_name + '</b> ');
+
                             //2
                             var symbol = baseInfo.symbols[0];
                             wordStrArr.push('<div>英: [<b>' + symbol.ph_en + '</b>] 美: [<b>' + symbol.ph_am + '</b>] </div>');
+                            wordtxtatt.push('英: [<b>' + symbol.ph_en + '</b>] 美: [<b>' + symbol.ph_am + '</b>] ');
                             //3
-                            wordStrArr.push('<div>高频词: <b>' + (baseInfo.frequence == undefined ? 0 : baseInfo.frequence) + '/5</b>');
+                            if (baseInfo.frequence && baseInfo.frequence>0){
+                            wordStrArr.push('<div>高频词: <b>' + baseInfo.frequence + '/5</b>');
+                            wordtxtatt.push('高频词: <b>' + baseInfo.frequence + '/5</b>');
+                            }
+                            //4
                             var wordTag = baseInfo.word_tag;
                             if (wordTag && wordTag.length > 0) {
                                 var tagStr = ' ';
@@ -133,22 +181,45 @@
                                     tagStr += tagDic[ele] + ' ';
                                 })
                                 wordStrArr.push(tagStr);
+                                wordtxtatt.push(tagStr);
                             }
                             wordStrArr.push('</div>');
-                            //4
+                            //5解释
                             if (symbol.parts && symbol.parts.length > 0) {
                                 for (var i = 0; i < symbol.parts.length; i++) {
                                     var part = symbol.parts[i]
                                     wordStrArr.push('<div><b>' + part.part + '</b> ' + part.means.toString() + '</div>');
+                                    wordtxtatt.push('<b>' + part.part + '</b> ' + part.means.toString() + ' ');
                                 }
                             }
-                            //5
+                            //6时态
                             var exchange = baseInfo.exchange;
                             if (exchange) {
-                                wordStrArr.push('<div>过去式： ' + exchange.word_past + ' 过去分词： ' + exchange.word_past + ' 现在分词： ' + exchange.word_ing + ' 第三人称单数： ' + exchange.word_third + '</div>');
+                                wordStrArr.push('<div>');
+                                if (exchange.word_past && exchange.word_past.length>0) {
+                                    wordStrArr.push('过去式： ' + exchange.word_past);
+                                    wordtxtatt.push('过去式： ' + exchange.word_past);
+                                }
+                                if (exchange.word_past && exchange.word_past.length > 0) {
+                                    wordStrArr.push('过去分词： ' + exchange.word_past);
+                                    wordtxtatt.push('过去分词： ' + exchange.word_past);
+                                }
+                                if (exchange.word_ing && exchange.word_ing.length > 0) {
+                                    wordStrArr.push('现在分词： ' + exchange.word_ing);
+                                    wordtxtatt.push('现在分词： ' + exchange.word_ing);
+                                }
+                                if (exchange.word_third && exchange.word_third.length > 0) {
+                                    wordStrArr.push('第三人称单数： ' + exchange.word_third);
+                                    wordtxtatt.push('第三人称单数： ' + exchange.word_third);
+                                }
+                                wordStrArr.push('</div>');
+                                //wordStrArr.push('<div>过去式： ' + exchange.word_past + ' 过去分词： ' + exchange.word_past + ' 现在分词： ' + exchange.word_ing + ' 第三人称单数： ' + exchange.word_third + '</div>');
+                                //wordtxtatt.push('过去式： ' + exchange.word_past + ' 过去分词： ' + exchange.word_past + ' 现在分词： ' + exchange.word_ing + ' 第三人称单数： ' + exchange.word_third + ' ');
                             }
                             //追加单词解释
                             $('#wordmeans').html(wordStrArr.join(''));
+                            //追加到生词本备用
+                            window.document.wordtxt = wordtxtatt.join('');
 
                         } else {
                             $('#wordmeans').html('没有找到单词：' + word + '，请检查拼写是否正确。')
@@ -193,7 +264,7 @@
         }
         //历史查询记录
         function BuildHistory(word) {
-            debugger;
+           // debugger;
             { //$.data()用法
             //if ($('#searchhistory').data('d') == undefined)
             //    var words = [];
@@ -225,11 +296,92 @@
             $(words).each(function (i, ele) {
                 hishtml.push('<span><a href="#" onclick="Search(\'' + ele + '\')" title="点击查询">' + ele + '</a></span>')
             });
-            $('#searchhistory').html(hishtml.join(' , '));
+            $('#searchhistory').html(hishtml.join(', '));
 
         }
-      
-    </script>
+        //加入生词本
+        function AddNewWord() {
+
+            //debugger;
+            if (!$.cookie('nd') || $.cookie('nd') == 'null')
+                var words = [];
+            else
+                var words = $.cookie('nd').split('||');
+            var wordtxt = window.document.wordtxt;
+            if (wordtxt) {
+                var wordindex = jQuery.inArray(wordtxt, words);
+                if (wordindex >= 0) {
+                    //已存在
+                    $('#addmsg').text('已存在');
+                    //words.splice(wordindex, 1);
+                    //words.unshift(word);
+                }
+                else {
+                    //words.push(wordtxt);
+                    words.unshift(wordtxt);
+                    words.splice(10, 1);
+                }
+            }
+            $.cookie('nd', words.join('||'), { expires: 7 });
+            var newwordhtml = [];
+            $(words).each(function (i, ele) {
+                newwordhtml.push('<li class="list-group-item">' + (words.length - i) + '. <span>' + ele + '</span></li>')
+            });
+            $('#newwords').html(newwordhtml.join(''));
+
+        }
+        //清空生词本
+        function ClearNewWord() {
+            $('#newwords').html('');
+            $.cookie('nd', null); //删除
+        }
+                //显示全文翻译
+        function BuildFullTrans() {
+            alert('功能正在开发中...');
+            return false;
+            //
+            var fulltext = $('#source').val();
+            if (fulltext)
+              
+            $.ajax({
+
+                'url': 'http://fanyi.baidu.com/v2transapi',//'http://fy.iciba.com/ajax.php?a=fy',
+                'async':false,
+                'type': 'POST',
+                'dataType': 'jsonp',
+                'data':{
+                    from:'en',
+                    to:'zh',
+                    query: fulltext,
+                    transtype:'translang',
+                    simple_means_flag:3
+                },
+                //{
+                //    f: 'auto',
+                //    t:'auto',
+                //    w: fulltext
+                //},
+                'success': function (data) {
+                    //debugger;
+                    if (data && data.status == 1) {
+                        var content = data.content;
+                        if (content && content.ciba_out) {                      
+                            $('#fulltrans').html(content.ciba_out);
+                        } else {
+                            $('#fulltrans').html(wordStrArr.join('没有找到相关内容。'));
+                        }
+                    }
+                }
+                , 'error': function (data) {
+
+                    console.log(data);
+                }, 'complete': function (data) {
+
+                    console.log(data);
+                }
+            });
+        }
+            </script>
 
 
 </body>
