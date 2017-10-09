@@ -27,21 +27,24 @@
         }#newwords li {
             padding-bottom:0px;
         }
+        .blog-footer {
+        margin:20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
 
         <div class="page-header">
-            <h1>英语文章阅读助手,帮你学好英语</h1>
-            <p class="lead">提取英文文章的生词、词组、短语</p>
+            <h1>英语文章阅读助手</h1>
+            <p class="lead">读英语文章学单词的在线工具，帮你学好英语</p>
         </div>
-        <h3>学英语小工具</h3>
-        <p><strong>双击单词选中，自动显示单词解释、相关词组和短语。可添加单词到生词本，方便保存到本地。</strong></p>
+        <h3>提取英语文章的生词、词组、短语</h3>
+        <p>双击单词选中，自动显示单词解释、相关词组和短语。可添加单词到生词本，方便保存到本地。</p>
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading">英文文章</div>
+                    <div class="panel-heading">英语文章</div>
                     <div class="panel-body" style="padding:0;">
                         <textarea id="source" class="form-control" rows="15" style="border:0;">Copy the English articles you are going to read here</textarea>
                     </div>
@@ -90,7 +93,7 @@
             <div class="col-md-12">
 
                 <div class="panel panel-default panel-newword">
-                    <div class="panel-heading">生词本<small> ( 依赖缓存，默认保存7天，可复制到本地文件保存，打印 )</small></div>
+                    <div class="panel-heading">生词本<small> ( 依赖缓存，默认保存7天。可选择文字复制到本地文件保存，打印 )</small></div>
                     <div class="panel-body">
                         <ul class="list-group" id="newwords"></ul>
                     </div>
@@ -101,7 +104,8 @@
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
                         <footer class="blog-footer">
-                            <p> 阅读助手2017</p>
+                            <p> <a href="http://www.isharesite.com/tools/translate" title="打开英语文章阅读助手">英语文章阅读助手2017</a>｜<a href="Mailto:kuer-2006@163.com">给我发邮件</a> </p>
+
                         </footer>      
             </div>
         </div>
@@ -167,23 +171,7 @@
                             var symbol = baseInfo.symbols[0];
                             wordStrArr.push('<div>英: [<b>' + symbol.ph_en + '</b>] 美: [<b>' + symbol.ph_am + '</b>] </div>');
                             wordtxtatt.push('英: [<b>' + symbol.ph_en + '</b>] 美: [<b>' + symbol.ph_am + '</b>] ');
-                            //3
-                            if (baseInfo.frequence && baseInfo.frequence>0){
-                            wordStrArr.push('<div>高频词: <b>' + baseInfo.frequence + '/5</b>');
-                            wordtxtatt.push('高频词: <b>' + baseInfo.frequence + '/5</b>');
-                            }
-                            //4
-                            var wordTag = baseInfo.word_tag;
-                            if (wordTag && wordTag.length > 0) {
-                                var tagStr = ' ';
-                                var tagDic = { '0': '考研', '1': 'CET6', '2': 'CET4', '3': 'GRE', '4': 'TOEFL', '5': 'IELTS' };
-                                $(wordTag).each(function (i, ele) {
-                                    tagStr += tagDic[ele] + ' ';
-                                })
-                                wordStrArr.push(tagStr);
-                                wordtxtatt.push(tagStr);
-                            }
-                            wordStrArr.push('</div>');
+                         
                             //5解释
                             if (symbol.parts && symbol.parts.length > 0) {
                                 for (var i = 0; i < symbol.parts.length; i++) {
@@ -198,28 +186,50 @@
                                 wordStrArr.push('<div>');
                                 if (exchange.word_past && exchange.word_past.length>0) {
                                     wordStrArr.push('过去式： ' + exchange.word_past);
+                                    wordStrArr.push('<br/>');
                                     wordtxtatt.push('过去式： ' + exchange.word_past);
+                                    
                                 }
                                 if (exchange.word_past && exchange.word_past.length > 0) {
                                     wordStrArr.push('过去分词： ' + exchange.word_past);
+                                    wordStrArr.push('<br/>');
                                     wordtxtatt.push('过去分词： ' + exchange.word_past);
                                 }
                                 if (exchange.word_ing && exchange.word_ing.length > 0) {
                                     wordStrArr.push('现在分词： ' + exchange.word_ing);
+                                    wordStrArr.push('<br/>');
                                     wordtxtatt.push('现在分词： ' + exchange.word_ing);
                                 }
                                 if (exchange.word_third && exchange.word_third.length > 0) {
                                     wordStrArr.push('第三人称单数： ' + exchange.word_third);
+                                    wordStrArr.push('<br/>');
                                     wordtxtatt.push('第三人称单数： ' + exchange.word_third);
                                 }
                                 wordStrArr.push('</div>');
                                 //wordStrArr.push('<div>过去式： ' + exchange.word_past + ' 过去分词： ' + exchange.word_past + ' 现在分词： ' + exchange.word_ing + ' 第三人称单数： ' + exchange.word_third + '</div>');
                                 //wordtxtatt.push('过去式： ' + exchange.word_past + ' 过去分词： ' + exchange.word_past + ' 现在分词： ' + exchange.word_ing + ' 第三人称单数： ' + exchange.word_third + ' ');
                             }
+                            //3
+                            if (baseInfo.frequence && baseInfo.frequence > 0) {
+                                wordStrArr.push('<div>高频词: <b>' + baseInfo.frequence + '/5</b>');
+                                wordtxtatt.push('高频词: <b>' + baseInfo.frequence + '/5</b>');
+                            }
+                            //4
+                            var wordTag = baseInfo.word_tag;
+                            if (wordTag && wordTag.length > 0) {
+                                var tagStr = ' ';
+                                var tagDic = { '0': '考研', '1': 'CET6', '2': 'CET4', '3': 'GRE', '4': 'TOEFL', '5': 'IELTS' };
+                                $(wordTag).each(function (i, ele) {
+                                    tagStr += tagDic[ele] + ' ';
+                                })
+                                wordStrArr.push(tagStr);
+                                wordtxtatt.push(tagStr);
+                            }
+                            wordStrArr.push('</div>');
                             //追加单词解释
                             $('#wordmeans').html(wordStrArr.join(''));
                             //追加到生词本备用
-                            window.document.wordtxt = wordtxtatt.join('');
+                            window.document.wordtxt = wordtxtatt.join(' | ');
 
                         } else {
                             $('#wordmeans').html('没有找到单词：' + word + '，请检查拼写是否正确。')
@@ -312,11 +322,13 @@
                 var wordindex = jQuery.inArray(wordtxt, words);
                 if (wordindex >= 0) {
                     //已存在
-                    $('#addmsg').text('已存在');
+                    $('#addmsg').text('已添加');
                     //words.splice(wordindex, 1);
                     //words.unshift(word);
                 }
                 else {
+                    //添加成功
+                    $('#addmsg').text('添加成功');
                     //words.push(wordtxt);
                     words.unshift(wordtxt);
                     words.splice(10, 1);
