@@ -29,6 +29,7 @@
         }
         .blog-footer {
         margin:20px;
+       
         }
     </style>
 </head>
@@ -36,11 +37,12 @@
     <div class="container">
 
         <div class="page-header">
-            <h1>英语文章阅读助手</h1>
+            <a class="title" href="http://www.isharesite.com/tools/translate"><h1>英语文章阅读助手</h1></a>
+            
             <p class="lead">读英语文章学单词的在线工具，帮你学好英语</p>
         </div>
         <h3>提取英语文章的生词、词组、短语</h3>
-        <p>双击单词选中，自动显示单词解释、相关词组和短语。可添加单词到生词本，方便保存到本地。</p>
+        <p>双击或选择单词，自动显示单词解释、相关词组和短语。可添加单词到生词本，方便保存到本地。</p>
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
@@ -48,8 +50,9 @@
                     <div class="panel-body" style="padding:0;">
                         <textarea id="source" class="form-control" rows="15" style="border:0;">Copy the English articles you are going to read here</textarea>
                     </div>
+                    <span> <a class="btn btn-default btn-sm" style="float:right" href="javascript:ClearEnDoc();" role="button" >清空文章内容</a></span>
                 </div>
-                <div>
+              <!--  <div>
                     <a class="btn btn-default center-block" href="#" role="button" onclick="BuildFullTrans();">显示全文翻译</a>
                 </div>
                 <div class="panel panel-default">
@@ -59,6 +62,7 @@
                         @*<iframe src="http://fy.iciba.com/"></iframe>*@
                     </div>
                 </div>
+                  -->
             </div>
 
             <div class="col-md-3">
@@ -67,7 +71,7 @@
                     <div class="panel-heading">单词解释</div>
                     <div style="float:right">
                         <small id="addmsg"></small>
-                        <a class="btn btn-default btn-xs" href="#" role="button" onclick="AddNewWord();">+ 生词本</a>
+                        <a class="btn btn-default btn-xs" href="javascript:AddNewWord();" role="button" >+ 生词本</a>
                     </div>
                     <div class="panel-body" id="wordmeans">
 
@@ -98,7 +102,7 @@
                     <div class="panel-body">
                         <ul class="list-group" id="newwords"></ul>
                     </div>
-                    <span> <a class="btn btn-default btn-xs" style="float:right" href="#" role="button" onclick="ClearNewWord();">清空生词本</a></span>
+                    <span> <a class="btn btn-default btn-sm" style="float:right" href="javascript:ClearNewWord();" role="button" >清空生词本</a></span>
                 </div>
             </div>
         </div>
@@ -123,7 +127,8 @@
             //}
             BuildHistory();
             AddNewWord();
-            $("#source").dblclick(Search) ;
+            //$("#source").dblclick(Search);
+            $("#source").select(Search);
         })
        // var word = '';
 
@@ -137,7 +142,7 @@
 
                 //word= document.execCommand('Copy');
                 word = wordtxt.toLocaleLowerCase().trim();
-                if (word) {
+                if (word && word.length <= 30) {                    
                     //追加单词解释
                     BuildMeans(word);
                     // 追加单词联想（词组短语等）
@@ -233,11 +238,12 @@
                             window.document.wordtxt = wordtxtatt.join(' | ');
 
                         } else {
-                            $('#wordmeans').html('没有找到单词：' + word + '，请检查拼写是否正确。')
+                            $('#wordmeans').html('没有找到单词：' + word + '，请检查拼写是否正确。');
                         }
                     }
                     else {
-                        $('#wordmeans').html(data.errmsg)
+                       // $('#wordmeans').html(data.errmsg)
+                        $('#wordmeans').html('没有找到单词：' + word + '，请检查拼写是否正确。');
                     }
                 }
             });
@@ -265,10 +271,17 @@
                                         wordStrArr.push('<div><b>' + word.key + '</b> ' + word.means[0].means.toString() + '</div>');
                                 }
                             }
-                            $('#wordsuggst').html(wordStrArr.join(''));
+                            if (wordStrArr.length > 0){
+                                $('#wordsuggst').html(wordStrArr.join(''));
+                            }
+                            else {
+                                $('#wordsuggst').html('没有找到相关词组或短语。');
+                            }
                         } else {
-                            $('#wordsuggst').html(wordStrArr.join('没有找到相关内容。'));
+                            $('#wordsuggst').html('没有找到相关词组或短语。');
                         }
+                    } else {
+                        $('#wordsuggst').html('没有找到相关词组或短语。');
                     }
                 }
             });
@@ -305,14 +318,13 @@
             $.cookie('d', words.join(), { expires: 7 });
             var hishtml = [];
             $(words).each(function (i, ele) {
-                hishtml.push('<span><a href="#" onclick="Search(\'' + ele + '\')" title="点击查询">' + ele + '</a></span>')
+                hishtml.push('<span><a href="javascript:Search(\'' + ele + '\')" title="点击查询">' + ele + '</a></span>')
             });
             $('#searchhistory').html(hishtml.join(', '));
 
         }
         //加入生词本
-        function AddNewWord() {
-
+        function AddNewWord() {         
             //debugger;
             if (!$.cookie('nd') || $.cookie('nd') == 'null')
                 var words = [];
@@ -323,7 +335,7 @@
                 var wordindex = jQuery.inArray(wordtxt, words);
                 if (wordindex >= 0) {
                     //已存在
-                    $('#addmsg').text('已添加');
+                    $('#addmsg').text('已存在');
                     //words.splice(wordindex, 1);
                     //words.unshift(word);
                 }
@@ -334,6 +346,12 @@
                     words.unshift(wordtxt);
                     words.splice(10, 1);
                 }
+                $('#addmsg').fadeIn();
+                setTimeout(function () {
+                    $('#addmsg').fadeOut(2000);
+                   
+                }, 2000);
+                //$('#addmsg').text(' ');
             }
             $.cookie('nd', words.join('||'), { expires: 7 });
             var newwordhtml = [];
@@ -341,12 +359,23 @@
                 newwordhtml.push('<li class="list-group-item">' + (words.length - i) + '. <span>' + ele + '</span></li>')
             });
             $('#newwords').html(newwordhtml.join(''));
-
+           
+        }
+        //清空英文文章
+        function ClearEnDoc() {
+            $('#source').val('');
+           
         }
         //清空生词本
         function ClearNewWord() {
-            $('#newwords').html('');
-            $.cookie('nd', null); //删除
+            if (confirm("确定清空生词本吗？")) {
+                $('#newwords').html('');
+                $.cookie('nd', null); //删除
+            }
+            else {
+                return;
+            }
+          
         }
                 //显示全文翻译
         function BuildFullTrans() {

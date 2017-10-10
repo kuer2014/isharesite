@@ -39,6 +39,10 @@
          .content .mainbar {
              padding-left: 10px;
          }
+        .content .gadget .origiapp div{
+        margin:10px;
+        font-size:13px;
+        }
     </style>
 </head>
 <body>
@@ -64,14 +68,15 @@
                 </div>
                 <div class="sidebar">
                     @*<div class="searchform">
-                            <form id="formsearch" name="formsearch" method="get" action="/Sites/@TempData["TypeCode"]">
-                                <span><input name="keyword" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
-                                <input src="~/Content/images/search_btn.gif" class="button_search" type="image" />
-                            </form>
-                        </div>*@
+                <form id="formsearch" name="formsearch" method="get" action="/Sites/@TempData["TypeCode"]">
+                    <span><input name="keyword" class="editbox_search" id="editbox_search" maxlength="80" placeholder="搜索站点名称/URL..." type="text" /></span>
+                    <input src="~/Content/images/search_btn.gif" class="button_search" type="image" />
+                </form>
+            </div>*@
                     <div class="gadget">
                         @*<form class="" action="/@TempData["TypeCode"]/1.html">*@
-                        <form class="" action="1.html"> @*搜索本类下*@
+                        <form class="" action="1.html">
+                            @*搜索本类下*@
                             @*<form class="" action="/1.html"> 搜索全站*@
                             <input type="text" name="keyword" class="search_box" id="SearchForm" placeholder="搜索好站...">
                             <input type="submit" value="搜索" />
@@ -80,13 +85,22 @@
                         @*<script type="text/javascript">(function () { document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E')); var bdcs = document.createElement('script'); bdcs.type = 'text/javascript'; bdcs.async = true; bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=13657143060855947138' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date() / 3600000); var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(bdcs, s); })();</script>*@
                     </div>
                     <div class="gadget">
-                       <span>热门标签</span>
-                        <div class="clr"></div>
+                        <span>原创应用</span>
+                        <div class="origiapp">
+                            <div> <a href="http://www.isharesite.com/tools/translate" title="英语文章阅读助手,读英语文章学单词的在线工具"> 读英语文章学单词的在线工具</a></div>
+                            <div> <a href="http://www.isharesite.com/douban/douban-book-ratingpeople-top100" title="豆瓣图书,电影,音乐排行榜top100 (每周更新)"> 豆瓣图书,电影,音乐排行榜(每周更新)</a></div>
+                        </div>
+                    </div>
+                    <div class="gadget">
+                        <span>热门标签</span>                      
                         @{
                             Html.RenderAction("_TagCrtl", "Tags");
                         }
                     </div>
+                   
+                  
                 </div>
+
                 <div class="clr"></div>
             </div>
         </div>
