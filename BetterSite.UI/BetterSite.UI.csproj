@@ -202,6 +202,7 @@
     <Content Include="Content\images\eye2.jpg" />
     <Content Include="Content\images\r_top.png" />
     <Content Include="Content\images\visit2.png" />
+    <Content Include="Content\js\translate.js" />
     <Content Include="Content\top\top.css" />
     <Content Include="Content\top\top.js" />
     <Content Include="Content\viewerjs\viewer.min.css" />

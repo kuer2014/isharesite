@@ -15,6 +15,8 @@ namespace BetterSite.UI
                        "~/Scripts/Common.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                    "~/Scripts/bootstrap.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/translate").Include(
+                   "~/Content/js/translate.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
             // "~/Scripts/knockout-3.3.0.js"));
