@@ -63,7 +63,7 @@ namespace BetterSite.UI.Controllers
             var list_zhuanlan = sitesBO.QueryForPageList(where).Cast<M_Sites>().ToList();
             ViewBag.zhuanlan = list_zhuanlan;
             //最新收录
-            where.Rows = 12;
+            where.Rows = 18;
             where.Sort = "SiteAddDate";
             where.Order = "Desc";
             where.TypeCode = "";
